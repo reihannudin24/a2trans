@@ -13,3 +13,65 @@
 .h-img{
   height: 20px;
 }
+
+.h-img-2{
+  height: 23px;
+}
+
+
+.bg-btn-primary{
+  background: #E33C2F;
+}
+
+.bg-btn-primary:hover{
+  background: #cc291d;
+}
+
+
+.menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-open, .menu-close {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-open .line, .menu-close .line-1, .menu-close .line-2 {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 2px 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-close .line-1 {
+  transform: rotate(45deg) translate(-0px, 5px);
+}
+
+.menu-close .line-2 {
+  transform: rotate(-45deg) translate(0px, -5px);
+}
+
+.menu-open .line:nth-child(2) {
+  opacity: 1;
+}
+
+.menu-close .line-1, .menu-close .line-2 {
+  opacity: 1;
+}
+
+.menu-open .line:nth-child(2) {
+  opacity: 1;
+}
+
+
+
+
+.w-99{
+  width: 96%;
+}
