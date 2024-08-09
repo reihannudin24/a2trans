@@ -1,25 +1,37 @@
 import './App.css';
-import { NavbarComponent } from "./component/Navbar.Component";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+
 import Categories from "./page/Categories";
 import Home from './page/Home';
 import Detail from "./page/Detail";
-import {FooterComponent} from "./component/Footer.Component";
+
+import Panel from './page/Panel';
+import PanelAdd from './page/PanelAdd';
+
+import { NavbarComponent } from "./component/Navbar.Component";
+import { FooterComponent } from "./component/Footer.Component";
 
 
 function App() {
+    const location = useLocation();
+
+    const isPanelRoute = location.pathname === "/panel" || location.pathname === "/panel/add";
+
     return (
         <main className={"w-full bg-white"}>
-            <NavbarComponent />
+            {!isPanelRoute && <NavbarComponent />}
             <section className={"pt-14"}>
-                <Home />
-                {/*<Routes>*/}
-                {/*    <Route path={"/"} element={<Home />} />*/}
-                {/*    /!*<Route path={"/detail/:id"} element={<Detail />} />*!/*/}
-                {/*    /!*<Route path={"/categories"} element={<Categories />} />*!/*/}
-                {/*</Routes>*/}
+                <Routes>
+                    <Route path={"/"} element={<Home />} />
+                    <Route path={"/detail/:id"} element={<Detail />} />
+                    <Route path={"/categories"} element={<Categories />} />
+
+                    {/* PANEL */}
+                    <Route path={"/panel"} element={<Panel />} />
+                    <Route path={"/panel/add"} element={<PanelAdd />} />
+                </Routes>
             </section>
-            <FooterComponent />
+            {!isPanelRoute && <FooterComponent />}
         </main>
     );
 }
