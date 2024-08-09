@@ -3,7 +3,8 @@ import { NavbarComponent } from "./component/Navbar.Component";
 import { Route, Routes } from "react-router-dom";
 import Categories from "./page/Categories";
 import Home from './page/Home';
-import Footer from './component/Footer.Component';
+import Detail from "./page/Detail";
+import {FooterComponent} from "./component/Footer.Component";
 
 
 function App() {
@@ -11,12 +12,14 @@ function App() {
         <main className={"w-full bg-white"}>
             <NavbarComponent />
             <section className={"pt-14"}>
-                <Routes>
-                    <Route path={"/"} element={<Home />} />
-                    <Route path={"/categories"} element={<Categories />} />
-                </Routes>
+                <Home />
+                {/*<Routes>*/}
+                {/*    <Route path={"/"} element={<Home />} />*/}
+                {/*    /!*<Route path={"/detail/:id"} element={<Detail />} />*!/*/}
+                {/*    /!*<Route path={"/categories"} element={<Categories />} />*!/*/}
+                {/*</Routes>*/}
             </section>
-            <Footer />
+            <FooterComponent />
         </main>
     );
 }

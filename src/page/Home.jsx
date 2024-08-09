@@ -1,14 +1,26 @@
-import Caroussel from "../component/Caroussel.Component"
-import Detail from "../component/Detail.Component"
-import Detail_2 from "../component/Detail_2.Component"
+import {CarousselComponent} from "../component/Caroussel.Component"
+import Detail, {
+    FaqComponent,
+    Promo2Component,
+    Promo3Component,
+    PromoComponent,
+    TestimonialComponent
+} from "../component/Promo.Component"
+import {ListCardComponent} from "../component/Card.Component";
 
 function Home() {
     return (
-        <>
-            <Caroussel />
-            <Detail />
-            <Detail_2 />
-        </>
+        <section className={"w-full"}>
+            <div className={"w-full"}>
+                <CarousselComponent />
+                <PromoComponent />
+                <Promo2Component />
+                <ListCardComponent title={"Jenis-Jenis Kendaraan "} />
+                <TestimonialComponent />
+                <FaqComponent />
+                <Promo3Component />
+            </div>
+        </section>
     )
 }
 

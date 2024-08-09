@@ -30,17 +30,17 @@ export const NavbarComponent = () => {
     return(
         <>
             <nav className={"fixed top-0 z-50 w-full "}>
-                <div className={"bg-primary w-full"}>
+                <div className={"bg-primary-nav py-1 w-full"}>
                     <header className={"w-11/12 mx-auto  py-4"}>
                         <div className={"w-full flex justify-between"}>
-                            <div className={"lg:w-6/12 mt-3 mb-auto lg:mb-0 lg:mt-1"}>
+                            <div className={"lg:w-6/12 mt-3 mb-auto lg:mb-0 lg:mt-0"}>
                                 <div className={"w-full lg:w-5/12 h-full my-auto"}>
                                     <Logo />
                                 </div>
                             </div>
-                            <div className={"lg:w-6/12"}>
-                                <div className={"w-10/12 lg:block hidden ms-auto"}>
-                                    <ul className={"flex gap-10"}>
+                            <div className={"lg:w-6/12 my-auto"}>
+                                <div className={"w-10/12 my-auto lg:block hidden ms-auto"}>
+                                    <ul className={"flex my-auto gap-10"}>
                                         {navbar.map((item, index) => {
                                             return(
                                                 <li key={index} className={""}>
@@ -69,12 +69,15 @@ export const NavbarComponent = () => {
 const Logo = () => {
     return(
         <>
-            <div className={"hidden lg:block h-img my-auto"}>
-                <img className={"w-full my-auto h-full object-fit"} src={"/assets/img/logo.svg"} alt={"logo"}/>
+            <div className={"my-auto"}>
+                <h1 className={"text-2xl text-white my-auto"}>A2Trans</h1>
             </div>
-            <div className={"block lg:hidden h-img-2 my-auto"}>
-                <img className={"w-full my-auto h-full object-fit"} src={"/assets/img/logo.svg"} alt={"logo"}/>
-            </div>
+            {/*<div className={"hidden lg:block h-img my-auto"}>*/}
+            {/*    <img className={"w-full my-auto h-full object-fit"} src={"/assets/img/logo.svg"} alt={"logo"}/>*/}
+            {/*</div>*/}
+            {/*<div className={"block lg:hidden h-img-2 my-auto"}>*/}
+            {/*    <img className={"w-full my-auto h-full object-fit"} src={"/assets/img/logo.svg"} alt={"logo"}/>*/}
+            {/*</div>*/}
         </>
     )
 }
@@ -106,7 +109,7 @@ const ListNavbar = ({url, name}) => {
         <div className={"w-5/12 mx-auto lg:w-full"}>
             <div className={"cursor-pointer mx-auto  text-white hover:text-white py-1 px-2 rounded-md hover:bg-white hover:bg-opacity-40"}>
                 <Link to={`${url}`}>
-                    <p className={"text-md lg:text-sm text-white "}>{name}</p>
+                    <p className={"text-md  text-white "}>{name}</p>
                 </Link>
             </div>
         </div>
