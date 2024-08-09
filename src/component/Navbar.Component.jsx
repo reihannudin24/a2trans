@@ -8,7 +8,7 @@ const navbar = [
     },
     {
         "name" : "Penyewaan",
-        "url" : "/",
+        "url" : "/rent",
     },
     {
         "name" : "Tentang Kami",
@@ -66,11 +66,28 @@ export const NavbarComponent = () => {
     )
 }
 
-const Logo = () => {
+export  const Logo = () => {
     return(
         <>
             <div className={"my-auto"}>
                 <h1 className={"text-2xl text-white my-auto"}>A2Trans</h1>
+            </div>
+            {/*<div className={"hidden lg:block h-img my-auto"}>*/}
+            {/*    <img className={"w-full my-auto h-full object-fit"} src={"/assets/img/logo.svg"} alt={"logo"}/>*/}
+            {/*</div>*/}
+            {/*<div className={"block lg:hidden h-img-2 my-auto"}>*/}
+            {/*    <img className={"w-full my-auto h-full object-fit"} src={"/assets/img/logo.svg"} alt={"logo"}/>*/}
+            {/*</div>*/}
+        </>
+    )
+}
+
+
+export  const LogoPrimary = () => {
+    return(
+        <>
+            <div className={"my-auto"}>
+                <h1 className={"text-2xl text-primary my-auto"}>A2Trans</h1>
             </div>
             {/*<div className={"hidden lg:block h-img my-auto"}>*/}
             {/*    <img className={"w-full my-auto h-full object-fit"} src={"/assets/img/logo.svg"} alt={"logo"}/>*/}

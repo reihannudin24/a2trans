@@ -1,4 +1,4 @@
-import {Star} from "@phosphor-icons/react";
+import {Buildings, Phone, Star} from "@phosphor-icons/react";
 
 
 export const ListCardComponent = ({title}) => {
@@ -124,26 +124,95 @@ export const Card2Component = ({name, category, img}) => {
 
 
 export const CardComponent = () => {
+
+    const facilities = [
+        {
+            "id" : 1,
+            "name" : "bla bla bla",
+            "icon": <Buildings size={18} color="#gray" />
+        },{
+            "id" : 2,
+            "name" : "blo blo blo",
+            "icon": <Phone size={18} color="#gray" />
+        },{
+            "id" : 3,
+            "name" : "ble ble ble",
+            "icon": <Phone size={18} color="#gray"  />
+        },  {
+            "id" : 4,
+            "name" : "bli bli bli",
+            "icon": <Phone size={18} color="#gray"  />
+        },
+
+    ]
+
     return(
         <>
-            <div className={"w-99 mx-auto lg:w-full rounded-lg pb-2 shadow"}>
-                <div className={""}>
-                    <div className={"h-img-card"}>
-                        <img className={"w-full h-full object-cover radius-card-img"} src={"/assets/img/bus/bus-1.jpg"}/>
-                    </div>
-                    <div className={"my-1"}>
-                        <div className={"mb-2"}>
-                            <div className={"mt-1 pt-2"}>
-                                <p className={"text-sm text-gray-500 text-center"}>Travel</p>
+            <div className={"w-99 mx-auto lg:w-full py-3 shadow-lg rounded-lg "}>
+                <div className={"w-99  h-52 relative  cursor-pointer mx-auto"}>
+                    <div className={"w-full "}>
+                        <div className={"mb-2 "}>
+                            <div className={"flex justify-between w-full"}>
+                                <div className={"mt-1 pt-2"}>
+                                    <p className={"text-2xl font-semibold text-gray-800"}>Jackal holidays</p>
+                                    <p className={"text-md text-gray-500"}>Big Bus - Luxury</p>
+                                </div>
+                                <div className={"pt-0.5 mt-1"}>
+                                    <div className={"bg-gray-100 rounded-md py-1.5 px-2"}>
+                                        <div className={"flex gap-2"}>
+                                            <Star size={16} color="#FFD700" weight="fill" />
+                                            <h3 className={"text-sm text-gray-500 font-semibold"}>4.7/5</h3>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <h3 className={"text-center text-lg font-semibold"}>Name</h3>
-                        </div>
-                        <div className={"text-center"}>
-                            <p className={"text-md font-bold text-gray-700"}>Rp.1000 - Rp.1000</p>
+                            <div className={""}>
+                            </div>
                         </div>
                     </div>
+
+                    <div className={"absolute w-full bottom-0"}>
+                        <div className={"mt-1 w-full pt-2"}>
+                            <div className={"w-full"}>
+                                <div className={"flex w-full justify-between"}>
+                                    <div className={"my-auto"}>
+                                        <ul className={"flex my-auto gap-2 w-full"}>
+                                            {facilities.map((item, index) => {
+                                                return(
+                                                    <li className={"my-auto"} key={index}>
+                                                        <FacilityCardComponent id={item?.id} name={item?.name} icon={item?.icon} />
+                                                    </li>
+                                                    )
+                                            })}
+                                        </ul>
+                                    </div>
+                                    <div className={"my-auto h-full"}>
+                                        <h1 className={"text-2xl my-auto font-semibold text-gray-800"}>Rp.1000 - Rp.1000</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/*<div className={"h-img-card"}>*/}
+                    {/*    <img className={"w-full h-full object-cover rounded-md"} src={"/assets/img/bus/bus-1.jpg"}/>*/}
+                    {/*</div>*/}
                 </div>
             </div>
         </>
+    )
+}
+
+const FacilityCardComponent =  ({id, icon, name}) => {
+    return(
+        <div className={"my-auto flex gap-2"}>
+            <div className={""}>
+                {icon}
+
+            </div>
+            <div className={"my-auto"}>
+                <p className={"text-sm  text-gray-500"}>{name}</p>
+            </div>
+        </div>
     )
 }

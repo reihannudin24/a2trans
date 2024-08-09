@@ -39,11 +39,11 @@ export const InputCheckbox = ({name, checks, setChecks}) => {
 export const InputSearch = ({search, setSearch, redirect}) => {
     const navigate = useNavigate();
     const handleSearch = (e) => {
-        const change = e.target.event;
+        const change = e.target.value;
         setSearch(change)
     }
     const submitSearch = () => {
-        navigate(`${redirect}?query=${search}`);
+        navigate(`${redirect}?search=${search}`);
     };
     return(
         <div className={"bg-white  py-2 px-4 rounded-lg shadow"}>
