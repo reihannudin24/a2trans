@@ -1,0 +1,113 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+
+.bg-primary{
+  background: #E33C2F;
+}
+
+.bg-primary-nav{
+  background: #d22619;
+}
+
+.text-primary {
+  color: #E33C2F;
+}
+
+.h-img{
+  height: 20px;
+}
+
+.h-img-2{
+  height: 23px;
+}
+
+
+.bg-btn-primary{
+  background: #E33C2F;
+}
+
+.bg-btn-primary:hover{
+  background: #cc291d;
+}
+
+
+.menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-open, .menu-close {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-open .line, .menu-close .line-1, .menu-close .line-2 {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 2px 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-close .line-1 {
+  transform: rotate(45deg) translate(-0px, 5px);
+}
+
+.menu-close .line-2 {
+  transform: rotate(-45deg) translate(0px, -5px);
+}
+
+.menu-open .line:nth-child(2) {
+  opacity: 1;
+}
+
+.menu-close .line-1, .menu-close .line-2 {
+  opacity: 1;
+}
+
+.menu-open .line:nth-child(2) {
+  opacity: 1;
+}
+
+
+.w-99{
+  width: 96%;
+}
+
+.radius-card-img{
+  border-radius: 12px ;
+}
+
+.h-img-card{
+  height: 200px;
+}
+
+
+.bg-shadow {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.27), rgba(0, 0, 0, 0)), rgba(0, 0, 0, 0.27);
+}
+
+
+.transition-max-height {
+  transition: max-height 0.5s ease-in-out;
+}
+
+.max-h-0 {
+  max-height: 0;
+}
+
+.max-h-96 {
+  max-height: 24rem; /* Adjust this value based on your content size */
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
