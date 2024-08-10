@@ -17,7 +17,6 @@ function App() {
                     <Route path={"/"} element={<Home />} />
                     <Route path={"/rent"} element={<Rent />} />
                     <Route path={"/detail/:id"} element={<Detail />} />
-
                 </Routes>
             </section>
             <FooterComponent />
