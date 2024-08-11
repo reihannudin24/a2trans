@@ -149,7 +149,7 @@ export const Promo3Component = () => {
             </div>
             <div className={"w-full py-5 bg-primary"}>
                 <div className={"mx-auto container"}>
-                    <div className={"w-full"}>
+                    <div className={"mx-4"}>
                         <ul className={"w-full flex gap-4"}>
                             {promoLayanan.map((item, index) => {
                                 return (
@@ -201,21 +201,37 @@ export const Promo3Component = () => {
 }
 
 
-export const ContactCardComponent = () => {
+export const ContactCardComponent = ({icon, name, value}) => {
     return (
         <div className={"w-11/12 mx-auto"}>
             <div className={"flex gap-3"}>
-                <div className={"bg-red-600 rounded-full h-14 w-14"}>
-                    <img className={""} />
+                <div className={"bg-red-600 rounded-full h-14 w-14 flex items-center justify-center"}>
+                    {icon}
                 </div>
-                <div className={""}>
-                    <div className={""}>
-                        <h4 className={""}>PT. ANUGERAH JASA BERWISATA</h4>
-                        <p className={""}>NPWP : 86.866.411.1-061.000</p>
-                    </div>
+                <div>
+                    <h4 className={"text-gray-600 font-medium"}>{name}</h4>
+                    <p className={"text-gray-800 font-semibold"}>{value}</p>
                 </div>
             </div>
         </div>
+
+    // <div className={"w-11/12 mx-auto"}>
+    //         <div className={"flex gap-3"}>
+    //             <div className={"bg-red-600 rounded-full h-14 w-14"}>
+    //                 <div className={"w-14 relative h-14 my-auto mx-auto"}>
+    //                     <div className={"absolute top-0 bottom-0 right-0 left-0"}>
+    //                         {icon}
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //             <div className={""}>
+    //                 <div className={""}>
+    //                     <h4 className={""}>{name}</h4>
+    //                     <p className={""}>{value}</p>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </div>
     )
 }
 

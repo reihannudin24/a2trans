@@ -1,10 +1,11 @@
 import {Link} from "react-router-dom";
+import {LogoPrimary} from "./Navbar.Component";
 
 export const FooterComponent = () => {
 
     const information = [
         {
-            "value" : "A commitment to teaching essential skills to students globally." ,
+            "value" : "A2Trans hadir sebagai pilihan yang cocok bagi Anda apabila ingin merencanakan perjalanan. Dengan banyaknya armada yang disediakan, serta jaminan kenyamanan bagi para penumpang, Andara menjadi penyedia layanan sewa bus Jakarta yang terbaik." ,
         },
         {
             "value" : "Grand Catania blok O5/39 Citra Raya, Kabupaten Tangerang" ,
@@ -18,42 +19,57 @@ export const FooterComponent = () => {
     const footer = [
         {
             'footer' : {
-                "title" : "About" ,
+                "title" : "Kontak" ,
                 "data" : [
                     {
-                        "value" : "team", "url" : "/team"
+                        "value" : "+62 821-1119-1279", "url" : "/team"
                     },
                     {
-                        "value" : "History" , "url" : "/history"
+                        "value" : "+62 821-1119-1279" , "url" : "/history"
                     },
                     {
-                        "value" : "Carrers" , "url" : "/carrers"
+                        "value" : "a2trans@gmail.com" , "url" : "/history"
+                    }
+                ]
+            },
+        },
+        {
+            'footer' : {
+                "title" : "Harga sewa" ,
+                "data" : [
+                    {
+                        "value" : "Harga Sewa Big Bus", "url" : "/rent?category=big_bus"
+                    },
+                    {
+                        "value" : "Harga Sewa Medium Bus" , "url" : "/rent?category=medium_bus"
+                    },
+                    {
+                        "value" : "Harga Sewa Medium Bus Long" , "url" : "/rent?category=medium_long_bus"
+                    },
+                    {
+                        "value" : "Harga Sewa Hiace" , "url" : "/rent?category=hiace"
+                    },
+                    {
+                        "value" : "Harga Sewa Hiace Premio" , "url" : "/rent?category=hiace_premio"
+                    },
+                    {
+                        "value" : "Harga Sewa Elf" , "url" : "/rent?category=elf"
                     },
                 ]
             },
         },
         {
             'footer' : {
-                "title" : "Contact Us" ,
+                "title" : "Armada Luxury" ,
                 "data" : [
                     {
-                        "value" : "Privacy Policy", "url" : "/privacy-policy"
+                        "value" : "Sewa Bus Luxury", "url" : "/rent/luxury=bus"
                     },
                     {
-                        "value" : "Contact Us/About Us" , "url" : "/about"
-                    },
-                ]
-            },
-        },
-        {
-            'footer' : {
-                "title" : "Country" ,
-                "data" : [
-                    {
-                        "value" : "Indonesia", "url" : "/indonesia"
+                        "value" : "Sewa Hiace Luxury" , "url" : "/rent/luxury=hiace"
                     },
                     {
-                        "value" : "Australia" , "url" : "/australia"
+                        "value" : "Sewa Hiace Premio Luxury" , "url" : "/rent/luxury=hiace_premio"
                     },
                 ]
             },
@@ -94,13 +110,8 @@ export const FooterComponent = () => {
                                 <div className={"w-full mb-3"}>
                                     <div className={"cursor-pointer"} style={{height:"50px"}}>
                                         <Link to={"/"}>
-                                            <div className={"flex"}>
-                                                <div className={"my-auto pe-3 border-r border-gray-300"} style={{height:"40px"}}>
-                                                    <img className={"h-full my-auto object-cover"} src={"/assets/img/logo.svg"} />
-                                                </div>
-                                                <div className={"my-auto ps-3"} style={{height:"45px"}}>
-                                                    <img className={"h-full my-auto object-cover"} src={"/assets/img/logo-icon.svg"} />
-                                                </div>
+                                            <div className={"w-full lg:w-5/12 h-full my-auto"}>
+                                                <LogoPrimary />
                                             </div>
                                         </Link>
                                     </div>
@@ -122,13 +133,13 @@ export const FooterComponent = () => {
                                     {footer.map((item , index) => {
                                         return(
                                             <div key={index} className={"py-4"}>
-                                                <p className={"text-sm md:text-md font-semibold text-gray-700"}>
+                                                <p className={"text-lg md:text-md font-semibold text-gray-700"}>
                                                     {item?.footer.title}
                                                 </p>
                                                 <ul className={"my-3 block"}>
                                                     {item?.footer?.data.map((itemData , indexData) => {
                                                         return(
-                                                            <li key={indexData} className={"text-sm  py-2 my-auto h-full cursor-pointer text-gray-500 hover:text-yellow-400"}>
+                                                            <li key={indexData} className={"text-sm  py-2 my-auto h-full cursor-pointer text-gray-500 hover:text-red-600"}>
                                                                 <Link to={`${itemData.url}`}>{itemData.value}</Link>
                                                             </li>
                                                         )
@@ -150,7 +161,7 @@ export const FooterComponent = () => {
                                                     <Link to={`${item.url}`}>
                                                         <div className={"bg-gray-100 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10"} >
                                                             <div className={"py-3 px-3 w-full h-full"}>
-                                                                <img className={" w-full h-full object-cover"} src={`assets/img/img-social/img-social${item?.image}.png`}/>
+                                                                <img alt="img" className={" w-full h-full object-cover"} src={`assets/img/img-social/img-social${item?.image}.png`}/>
                                                             </div>
                                                         </div>
                                                     </Link>

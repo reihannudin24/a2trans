@@ -1,9 +1,9 @@
 import './App.css';
 import { Route, Routes, useLocation } from "react-router-dom";
 
-import Categories from "./page/Categories";
 import Home from './page/Home';
 import Detail from "./page/Detail";
+import Rent from './page/Rent';
 
 import Panel from './page/Panel';
 import PanelAdd from './page/PanelAdd';
@@ -23,8 +23,8 @@ function App() {
             <section className={"pt-14"}>
                 <Routes>
                     <Route path={"/"} element={<Home />} />
-                    <Route path={"/detail/:id"} element={<Detail />} />
-                    <Route path={"/categories"} element={<Categories />} />
+                    <Route path={"/detail"} element={<Detail />} />
+                    <Route path={"/rent"} element={<Rent />} />
 
                     {/* PANEL */}
                     <Route path={"/panel"} element={<Panel />} />

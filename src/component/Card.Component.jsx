@@ -1,4 +1,4 @@
-import { Star } from "@phosphor-icons/react";
+import { Star, Fan, Monitor, User, PintGlass } from "@phosphor-icons/react";
 
 
 export const ListCardComponent = ({ title }) => {
@@ -103,7 +103,7 @@ export const Card2Component = ({ name, category, img }) => {
             <div className={"w-99 mx-auto lg:w-full rounded-lg  shadow"}>
                 <div className={"relative"}>
                     <div className={"h-img-card relative"}>
-                        <img className={"w-full h-full object-cover radius-card-img"} src={"/assets/img/bus/bus-1.jpg"} />
+                        <img alt="Bus" className={"w-full h-full object-cover radius-card-img"} src={"/assets/img/bus/bus-1.jpg"} />
                         <div className={"absolute bottom-0 top-0 radius-card-img right-0 left-0 w-full h-full bg-shadow"}>
 
                         </div>
@@ -128,24 +128,127 @@ export const Card2Component = ({ name, category, img }) => {
 export const CardComponent = () => {
     return (
         <>
-            <div className={"w-99 mx-auto lg:w-full rounded-lg pb-2 shadow"}>
-                <div className={""}>
-                    <div className={"h-img-card"}>
-                        <img className={"w-full h-full object-cover radius-card-img"} src={"/assets/img/bus/bus-1.jpg"} />
-                    </div>
-                    <div className={"my-1"}>
-                        <div className={"mb-2"}>
-                            <div className={"mt-1 pt-2"}>
-                                <p className={"text-sm text-gray-500 text-center"}>Travel</p>
+            <div className={"w-99 mx-auto lg:w-full rounded-lg p-4 shadow"}>
+                <div className={"flex gap-4 justify-between"}>
+                    <div className="flex gap-4 sm:flex-nowrap flex-wrap justify-center sm:justify-normal">
+
+                        <div className={"h-img-card flex gap-4"}>
+                            <img alt="Img" className={"w-full h-full object-cover radius-card-img"} src={"/assets/img/bus/bus-1.jpg"} />
+                        </div>
+
+
+                        <div className={"flex-1 flex-col gap-4"}>
+                            <h1 className={"text-xl font-medium mb-2"}>Bus Gede</h1>
+                            <div className="flex flex-wrap sm:gap-4 gap-2 mb-4">
+                                {FacilityArray.map(res => {
+                                    return <FacilityCardComponent Icon={res.icon} text={res.text} />
+                                })}
                             </div>
-                            <h3 className={"text-center text-lg font-semibold"}>Name</h3>
+
+                            {/* MOBILE MODE */}
+                            <div className="flex flex-col gap-2 xl:hidden">
+                                <div className="flex flex-col">
+                                    <h1 className="text-md text-gray-500">Mulai dari</h1>
+                                    <h1 className="text-2xl font-medium text-primary">IDR 100k</h1>
+                                </div>
+                                <button className="p-2 bg-blue-500 text-white rounded-md w-full">Detial</button>
+                            </div>
                         </div>
-                        <div className={"text-center"}>
-                            <p className={"text-md font-bold text-gray-700"}>Rp.1000 - Rp.1000</p>
+
+                    </div>
+
+                    {/* DASKTOP MODE */}
+                    <div className="items-end xl:flex hidden">
+                        <div className="flex flex-col gap-2">
+                            <div className="flex flex-col">
+                                <h1 className="text-md text-gray-500">Mulai dari</h1>
+                                <h1 className="xl:text-2xl sm:text-md font-medium text-primary">IDR 100k</h1>
+                            </div>
+                            <button className="p-2 bg-blue-500 text-white rounded-md w-full">Detial</button>
                         </div>
                     </div>
+
                 </div>
             </div>
         </>
+    )
+}
+
+export const CardDetialComponent = () => {
+    return (
+        <div className="mx-4">
+            <h1 className="font-bold text-2xl mb-4">Detail Kendaraan</h1>
+
+            <div className={"flex gap-4 justify-between p-4 rounded-md shadow-md"}>
+                <div className="flex gap-4 sm:flex-nowrap flex-wrap justify-center sm:justify-normal">
+
+                    <div className={"h-img-card flex gap-4"}>
+                        <img alt="Img" className={"w-full h-full object-cover radius-card-img"} src={"/assets/img/bus/bus-1.jpg"} />
+                    </div>
+
+
+                    <div className={"flex-1 flex-col gap-4 justify-between"}>
+                        <h1 className={"text-xl font-medium mb-2"}>Bus Gede</h1>
+                        <StatusCardComponent status={true}/>
+                        <div className="flex flex-wrap sm:gap-6 gap-4 mb-4">
+                            {FacilityArray.map(res => {
+                                return <FacilityCardComponent Icon={res.icon} text={res.text} />
+                            })}
+                        </div>
+
+                        {/* MOBILE MODE */}
+                        <div className="flex flex-col gap-2 xl:hidden items-end">
+                            <button className="p-2 bg-blue-500 text-white rounded-md w-full">Pesan Sekarang</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                {/* DASKTOP MODE */}
+                <div className="items-end xl:flex hidden">
+                    <div className="flex flex-col gap-2">
+                        <button className="p-2 bg-blue-500 text-white rounded-md w-full">Pesan Sekarang</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    )
+}
+
+const FacilityArray = [
+    {
+        icon: PintGlass,
+        text: "Air"
+    },
+    {
+        icon: User,
+        text: "Kapasitas 40"
+    },
+    {
+        icon: Monitor,
+        text: "Hiburan"
+    },
+    {
+        icon: Fan,
+        text: "Full AC"
+    },
+]
+
+const FacilityCardComponent = ({ text, Icon }) => {
+    return (
+        <div className="flex gap-2 items-center">
+            <Icon size={30} className="text-gray-500" />
+            <span className="text-gray-500">{text}</span>
+        </div>
+    )
+}
+
+const StatusCardComponent = ({ status }) => {
+    return (
+        <div className={`${status ? "bg-green-500" : "bg-red-500"} p-2 rounded-md text-white w-16 text-center mb-2`}>
+            {status ? "Ready" : "Not Ready"}
+        </div>
     )
 }

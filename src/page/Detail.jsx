@@ -1,9 +1,12 @@
+import { CardDetialComponent } from "../component/Card.Component"
+import { CarousselGalleryComponent } from "../component/Caroussel.Component"
 
-function Detail(){
-    return(
-        <section className={"w-full"}>
-            <div className={"w-full"}>
-            </div>
+function Detail() {
+
+    return (
+        <section className={"w-full pt-20 mx-auto container"}>
+            <CardDetialComponent />
+            <CarousselGalleryComponent />
         </section>
     )
 }

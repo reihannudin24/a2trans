@@ -1,10 +1,8 @@
-import { Bus, Van } from "@phosphor-icons/react";
-import { useState } from "react";
+import { Bus, Van, CaretLeft, CaretRight } from "@phosphor-icons/react";
+import { useState, useRef, useEffect } from "react"
 
 export const CarousselComponent = () => {
-  const [popUpText, setPopUpText] = useState(false)
-  const [popUpText2, setPopUpText2] = useState(false)
-
+  
   return (
     <>
       <section className="relative h-60 lg:h-full">
@@ -100,8 +98,65 @@ const CardBannerMobile = () => {
       </div>
 
       {showPopup && (
-        <PopupDes />
+        <PopupDes toggle={togglePopup} />
       )}
+    </div>
+  )
+}
+
+export const CarousselGalleryComponent = () => {
+
+  const scrollRef = useRef(null);
+  const [showLeftButton, setShowLeftButton] = useState(false);
+  const [showRightButton, setShowRightButton] = useState(true);
+
+  const updateButtonVisibility = () => {
+      const { current } = scrollRef;
+      if (current) {
+          setShowLeftButton(current.scrollLeft > 0);
+          setShowRightButton(current.scrollLeft < (current.scrollWidth - current.clientWidth));
+      }
+  };
+
+  useEffect(() => {
+      const { current } = scrollRef;
+      if (current) {
+          current.addEventListener('scroll', updateButtonVisibility);
+          return () => current.removeEventListener('scroll', updateButtonVisibility);
+      }
+  }, []);
+
+  const scroll = (direction) => {
+      const { current } = scrollRef;
+      if (current) {
+          const scrollAmount = direction === 'left' ? -300 : 300;
+          current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+  };
+
+  return (
+    <div className="mx-4">
+      <h1 className="font-bold text-2xl my-4">Gallery Kendaraan</h1>
+      <div className="relative">
+        <div className="overflow-x-auto mx-4" ref={scrollRef}>
+          <div className="flex gap-6 pb-4">
+            <img alt="Img" className="w-96 flex-shrink-0 object-cover radius-card-img hover:scale-105" src={"/assets/img/bus/bus-1.jpg"} />
+            <img alt="Img" className="w-96 flex-shrink-0 object-cover radius-card-img hover:scale-105" src={"/assets/img/bus/bus-1.jpg"} />
+            <img alt="Img" className="w-96 flex-shrink-0 object-cover radius-card-img hover:scale-105" src={"/assets/img/bus/bus-1.jpg"} />
+            <img alt="Img" className="w-96 flex-shrink-0 object-cover radius-card-img hover:scale-105" src={"/assets/img/bus/bus-1.jpg"} />
+          </div>
+        </div>
+        {showLeftButton && (
+          <button onClick={() => scroll('left')} className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full">
+            <CaretLeft size={24} />
+          </button>
+        )}
+        {showRightButton && (
+          <button onClick={() => scroll('right')} className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full">
+            <CaretRight size={24} />
+          </button>
+        )}
+      </div>
     </div>
   )
 }
