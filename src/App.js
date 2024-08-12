@@ -8,6 +8,8 @@ import Rent from './page/Rent';
 import Panel from './page/Panel';
 import PanelAdd from './page/PanelAdd';
 
+import Login from './page/Login';
+
 import { NavbarComponent } from "./component/Navbar.Component";
 import { FooterComponent } from "./component/Footer.Component";
 
@@ -15,7 +17,12 @@ import { FooterComponent } from "./component/Footer.Component";
 function App() {
     const location = useLocation();
 
-    const isPanelRoute = location.pathname === "/panel" || location.pathname === "/panel/add";
+    const isPanelRoute = location.pathname === "/panel" ||
+        location.pathname === "/panel/" ||
+        location.pathname === "/panel/add/" ||
+        location.pathname === "/panel/add" ||
+        location.pathname === "/login" ||
+        location.pathname === "/login/";
 
     return (
         <main className={"w-full bg-white"}>
@@ -25,6 +32,9 @@ function App() {
                     <Route path={"/"} element={<Home />} />
                     <Route path={"/detail"} element={<Detail />} />
                     <Route path={"/rent"} element={<Rent />} />
+
+                    {/* LOGIN */}
+                    <Route path={"/login"} element={<Login />} />
 
                     {/* PANEL */}
                     <Route path={"/panel"} element={<Panel />} />

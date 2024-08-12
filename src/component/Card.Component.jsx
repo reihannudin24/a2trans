@@ -1,7 +1,7 @@
 import { Star, Fan, Monitor, User, PintGlass } from "@phosphor-icons/react";
 
 
-export const ListCardComponent = ({ title }) => {
+export const ListCardComponent = ({ title, data }) => {
     return (
         <div className={"w-full my-4 lg:w-11/12 mx-auto container"}>
             <div className={"w-full"}>
@@ -11,18 +11,11 @@ export const ListCardComponent = ({ title }) => {
                 <div className="mx-4">
                     <div className={"w-full relative"}>
                         <ul className={"w-full flex flex-wrap relative"}>
-                            <li className={"w-6/12 lg:w-3/12  my-3"}>
-                                <Card2Component name={"Luxury Bus"} category={"Travel Bus"} />
-                            </li>
-                            <li className={"w-6/12 lg:w-3/12  my-3"}>
-                                <Card2Component name={"Luxury Bus"} category={"Travel Bus"} />
-                            </li>
-                            <li className={"w-6/12 lg:w-3/12  my-3"}>
-                                <Card2Component name={"Luxury Bus"} category={"Travel Bus"} />
-                            </li>
-                            <li className={"w-6/12 lg:w-3/12  my-3"}>
-                                <Card2Component name={"Luxury Bus"} category={"Travel Bus"} />
-                            </li>
+                            {data.map(res => {
+                                return (<li className={"w-6/12 lg:w-3/12  my-3"}>
+                                    <Card2Component name={data.nama_bus} category={data.category} />
+                                </li>)
+                            })}
                         </ul>
                     </div>
                 </div>
@@ -125,31 +118,35 @@ export const Card2Component = ({ name, category, img }) => {
 }
 
 
-export const CardComponent = () => {
+export const CardComponent = ({ data }) => {
     return (
         <>
-            <div className={"w-99 mx-auto lg:w-full rounded-lg p-4 shadow"}>
+            <div className={"w-99 mx-auto lg:w-full rounded-lg p-4 shadow-3"}>
                 <div className={"flex gap-4 justify-between"}>
                     <div className="flex gap-4 sm:flex-nowrap flex-wrap justify-center sm:justify-normal">
 
                         <div className={"h-img-card flex gap-4"}>
-                            <img alt="Img" className={"w-full h-full object-cover radius-card-img"} src={"/assets/img/bus/bus-1.jpg"} />
+                            <img alt="Img" className={"w-full h-full object-cover radius-card-img"} src={data.thumb} />
                         </div>
 
 
                         <div className={"flex-1 flex-col gap-4"}>
-                            <h1 className={"text-xl font-medium mb-2"}>Bus Gede</h1>
+                            <h1 className={"text-xl font-medium mb-2"}>{data.nama_bus}</h1>
                             <div className="flex flex-wrap sm:gap-4 gap-2 mb-4">
+
+                                {/* FACILITY ICON */}
+                                {/* Note : Data array dummy ada di bawah */}
                                 {FacilityArray.map(res => {
                                     return <FacilityCardComponent Icon={res.icon} text={res.text} />
                                 })}
+
                             </div>
 
                             {/* MOBILE MODE */}
                             <div className="flex flex-col gap-2 xl:hidden">
                                 <div className="flex flex-col">
                                     <h1 className="text-md text-gray-500">Mulai dari</h1>
-                                    <h1 className="text-2xl font-medium text-primary">IDR 100k</h1>
+                                    <h1 className="text-2xl font-medium text-primary">IDR {data.harga}</h1>
                                 </div>
                                 <button className="p-2 bg-blue-500 text-white rounded-md w-full">Detial</button>
                             </div>
@@ -162,7 +159,7 @@ export const CardComponent = () => {
                         <div className="flex flex-col gap-2">
                             <div className="flex flex-col">
                                 <h1 className="text-md text-gray-500">Mulai dari</h1>
-                                <h1 className="xl:text-2xl sm:text-md font-medium text-primary">IDR 100k</h1>
+                                <h1 className="xl:text-2xl sm:text-md font-medium text-primary">IDR {data.harga}</h1>
                             </div>
                             <button className="p-2 bg-blue-500 text-white rounded-md w-full">Detial</button>
                         </div>
@@ -174,7 +171,7 @@ export const CardComponent = () => {
     )
 }
 
-export const CardDetialComponent = () => {
+export const CardDetialComponent = ({ data }) => {
     return (
         <div className="mx-4">
             <h1 className="font-bold text-2xl mb-4">Detail Kendaraan</h1>
@@ -183,18 +180,27 @@ export const CardDetialComponent = () => {
                 <div className="flex gap-4 sm:flex-nowrap flex-wrap justify-center sm:justify-normal">
 
                     <div className={"h-img-card flex gap-4"}>
-                        <img alt="Img" className={"w-full h-full object-cover radius-card-img"} src={"/assets/img/bus/bus-1.jpg"} />
+                        <img alt="Img" className={"w-full h-full object-cover radius-card-img"} src={data.thumbAsli} />
                     </div>
 
 
                     <div className={"flex-1 flex-col gap-4 justify-between"}>
-                        <h1 className={"text-xl font-medium mb-2"}>Bus Gede</h1>
-                        <StatusCardComponent status={true}/>
+                        <h1 className={"text-xl font-medium mb-2"}>{data.nama_bus}</h1>
+
+                        {/* Status Bus */}
+                        <StatusCardComponent status={data.status} />
+
                         <div className="flex flex-wrap sm:gap-6 gap-4 mb-4">
+
+                            {/* FACILITY ICON */}
+                            {/* Note : Data array dummy ada di bawah */}
                             {FacilityArray.map(res => {
                                 return <FacilityCardComponent Icon={res.icon} text={res.text} />
                             })}
+
                         </div>
+
+                        {/* Note : ini button masih blm kedirect ke nomor owner */}
 
                         {/* MOBILE MODE */}
                         <div className="flex flex-col gap-2 xl:hidden items-end">
@@ -207,7 +213,7 @@ export const CardDetialComponent = () => {
                 {/* DASKTOP MODE */}
                 <div className="items-end xl:flex hidden">
                     <div className="flex flex-col gap-2">
-                        <button className="p-2 bg-blue-500 text-white rounded-md w-full">Pesan Sekarang</button>
+                        <button className="p-4 bg-blue-500 text-white rounded-md w-full">Pesan Sekarang</button>
                     </div>
                 </div>
 
@@ -217,6 +223,7 @@ export const CardDetialComponent = () => {
     )
 }
 
+// Data Icon Dummy Array
 const FacilityArray = [
     {
         icon: PintGlass,

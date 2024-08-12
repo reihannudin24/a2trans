@@ -1,9 +1,6 @@
 import { InputSearch } from "./Input.Component";
-import { useState } from "react";
 
-export const HeaderRent = () => {
-
-    const [search, setSeach] = useState("");
+export const HeaderRent = ({ search, setSearch }) => {
 
     return (
         <div className={"bg-primary  relative pt-20 pb-14 lg:pb-20"}>
@@ -19,7 +16,7 @@ export const HeaderRent = () => {
             <div className={"w-10/12 left-0 right-0 absolute -bottom-6 mx-auto"}>
                 <div className={"w-full lg:w-9/12 mx-auto container"}>
                     {/*Search*/}
-                    <InputSearch search={search} setSearch={setSeach} redirect={"/rent"} />
+                    <InputSearch search={search} setSearch={setSearch} redirect={"/rent"} />
                 </div>
             </div>
         </div>

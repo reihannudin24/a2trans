@@ -2,7 +2,7 @@ import { Bus, Van, CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { useState, useRef, useEffect } from "react"
 
 export const CarousselComponent = () => {
-  
+
   return (
     <>
       <section className="relative h-60 lg:h-full">
@@ -25,15 +25,18 @@ export const CarousselComponent = () => {
   );
 }
 
-const PopupDes = ({ toggle }) => {
+
+const PopupDes = ({ toggle, onSelect }) => {
   return (
     <div className="absolute top-0 left-0 w-full h-full bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-6 shadow-md rounded-md sm:w-1/3">
         <h3 className="text-md sm:text-xl font-bold mb-2">Pilih Lokasi Keberangkatan</h3>
         <ul>
-          <li className="cursor-pointer hover:bg-gray-100 p-2">Jakarta</li>
-          <li className="cursor-pointer hover:bg-gray-100 p-2">Surabaya</li>
-          <li className="cursor-pointer hover:bg-gray-100 p-2">Bandung</li>
+
+          {/* Nnti bikin jadi type bus */}
+          <li className="cursor-pointer hover:bg-gray-100 p-2" onClick={() => onSelect("Jakarta")}>Jakarta</li>
+          <li className="cursor-pointer hover:bg-gray-100 p-2" onClick={() => onSelect("Surabaya")}>Surabaya</li>
+          <li className="cursor-pointer hover:bg-gray-100 p-2" onClick={() => onSelect("Bandung")}>Bandung</li>
         </ul>
         <button className="mt-4 bg-red-500 text-white px-4 py-2 rounded" onClick={toggle}>Tutup</button>
       </div>
@@ -42,11 +45,18 @@ const PopupDes = ({ toggle }) => {
 }
 
 
+
 const CardBannerDes = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState("Pilih lokasi keberangkatan");
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
+  };
+
+  const handleLocationSelect = (location) => {
+    setSelectedLocation(location);
+    togglePopup();
   };
 
   return (
@@ -55,7 +65,7 @@ const CardBannerDes = () => {
         <div className="bg-gray-300 p-2 rounded-xl my-4">
           <div className="flex items-center gap-4 border-b border-gray-400 mx-4 py-3 cursor-pointer" onClick={togglePopup}>
             <span><Bus size={32} color="gray" /></span>
-            <span className="text-gray-500">"Pilih lokasi keberangkatan"</span>
+            <span className="text-gray-500">{selectedLocation}</span>
           </div>
           <div className="flex items-center gap-4 mx-4 py-3">
             <span><Van size={32} color="gray" /></span><span className="text-gray-500">Mau ke mana?</span>
@@ -68,25 +78,32 @@ const CardBannerDes = () => {
 
 
         {showPopup && (
-          <PopupDes toggle={togglePopup} />
+          <PopupDes toggle={togglePopup} onSelect={handleLocationSelect} />
         )}
       </div>
     </div>
   )
 }
 
+
 const CardBannerMobile = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState("Pilih lokasi keberangkatan");
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
+  };
+
+  const handleLocationSelect = (location) => {
+    setSelectedLocation(location);
+    togglePopup();
   };
 
   return (
     <div className="rounded-xl absolute w-full top-52 bg-white p-6 rounded-t-2xl block xl:hidden place-self-end">
       <div className="bg-gray-300 p-2 rounded-xl my-4">
         <div className="flex items-center gap-4 border-b border-gray-400 mx-4 py-3" onClick={togglePopup}>
-          <span><Bus size={32} color="gray" /></span><span className="text-gray-500">Pilih lokasi keberangkatan</span>
+          <span><Bus size={32} color="gray" /></span><span className="text-gray-500">{selectedLocation}</span>
         </div>
         <div className="flex items-center gap-4 mx-4 py-3">
           <span><Van size={32} color="gray" /></span><span className="text-gray-500">Mau ke mana?</span>
@@ -98,40 +115,41 @@ const CardBannerMobile = () => {
       </div>
 
       {showPopup && (
-        <PopupDes toggle={togglePopup} />
+        <PopupDes toggle={togglePopup} onSelect={handleLocationSelect} />
       )}
+
     </div>
   )
 }
 
-export const CarousselGalleryComponent = () => {
+export const CarousselGalleryComponent = ({ data }) => {
 
   const scrollRef = useRef(null);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(true);
 
   const updateButtonVisibility = () => {
-      const { current } = scrollRef;
-      if (current) {
-          setShowLeftButton(current.scrollLeft > 0);
-          setShowRightButton(current.scrollLeft < (current.scrollWidth - current.clientWidth));
-      }
+    const { current } = scrollRef;
+    if (current) {
+      setShowLeftButton(current.scrollLeft > 0);
+      setShowRightButton(current.scrollLeft < (current.scrollWidth - current.clientWidth));
+    }
   };
 
   useEffect(() => {
-      const { current } = scrollRef;
-      if (current) {
-          current.addEventListener('scroll', updateButtonVisibility);
-          return () => current.removeEventListener('scroll', updateButtonVisibility);
-      }
+    const { current } = scrollRef;
+    if (current) {
+      current.addEventListener('scroll', updateButtonVisibility);
+      return () => current.removeEventListener('scroll', updateButtonVisibility);
+    }
   }, []);
 
   const scroll = (direction) => {
-      const { current } = scrollRef;
-      if (current) {
-          const scrollAmount = direction === 'left' ? -300 : 300;
-          current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      }
+    const { current } = scrollRef;
+    if (current) {
+      const scrollAmount = direction === 'left' ? -300 : 300;
+      current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -140,10 +158,12 @@ export const CarousselGalleryComponent = () => {
       <div className="relative">
         <div className="overflow-x-auto mx-4" ref={scrollRef}>
           <div className="flex gap-6 pb-4">
-            <img alt="Img" className="w-96 flex-shrink-0 object-cover radius-card-img hover:scale-105" src={"/assets/img/bus/bus-1.jpg"} />
-            <img alt="Img" className="w-96 flex-shrink-0 object-cover radius-card-img hover:scale-105" src={"/assets/img/bus/bus-1.jpg"} />
-            <img alt="Img" className="w-96 flex-shrink-0 object-cover radius-card-img hover:scale-105" src={"/assets/img/bus/bus-1.jpg"} />
-            <img alt="Img" className="w-96 flex-shrink-0 object-cover radius-card-img hover:scale-105" src={"/assets/img/bus/bus-1.jpg"} />
+
+            {/* Mapping Gallery Image */}
+            {data.map(res => {
+              return (<img alt="Img" className="w-96 flex-shrink-0 object-cover radius-card-img hover:scale-105" src={res} />)
+            })}
+
           </div>
         </div>
         {showLeftButton && (
