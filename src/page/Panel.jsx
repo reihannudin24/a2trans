@@ -23,11 +23,23 @@ function TextAtas() {
 }
 
 export default function Panel() {
+
+    // Bikin Fetching get
+
+    const dataTable = [
+        {
+            id_bus: 1,
+            thumb: "/assets/img/bus/bus-1.jpg",
+            nama_bus: "Bus Amatron",
+            category: "Bus Gede",
+            status: "Ready"
+        }
+    ]
     return (
         <section>
             <SidebarComponent />
             <TextAtas />
-            <TableComponent />
+            <TableComponent data={dataTable} />
         </section>
     )
 }

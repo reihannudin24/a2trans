@@ -17,12 +17,8 @@ import { FooterComponent } from "./component/Footer.Component";
 function App() {
     const location = useLocation();
 
-    const isPanelRoute = location.pathname === "/panel" ||
-        location.pathname === "/panel/" ||
-        location.pathname === "/panel/add/" ||
-        location.pathname === "/panel/add" ||
-        location.pathname === "/login" ||
-        location.pathname === "/login/";
+    const isPanelRoute = location.pathname.includes("/panel") ||
+        location.pathname.includes("/login") 
 
     return (
         <main className={"w-full bg-white"}>

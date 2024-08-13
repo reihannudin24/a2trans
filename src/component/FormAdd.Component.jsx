@@ -1,33 +1,96 @@
 import { useState } from "react";
+import { textPopUp } from "../function/swal";
+
 
 export default function FormAddComponent() {
-    const [selectedFiles, setSelectedFiles] = useState([]);
+    const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
+    const [selectedThumbFile, setSelectedThumbFile] = useState(null);
+    const [busName, setBusName] = useState("");
+    const [category, setCategory] = useState("");
 
-    const handleFileChange = (event) => {
+    const handleFileChangeGallery = (event) => {
         const files = Array.from(event.target.files);
-        setSelectedFiles(files);
+        setSelectedGalleryFiles(files);
+    };
+
+    const handleFileChangeThumb = (event) => {
+        const file = event.target.files[0];
+        setSelectedThumbFile(file);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        console.log(selectedThumbFile )
+        console.log(selectedGalleryFiles )
+        console.log(busName )
+        console.log(category )
+        if (!selectedGalleryFiles.length || !selectedThumbFile || !busName || !category) {
+            textPopUp("Error", "Ada Value yang tidak terisi", "error")
+            return;
+        }
+
         const formData = new FormData();
-        selectedFiles.forEach((file, index) => {
-            formData.append(`image${index}`, file);
+        selectedGalleryFiles.forEach((file, index) => {
+            formData.append(`image_gallery-${index}`, file);
         });
 
+        const dataForm = {
+            name_bus: busName,
+            category: category
+        }
+
         try {
-            console.log(formData)
-            const response = await fetch('/api/upload', {
+            // FETCHING
+            const responseData = await fetch('/api/add/bus', {
+                method: 'POST',
+                body: dataForm,
+            });
+
+            const responseGallery = await fetch('/api/upload/image-gallery', {
                 method: 'POST',
                 body: formData,
             });
 
-            if (response.ok) {
-                console.log('Files uploaded successfully');
+            const responseThumb = await fetch('/api/upload/image-gallery', {
+                method: 'POST',
+                body: selectedThumbFile,
+            });
+
+            // RESPONE
+            if (responseData.ok) {
+                console.log('data bus uploaded successfully');
+                setBusName("");
+                setCategory("");
+                event.target.reset();
+                textPopUp("Error", "Terjadi Eror Pada Fetching Bus", "error")
+                return;
             } else {
                 console.error('File upload failed');
             }
+
+            if (responseGallery.ok) {
+                console.log('Files and data image gallery uploaded successfully');
+                setSelectedGalleryFiles([]);
+                event.target.reset();
+                textPopUp("Error", "Terjadi Eror Pada Fetching Image Gallery", "error")
+                return;
+            } else {
+                console.error('File upload failed');
+            }
+
+            if (responseThumb.ok) {
+                console.log('Files and data image thumb uploaded successfully');
+                setSelectedThumbFile("");
+                event.target.reset();
+                textPopUp("Error", "Terjadi Eror Pada Fetching Image Thumb", "error")
+                return;
+            } else {
+                console.error('File upload failed');
+            }
+
+            textPopUp("Success", "Berhasil Mengupload Data", "success")
+
         } catch (error) {
             console.error('Error uploading files:', error);
         }
@@ -49,24 +112,38 @@ export default function FormAddComponent() {
                             <div className="py-8 pt-6 px-9">
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-5">
-                                        <label htmlFor="name" className="mb-3 block text-base font-medium text-gray-600">
-                                            Full Name
+                                        <label htmlFor="bus_name" className="mb-3 block text-base font-medium text-gray-600">
+                                            Bus Name
                                         </label>
-                                        <input type="text" name="name" id="name" placeholder="Full Name"
-                                            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md" />
+                                        <input
+                                            type="text"
+                                            name="bus_name"
+                                            id="bus_name"
+                                            placeholder="Enter bus name"
+                                            value={busName}
+                                            onChange={(e) => setBusName(e.target.value)}
+                                            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
+                                        />
                                     </div>
                                     <div className="mb-5">
-                                        <label htmlFor="phone" className="mb-3 block text-base font-medium text-gray-600">
-                                            Phone Number
+                                        <label htmlFor="category" className="mb-3 block text-base font-medium text-gray-600">
+                                            Category
                                         </label>
-                                        <input type="text" name="phone" id="phone" placeholder="Enter your phone number"
-                                            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md" />
+                                        <input
+                                            type="text"
+                                            name="category"
+                                            id="category"
+                                            placeholder="Enter category"
+                                            value={category}
+                                            onChange={(e) => setCategory(e.target.value)}
+                                            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
+                                        />
                                     </div>
 
                                     <div className="-mx-3 flex flex-wrap">
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
-                                                <label htmlFor="date" className="mb-3 block text-base font-medium text-gray-600">
+                                                <label htmlFor="image_gallery" className="mb-3 block text-base font-medium text-gray-600">
                                                     Image Gallery
                                                 </label>
                                                 <input
@@ -74,50 +151,23 @@ export default function FormAddComponent() {
                                                     name="image_gallery"
                                                     id="image_gallery"
                                                     multiple
-                                                    onChange={handleFileChange}
+                                                    onChange={handleFileChangeGallery}
                                                     className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
                                                 />
                                             </div>
                                         </div>
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
-                                                <label htmlFor="time" className="mb-3 block text-base font-medium text-gray-600">
-                                                    Time
+                                                <label htmlFor="image_thumb" className="mb-3 block text-base font-medium text-gray-600">
+                                                    Image Thumb
                                                 </label>
-                                                <input type="time" name="time" id="time"
-                                                    className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="mb-5 pt-3">
-                                        <label className="mb-5 block text-base font-semibold text-gray-600 sm:text-xl">
-                                            Address Details
-                                        </label>
-                                        <div className="-mx-3 flex flex-wrap">
-                                            <div className="w-full px-3 sm:w-1/2">
-                                                <div className="mb-5">
-                                                    <input type="text" name="area" id="area" placeholder="Enter area"
-                                                        className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md" />
-                                                </div>
-                                            </div>
-                                            <div className="w-full px-3 sm:w-1/2">
-                                                <div className="mb-5">
-                                                    <input type="text" name="city" id="city" placeholder="Enter city"
-                                                        className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md" />
-                                                </div>
-                                            </div>
-                                            <div className="w-full px-3 sm:w-1/2">
-                                                <div className="mb-5">
-                                                    <input type="text" name="state" id="state" placeholder="Enter state"
-                                                        className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md" />
-                                                </div>
-                                            </div>
-                                            <div className="w-full px-3 sm:w-1/2">
-                                                <div className="mb-5">
-                                                    <input type="text" name="post-code" id="post-code" placeholder="Post Code"
-                                                        className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md" />
-                                                </div>
+                                                <input
+                                                    type="file"
+                                                    name="image_thumb"
+                                                    id="image_thumb"
+                                                    onChange={handleFileChangeThumb}
+                                                    className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
+                                                />
                                             </div>
                                         </div>
                                     </div>

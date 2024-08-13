@@ -1,5 +1,6 @@
 import { CardDetialComponent } from "../component/Card.Component"
 import { CarousselGalleryComponent } from "../component/Caroussel.Component"
+import CalenderComponent from "../component/Calender.Component"
 
 function Detail() {
 
@@ -24,6 +25,7 @@ function Detail() {
         <section className={"w-full pt-20 mx-auto container"}>
             <CardDetialComponent data={arrayDummyBus}/>
             <CarousselGalleryComponent data={arrayDummy} />
+            <CalenderComponent />
         </section>
     )
 }

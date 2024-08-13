@@ -48,9 +48,9 @@ export default function SidebarComponent() {
                                 <div>List Bus</div>
                             </a>
                         </li>
-                        <li className="p-1">
+                        <li className="shadow-md rounded-md p-1">
                             <a href="/panel/add" className="cursor-pointer w-full flex items-center gap-4 p-2 hover:bg-color-biru rounded-lg text-gray-500">
-                                <MonitorPlay size={44} className="p-2.5 bg-white rounded-lg text-black shadow-md" />
+                                <MonitorPlay size={44} className="p-2.5 bg-purple-500 rounded-lg text-white shadow-md" />
                                 <div>Add Bus</div>
                             </a>
                         </li>
