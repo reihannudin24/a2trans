@@ -144,10 +144,10 @@ export const CardComponent = ({ data }) => {
 
                             {/* MOBILE MODE */}
                             <div className="flex flex-col gap-2 xl:hidden">
-                                <div className="flex flex-col">
+                                {/* <div className="flex flex-col">
                                     <h1 className="text-md text-gray-500">Mulai dari</h1>
                                     <h1 className="text-2xl font-medium text-primary">IDR {data.harga}</h1>
-                                </div>
+                                </div> */}
                                 <button className="p-2 bg-blue-500 text-white rounded-md w-full">Detial</button>
                             </div>
                         </div>
@@ -157,10 +157,10 @@ export const CardComponent = ({ data }) => {
                     {/* DASKTOP MODE */}
                     <div className="items-end xl:flex hidden">
                         <div className="flex flex-col gap-2">
-                            <div className="flex flex-col">
+                            {/* <div className="flex flex-col">
                                 <h1 className="text-md text-gray-500">Mulai dari</h1>
                                 <h1 className="xl:text-2xl sm:text-md font-medium text-primary">IDR {data.harga}</h1>
-                            </div>
+                            </div> */}
                             <button className="p-2 bg-blue-500 text-white rounded-md w-full">Detial</button>
                         </div>
                     </div>

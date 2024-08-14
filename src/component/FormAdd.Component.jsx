@@ -9,10 +9,9 @@ export default function FormAddComponent() {
 
     const [busName, setBusName] = useState("");
     const [description, setDescription] = useState("");
-    const [priceMin, setPriceMin] = useState("");
-    const [priceMax, setPriceMax] = useState("");
+    const [busCategory, setBusCategory] = useState("");
+    const [busMerek, setbusMerek] = useState("");
     const [busType, setBusType] = useState("");
-    // const [priceMax, setBusCategory] = useState("");
 
     const handleFileChangeGallery = (event) => {
         const files = Array.from(event.target.files);
@@ -27,10 +26,7 @@ export default function FormAddComponent() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        console.log(priceMin)
-        console.log(priceMax)
-        console.log(busType)
-        if (!selectedGalleryFiles.length || !selectedThumbFile || !busName || !description || !priceMin || !priceMax) {
+        if (!selectedGalleryFiles.length || !selectedThumbFile || !busName || !description || !busCategory || !busType || !busMerek) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
@@ -43,8 +39,9 @@ export default function FormAddComponent() {
         const dataForm = {
             name_bus: busName,
             description: description,
-            priceMin: priceMin,
-            priceMax: priceMax
+            category: busCategory,
+            type: busType,
+            merek: busMerek
         }
 
         try {
@@ -142,32 +139,22 @@ export default function FormAddComponent() {
                                         </div>
                                     </div>
 
-                                    <div className="-mx-3 flex flex-wrap">
-                                        <div className="w-full px-3 sm:w-1/2">
-                                            <div className="mb-5">
-                                                <LabelText text={"Price Min"} htmlFor={"price_min"} />
-                                                <InputText id={"price_min"} value={priceMin} set={setPriceMin} placeholder={"Enter Price Minimum"} />
-                                            </div>
-                                        </div>
-                                        <div className="w-full px-3 sm:w-1/2">
-                                            <div className="mb-5">
-                                                <LabelText text={"Price Max"} htmlFor={"price_max"} />
-                                                <InputText id={"price_max"} value={priceMax} set={setPriceMax} placeholder={"Enter Price Maximum"} />
-                                            </div>
-                                        </div>
+                                    <div className="mb-5">
+                                        <LabelText text={"Type Kendaraan"} htmlFor={"type_kendaraan"} />
+                                        <InputText id={"type_kendaraan"} value={busType} set={setBusType} placeholder={"Enter Bus Name"} />
                                     </div>
 
                                     <div className="-mx-3 flex flex-wrap">
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
-                                                <LabelText text={"Category"} htmlFor={"type"} />
-                                                <InputSelectOption data={["Bus Gede", "Bus Kecil", "Bus Amatron"]} id={"type"} value={busType} set={setBusType} />
+                                                <LabelText text={"Category Kendaraan"} htmlFor={"category_bus"} />
+                                                <InputSelectOption data={["Bus Gede", "Bus Kecil", "Bus Amatron"]} id={"category_bus"} value={busCategory} set={setBusCategory} />
                                             </div>
                                         </div>
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
-                                                <LabelText text={"Vendor"} htmlFor={"type"} />
-                                                <InputSelectOption data={["Bus Gede", "Bus Kecil", "Bus Amatron"]} id={"type"} value={busType} set={setBusType} />
+                                                <LabelText text={"Merk Kendaraan"} htmlFor={"merk_bus"} />
+                                                <InputSelectOption data={["Bus Gede", "Bus Kecil", "Bus Amatron"]} id={"merk_bus"} value={busMerek} set={setbusMerek} />
                                             </div>
                                         </div>
                                     </div>
