@@ -20,7 +20,8 @@ function EditPanelMerek () {
                 textPopUp("Error", "Login failed. Please check your credentials.", "error");
             }
         }
-    })
+        fetchData()
+    }, []);
 
 
 
