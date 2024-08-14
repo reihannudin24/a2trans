@@ -74,8 +74,14 @@ function AddPanelMerek() {
                     formData.append('files', file);
                 });
                 console.log(selectedGalleryFiles)
-                const responseImageGallery = await apiImage.post('/bus/add/new/image/bus', formData)
-                console.log(responseImageGallery)
+                // const responseImageGallery = await apiAuth.post('/bus/add/new/image/bus', {bus_id: responseData.data.data[0].insertId, files: selectedGalleryFiles})
+                // console.log(responseImageGallery)
+
+                const response = await apiImage.post('/bus/add/new/image/buss', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    }
+                });
 
                 return;
             } else {

@@ -38,11 +38,8 @@ function App() {
                     <Route path={"/panel/*"} element={<Panel />} />
                     <Route path={"/panel/add/*"} element={<PanelAdd />} />
                     <Route path={"/panel/edit/*"} element={<PanelEdit />} />
-<<<<<<< HEAD
-=======
-                    <Route path="*" element={<NotFound />} /> {/* Handle other undefined paths */}
+                    <Route path="*" element={<NotFound />} /> 
 
->>>>>>> 57b69f5e7f72d8f9f5d682e6c93d2e04bd1124de
                 </Routes>
             </section>
             {!isPanelRoute && <FooterComponent />}
