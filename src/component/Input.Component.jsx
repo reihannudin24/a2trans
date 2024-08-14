@@ -77,3 +77,21 @@ export const InputOptionFilter = ({ id, name, value, index }) => {
         </>
     )
 }
+
+export const InputComponent = ({ id, name, label, value, type, placeholder , onChange}) => {
+
+    return (
+        <label htmlFor={id}>
+            <p className="font-medium text-slate-700 pb-2">{label}</p>
+            <input
+                id={id}
+                name={name}
+                type={type}
+                value={value}
+                onChange={onChange}
+                className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+                placeholder={placeholder}
+            />
+        </label>
+    );
+};
