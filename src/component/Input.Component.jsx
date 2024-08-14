@@ -52,7 +52,7 @@ export const InputFilter = ({ defaultContent, content, selectedOption, setSelect
     return (
         <>
             <div className={"text-gray-500 w-full"}>
-               <select className={"text-sm w-11/12 mx-auto"} value={selectedOption} onChange={handleSelectChange}>
+                <select className={"text-sm w-11/12 mx-auto"} value={selectedOption} onChange={handleSelectChange}>
                     <option value={""} id={"default"} className={"cursor-pointer text-sm text-gray-700"}>{defaultContent}</option>
                     {content.map((option, index) => {
                         return (
@@ -75,5 +75,65 @@ export const InputOptionFilter = ({ id, name, value, index }) => {
         <>
             <option key={index} id={id} name={name} value={value} className={"cursor-pointer text-sm text-gray-700"}>{name}</option>
         </>
+    )
+}
+
+export const InputText = ({ id, value, set, placeholder }) => {
+    return (
+        <input
+            type="text"
+            name={id}
+            id={id}
+            placeholder={placeholder}
+            value={value}
+            onChange={(e) => set(e.target.value)}
+            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
+        />
+    )
+}
+
+export const InputTextArea = ({ id, value, set, placeholder, rows }) => {
+    return (
+        <textarea
+            name={id}
+            id={id}
+            placeholder={placeholder}
+            value={value}
+            onChange={(e) => set(e.target.value)}
+            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
+            rows={rows}
+        ></textarea>
+    )
+}
+
+export const InputSelectOption = ({ data, id, value, set }) => {
+    return (
+        <select
+            name={id}
+            id={id}
+            value={value}
+            onChange={(e) => set(e.target.value)}
+            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
+        >
+            <option value="" disabled>Pilih Type</option>
+            {data.map((res, index) => {
+                return (
+                    <option key={index} value={res}>{res}</option>
+                )
+            })}
+        </select>
+    )
+}
+
+export const InputImage = ({ id, change, multiple }) => {
+    return (
+        <input
+            type="file"
+            name={id}
+            id={id}
+            multiple={multiple}
+            onChange={change}
+            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
+        />
     )
 }

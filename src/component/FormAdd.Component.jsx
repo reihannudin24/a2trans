@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { textPopUp } from "../function/swal";
-
+import { InputImage, InputSelectOption, InputText, InputTextArea } from "./Input.Component";
+import { LabelText } from "./Label.Component";
 
 export default function FormAddComponent() {
     const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
     const [selectedThumbFile, setSelectedThumbFile] = useState(null);
+
     const [busName, setBusName] = useState("");
-    const [category, setCategory] = useState("");
+    const [description, setDescription] = useState("");
+    const [priceMin, setPriceMin] = useState("");
+    const [priceMax, setPriceMax] = useState("");
+    const [busType, setBusType] = useState("");
+    // const [priceMax, setBusCategory] = useState("");
 
     const handleFileChangeGallery = (event) => {
         const files = Array.from(event.target.files);
@@ -21,11 +27,10 @@ export default function FormAddComponent() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        console.log(selectedThumbFile )
-        console.log(selectedGalleryFiles )
-        console.log(busName )
-        console.log(category )
-        if (!selectedGalleryFiles.length || !selectedThumbFile || !busName || !category) {
+        console.log(priceMin)
+        console.log(priceMax)
+        console.log(busType)
+        if (!selectedGalleryFiles.length || !selectedThumbFile || !busName || !description || !priceMin || !priceMax) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
@@ -37,12 +42,14 @@ export default function FormAddComponent() {
 
         const dataForm = {
             name_bus: busName,
-            category: category
+            description: description,
+            priceMin: priceMin,
+            priceMax: priceMax
         }
 
         try {
             // FETCHING
-            const responseData = await fetch('/api/add/bus', {
+            const responseData = await fetch(`${process.env.REACT_APP_PANEL_WEBSITE}/add/new`, {
                 method: 'POST',
                 body: dataForm,
             });
@@ -61,7 +68,7 @@ export default function FormAddComponent() {
             if (responseData.ok) {
                 console.log('data bus uploaded successfully');
                 setBusName("");
-                setCategory("");
+                setDescription("");
                 event.target.reset();
                 textPopUp("Error", "Terjadi Eror Pada Fetching Bus", "error")
                 return;
@@ -112,62 +119,55 @@ export default function FormAddComponent() {
                             <div className="py-8 pt-6 px-9">
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-5">
-                                        <label htmlFor="bus_name" className="mb-3 block text-base font-medium text-gray-600">
-                                            Bus Name
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="bus_name"
-                                            id="bus_name"
-                                            placeholder="Enter bus name"
-                                            value={busName}
-                                            onChange={(e) => setBusName(e.target.value)}
-                                            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
-                                        />
+                                        <LabelText text={"Bus Name"} htmlFor={"bus_name"} />
+                                        <InputText id={"bus_name"} value={busName} set={setBusName} placeholder={"Enter Bus Name"} />
                                     </div>
                                     <div className="mb-5">
-                                        <label htmlFor="category" className="mb-3 block text-base font-medium text-gray-600">
-                                            Category
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="category"
-                                            id="category"
-                                            placeholder="Enter category"
-                                            value={category}
-                                            onChange={(e) => setCategory(e.target.value)}
-                                            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
-                                        />
+                                        <LabelText text={"Description"} htmlFor={"description"} />
+                                        <InputTextArea id={"description"} value={description} set={setDescription} placeholder={"Enter Description Bus"} rows={4} />
                                     </div>
 
                                     <div className="-mx-3 flex flex-wrap">
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
-                                                <label htmlFor="image_gallery" className="mb-3 block text-base font-medium text-gray-600">
-                                                    Image Gallery
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    name="image_gallery"
-                                                    id="image_gallery"
-                                                    multiple
-                                                    onChange={handleFileChangeGallery}
-                                                    className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
-                                                />
+                                                <LabelText text={"Image Gallery"} htmlFor={"image_gallery"} />
+                                                <InputImage id={"image_gallery"} change={handleFileChangeGallery} multiple={true} />
                                             </div>
                                         </div>
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
-                                                <label htmlFor="image_thumb" className="mb-3 block text-base font-medium text-gray-600">
-                                                    Image Thumb
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    name="image_thumb"
-                                                    id="image_thumb"
-                                                    onChange={handleFileChangeThumb}
-                                                    className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
-                                                />
+                                                <LabelText text={"Image Thumb"} htmlFor={"image_thumb"} />
+                                                <InputImage id={"image_thumb"} change={handleFileChangeThumb} multiple={false} />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="-mx-3 flex flex-wrap">
+                                        <div className="w-full px-3 sm:w-1/2">
+                                            <div className="mb-5">
+                                                <LabelText text={"Price Min"} htmlFor={"price_min"} />
+                                                <InputText id={"price_min"} value={priceMin} set={setPriceMin} placeholder={"Enter Price Minimum"} />
+                                            </div>
+                                        </div>
+                                        <div className="w-full px-3 sm:w-1/2">
+                                            <div className="mb-5">
+                                                <LabelText text={"Price Max"} htmlFor={"price_max"} />
+                                                <InputText id={"price_max"} value={priceMax} set={setPriceMax} placeholder={"Enter Price Maximum"} />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="-mx-3 flex flex-wrap">
+                                        <div className="w-full px-3 sm:w-1/2">
+                                            <div className="mb-5">
+                                                <LabelText text={"Category"} htmlFor={"type"} />
+                                                <InputSelectOption data={["Bus Gede", "Bus Kecil", "Bus Amatron"]} id={"type"} value={busType} set={setBusType} />
+                                            </div>
+                                        </div>
+                                        <div className="w-full px-3 sm:w-1/2">
+                                            <div className="mb-5">
+                                                <LabelText text={"Vendor"} htmlFor={"type"} />
+                                                <InputSelectOption data={["Bus Gede", "Bus Kecil", "Bus Amatron"]} id={"type"} value={busType} set={setBusType} />
                                             </div>
                                         </div>
                                     </div>

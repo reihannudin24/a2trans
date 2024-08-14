@@ -1,9 +1,11 @@
-import { Bus, List, MonitorPlay } from "@phosphor-icons/react"
+import { Bus, List, MonitorPlay, CaretRight, Plus } from "@phosphor-icons/react"
 import { useState, useRef, useEffect } from "react"
 
 export default function SidebarComponent() {
     const [sidebar, setSidebar] = useState(false)
     const [showSidebar, setShowSidebar] = useState(true)
+    const [expandBusList, setExpandBusList] = useState(false)
+    const [expandAddBus, setExpandAddBus] = useState(false)
     const sidebarRef = useRef(null)
 
     const handleClickOutside = (event) => {
@@ -17,6 +19,16 @@ export default function SidebarComponent() {
         event.preventDefault()
         setSidebar(!sidebar)
         setShowSidebar(!showSidebar)
+        setExpandBusList(false)
+        setExpandAddBus(false)
+    }
+
+    const toggleBusList = () => {
+        setExpandBusList(!expandBusList)
+    }
+
+    const toggleAddBus = () => {
+        setExpandAddBus(!expandAddBus)
     }
 
     useEffect(() => {
@@ -43,18 +55,46 @@ export default function SidebarComponent() {
                             <h1 className={"text-2xl text-gray-500 my-auto text-center mb-10"}>A2Trans</h1>
                         </li>
                         <li className="shadow-md rounded-md p-1">
-                            <a href="/panel" className="cursor-pointer w-full flex items-center gap-4 p-2 hover:bg-color-biru rounded-lg text-gray-500">
-                                <Bus size={44} className="p-2.5 bg-purple-500 rounded-lg text-white shadow-md" />
-                                <div>List Bus</div>
-                            </a>
+                            <button onClick={toggleBusList} className="cursor-pointer w-full flex items-center justify-between p-2 hover:bg-color-biru rounded-lg text-gray-500">
+                                <div className="flex items-center gap-4">
+                                    <Bus size={44} className="p-2.5 bg-purple-500 rounded-lg text-white shadow-md" />
+                                    <div>List Bus</div>
+                                </div>
+                                <CaretRight size={20} className={`transition-transform duration-200 ${expandBusList ? 'rotate-90' : ''}`} />
+                            </button>
+                            {expandBusList && (
+                                <ul className="ml-12 mt-2 space-y-2">
+                                    <li>
+                                        <a href="/panel" className="block p-2 hover:bg-color-biru rounded-lg text-gray-500">List Bus</a>
+                                    </li>
+                                    <li>
+                                        <a href="/panel/active" className="block p-2 hover:bg-color-biru rounded-lg text-gray-500">List Category</a>
+                                    </li>
+                                    <li>
+                                        <a href="/panel/inactive" className="block p-2 hover:bg-color-biru rounded-lg text-gray-500">List</a>
+                                    </li>
+                                </ul>
+                            )}
                         </li>
                         <li className="shadow-md rounded-md p-1">
-                            <a href="/panel/add" className="cursor-pointer w-full flex items-center gap-4 p-2 hover:bg-color-biru rounded-lg text-gray-500">
-                                <MonitorPlay size={44} className="p-2.5 bg-purple-500 rounded-lg text-white shadow-md" />
-                                <div>Add Bus</div>
-                            </a>
+                            <button onClick={toggleAddBus} className="cursor-pointer w-full flex items-center justify-between p-2 hover:bg-color-biru rounded-lg text-gray-500">
+                                <div className="flex items-center gap-4">
+                                    <Plus size={44} className="p-2.5 bg-purple-500 rounded-lg text-white shadow-md" />
+                                    <div>Add Bus</div>
+                                </div>
+                                <CaretRight size={20} className={`transition-transform duration-200 ${expandAddBus ? 'rotate-90' : ''}`} />
+                            </button>
+                            {expandAddBus && (
+                                <ul className="ml-12 mt-2 space-y-2">
+                                    <li>
+                                        <a href="/panel/add" className="block p-2 hover:bg-color-biru rounded-lg text-gray-500">Add New Bus</a>
+                                    </li>
+                                    <li>
+                                        <a href="/panel/add-category" className="block p-2 hover:bg-color-biru rounded-lg text-gray-500">Add Category</a>
+                                    </li>
+                                </ul>
+                            )}
                         </li>
-
                     </ul>
                 </div>
             </aside>
