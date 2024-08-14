@@ -36,7 +36,7 @@ export const NavbarComponent = () => {
                             <div className={"lg:w-6/12 mt-3 mb-auto lg:mb-0 lg:mt-0"}>
                                 <div className={"w-full lg:w-5/12 h-full my-auto "}>
                                     <div className={"h-10 "}>
-                                        <img className={"h-full object-cover"} src={"/assets/img/hor-icon.svg"}/>
+                                        <img alt="Logo" className={"h-full object-cover"} src={"/assets/img/hor-icon.svg"}/>
                                     </div>
                                     {/*<Logo />*/}
                                 </div>

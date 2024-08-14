@@ -1,5 +1,4 @@
 import {Link} from "react-router-dom";
-import {LogoPrimary} from "./Navbar.Component";
 
 export const FooterComponent = () => {
 
@@ -108,7 +107,7 @@ export const FooterComponent = () => {
                                         <Link to={"/"}>
                                             <div className={"w-full lg:w-5/12 h-full my-auto"}>
                                                 <div className={"h-10 "}>
-                                                    <img className={"h-full object-cover"} src={"/assets/img/hor-icon.svg"}/>
+                                                    <img alt="img" className={"h-full object-cover"} src={"/assets/img/hor-icon.svg"}/>
                                                 </div>
                                             </div>
                                         </Link>

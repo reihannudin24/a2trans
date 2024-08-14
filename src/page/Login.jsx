@@ -36,7 +36,7 @@ export default function Login() {
             const data = await response;
             console.log(data);
             textPopUp("Success", "Login successful!", "success");
-            navigate('/dashboard'); // Redirect after successful login
+            navigate('/dashboard'); 
         } catch (err) {
             console.error(err);
             textPopUp("Error", "Login failed. Please check your credentials.", "error");

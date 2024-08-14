@@ -2,6 +2,7 @@ import { useState } from "react";
 import { textPopUp } from "../function/swal";
 import { InputImage, InputSelectOption, InputText, InputTextArea } from "./Input.Component";
 import { LabelText } from "./Label.Component";
+import apiAuth from "../function/axiosAuth";
 
 export default function FormAddComponent() {
     const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
@@ -25,7 +26,7 @@ export default function FormAddComponent() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+        console.log(selectedGalleryFiles)
         if (!selectedGalleryFiles.length || !selectedThumbFile || !busName || !description || !busCategory || !busType || !busMerek) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
@@ -37,63 +38,61 @@ export default function FormAddComponent() {
         });
 
         const dataForm = {
-            name_bus: busName,
+            name: busName,
             description: description,
-            category: busCategory,
-            type: busType,
-            merek: busMerek
+            seat: 10,
+            categories_id: busCategory,
+            type: 1,
+            merek_id: 2
         }
 
         try {
             // FETCHING
-            const responseData = await fetch(`${process.env.REACT_APP_PANEL_WEBSITE}/add/new`, {
-                method: 'POST',
-                body: dataForm,
-            });
+            const responseData = await apiAuth.post('/bus/add/new', dataForm)
 
-            const responseGallery = await fetch('/api/upload/image-gallery', {
-                method: 'POST',
-                body: formData,
-            });
+            // const responseGallery = await fetch('/api/upload/image-gallery', {
+            //     method: 'POST',
+            //     body: formData,
+            // });
 
-            const responseThumb = await fetch('/api/upload/image-gallery', {
-                method: 'POST',
-                body: selectedThumbFile,
-            });
+            // const responseThumb = await fetch('/api/upload/image-gallery', {
+            //     method: 'POST',
+            //     body: selectedThumbFile,
+            // });
 
-            // RESPONE
-            if (responseData.ok) {
+            // // RESPONE
+            if (responseData.status === 200) {
                 console.log('data bus uploaded successfully');
                 setBusName("");
                 setDescription("");
                 event.target.reset();
-                textPopUp("Error", "Terjadi Eror Pada Fetching Bus", "error")
+                textPopUp("Success", "Berhasil menambah data kedatabase", "success")
                 return;
             } else {
                 console.error('File upload failed');
             }
 
-            if (responseGallery.ok) {
-                console.log('Files and data image gallery uploaded successfully');
-                setSelectedGalleryFiles([]);
-                event.target.reset();
-                textPopUp("Error", "Terjadi Eror Pada Fetching Image Gallery", "error")
-                return;
-            } else {
-                console.error('File upload failed');
-            }
+            // if (responseGallery.ok) {
+            //     console.log('Files and data image gallery uploaded successfully');
+            //     setSelectedGalleryFiles([]);
+            //     event.target.reset();
+            //     textPopUp("Error", "Terjadi Eror Pada Fetching Image Gallery", "error")
+            //     return;
+            // } else {
+            //     console.error('File upload failed');
+            // }
 
-            if (responseThumb.ok) {
-                console.log('Files and data image thumb uploaded successfully');
-                setSelectedThumbFile("");
-                event.target.reset();
-                textPopUp("Error", "Terjadi Eror Pada Fetching Image Thumb", "error")
-                return;
-            } else {
-                console.error('File upload failed');
-            }
+            // if (responseThumb.ok) {
+            //     console.log('Files and data image thumb uploaded successfully');
+            //     setSelectedThumbFile("");
+            //     event.target.reset();
+            //     textPopUp("Error", "Terjadi Eror Pada Fetching Image Thumb", "error")
+            //     return;
+            // } else {
+            //     console.error('File upload failed');
+            // }
 
-            textPopUp("Success", "Berhasil Mengupload Data", "success")
+            // textPopUp("Success", "Berhasil Mengupload Data", "success")
 
         } catch (error) {
             console.error('Error uploading files:', error);

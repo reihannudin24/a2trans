@@ -4,7 +4,7 @@ import FormAddComponent from "../component/FormAdd.Component"
 
 function TextAtas() {
     return (
-        <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
+        <div className="lg:ml-80 ml-4 lg:mr-16 mr-4 mt-16">
             <div className="justify-between flex items-center">
                 <div className="text-gray-500">
                     <a href="/dashboard">Pages</a>
