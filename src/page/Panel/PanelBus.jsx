@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { textPopUp } from "../../function/swal";
-import apiJson from "../../function/axios";
 import { CardPanelBusComponent } from "../../component/PanelComponent";
 import { useNavigate } from "react-router-dom";
+import apiJson from "../../function/axios";
 
 function PanelBus() {
     const navigate = useNavigate();

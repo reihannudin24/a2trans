@@ -13,6 +13,7 @@ import Login from './page/Login';
 import { NavbarComponent } from "./component/Navbar.Component";
 import { FooterComponent } from "./component/Footer.Component";
 import PanelEdit from "./page/PanelEdit";
+import NotFound from "./page/NotFound";
 
 
 function App() {
@@ -34,9 +35,11 @@ function App() {
                     <Route path={"/login"} element={<Login />} />
 
                     {/* PANEL */}
-                    <Route path={"/panel/:"} element={<Panel />} />
-                    <Route path={"/panel/add/:"} element={<PanelAdd />} />
-                    <Route path={"/panel/edit/:"} element={<PanelEdit />} />
+                    <Route path={"/panel/*"} element={<Panel />} />
+                    <Route path={"/panel/add/*"} element={<PanelAdd />} />
+                    <Route path={"/panel/edit/*"} element={<PanelEdit />} />
+                    <Route path="*" element={<NotFound />} /> {/* Handle other undefined paths */}
+
                 </Routes>
             </section>
             {!isPanelRoute && <FooterComponent />}

@@ -1,5 +1,5 @@
 import {confirmDelete, textPopUp} from "../function/swal";
-import {apiAuth} from "../function/axios";
+import apiAuth from "../function/axios";
 
 
 export const CardPanelBusComponent =  ({index, id, item, navigate}) => {
@@ -51,7 +51,7 @@ export const CardPanelBusComponent =  ({index, id, item, navigate}) => {
             </td>
             <td className="p-3 pr-12 text-end">
                 <div className="flex gap-4 justify-end">
-                    <button onClick={() => handleDelete(id.bus_id)} className="p-2 bg-red-500 rounded-md text-white">Delete</button>
+                    <button onClick={() => handleDelete(id)} className="p-2 bg-red-500 rounded-md text-white">Delete</button>
                     <a href="/panel/bus/edit" className="cursor-pointer p-2 bg-blue-500 rounded-md text-white">Edit</a>
                 </div>
             </td>
