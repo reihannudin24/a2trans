@@ -23,7 +23,7 @@ function App() {
     return (
         <main className={"w-full bg-white"}>
             {!isPanelRoute && <NavbarComponent />}
-            <section className={"pt-14"}>
+            <section className={""}>
                 <Routes>
                     <Route path={"/"} element={<Home />} />
                     <Route path={"/detail"} element={<Detail />} />
