@@ -5,6 +5,7 @@ import { NavbarPanelComponent } from "../component/Navbar.Component";
 import AddPanelMerek from "./Panel/Add/AddPanelMerek";
 import AddPanelCategories from "./Panel/Add/AddPanelCategories";
 import AddPanelFacilities from "./Panel/Add/AddPanelFacilities";
+import NotFound from "./NotFound";
 
 export default function PanelAdd() {
     return (
@@ -17,8 +18,9 @@ export default function PanelAdd() {
                     <Route path={"new/facilities"} element={<AddPanelFacilities />} />
                     <Route path={"new/categories"} element={<AddPanelCategories />} />
                     <Route path={"new/brand"} element={<AddPanelMerek />} />
+                    <Route path="*" element={<NotFound />} /> {/* Handle other undefined paths */}
                 </Routes>
-            </div>
-        </section>
+            </div >
+        </section >
     )
 }
