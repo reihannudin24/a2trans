@@ -26,8 +26,7 @@ export default function FormAddComponent() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(selectedGalleryFiles)
-        if (!selectedGalleryFiles.length || !selectedThumbFile || !busName || !description || !busCategory || !busType || !busMerek) {
+        if ( !busName || !description || !busCategory || !busType || !busMerek) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
@@ -49,6 +48,7 @@ export default function FormAddComponent() {
         try {
             // FETCHING
             const responseData = await apiAuth.post('/bus/add/new', dataForm)
+            console.log(responseData.data.data[0].insertId)
 
             // const responseGallery = await fetch('/api/upload/image-gallery', {
             //     method: 'POST',
