@@ -9,10 +9,6 @@ export const FooterComponent = () => {
         },
         {
             "value" : "Grand Catania blok O5/39 Citra Raya, Kabupaten Tangerang" ,
-        }, {
-            "value" : "reihannudin24@gmail.com" ,
-        },{
-            "value" : "+62812-1839-1138" ,
         }
     ]
 
@@ -79,12 +75,12 @@ export const FooterComponent = () => {
 
     const socialMedia = [
         {
-            "name" : "Instagram",
+            "name" : "Email",
             "image" : "1",
             "url" : "reihannudin24@gmail.com",
         },
         {
-            "name" : "Instagram",
+            "name" : "Facebook",
             "image" : "2",
             "url" : "https://www.facebook.com/reihannudin/",
         },
@@ -94,7 +90,7 @@ export const FooterComponent = () => {
             "url" : "https://www.instagram.com/reihannudin/",
         },
         {
-            "name" : "Instagram",
+            "name" : "Whatapps",
             "image" : "4",
             "url" : "https://www.linkedin.com/reihannudin/",
         },
@@ -103,15 +99,17 @@ export const FooterComponent = () => {
     return(
         <>
             <footer className={"w-full xl:pt-10 py-2"}>
-                <header className={"w-11/12 2xl:w-10/12  py-4  mx-auto container"} style={{minWidth:"400px" , maxWidth:"1500px"}}>
-                    <div className={"w-full md:mx-5"}>
+                <header className={"w-11/12 2xl:w-1/12  py-4  mx-auto container"} style={{minWidth:"400px" , maxWidth:"1500px"}}>
+                    <div className={"w-full "}>
                         <div className={"md:flex block mx-4"}>
                             <div className={"md:w-5/12 w-full "}>
                                 <div className={"w-full mb-3"}>
                                     <div className={"cursor-pointer"} style={{height:"50px"}}>
                                         <Link to={"/"}>
                                             <div className={"w-full lg:w-5/12 h-full my-auto"}>
-                                                <LogoPrimary />
+                                                <div className={"h-10 "}>
+                                                    <img className={"h-full object-cover"} src={"/assets/img/hor-icon.svg"}/>
+                                                </div>
                                             </div>
                                         </Link>
                                     </div>
@@ -161,7 +159,7 @@ export const FooterComponent = () => {
                                                     <Link to={`${item.url}`}>
                                                         <div className={"bg-gray-100 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10"} >
                                                             <div className={"py-3 px-3 w-full h-full"}>
-                                                                <img alt="img" className={" w-full h-full object-cover"} src={`assets/img/img-social/img-social${item?.image}.png`}/>
+                                                                <img alt="img" className={" w-full h-full object-cover"} src={`/assets/img/icon/img-social${item?.image}.png`}/>
                                                             </div>
                                                         </div>
                                                     </Link>

@@ -10,8 +10,16 @@
   background: #E33C2F;
 }
 
+.bg-primary-new-nav {
+  background: linear-gradient(to right, #ffffff 30%, #E33C2F 60%);
+}
+
+.text-15{
+  font-size: 15px;
+}
+
 .bg-primary-nav{
-  background: #d22619;
+  background: #af1d11;
 }
 
 .text-primary {
@@ -114,4 +122,23 @@
 
 .rotate-180 {
   transform: rotate(180deg);
+}
+
+.typing-animation {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  /*border-right: 2px solid white; !* Cursor effect *!*/
+  animation: typing 3.5s steps(40, end) forwards, blink-caret 0.75s step-end infinite; /* Infinite blink-caret */
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  0% { border-color: white; }
+  99.9% { border-color: white; }
+  100% { border-color: transparent;  border-right:none;}
 }

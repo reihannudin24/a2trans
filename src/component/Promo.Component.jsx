@@ -239,7 +239,7 @@ export const TestimonialComponent = () => {
     return (
         <>
             <div className="xl:mt-10 mx-auto container pb-10">
-                <div className="mx-4">
+                <div className="w-full">
                     <div className={"w-full mx-4"}>
                         <div className={"flex gap-2 text-center"}>
                             <h1 className="font-bold text-primary xl:text-2xl text-md">Testimoni</h1>

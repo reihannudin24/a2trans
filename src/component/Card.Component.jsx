@@ -3,10 +3,10 @@ import { Star, Fan, Monitor, User, PintGlass } from "@phosphor-icons/react";
 
 export const ListCardComponent = ({ title, data }) => {
     return (
-        <div className={"w-full my-4 lg:w-11/12 mx-auto container"}>
+        <div className={"w-full my-4  mx-auto container"}>
             <div className={"w-full"}>
                 <div className={"my-5"}>
-                    <h2 className={"font-bold xl:text-xl text-md text-gray-800 mx-4"}>{title}</h2>
+                    <h2 className={"font-bold xl:text-2xl text-md text-red-700 mx-4"}>{title}</h2>
                 </div>
                 <div className="mx-4">
                     <div className={"w-full relative"}>
@@ -24,23 +24,6 @@ export const ListCardComponent = ({ title, data }) => {
     )
 }
 
-
-export const FAQCardComponent = () => {
-    return (
-        <div className={""}>
-            <div className={""}>
-                <h2 className={""}>Jenis bus apa yang cocok untuk kebutuhan saya?</h2>
-            </div>
-            <div className={""}>
-                <div className={""}>
-                    <p className={""}>Jenis bus apa yang cocok untuk kebutuhan saya?
-                    </p>
-                </div>
-            </div>
-        </div>
-
-    )
-}
 
 export const ReviewCardComponent = () => {
     return (
