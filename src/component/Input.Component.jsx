@@ -52,7 +52,7 @@ export const InputFilter = ({ defaultContent, content, selectedOption, setSelect
     return (
         <>
             <div className={"text-gray-500 w-full"}>
-                <select className={"text-sm w-11/12 mx-auto"} value={selectedOption} onChange={handleSelectChange}>
+               <select className={"text-sm w-11/12 mx-auto"} value={selectedOption} onChange={handleSelectChange}>
                     <option value={""} id={"default"} className={"cursor-pointer text-sm text-gray-700"}>{defaultContent}</option>
                     {content.map((option, index) => {
                         return (
