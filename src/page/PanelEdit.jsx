@@ -20,7 +20,7 @@ function PanelEdit() {
                     <Route path={"/edit/brand/:id"} element={<EditPanelMerek />}/>
                 </Routes>
             </div>
-            <FormAddComponent />
+            {/*<FormAddComponent />*/}
         </section>
     )
 }
