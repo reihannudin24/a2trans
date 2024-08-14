@@ -1,6 +1,12 @@
 import { CaretDown  } from "@phosphor-icons/react"
 import SidebarComponent from "../component/Sidebar.Component"
 import TableComponent from "../component/Table.Component"
+import {Route, Routes} from "react-router-dom";
+import Login from "./Login";
+import PanelBus from "./Panel/PanelBus";
+import PanelCategory from "./Panel/PanelCategory";
+import PanelMerek from "./Panel/PanelMerek";
+import PanelFacilities from "./Panel/PanelFacilitas";
 
 function TextAtas() {
     return (
@@ -39,7 +45,15 @@ export default function Panel() {
         <section>
             <SidebarComponent />
             <TextAtas />
-            <TableComponent data={dataTable} />
+            <div>
+                <Routes>
+                    <Route path={"/bus"} element={<PanelBus />} />
+                    <Route path={"/category"} element={<PanelCategory />} />
+                    <Route path={"/merk"} element={<PanelMerek />} />
+                    <Route path={"/facilities"} element={<PanelFacilities />} />
+                </Routes>
+            </div>
+            {/*<TableComponent data={dataTable} />*/}
         </section>
     )
 }

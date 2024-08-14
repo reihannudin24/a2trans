@@ -1,12 +1,27 @@
-import { confirmDelete } from "../function/swal";
+import {confirmDelete, textPopUp} from "../function/swal";
+import {useEffect, useState} from "react";
+import {apiAuth} from "../function/axios";
 
 export default function TableComponent({ data }) {
+
+    const [bus, setBus ] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try{
+                const response = await apiAuth.post('/bus/show');
+                setBus(response?.data);
+            }catch (error){
+                console.log(error)
+                textPopUp("Error", "Login failed. Please check your credentials.", "error");
+            }
+        }
+        fetchData()
+    }, []);
+
 
     const handleDelete = async (id) => {
         await confirmDelete('Are you sure?', 'apa kamu yakin untuk menghapus data ini', id).then(result => {
             if (result.confirmed) {
-
-                // INI RESULT PAS DELETE 
                 console.log(result)
 
             }
@@ -33,36 +48,38 @@ export default function TableComponent({ data }) {
                                         <thead className="align-bottom">
                                             <tr className="font-semibold text-[0.95rem] text-secondary-dark">
                                                 <th className="pb-3 text-start min-w-[175px]">Bus</th>
-                                                <th className="pb-3 text-end min-w-[175px]">Type</th>
-                                                <th className="pb-3 text-end min-w-[175px]">PROGRESS</th>
-                                                <th className="pb-3 pr-12 text-end min-w-[175px]">STATUS</th>
+                                                <th className="pb-3 pr-12 text-end min-w-[175px]">Seat</th>
+                                                <th className="pb-3 text-end min-w-[175px]">Kategori</th>
+                                                <th className="pb-3 text-end min-w-[175px]">Tipe</th>
+                                                <th className="pb-3 pr-12 text-end min-w-[175px]">Merek</th>
                                                 <th className="pb-3 pr-12 text-end min-w-[175px]">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-
-                                            {/* MAPPING */}
-                                            {data.map((res, index) => {
+                                            {bus.map((res, index) => {
                                                 return (
                                                     <tr key={index} className="border-b">
                                                         <td className="p-3 pl-0">
                                                             <div className="flex items-center">
                                                                 <div className="relative inline-block shrink-0 rounded-2xl me-3">
-                                                                    <img src={res.thumb} className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl" alt="" />
+                                                                    <img src={res.image} className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl" alt="" />
                                                                 </div>
                                                                 <div className="flex flex-col justify-start">
-                                                                    <div className="mb-1 font-semibold transition-colors duration-200 ease-in-out"> {res.nama_bus} </div>
+                                                                    <div className="mb-1 font-semibold transition-colors duration-200 ease-in-out"> {res.name}</div>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td className="p-3 pr-0 text-end">
-                                                            <span className="font-semibold">{res.category}</span>
+                                                            <span className="font-semibold">{res.seat}</span>
                                                         </td>
                                                         <td className="p-3 pr-0 text-end">
-                                                            <span className="font-semibold">Bus Gede</span>
+                                                            <span className="font-semibold">{res.categories_id}</span>
+                                                        </td>
+                                                        <td className="p-3 pr-0 text-end">
+                                                            <span className="font-semibold">{res?.type}</span>
                                                         </td>
                                                         <td className="p-3 pr-12 text-end">
-                                                            <span className={`font-semibold ${res.status === "Ready" ? "p-2 bg-green-500 rounded-md text-white" : "p-2 bg-red-500 rounded-md text-white"}`}>{res.status}</span>
+                                                            <span className="font-semibold">{res?.merek}</span>
                                                         </td>
                                                         <td className="p-3 pr-12 text-end">
                                                             <div className="flex gap-4 justify-end">
