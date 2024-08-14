@@ -34,9 +34,9 @@ function App() {
                     <Route path={"/login"} element={<Login />} />
 
                     {/* PANEL */}
-                    <Route path={"/panel/:"} element={<Panel />} />
-                    <Route path={"/panel/add/:"} element={<PanelAdd />} />
-                    <Route path={"/panel/edit/:"} element={<PanelEdit />} />
+                    <Route path={"/panel/*"} element={<Panel />} />
+                    <Route path={"/panel/add/*"} element={<PanelAdd />} />
+                    <Route path={"/panel/edit/*"} element={<PanelEdit />} />
                 </Routes>
             </section>
             {!isPanelRoute && <FooterComponent />}

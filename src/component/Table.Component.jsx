@@ -1,6 +1,6 @@
 import {confirmDelete, textPopUp} from "../function/swal";
 import {useEffect, useState} from "react";
-import {apiAuth} from "../function/axios";
+import apiAuth from "../function/axios";
 
 export default function TableComponent({ data }) {
 

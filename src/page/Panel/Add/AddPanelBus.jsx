@@ -1,10 +1,11 @@
-import {useState} from "react";
-import {textPopUp} from "../../../function/swal";
+import { useState } from "react";
+import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
-import {LabelText} from "../../../component/Label.Component";
-import {InputImage, InputSelectOption, InputText, InputTextArea} from "../../../component/Input.Component";
+import apiImage from "../../../function/axiosImage";
+import { LabelText } from "../../../component/Label.Component";
+import { InputImage, InputSelectOption, InputText, InputTextArea } from "../../../component/Input.Component";
 
-function AddPanelMerek () {
+function AddPanelMerek() {
     const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
     const [selectedThumbFile, setSelectedThumbFile] = useState(null);
 
@@ -26,15 +27,15 @@ function AddPanelMerek () {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if ( !busName || !description || !busCategory || !busType || !busMerek) {
+        if (!busName || !description || !busCategory || !busType || !busMerek) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
 
-        const formData = new FormData();
-        selectedGalleryFiles.forEach((file, index) => {
-            formData.append(`image_gallery-${index}`, file);
-        });
+        // const formData = new FormData();
+        // selectedGalleryFiles.forEach((file, index) => {
+        //     formData.append(`image_gallery-${index}`, file);
+        // });
 
         const dataForm = {
             name: busName,
@@ -48,7 +49,6 @@ function AddPanelMerek () {
         try {
             // FETCHING
             const responseData = await apiAuth.post('/bus/add/new', dataForm)
-            console.log(responseData.data.data[0].insertId)
 
             // const responseGallery = await fetch('/api/upload/image-gallery', {
             //     method: 'POST',
@@ -67,6 +67,16 @@ function AddPanelMerek () {
                 setDescription("");
                 event.target.reset();
                 textPopUp("Success", "Berhasil menambah data kedatabase", "success")
+
+                const formData = new FormData();
+                formData.append('bus_id', responseData.data.data[0].insertId);
+                selectedGalleryFiles.forEach((file, index) => {
+                    formData.append('files', file);
+                });
+                console.log(selectedGalleryFiles)
+                const responseImageGallery = await apiImage.post('/bus/add/new/image/bus', formData)
+                console.log(responseImageGallery)
+
                 return;
             } else {
                 console.error('File upload failed');

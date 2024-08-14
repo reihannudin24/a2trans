@@ -1,5 +1,4 @@
 import SidebarComponent from "../component/Sidebar.Component"
-import FormAddComponent from "../component/FormAdd.Component"
 import {Route, Routes} from "react-router-dom";
 import EditPanelBus from "./Panel/Edit/EditPanelBus";
 import EditPanelFacilities from "./Panel/Edit/EditPanelFacilities";
@@ -20,7 +19,6 @@ function PanelEdit() {
                     <Route path={"/edit/brand/:id"} element={<EditPanelMerek />}/>
                 </Routes>
             </div>
-            <FormAddComponent />
         </section>
     )
 }
