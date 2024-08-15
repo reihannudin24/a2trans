@@ -23,7 +23,7 @@ function App() {
         location.pathname.includes("/login") 
 
     return (
-        <main className={"w-full bg-white"}>
+        <main className={"w-full bg-white"} style={{minWidth:"300px"}}>
             {!isPanelRoute && <NavbarComponent />}
             <section className={""}>
                 <Routes>

@@ -6,15 +6,15 @@ export const ListCardComponent = ({ title, data }) => {
         <div className={"w-full my-4  mx-auto container"}>
             <div className={"w-full"}>
                 <div className={"my-5"}>
-                    <h2 className={"font-bold xl:text-2xl text-md text-red-700 mx-4"}>{title}</h2>
+                    <h2 className={"font-bold xl:text-2xl text-2xl text-black-700 mx-4"}>{title}</h2>
                 </div>
                 <div className="mx-4">
                     <div className={"w-full relative"}>
                         <ul className={"w-full flex flex-wrap relative"}>
-                            {data.map(res => {
-                                return (<li className={"w-6/12 lg:w-3/12  my-3"}>
-                                    <Card2Component name={data.nama_bus} category={data.category} />
-                                </li>)
+                            {data?.map((item, index) => {
+                                return(
+                                    <CardCategoriesComponent index={index} name={item.nama_bus} category={data.category} />
+                                )
                             })}
                         </ul>
                     </div>
@@ -73,10 +73,10 @@ export const StarComponent = () => {
 }
 
 
-export const Card2Component = ({ name, category, img }) => {
+export const CardCategoriesComponent = ({ name, category, img }) => {
     return (
         <>
-            <div className={"w-99 mx-auto lg:w-full rounded-lg  shadow"}>
+            <div className={"w-99 mx-auto my-2 lg:w-full rounded-lg  shadow"}>
                 <div className={"relative"}>
                     <div className={"h-img-card relative"}>
                         <img alt="Bus" className={"w-full h-full object-cover radius-card-img"} src={"/assets/img/bus/bus-1.jpg"} />
@@ -87,7 +87,7 @@ export const Card2Component = ({ name, category, img }) => {
                             <div className={"mb-2 w-11/12 text-left mx-auto"}>
                                 <div className={"mx-3 w-full"}>
                                     <div className={"mt-1 pt-2 w-full"}>
-                                        <p className={"text-sm w-full text-gray-50 "}>{category}</p>
+                                        <p className={"text-md w-full text-gray-50 "}>{category}</p>
                                     </div>
                                     <h3 className={"w-full text-white text-lg font-semibold"}>{name}</h3>
                                 </div>
