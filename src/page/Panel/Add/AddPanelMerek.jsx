@@ -3,6 +3,7 @@ import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
 import { LabelText } from "../../../component/Label.Component";
 import { InputText } from "../../../component/Input.Component";
+import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
 
 function AddPanelMerek() {
     const [name, setName] = useState("");
@@ -21,7 +22,6 @@ function AddPanelMerek() {
 
         try {
             const responseData = await apiAuth.post('/vendors/create', dataForm)
-            console.log(responseData)
 
             // RESPONE
             if (responseData.status === 200) {
@@ -42,6 +42,7 @@ function AddPanelMerek() {
 
     return (
         <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
+            <NavbarNewPanelComponent brandText="Dashboard" />
             <div className="flex flex-wrap -mx-3 mb-5">
                 <div className="w-full max-w-full mb-6 mx-auto">
                     <div className="relative flex flex-col min-w-0 shadow-md rounded-md bg-white m-5">
@@ -56,14 +57,14 @@ function AddPanelMerek() {
                             <div className="py-8 pt-6 px-9">
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-5">
-                                        <LabelText text="Name" htmlFor="name" />
+                                        <LabelText text="Name Merek" htmlFor="name" />
                                         <InputText id="name" value={name} set={setName} placeholder="Enter Name Merek" />
                                     </div>
 
                                     <div>
                                         <button
                                             type="submit"
-                                            className="hover:shadow-form w-full rounded-md bg-blue-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                                            className="hover:shadow-form w-full rounded-md bg-red-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
                                             Submit
                                         </button>
                                     </div>

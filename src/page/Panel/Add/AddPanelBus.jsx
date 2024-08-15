@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
 import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
 import { InputImage, InputSelectOption, InputNumber, InputText, InputTextArea } from "../../../component/Input.Component";
 import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
+
+
 
 function AddPanelMerek() {
     const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
@@ -91,16 +93,22 @@ function AddPanelMerek() {
         }
     };
 
-    const checkDataCategory = async () => {
+    const [loop, setLoop] = useState(true)
+    const checkDataCategory = useCallback(async () => {
         const responseCategories = await apiAuth.get('/categories/show');
         const responseMerek = await apiAuth.get('/vendors/show');
         setCategories(responseCategories.data.data)
         setMerek(responseMerek.data.data)
-    }
+
+        
+        setLoop(false);
+    }, []);
 
     useEffect(() => {
-        checkDataCategory()
-    }, [])
+        if (loop === true) {
+            checkDataCategory()
+        }
+    }, [loop, checkDataCategory])
 
     return (
         <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
@@ -156,7 +164,7 @@ function AddPanelMerek() {
                                         </div>
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
-                                                <LabelText text={"Merk Kendaraan"} htmlFor={"merk_bus"} />
+                                                <LabelText text={"Merek Kendaraan"} htmlFor={"merk_bus"} />
                                                 <InputSelectOption data={merek} id={"merk_bus"} value={busMerek} set={setbusMerek} text={"Pilih Merek"} />
                                             </div>
                                         </div>

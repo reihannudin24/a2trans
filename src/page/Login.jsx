@@ -36,7 +36,7 @@ export default function Login() {
             const data = await response;
             console.log(data);
             textPopUp("Success", "Login successful!", "success");
-            navigate('/dashboard'); 
+            navigate('/'); 
         } catch (err) {
             console.error(err);
             textPopUp("Error", "Login failed. Please check your credentials.", "error");
@@ -56,7 +56,7 @@ export default function Login() {
                         <div className={" h-screen w-5/12 mx-auto relative left-0 right-0 top-0 bottom-0 pb-2 "}>
                             <div className="w-11/12  my-8 bg-white left-0 right-0 top-0 bottom-0 mx-auto container py-4 px-8 rounded-xl shadow-md">
                                 <div className={"h-28"}>
-                                    <img className={"h-full object-cover"} src={"/assets/img/logo.svg"}/>
+                                    <img alt="Logo" className={"h-full object-cover"} src={"/assets/img/logo.svg"}/>
                                 </div>
                                 <div>
                                     <h1 className="text-3xl font-bold">Admin Login</h1>

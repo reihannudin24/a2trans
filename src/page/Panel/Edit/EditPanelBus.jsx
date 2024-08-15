@@ -4,11 +4,14 @@ import apiAuth from "../../../function/axiosAuth";
 import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
 import { InputImage, InputSelectOption, InputNumber, InputText, InputTextArea } from "../../../component/Input.Component";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
 
 function EditPanelBus() {
     const { id } = useParams();
+
+    const navigate = useNavigate()
+
     const [selectedThumbFile, setSelectedThumbFile] = useState(null);
 
     const [busName, setBusName] = useState("");
@@ -46,7 +49,6 @@ function EditPanelBus() {
         try {
             // FETCHING
             const responseData = await apiAuth.post('/bus/update', dataForm)
-            console.log(responseData)
 
             // // RESPONE
             if (responseData.status === 200) {
@@ -57,7 +59,6 @@ function EditPanelBus() {
                 formDataThumb.append('files', selectedThumbFile);
 
                 const responseThumb = await apiImage.post('/bus/add/new/image/bus', formDataThumb);
-                console.log(responseThumb)
 
                 if (responseThumb.data.status === 200) {
                     console.log('data bus uploaded successfully');
@@ -86,6 +87,7 @@ function EditPanelBus() {
     const [loop, setLoop] = useState(true)
     const checkData = useCallback(async () => {
         const responseData = await apiAuth.get(`/bus/show?id=${id}`);
+        if (responseData.data.data.length === 0) return navigate("/panel/bus")
         setBusName(responseData.data.data[0].name);
         setDescription(responseData.data.data[0].description);
         setBusCategory(responseData.data.data[0].categories_id);
@@ -94,7 +96,7 @@ function EditPanelBus() {
         setBusSeat(responseData.data.data[0].seat);
 
         setLoop(false);
-    }, [id]);
+    }, [id, navigate]);
 
 
     useEffect(() => {

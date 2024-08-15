@@ -4,6 +4,7 @@ import apiAuth from "../../../function/axiosAuth";
 import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
 import { InputText, InputImage } from "../../../component/Input.Component";
+import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
 
 function AddPanelCategories() {
     const [name, setName] = useState("");
@@ -55,6 +56,7 @@ function AddPanelCategories() {
 
     return (
         <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
+            <NavbarNewPanelComponent brandText="Dashboard" />
             <div className="flex flex-wrap -mx-3 mb-5">
                 <div className="w-full max-w-full  mb-6  mx-auto">
                     <div className="relative flex flex-col  min-w-0 shadow-md rounded-md bg-white m-5">
@@ -80,7 +82,7 @@ function AddPanelCategories() {
                                     <div>
                                         <button
                                             type="submit"
-                                            className="hover:shadow-form w-full rounded-md bg-blue-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                                            className="hover:shadow-form w-full rounded-md bg-red-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
                                             Submit
                                         </button>
                                     </div>
