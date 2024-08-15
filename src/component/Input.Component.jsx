@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import {MdFileUpload} from "react-icons/md";
 
 export const InputCheckbox = ({ name, toggle, selectedColors, value }) => {
     return (
@@ -87,7 +88,7 @@ export const InputText = ({ id, value, set, placeholder }) => {
             placeholder={placeholder}
             value={value}
             onChange={(e) => set(e.target.value)}
-            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
+            className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-md font-normal text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
         />
     )
 }
@@ -100,7 +101,7 @@ export const InputTextArea = ({ id, value, set, placeholder, rows }) => {
             placeholder={placeholder}
             value={value}
             onChange={(e) => set(e.target.value)}
-            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
+            className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-md font-normal text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
             rows={rows}
         ></textarea>
     )
@@ -127,16 +128,31 @@ export const InputSelectOption = ({ data, id, value, set }) => {
 
 export const InputImage = ({ id, change, multiple }) => {
     return (
-        <input
-            type="file"
-            name={id}
-            id={id}
-            multiple={multiple}
-            onChange={change}
-            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
-        />
-    )
+        <div className="col-span-5 h-full w-full rounded-xl bg-lightPrimary dark:!bg-navy-700 2xl:col-span-6">
+            <label htmlFor={id}>
+                <input
+                    type="file"
+                    name={id}
+                    id={id}
+                    multiple={multiple}
+                    onChange={change}
+                    className="hidden"
+                />
+                <div className="flex h-full py-4 w-full flex-col items-center justify-center rounded-xl border-[2px] border-dashed border-gray-200  dark:!border-navy-700 lg:pb-5">
+                    <MdFileUpload className="text-[50px] text-red-500 dark:text-white" />
+                    <h4 className="text-xl font-bold text-red-500 dark:text-white">
+                        Upload Files
+                    </h4>
+                    <p className="mt-2 text-sm font-medium text-gray-600">
+                        PNG, JPG and GIF files are allowed
+                    </p>
+                </div>
+            </label>
+        </div>
+    );
 }
+
+
 export const InputComponent = ({ id, name, label, value, type, placeholder , onChange}) => {
 
     return (

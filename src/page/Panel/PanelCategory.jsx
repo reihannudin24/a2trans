@@ -1,8 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import apiJson from "../../function/axios";
 import { textPopUp } from "../../function/swal";
 import { CardPanelCategoryComponent } from "../../component/PanelComponent";
+import apiAuth from "../../function/axiosAuth";
+import {NavbarNewPanelComponent} from "../../component/Navbar.Component";
+import {WidgetComponent} from "../../component/Widget.Component";
+import {MdBarChart} from "react-icons/md";
+import {IoDocuments} from "react-icons/io5";
 
 function PanelCategory() {
     const navigate = useNavigate();
@@ -11,55 +15,124 @@ function PanelCategory() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await apiJson.get('/category/show');
-                setCategory(response?.data || []);
+                const response = await apiAuth.get('/categories/show' , {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                setCategory(response?.data?.data || []);
             } catch (error) {
                 console.error(error);
-                textPopUp("Error", "Failed to fetch categories. Please try again later.", "error");
+                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
         };
-
         fetchData();
     }, []);
 
     return (
         <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
+            <NavbarNewPanelComponent brandText="Dashboard" />
+            <div className={"mt-4"}>
+                <ul className={"flex gap-2"}>
+                    <li className={"w-3/12"}>
+                        <WidgetComponent
+                            icon={<MdBarChart className="h-7 w-7" />}
+                            title={"Earnings"}
+                            subtitle={"$340.5"}
+                        />
+                    </li>
+                    <li className={"w-3/12"}>
+                        <WidgetComponent
+                            icon={<IoDocuments className="h-6 w-6" />}
+                            title={"Spend this month"}
+                            subtitle={"$642.39"}
+                        />
+                    </li>
+                    <li className={"w-3/12"}>
+                        <WidgetComponent
+                            icon={<MdBarChart className="h-7 w-7" />}
+                            title={"Earnings"}
+                            subtitle={"$340.5"}
+                        />
+                    </li>
+                    <li className={"w-3/12"}>
+                        <WidgetComponent
+                            icon={<IoDocuments className="h-6 w-6" />}
+                            title={"Spend this month"}
+                            subtitle={"$642.39"}
+                        />
+                    </li>
+                </ul>
+            </div>
             <div className="flex flex-wrap -mx-3 mb-5">
-                <div className="w-full max-w-full mb-6 mx-auto">
-                    <div className="relative flex flex-col min-w-0 shadow-md rounded-md bg-white m-5">
-                        <div className="relative flex flex-col border border-dashed bg-clip-border rounded-2xl">
+                <div className="w-full flex max-w-full mb-6 mx-auto">
+                    <div className="relative lg:w-7/12 flex flex-col min-w-0 shadow-md rounded-2xl bg-white my-5 mx-4">
+                        <div className="relative flex flex-col bg-clip-border rounded-2xl">
                             <div className="px-9 pt-5 flex justify-between items-stretch flex-wrap pb-0 bg-transparent">
                                 <h3 className="flex flex-col items-start justify-center ml-0 font-medium">
-                                    <span className="mr-3 font-semibold">List Bus</span>
+                                    <span className="mr-3 text-lg font-semibold">List Kategori</span>
                                 </h3>
-                                <a href="/panel/add" className="p-2 px-3 bg-green-500 rounded-lg text-white">Add Bus</a>
+                                <a href="/panel/add/new/categories" className="p-2 px-3 bg-green-500 rounded-lg text-sm text-white">Tambahkan Kategori</a>
                             </div>
                             <div className="px-9">
-                                <span className="font-medium mt-1">Semua data bus dari database</span>
+                                <span className="font-medium mt-1">Semua data Kategori dari database</span>
                             </div>
                             <div className="flex-auto block py-8 pt-6 px-9">
-                                <div className="overflow-x-auto">
+                                <div className="overflow-x-auto scrollbar-hide">
                                     <table className="w-full my-0">
                                         <thead className="align-bottom">
                                         <tr className="font-semibold text-[0.95rem] text-secondary-dark">
-                                            <th className="pb-3 text-start min-w-[175px]">Id</th>
-                                            <th className="pb-3 pr-12 text-end min-w-[175px]">Image</th>
-                                            <th className="pb-3 text-end min-w-[175px]">Name</th>
+                                            <th className="pb-3 ps-3 text-start min-w-[50px]">Id</th>
+                                            <th className="pb-3 ps-0 text-center min-w-[140px]">Nama</th>
                                             <th className="pb-3 pr-12 text-end min-w-[175px]">Action</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        {category.map((item, index) => (
-                                            <CardPanelCategoryComponent
-                                                key={item.id} // Added key prop
-                                                index={index}
-                                                id={item?.id}
-                                                item={item}
-                                                navigate={navigate}
-                                            />
-                                        ))}
+                                        <tbody className={"scrollbar-hide"}>
+                                        {category.length === 0 ? (
+                                            <div>
+                                                <div>
+                                                    Tidak Memiliki data
+                                                </div>
+                                            </div>
+                                        ): (
+                                          <>
+                                              {category.map((item, index) => (
+                                                  <CardPanelCategoryComponent
+                                                      key={item.id} // Added key prop
+                                                      index={index}
+                                                      id={item?.id}
+                                                      item={item}
+                                                      navigate={navigate}
+                                                  />
+                                              ))}
+                                          </>
+                                        )}
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="relative lg:w-5/12 flex flex-col min-w-0 shadow-md rounded-2xl bg-white my-5 mx-4">
+                        <div className="relative flex flex-col bg-clip-border rounded-2xl">
+                            <div className="px-9 pt-5 flex justify-between items-stretch flex-wrap pb-0 bg-transparent">
+                                <h3 className="flex flex-col items-start justify-center ml-0 font-medium">
+                                    <span className="mr-3 text-lg font-semibold">List Bus</span>
+                                </h3>
+                            </div>
+                            <div className="px-9">
+                                <span className="font-medium mt-1">Semua data Kategori dari database</span>
+                            </div>
+                            <div className="flex-auto block py-8 pt-6 px-9">
+                                <div className="overflow-x-auto scrollbar-hide">
+                                    <div className="w-full my-0">
+                                        <ul className={"w-full scrollbar-hide flex flex-wrap"}>
+                                        {category.map((item, index) => (
+                                            <li className={"w-6/12"}>
+                                            </li>
+                                        ))}
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>

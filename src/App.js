@@ -14,6 +14,8 @@ import { NavbarComponent } from "./component/Navbar.Component";
 import { FooterComponent } from "./component/Footer.Component";
 import PanelEdit from "./page/PanelEdit";
 import NotFound from "./page/NotFound";
+import Contact from "./page/Contact";
+import About from "./page/About";
 
 
 function App() {
@@ -30,8 +32,9 @@ function App() {
                     <Route path={"/"} element={<Home />} />
                     <Route path={"/detail"} element={<Detail />} />
                     <Route path={"/rent"} element={<Rent />} />
+                    <Route path={"/about"} element={<About />} />
+                    <Route path={"/contact"} element={<Contact />} />
 
-                    {/* LOGIN */}
                     <Route path={"/login"} element={<Login />} />
 
                     {/* PANEL */}

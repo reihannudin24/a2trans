@@ -13,10 +13,10 @@ function PanelEdit() {
             <NavbarPanelComponent />
             <div>
                 <Routes>
-                    <Route path={"/edit/bus/:id"} element={<EditPanelBus />}/>
-                    <Route path={"/edit/facilities/:id"} element={<EditPanelFacilities />}/>
-                    <Route path={"/edit/categories/:id"} element={<EditPanelCategory />}/>
-                    <Route path={"/edit/brand/:id"} element={<EditPanelMerek />}/>
+                    <Route path={"bus/:id"} element={<EditPanelBus />}/>
+                    <Route path={"facilities/:id"} element={<EditPanelFacilities />}/>
+                    <Route path={"categories/:id"} element={<EditPanelCategory />}/>
+                    <Route path={"brand/:id"} element={<EditPanelMerek />}/>
                 </Routes>
             </div>
         </section>

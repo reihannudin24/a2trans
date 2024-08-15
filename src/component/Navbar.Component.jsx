@@ -1,6 +1,12 @@
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import {CaretDown} from "@phosphor-icons/react";
+import React from "react";
+// import { FiAlignJustify } from "react-icons/fi";
+// import { FiSearch } from "react-icons/fi";
+// import avatar from "assets/img/avatars/avatar4.png";
+import Dropdown from "./Dropdown.Component";
+import {MdArrowBack} from "react-icons/md";
 
 const navbar = [
     {
@@ -70,6 +76,71 @@ export const NavbarComponent = () => {
     )
 }
 
+export const NavbarNewPanelComponent = () => {
+    return (
+        <div className={"container flex gap-2 me-auto "}>
+            <nav className="sticky  top-4 px-5 z-40 shadow-gray-300 hover:text-white text-gray-700 dark:text-white flex flex-row items-center w-3/12 ms-auto justify-between rounded-xl bg-white/90 cursor-pointer hover:bg-red-500 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
+                <div className={"flex gap-2"}>
+                    <MdArrowBack className="text-2xl " />
+                    <h2 className="ml-2  ">Kembali</h2>
+                </div>
+            </nav>
+            <nav className="sticky top-4 px-5 z-40 shadow-gray-300 flex flex-row items-center w-9/12 ms-auto justify-between rounded-xl bg-white/90 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
+                <div className="flex items-center">
+                    <div className="text-gray-600 font-semibold  dark:text-white"> {/* Ubah ke warna yang jelas */}
+                        <a href="/dashboard" className="hover:underline">
+                            Pages
+                        </a>
+                        <span className="text-black dark:text-gray-300"> / Add</span> {/* Ubah ke warna yang jelas */}
+                    </div>
+                </div>
+                <div className="flex items-center">
+                    {/* Profile & Dropdown */}
+                    <Dropdown
+                        button={
+                            <img
+                                className="h-12 w-12 cursor-pointer rounded-full"
+                                src="/assets/img/logo.svg"
+                                alt="Profile"
+                            />
+                        }
+                        children={
+                            <div className="flex w-56 flex-col rounded-[20px] bg-white shadow-xl dark:bg-navy-700 dark:text-white">
+                                <div className="p-4">
+                                    <p className="text-sm font-bold text-black dark:text-white">
+                                        👋 Hey, Adela
+                                    </p>
+                                </div>
+                                <div className="h-px w-full bg-gray-200 dark:bg-white/20" />
+                                <div className="flex flex-col p-4">
+                                    <a
+                                        href="#profile-settings"
+                                        className="text-sm text-black dark:text-white hover:underline"
+                                    >
+                                        Profile Settings
+                                    </a>
+                                    <a
+                                        href="#newsletter-settings"
+                                        className="mt-3 text-sm text-black dark:text-white hover:underline"
+                                    >
+                                        Newsletter Settings
+                                    </a>
+                                    <a
+                                        href="#logout"
+                                        className="mt-3 text-sm font-medium text-red-500 hover:text-red-500 transition duration-150 ease-out"
+                                    >
+                                        Log Out
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                        classNames="py-2 top-8 -left-[180px] w-max"
+                    />
+                </div>
+            </nav>
+        </div>
+    );
+};
 
 export const NavbarPanelComponent = () => {
     return (
