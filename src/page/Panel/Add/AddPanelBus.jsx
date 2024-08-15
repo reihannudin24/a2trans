@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
 import apiImage from "../../../function/axiosImage";
@@ -15,6 +15,8 @@ function AddPanelMerek() {
     const [busMerek, setbusMerek] = useState("");
     const [busType, setBusType] = useState("");
 
+    const [categories, setCategories] = useState([])
+
     const handleFileChangeGallery = (event) => {
         const files = Array.from(event.target.files);
         setSelectedGalleryFiles(files);
@@ -27,22 +29,17 @@ function AddPanelMerek() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!busName || !description || !busCategory || !busType || !busMerek) {
+        if (!selectedThumbFile || !selectedGalleryFiles.length || !busName || !description || !busCategory || !busType || !busMerek) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
-
-        // const formData = new FormData();
-        // selectedGalleryFiles.forEach((file, index) => {
-        //     formData.append(`image_gallery-${index}`, file);
-        // });
 
         const dataForm = {
             name: busName,
             description: description,
             seat: 10,
             categories_id: busCategory,
-            type: 1,
+            type: busType,
             merek_id: 2
         }
 
@@ -50,70 +47,53 @@ function AddPanelMerek() {
             // FETCHING
             const responseData = await apiAuth.post('/bus/add/new', dataForm)
 
-            // const responseGallery = await fetch('/api/upload/image-gallery', {
-            //     method: 'POST',
-            //     body: formData,
-            // });
-
-            // const responseThumb = await fetch('/api/upload/image-gallery', {
-            //     method: 'POST',
-            //     body: selectedThumbFile,
-            // });
-
             // // RESPONE
             if (responseData.status === 200) {
-                console.log('data bus uploaded successfully');
-                setBusName("");
-                setDescription("");
-                event.target.reset();
-                textPopUp("Success", "Berhasil menambah data kedatabase", "success")
-
-                const formData = new FormData();
-                formData.append('bus_id', responseData.data.data[0].insertId);
+                const formDataGallery = new FormData();
+                formDataGallery.append('bus_id', responseData.data.data[0].insertId);
                 selectedGalleryFiles.forEach((file, index) => {
-                    formData.append('files', file);
+                    formDataGallery.append('files', file);
                 });
-                console.log(selectedGalleryFiles)
-                // const responseImageGallery = await apiAuth.post('/bus/add/new/image/bus', {bus_id: responseData.data.data[0].insertId, files: selectedGalleryFiles})
-                // console.log(responseImageGallery)
 
-                const response = await apiImage.post('/bus/add/new/image/buss', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    }
-                });
+                const formDataThumb = new FormData();
+                formDataThumb.append('bus_id', responseData.data.data[0].insertId);
+                formDataThumb.append('thumb', true);
+                formDataThumb.append('files', selectedThumbFile);
+
+
+                const responseGallery = await apiImage.post('/bus/add/new/image/bus', formDataGallery);
+                const responseThumb = await apiImage.post('/bus/add/new/image/bus', formDataThumb);
+
+                if (responseGallery.data.status === 200 && responseThumb.data.status === 200) {
+                    console.log('data bus uploaded successfully');
+                    setBusName("");
+                    setDescription("");
+                    setBusType("")
+                    setbusMerek("")
+                    setBusCategory("")
+                    event.target.reset();
+                    textPopUp("Success", "Berhasil menambah data kedatabase", "success")
+                }
+
 
                 return;
             } else {
                 console.error('File upload failed');
             }
 
-            // if (responseGallery.ok) {
-            //     console.log('Files and data image gallery uploaded successfully');
-            //     setSelectedGalleryFiles([]);
-            //     event.target.reset();
-            //     textPopUp("Error", "Terjadi Eror Pada Fetching Image Gallery", "error")
-            //     return;
-            // } else {
-            //     console.error('File upload failed');
-            // }
-
-            // if (responseThumb.ok) {
-            //     console.log('Files and data image thumb uploaded successfully');
-            //     setSelectedThumbFile("");
-            //     event.target.reset();
-            //     textPopUp("Error", "Terjadi Eror Pada Fetching Image Thumb", "error")
-            //     return;
-            // } else {
-            //     console.error('File upload failed');
-            // }
-
-            // textPopUp("Success", "Berhasil Mengupload Data", "success")
-
         } catch (error) {
             console.error('Error uploading files:', error);
         }
     };
+
+    const checkDataCategory = async () => {
+        const responseGallery = await apiAuth.get('/categories/show');
+        setCategories(responseGallery.data.data)
+    }
+
+    useEffect(() => {
+        checkDataCategory()
+    }, [])
 
     return (
         <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
@@ -163,7 +143,7 @@ function AddPanelMerek() {
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
                                                 <LabelText text={"Category Kendaraan"} htmlFor={"category_bus"} />
-                                                <InputSelectOption data={["Bus Gede", "Bus Kecil", "Bus Amatron"]} id={"category_bus"} value={busCategory} set={setBusCategory} />
+                                                <InputSelectOption data={categories} id={"category_bus"} value={busCategory} set={setBusCategory} />
                                             </div>
                                         </div>
                                         <div className="w-full px-3 sm:w-1/2">

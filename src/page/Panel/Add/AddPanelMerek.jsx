@@ -6,32 +6,37 @@ import { InputImage, InputText } from "../../../component/Input.Component";
 
 function AddPanelMerek() {
     const [name, setName] = useState("");
-    const [selectedImageFile, setSelectedImageFile] = useState(null);
 
-    const handleFileChangeImage = (event) => {
-        const file = event.target.files[0];
-        setSelectedImageFile(file);
-    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        if (!name || !selectedImageFile) {
-            textPopUp("Error", "Ada Value yang tidak terisi", "error");
+        if (!name) {
+            textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
 
-        const formData = new FormData();
-        formData.append("name", name);
-        formData.append("image", selectedImageFile);
+        const dataForm = {
+            name: name,
+        }
 
         try {
-            const response = await apiAuth.post('/facilities/add/new', formData);
-            console.log(response.data.data[0].insertId);
-            textPopUp("Success", "Berhasil menambah data ke database", "success");
-        } catch (err) {
-            console.error('Error uploading files:', err);
-            textPopUp("Error", "Gagal mengunggah data", "error");
+            console.log(dataForm)
+            const responseData = await apiAuth.post('/vendors/create', dataForm)
+
+            // RESPONE
+            if (responseData.status === 200) {
+
+                console.log('data category uploaded successfully');
+                setName("");
+                textPopUp("Success", "Berhasil menambah data kedatabase", "success")
+
+                return;
+            } else {
+                console.error('File upload failed');
+            }
+
+        } catch (error) {
+            console.error('Error uploading files:', error);
         }
     };
 
@@ -52,16 +57,7 @@ function AddPanelMerek() {
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-5">
                                         <LabelText text="Name" htmlFor="name" />
-                                        <InputText id="name" value={name} set={setName} placeholder="Enter Name" />
-                                    </div>
-
-                                    <div className="-mx-3 flex flex-wrap">
-                                        <div className="w-full px-3 sm:w-1/2">
-                                            <div className="mb-5">
-                                                <LabelText text="Image" htmlFor="image" />
-                                                <InputImage id="image" change={handleFileChangeImage} multiple={false} />
-                                            </div>
-                                        </div>
+                                        <InputText id="name" value={name} set={setName} placeholder="Enter Name Merek" />
                                     </div>
 
                                     <div>
