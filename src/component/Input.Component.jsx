@@ -118,7 +118,7 @@ export const InputSelectOption = ({ data, id, value, set }) => {
             <option value="" disabled>Pilih Type</option>
             {data.map((res, index) => {
                 return (
-                    <option key={index} value={res}>{res}</option>
+                    <option key={index} value={res.id}>{res.name}</option>
                 )
             })}
         </select>

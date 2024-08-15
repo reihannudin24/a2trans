@@ -1,4 +1,4 @@
-import { Bus, List, MonitorPlay, CaretRight, Plus } from "@phosphor-icons/react"
+import { Bus, List,  CaretRight, Plus } from "@phosphor-icons/react"
 import { useState, useRef, useEffect } from "react"
 
 export default function SidebarComponent() {
@@ -87,10 +87,13 @@ export default function SidebarComponent() {
                             {expandAddBus && (
                                 <ul className="ml-12 mt-2 space-y-2">
                                     <li>
-                                        <a href="/panel/add" className="block p-2 hover:bg-color-biru rounded-lg text-gray-500">Add New Bus</a>
+                                        <a href="/panel/add/new/bus" className="block p-2 hover:bg-color-biru rounded-lg text-gray-500">Add New Bus</a>
                                     </li>
                                     <li>
-                                        <a href="/panel/add-category" className="block p-2 hover:bg-color-biru rounded-lg text-gray-500">Add Category</a>
+                                        <a href="/panel/add/new/categories" className="block p-2 hover:bg-color-biru rounded-lg text-gray-500">Add Category</a>
+                                    </li>
+                                    <li>
+                                        <a href="/panel/add/new/brand" className="block p-2 hover:bg-color-biru rounded-lg text-gray-500">Add Merek</a>
                                     </li>
                                 </ul>
                             )}
