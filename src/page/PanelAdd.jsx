@@ -9,7 +9,7 @@ import NotFound from "./NotFound";
 
 export default function PanelAdd() {
     return (
-        <section>
+        <section className={"bg-gray-50 min-h-screen py-10"}>
             <SidebarComponent />
             <NavbarPanelComponent text={"Add Data"} direct={"Add"} />
             <div>

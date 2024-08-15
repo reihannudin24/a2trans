@@ -5,21 +5,31 @@ export const CarousselComponent = () => {
 
   return (
     <>
-      <section className="relative h-60 lg:h-full">
-        <div>
+      <section className="relative h-full">
+        <div className={"h-full"}  style={{maxHeight:"400px"}}>
           <img src="/assets/img/bus/banner-bus.jpg" alt="" className="absolute  inset-0 w-full h-full object-cover" />
         </div>
-        <div className="flex container h-60  lg:h-screen px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 relative z-1 justify-items-center">
-          <div data-aos="fade-right" className="place-self-end m hidden xl:block">
-            <h1 className="max-w-5xl text-white  text-xl font-extrabold tracking-tight leading-none md:text-2xl xl:text-4xl dark:text-white drop-shadow-xl typing-animation">
-              Yuk, cari tiket bus dan travel terbaik untuk kebutuhanmu.
-            </h1>
+        <div className={"container relative h-60 mx-auto justify-center items-center "} style={{minHeight:"600px", maxHeight:"800px"}}>
+          <div className={"absolute w-11/12 mx-auto bottom-20 lg:bottom-10 left-0 right-0"}>
+            <div className={"lg:flex w-full  block justify-between"}>
+              <div className={"w-full lg:w-8/12"}>
+                <h1 className="text-white  mb-5 lg:mt-20 text-4xl font-extrabold tracking-tight leading-none  xl:text-4xl dark:text-white drop-shadow-xl">
+                  Yuk, cari tiket bus dan travel terbaik untuk kebutuhanmu.
+                </h1>
+              </div>
+              <div className={"w-full lg:w-4/12 ms-auto"}>
+                <div className={"absolute w-full  -bottom-50 z-20 lg:relative "}>
+                  <CardBannerDes />
+                </div>
+              </div>
+            </div>
           </div>
-           {/*DASKTOP UI*/}
-          <CardBannerDes />
         </div>
+        {/*<div className="flex container px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 relative z-1 justify-items-center">*/}
+        {/* */}
+        {/*</div>*/}
         {/* MOBILE UI */}
-        <CardBannerMobile />
+        {/*<CardBannerMobile />*/}
       </section>
     </>
   );
@@ -59,8 +69,8 @@ const CardBannerDes = () => {
   };
 
   return (
-    <div data-aos="fade-right" className="place-self-end ml-96 absolute right-6 top-64 hidden xl:block w-1/3 mb-10">
-      <div className={"w-10/12 mx-auto"}>
+    <div className=" ms-auto  block w-full mb-10">
+      <div className={"w-full lg:w-10/12 ms-auto "}>
         <div className="rounded-xl bg-white px-4 pb-4 pt-2">
           <div className="bg-gray-300 p-2 rounded-xl my-2">
             <div className="flex items-center  hover:scale-105 transition-transform duration-200  gap-4 border-b border-gray-400 mx-4 py-3 cursor-pointer" onClick={togglePopup}>

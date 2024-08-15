@@ -1,6 +1,12 @@
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import {CaretDown} from "@phosphor-icons/react";
+import React from "react";
+// import { FiAlignJustify } from "react-icons/fi";
+// import { FiSearch } from "react-icons/fi";
+// import avatar from "assets/img/avatars/avatar4.png";
+import Dropdown from "./Dropdown.Component";
+import {MdArrowBack} from "react-icons/md";
 
 const navbar = [
     {
@@ -30,9 +36,9 @@ export const NavbarComponent = () => {
 
     return(
         <>
-            <nav className={"fixed top-0 z-50 w-full "}>
+            <nav className={"sticky top-0 z-50 w-full mx-auto "} style={{minWidth:"300px"}}>
                 <div className={"bg-primary-new-nav py-1 w-full"}>
-                    <header className={"w-11/12 mx-auto  py-4"}>
+                    <header className={"w-11/12 mx-auto container pt-2  lg:pt-4 pb-4"}>
                         <div className={"w-full flex justify-between"}>
                             <div className={"lg:w-6/12 mt-3 mb-auto lg:mb-0 lg:mt-0"}>
                                 <div className={"w-full lg:w-5/12 h-full my-auto "}>
@@ -43,11 +49,11 @@ export const NavbarComponent = () => {
                                 </div>
                             </div>
                             <div className={"lg:w-6/12 my-auto"}>
-                                <div className={"w-10/12 my-auto lg:block hidden ms-auto"}>
+                                <div className={"w-10/12 my-auto lg:block hidden mx-auto"}>
                                     <ul className={"flex my-auto gap-10"}>
                                         {navbar.map((item, index) => {
                                             return(
-                                                <li key={index} className={""}>
+                                                <li key={index} className={"ms-auto"}>
                                                     <ListNavbar name={item?.name} url={item?.url} id={index} />
                                                 </li>
                                             )
@@ -70,6 +76,71 @@ export const NavbarComponent = () => {
     )
 }
 
+export const NavbarNewPanelComponent = () => {
+    return (
+        <div className={"container flex gap-2 me-auto "}>
+            <nav className="sticky  top-4 px-5 z-40 shadow-gray-300 hover:text-white text-gray-700 dark:text-white flex flex-row items-center w-3/12 ms-auto justify-between rounded-xl bg-white/90 cursor-pointer hover:bg-red-500 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
+                <div className={"flex gap-2"}>
+                    <MdArrowBack className="text-2xl " />
+                    <h2 className="ml-2  ">Kembali</h2>
+                </div>
+            </nav>
+            <nav className="sticky top-4 px-5 z-40 shadow-gray-300 flex flex-row items-center w-9/12 ms-auto justify-between rounded-xl bg-white/90 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
+                <div className="flex items-center">
+                    <div className="text-gray-600 font-semibold  dark:text-white"> {/* Ubah ke warna yang jelas */}
+                        <a href="/dashboard" className="hover:underline">
+                            Pages
+                        </a>
+                        <span className="text-black dark:text-gray-300"> / Add</span> {/* Ubah ke warna yang jelas */}
+                    </div>
+                </div>
+                <div className="flex items-center">
+                    {/* Profile & Dropdown */}
+                    <Dropdown
+                        button={
+                            <img
+                                className="h-12 w-12 cursor-pointer rounded-full"
+                                src="/assets/img/logo.svg"
+                                alt="Profile"
+                            />
+                        }
+                        children={
+                            <div className="flex w-56 flex-col rounded-[20px] bg-white shadow-xl dark:bg-navy-700 dark:text-white">
+                                <div className="p-4">
+                                    <p className="text-sm font-bold text-black dark:text-white">
+                                        👋 Hey, Adela
+                                    </p>
+                                </div>
+                                <div className="h-px w-full bg-gray-200 dark:bg-white/20" />
+                                <div className="flex flex-col p-4">
+                                    <a
+                                        href="#profile-settings"
+                                        className="text-sm text-black dark:text-white hover:underline"
+                                    >
+                                        Profile Settings
+                                    </a>
+                                    <a
+                                        href="#newsletter-settings"
+                                        className="mt-3 text-sm text-black dark:text-white hover:underline"
+                                    >
+                                        Newsletter Settings
+                                    </a>
+                                    <a
+                                        href="#logout"
+                                        className="mt-3 text-sm font-medium text-red-500 hover:text-red-500 transition duration-150 ease-out"
+                                    >
+                                        Log Out
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                        classNames="py-2 top-8 -left-[180px] w-max"
+                    />
+                </div>
+            </nav>
+        </div>
+    );
+};
 
 export const NavbarPanelComponent = ({text, direct}) => {
     return (
@@ -130,7 +201,7 @@ const Menu = ({toggleMenu , isOpen}) => {
     return(
         <button
             onClick={toggleMenu}
-            className={"cursor-pointer text-white hover:text-white  py-1 px-2 rounded-md "}
+            className={"cursor-pointer text-white hover:text-white  py-1 lg:px-2 rounded-md "}
         >
             {isOpen ? (
                 <div className={"menu-close"}>
@@ -151,7 +222,7 @@ const Menu = ({toggleMenu , isOpen}) => {
 const ListNavbar = ({url, name}) => {
     return(
         <div className={"w-5/12 mx-auto lg:w-full"}>
-            <div className={"cursor-pointer text-15  mx-auto text-white hover:text-white hover:scale-110 transition-transform duration-200 py-1 px-2 rounded-md hover:bg-white hover:bg-opacity-40"}>
+            <div className={"cursor-pointer text-15  mx-auto text-white hover:text-white hover:scale-110 transition-transform duration-200 py-1 md:px-2 rounded-md hover:bg-white hover:bg-opacity-40"}>
                 <Link to={`${url}`}>
                     <p className={"font-semibold text-white  "}>{name}</p>
                 </Link>

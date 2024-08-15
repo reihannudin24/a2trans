@@ -14,6 +14,8 @@ import { NavbarComponent } from "./component/Navbar.Component";
 import { FooterComponent } from "./component/Footer.Component";
 import PanelEdit from "./page/PanelEdit";
 import NotFound from "./page/NotFound";
+import Contact from "./page/Contact";
+import About from "./page/About";
 
 
 function App() {
@@ -23,15 +25,16 @@ function App() {
         location.pathname.includes("/login") 
 
     return (
-        <main className={"w-full bg-white"}>
+        <main className={"w-full bg-white"} style={{minWidth:"300px"}}>
             {!isPanelRoute && <NavbarComponent />}
             <section className={""}>
                 <Routes>
                     <Route path={"/"} element={<Home />} />
                     <Route path={"/detail"} element={<Detail />} />
                     <Route path={"/rent"} element={<Rent />} />
+                    <Route path={"/about"} element={<About />} />
+                    <Route path={"/contact"} element={<Contact />} />
 
-                    {/* LOGIN */}
                     <Route path={"/login"} element={<Login />} />
 
                     {/* PANEL */}

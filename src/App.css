@@ -10,6 +10,17 @@
   background: #E33C2F;
 }
 
+.bg-primary-left-right {
+  background: linear-gradient(to right,
+  #ffffff 2%,     /* 2% putih di sebelah kiri */
+  #E33C2F 30%,    /* Mulai transisi dari putih ke merah */
+  #E33C2F 90%,    /* Merah sampai 90% */
+  #ffffff 98%     /* Transisi dari merah ke putih di 98% */
+  );
+}
+
+
+
 .bg-primary-new-nav {
   background: linear-gradient(to right, #ffffff 30%, #E33C2F 60%);
 }
@@ -95,7 +106,7 @@
 }
 
 .h-img-card{
-  height: 200px;
+  height: 300px;
 }
 
 

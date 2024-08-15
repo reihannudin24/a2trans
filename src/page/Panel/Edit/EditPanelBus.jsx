@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
 import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
 import { InputImage, InputSelectOption, InputNumber, InputText, InputTextArea } from "../../../component/Input.Component";
 import { useParams } from "react-router-dom";
+import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
 
 function EditPanelBus() {
     const { id } = useParams();
@@ -83,17 +84,17 @@ function EditPanelBus() {
     }
 
     const [loop, setLoop] = useState(true)
-    const checkData = async () => {
-        const responseData = await apiAuth.get(`/bus/show?id=${id}`)
-        setBusName(responseData.data.data[0].name)
-        setDescription(responseData.data.data[0].description)
-        setBusCategory(responseData.data.data[0].categories_id)
-        setbusMerek(responseData.data.data[0].merek_id)
-        setBusType(responseData.data.data[0].type)
-        setBusSeat(responseData.data.data[0].seat)
+    const checkData = useCallback(async () => {
+        const responseData = await apiAuth.get(`/bus/show?id=${id}`);
+        setBusName(responseData.data.data[0].name);
+        setDescription(responseData.data.data[0].description);
+        setBusCategory(responseData.data.data[0].categories_id);
+        setbusMerek(responseData.data.data[0].merek_id);
+        setBusType(responseData.data.data[0].type);
+        setBusSeat(responseData.data.data[0].seat);
 
-        setLoop(false)
-    }
+        setLoop(false);
+    }, [id]);
 
 
     useEffect(() => {
@@ -101,10 +102,11 @@ function EditPanelBus() {
         if (loop === true) {
             checkData()
         }
-    }, [])
+    }, [loop, checkData])
 
     return (
         <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
+            <NavbarNewPanelComponent brandText="Dashboard" />
             <div className="flex flex-wrap -mx-3 mb-5">
                 <div className="w-full max-w-full  mb-6  mx-auto">
                     <div className="relative flex flex-col  min-w-0 shadow-md rounded-md bg-white m-5">

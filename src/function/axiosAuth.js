@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const token = localStorage.getItem('token');
-
+// const token = localStorage.getItem('token');
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjM2MjM2NTR9.bzIcUIp1XvDnwJKYdvVYYMHPtJfg3uvjNG8mlEsaq44";
 const apiAuth = axios.create({
     baseURL: 'http://localhost:3000/api',
     timeout: 10000,
