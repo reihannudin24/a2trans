@@ -93,7 +93,6 @@ function AddPanelMerek() {
         const responseCategories = await apiAuth.get('/categories/show');
         const responseMerek = await apiAuth.get('/vendors/show');
         setCategories(responseCategories.data.data)
-        console.log(responseMerek.data.data)
         setMerek(responseMerek.data.data)
     }
 
@@ -150,13 +149,13 @@ function AddPanelMerek() {
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
                                                 <LabelText text={"Category Kendaraan"} htmlFor={"category_bus"} />
-                                                <InputSelectOption data={categories} id={"category_bus"} value={busCategory} set={setBusCategory} />
+                                                <InputSelectOption data={categories} id={"category_bus"} value={busCategory} set={setBusCategory} text={"Pilih Category"} />
                                             </div>
                                         </div>
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
                                                 <LabelText text={"Merk Kendaraan"} htmlFor={"merk_bus"} />
-                                                <InputSelectOption data={merek} id={"merk_bus"} value={busMerek} set={setbusMerek} />
+                                                <InputSelectOption data={merek} id={"merk_bus"} value={busMerek} set={setbusMerek} text={"Pilih Merek"} />
                                             </div>
                                         </div>
                                     </div>

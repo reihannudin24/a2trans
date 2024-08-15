@@ -11,7 +11,7 @@ export default function PanelAdd() {
     return (
         <section>
             <SidebarComponent />
-            <NavbarPanelComponent />
+            <NavbarPanelComponent text={"Add Data"} direct={"Add"} />
             <div>
                 <Routes>
                     <Route path={"new/bus"} element={<AddPanelBus />} />

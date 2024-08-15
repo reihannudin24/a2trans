@@ -31,18 +31,17 @@ function AddPanelCategories() {
             // RESPONE
             if (responseData.status === 200) {
 
-                console.log('data category uploaded successfully');
-                setName("");
-                textPopUp("Success", "Berhasil menambah data kedatabase", "success")
-
                 const formDataFiles = new FormData();
-                console.log(responseData)
                 formDataFiles.append('category_id', responseData.data.data[0].insertId);
                 formDataFiles.append('category', true);
                 formDataFiles.append('files', selectedFiles);
 
                 const responseFiles = await apiImage.post('/categories/add/new/image', formDataFiles);
-                console.log(responseFiles)
+                if (responseFiles.data.status === 200) {
+                    console.log('data category uploaded successfully');
+                    setName("");
+                    textPopUp("Success", "Berhasil menambah data kedatabase", "success")
+                }
 
                 return;
             } else {

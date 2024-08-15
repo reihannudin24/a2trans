@@ -4,9 +4,10 @@ import apiAuth from "../../../function/axiosAuth";
 import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
 import { InputImage, InputSelectOption, InputNumber, InputText, InputTextArea } from "../../../component/Input.Component";
+import { useParams } from "react-router-dom";
 
 function EditPanelBus() {
-    const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
+    const { id } = useParams();
     const [selectedThumbFile, setSelectedThumbFile] = useState(null);
 
     const [busName, setBusName] = useState("");
@@ -19,11 +20,6 @@ function EditPanelBus() {
     const [categories, setCategories] = useState([])
     const [merek, setMerek] = useState([])
 
-    const handleFileChangeGallery = (event) => {
-        const files = Array.from(event.target.files);
-        setSelectedGalleryFiles(files);
-    };
-
     const handleFileChangeThumb = (event) => {
         const file = event.target.files[0];
         setSelectedThumbFile(file);
@@ -31,12 +27,13 @@ function EditPanelBus() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!selectedThumbFile || !selectedGalleryFiles.length || !busSeat || !busName || !description || !busCategory || !busType || !busMerek) {
-            textPopUp("Error", "Ada Value yang tidak terisi", "error")
-            return;
-        }
+        // if (!selectedThumbFile || !busSeat || !busName || !description || !busCategory || !busType || !busMerek) {
+        //     textPopUp("Error", "Ada Value yang tidak terisi", "error")
+        //     return;
+        // }
 
         const dataForm = {
+            id: id,
             name: busName,
             description: description,
             seat: busSeat,
@@ -47,33 +44,22 @@ function EditPanelBus() {
 
         try {
             // FETCHING
-            const responseData = await apiAuth.post('/bus/add/new', dataForm)
+            const responseData = await apiAuth.post('/bus/update', dataForm)
+            console.log(responseData)
 
             // // RESPONE
             if (responseData.status === 200) {
-                const formDataGallery = new FormData();
-                formDataGallery.append('bus_id', responseData.data.data[0].insertId);
-                selectedGalleryFiles.forEach((file, index) => {
-                    formDataGallery.append('files', file);
-                });
 
                 const formDataThumb = new FormData();
-                formDataThumb.append('bus_id', responseData.data.data[0].insertId);
+                formDataThumb.append('bus_id', id);
                 formDataThumb.append('thumb', true);
                 formDataThumb.append('files', selectedThumbFile);
 
-
-                const responseGallery = await apiImage.post('/bus/add/new/image/bus', formDataGallery);
                 const responseThumb = await apiImage.post('/bus/add/new/image/bus', formDataThumb);
+                console.log(responseThumb)
 
-                if (responseGallery.data.status === 200 && responseThumb.data.status === 200) {
+                if (responseThumb.data.status === 200) {
                     console.log('data bus uploaded successfully');
-                    setBusName("");
-                    setDescription("");
-                    setBusType("")
-                    setbusMerek("")
-                    setBusSeat("")
-                    setBusCategory("")
                     event.target.reset();
                     textPopUp("Success", "Berhasil menambah data kedatabase", "success")
                 }
@@ -93,12 +79,28 @@ function EditPanelBus() {
         const responseCategories = await apiAuth.get('/categories/show');
         const responseMerek = await apiAuth.get('/vendors/show');
         setCategories(responseCategories.data.data)
-        console.log(responseMerek.data.data)
         setMerek(responseMerek.data.data)
     }
 
+    const [loop, setLoop] = useState(true)
+    const checkData = async () => {
+        const responseData = await apiAuth.get(`/bus/show?id=${id}`)
+        setBusName(responseData.data.data[0].name)
+        setDescription(responseData.data.data[0].description)
+        setBusCategory(responseData.data.data[0].categories_id)
+        setbusMerek(responseData.data.data[0].merek_id)
+        setBusType(responseData.data.data[0].type)
+        setBusSeat(responseData.data.data[0].seat)
+
+        setLoop(false)
+    }
+
+
     useEffect(() => {
         checkDataCategory()
+        if (loop === true) {
+            checkData()
+        }
     }, [])
 
     return (
@@ -109,8 +111,8 @@ function EditPanelBus() {
                         <div className="relative flex flex-col  border border-dashed bg-clip-border rounded-2xl">
                             <div className="px-9 pt-5 flex justify-between items-stretch flex-wrap pb-0 bg-transparent">
                                 <h3 className="flex flex-col items-start justify-center ml-0 font-medium">
-                                    <span className="mr-3 font-semibold">Add Data</span>
-                                    <span className="font-medium mt-1">Menambah data kedalam database</span>
+                                    <span className="mr-3 font-semibold">Edit Data</span>
+                                    <span className="font-medium mt-1">Mengedit data bus</span>
                                 </h3>
                             </div>
 
@@ -126,19 +128,9 @@ function EditPanelBus() {
                                         <InputTextArea id={"description"} value={description} set={setDescription} placeholder={"Enter Description Bus"} rows={4} />
                                     </div>
 
-                                    <div className="-mx-3 flex flex-wrap">
-                                        <div className="w-full px-3 sm:w-1/2">
-                                            <div className="mb-5">
-                                                <LabelText text={"Image Gallery"} htmlFor={"image_gallery"} />
-                                                <InputImage id={"image_gallery"} change={handleFileChangeGallery} multiple={true} />
-                                            </div>
-                                        </div>
-                                        <div className="w-full px-3 sm:w-1/2">
-                                            <div className="mb-5">
-                                                <LabelText text={"Image Thumb"} htmlFor={"image_thumb"} />
-                                                <InputImage id={"image_thumb"} change={handleFileChangeThumb} multiple={false} />
-                                            </div>
-                                        </div>
+                                    <div className="mb-5">
+                                        <LabelText text={"Image Thumb"} htmlFor={"image_thumb"} />
+                                        <InputImage id={"image_thumb"} change={handleFileChangeThumb} multiple={false} />
                                     </div>
 
                                     <div className="mb-5">
@@ -150,13 +142,13 @@ function EditPanelBus() {
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
                                                 <LabelText text={"Category Kendaraan"} htmlFor={"category_bus"} />
-                                                <InputSelectOption data={categories} id={"category_bus"} value={busCategory} set={setBusCategory} />
+                                                <InputSelectOption data={categories} id={"category_bus"} value={busCategory} set={setBusCategory} text={"Pilih Category"} />
                                             </div>
                                         </div>
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
                                                 <LabelText text={"Merk Kendaraan"} htmlFor={"merk_bus"} />
-                                                <InputSelectOption data={merek} id={"merk_bus"} value={busMerek} set={setbusMerek} />
+                                                <InputSelectOption data={merek} id={"merk_bus"} value={busMerek} set={setbusMerek} text={"Pilih Merek"} />
                                             </div>
                                         </div>
                                     </div>

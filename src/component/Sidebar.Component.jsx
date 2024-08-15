@@ -6,6 +6,7 @@ export default function SidebarComponent() {
     const [showSidebar, setShowSidebar] = useState(true)
     const [expandBusList, setExpandBusList] = useState(false)
     const [expandAddBus, setExpandAddBus] = useState(false)
+    const [expandEditBus, setExpandEditBus] = useState(false)
     const sidebarRef = useRef(null)
 
     const handleClickOutside = (event) => {
@@ -21,6 +22,7 @@ export default function SidebarComponent() {
         setShowSidebar(!showSidebar)
         setExpandBusList(false)
         setExpandAddBus(false)
+        setExpandEditBus(false)
     }
 
     const toggleBusList = () => {
@@ -29,6 +31,10 @@ export default function SidebarComponent() {
 
     const toggleAddBus = () => {
         setExpandAddBus(!expandAddBus)
+    }
+
+    const toggleEditBus = () => {
+        setExpandEditBus(!expandEditBus)
     }
 
     useEffect(() => {
@@ -97,6 +103,15 @@ export default function SidebarComponent() {
                                     </li>
                                 </ul>
                             )}
+                        </li>
+                        <li className="shadow-md rounded-md p-1">
+                            <button onClick={toggleEditBus} className="cursor-pointer w-full flex items-center justify-between p-2 hover:bg-color-biru rounded-lg text-gray-500">
+                                <div className="flex items-center gap-4">
+                                    <Plus size={44} className="p-2.5 bg-purple-500 rounded-lg text-white shadow-md" />
+                                    <div>Edit Bus</div>
+                                </div>
+                                <CaretRight size={20} className={`transition-transform duration-200 ${expandEditBus ? 'rotate-90' : ''}`} />
+                            </button>
                         </li>
                     </ul>
                 </div>
