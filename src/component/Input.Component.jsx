@@ -92,6 +92,20 @@ export const InputText = ({ id, value, set, placeholder }) => {
     )
 }
 
+export const InputNumber = ({ id, value, set, placeholder }) => {
+    return (
+        <input
+            type="number"
+            name={id}
+            id={id}
+            placeholder={placeholder}
+            value={value}
+            onChange={(e) => set(e.target.value)}
+            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
+        />
+    )
+}
+
 export const InputTextArea = ({ id, value, set, placeholder, rows }) => {
     return (
         <textarea

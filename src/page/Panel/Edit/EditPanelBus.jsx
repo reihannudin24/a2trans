@@ -1,25 +1,106 @@
 import { useEffect, useState } from "react";
-import { LabelText } from "../../../component/Label.Component";
-import { InputText } from "../../../component/Input.Component";
-import { useParams } from "react-router-dom";
+import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
+import apiImage from "../../../function/axiosImage";
+import { LabelText } from "../../../component/Label.Component";
+import { InputImage, InputSelectOption, InputNumber, InputText, InputTextArea } from "../../../component/Input.Component";
 
 function EditPanelBus() {
-    const { id } = useParams();
+    const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
+    const [selectedThumbFile, setSelectedThumbFile] = useState(null);
+
     const [busName, setBusName] = useState("");
+    const [description, setDescription] = useState("");
+    const [busCategory, setBusCategory] = useState("");
+    const [busMerek, setbusMerek] = useState("");
+    const [busType, setBusType] = useState("");
+    const [busSeat, setBusSeat] = useState("");
+
+    const [categories, setCategories] = useState([])
+    const [merek, setMerek] = useState([])
+
+    const handleFileChangeGallery = (event) => {
+        const files = Array.from(event.target.files);
+        setSelectedGalleryFiles(files);
+    };
+
+    const handleFileChangeThumb = (event) => {
+        const file = event.target.files[0];
+        setSelectedThumbFile(file);
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!selectedThumbFile || !selectedGalleryFiles.length || !busSeat || !busName || !description || !busCategory || !busType || !busMerek) {
+            textPopUp("Error", "Ada Value yang tidak terisi", "error")
+            return;
+        }
 
-    }
+        const dataForm = {
+            name: busName,
+            description: description,
+            seat: busSeat,
+            categories_id: busCategory,
+            type: busType,
+            merek_id: busType
+        }
 
-    const checkData = async ()  => {
-        // const responseData = await apiAuth.post('/bus/add/new', dataForm)
+        try {
+            // FETCHING
+            const responseData = await apiAuth.post('/bus/add/new', dataForm)
 
+            // // RESPONE
+            if (responseData.status === 200) {
+                const formDataGallery = new FormData();
+                formDataGallery.append('bus_id', responseData.data.data[0].insertId);
+                selectedGalleryFiles.forEach((file, index) => {
+                    formDataGallery.append('files', file);
+                });
+
+                const formDataThumb = new FormData();
+                formDataThumb.append('bus_id', responseData.data.data[0].insertId);
+                formDataThumb.append('thumb', true);
+                formDataThumb.append('files', selectedThumbFile);
+
+
+                const responseGallery = await apiImage.post('/bus/add/new/image/bus', formDataGallery);
+                const responseThumb = await apiImage.post('/bus/add/new/image/bus', formDataThumb);
+
+                if (responseGallery.data.status === 200 && responseThumb.data.status === 200) {
+                    console.log('data bus uploaded successfully');
+                    setBusName("");
+                    setDescription("");
+                    setBusType("")
+                    setbusMerek("")
+                    setBusSeat("")
+                    setBusCategory("")
+                    event.target.reset();
+                    textPopUp("Success", "Berhasil menambah data kedatabase", "success")
+                }
+
+
+                return;
+            } else {
+                console.error('File upload failed');
+            }
+
+        } catch (error) {
+            console.error('Error uploading files:', error);
+        }
+    };
+
+    const checkDataCategory = async () => {
+        const responseCategories = await apiAuth.get('/categories/show');
+        const responseMerek = await apiAuth.get('/vendors/show');
+        setCategories(responseCategories.data.data)
+        console.log(responseMerek.data.data)
+        setMerek(responseMerek.data.data)
     }
 
     useEffect(() => {
-        checkData()
+        checkDataCategory()
     }, [])
+
     return (
         <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
             <div className="flex flex-wrap -mx-3 mb-5">
@@ -38,6 +119,59 @@ function EditPanelBus() {
                                     <div className="mb-5">
                                         <LabelText text={"Bus Name"} htmlFor={"bus_name"} />
                                         <InputText id={"bus_name"} value={busName} set={setBusName} placeholder={"Enter Bus Name"} />
+                                    </div>
+
+                                    <div className="mb-5">
+                                        <LabelText text={"Description"} htmlFor={"description"} />
+                                        <InputTextArea id={"description"} value={description} set={setDescription} placeholder={"Enter Description Bus"} rows={4} />
+                                    </div>
+
+                                    <div className="-mx-3 flex flex-wrap">
+                                        <div className="w-full px-3 sm:w-1/2">
+                                            <div className="mb-5">
+                                                <LabelText text={"Image Gallery"} htmlFor={"image_gallery"} />
+                                                <InputImage id={"image_gallery"} change={handleFileChangeGallery} multiple={true} />
+                                            </div>
+                                        </div>
+                                        <div className="w-full px-3 sm:w-1/2">
+                                            <div className="mb-5">
+                                                <LabelText text={"Image Thumb"} htmlFor={"image_thumb"} />
+                                                <InputImage id={"image_thumb"} change={handleFileChangeThumb} multiple={false} />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="mb-5">
+                                        <LabelText text={"Type Kendaraan"} htmlFor={"type_kendaraan"} />
+                                        <InputText id={"type_kendaraan"} value={busType} set={setBusType} placeholder={"Enter Bus Name"} />
+                                    </div>
+
+                                    <div className="-mx-3 flex flex-wrap">
+                                        <div className="w-full px-3 sm:w-1/2">
+                                            <div className="mb-5">
+                                                <LabelText text={"Category Kendaraan"} htmlFor={"category_bus"} />
+                                                <InputSelectOption data={categories} id={"category_bus"} value={busCategory} set={setBusCategory} />
+                                            </div>
+                                        </div>
+                                        <div className="w-full px-3 sm:w-1/2">
+                                            <div className="mb-5">
+                                                <LabelText text={"Merk Kendaraan"} htmlFor={"merk_bus"} />
+                                                <InputSelectOption data={merek} id={"merk_bus"} value={busMerek} set={setbusMerek} />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="mb-5">
+                                        <LabelText text={"Seat"} htmlFor={"seat"} />
+                                        <InputNumber id={"seat"} value={busSeat} set={setBusSeat} placeholder={"Enter Bus Seat"} />
+                                    </div>
+
+                                    <div>
+                                        <button
+                                            type="submit"
+                                            className="hover:shadow-form w-full rounded-md bg-blue-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                                            Submit
+                                        </button>
                                     </div>
                                 </form>
                             </div>

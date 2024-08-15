@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
+import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
-import { InputText } from "../../../component/Input.Component";
+import { InputText, InputImage } from "../../../component/Input.Component";
 
 function AddPanelCategories() {
     const [name, setName] = useState("");
+    const [selectedFiles, setSelectedFiles] = useState([]);
+
+    const handleFileChangeThumb = (event) => {
+        const file = event.target.files[0];
+        setSelectedFiles(file);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!name) {
+        if (!name || !selectedFiles) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
@@ -19,7 +26,6 @@ function AddPanelCategories() {
         }
 
         try {
-            console.log(dataForm)
             const responseData = await apiAuth.post('/categories/create/new', dataForm)
 
             // RESPONE
@@ -28,6 +34,15 @@ function AddPanelCategories() {
                 console.log('data category uploaded successfully');
                 setName("");
                 textPopUp("Success", "Berhasil menambah data kedatabase", "success")
+
+                const formDataFiles = new FormData();
+                console.log(responseData)
+                formDataFiles.append('category_id', responseData.data.data[0].insertId);
+                formDataFiles.append('category', true);
+                formDataFiles.append('files', selectedFiles);
+
+                const responseFiles = await apiImage.post('/categories/add/new/image', formDataFiles);
+                console.log(responseFiles)
 
                 return;
             } else {
@@ -57,6 +72,10 @@ function AddPanelCategories() {
                                     <div className="mb-5">
                                         <LabelText text={"Category Bus"} htmlFor={"category_bus"} />
                                         <InputText id={"category_bus"} value={name} set={setName} placeholder={"Enter Category Bus"} />
+                                    </div>
+                                    <div className="mb-5">
+                                        <LabelText text={"Image Category"} htmlFor={"image_category"} />
+                                        <InputImage id={"image_category"} change={handleFileChangeThumb} multiple={false} />
                                     </div>
 
                                     <div>

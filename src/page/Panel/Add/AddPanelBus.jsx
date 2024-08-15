@@ -3,7 +3,7 @@ import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
 import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
-import { InputImage, InputSelectOption, InputText, InputTextArea } from "../../../component/Input.Component";
+import { InputImage, InputSelectOption, InputNumber, InputText, InputTextArea } from "../../../component/Input.Component";
 
 function AddPanelMerek() {
     const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
@@ -14,8 +14,10 @@ function AddPanelMerek() {
     const [busCategory, setBusCategory] = useState("");
     const [busMerek, setbusMerek] = useState("");
     const [busType, setBusType] = useState("");
+    const [busSeat, setBusSeat] = useState("");
 
     const [categories, setCategories] = useState([])
+    const [merek, setMerek] = useState([])
 
     const handleFileChangeGallery = (event) => {
         const files = Array.from(event.target.files);
@@ -29,7 +31,7 @@ function AddPanelMerek() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!selectedThumbFile || !selectedGalleryFiles.length || !busName || !description || !busCategory || !busType || !busMerek) {
+        if (!selectedThumbFile || !selectedGalleryFiles.length || !busSeat || !busName || !description || !busCategory || !busType || !busMerek) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
@@ -37,10 +39,10 @@ function AddPanelMerek() {
         const dataForm = {
             name: busName,
             description: description,
-            seat: 10,
+            seat: busSeat,
             categories_id: busCategory,
             type: busType,
-            merek_id: 2
+            merek_id: busType
         }
 
         try {
@@ -70,6 +72,7 @@ function AddPanelMerek() {
                     setDescription("");
                     setBusType("")
                     setbusMerek("")
+                    setBusSeat("")
                     setBusCategory("")
                     event.target.reset();
                     textPopUp("Success", "Berhasil menambah data kedatabase", "success")
@@ -87,8 +90,11 @@ function AddPanelMerek() {
     };
 
     const checkDataCategory = async () => {
-        const responseGallery = await apiAuth.get('/categories/show');
-        setCategories(responseGallery.data.data)
+        const responseCategories = await apiAuth.get('/categories/show');
+        const responseMerek = await apiAuth.get('/vendors/show');
+        setCategories(responseCategories.data.data)
+        console.log(responseMerek.data.data)
+        setMerek(responseMerek.data.data)
     }
 
     useEffect(() => {
@@ -114,6 +120,7 @@ function AddPanelMerek() {
                                         <LabelText text={"Bus Name"} htmlFor={"bus_name"} />
                                         <InputText id={"bus_name"} value={busName} set={setBusName} placeholder={"Enter Bus Name"} />
                                     </div>
+
                                     <div className="mb-5">
                                         <LabelText text={"Description"} htmlFor={"description"} />
                                         <InputTextArea id={"description"} value={description} set={setDescription} placeholder={"Enter Description Bus"} rows={4} />
@@ -149,9 +156,14 @@ function AddPanelMerek() {
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
                                                 <LabelText text={"Merk Kendaraan"} htmlFor={"merk_bus"} />
-                                                <InputSelectOption data={["Bus Gede", "Bus Kecil", "Bus Amatron"]} id={"merk_bus"} value={busMerek} set={setbusMerek} />
+                                                <InputSelectOption data={merek} id={"merk_bus"} value={busMerek} set={setbusMerek} />
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div className="mb-5">
+                                        <LabelText text={"Seat"} htmlFor={"seat"} />
+                                        <InputNumber id={"seat"} value={busSeat} set={setBusSeat} placeholder={"Enter Bus Seat"} />
                                     </div>
 
                                     <div>

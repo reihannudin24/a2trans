@@ -2,7 +2,7 @@ import { useState } from "react";
 import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
 import { LabelText } from "../../../component/Label.Component";
-import { InputImage, InputText } from "../../../component/Input.Component";
+import { InputText } from "../../../component/Input.Component";
 
 function AddPanelMerek() {
     const [name, setName] = useState("");
@@ -20,8 +20,8 @@ function AddPanelMerek() {
         }
 
         try {
-            console.log(dataForm)
             const responseData = await apiAuth.post('/vendors/create', dataForm)
+            console.log(responseData)
 
             // RESPONE
             if (responseData.status === 200) {
