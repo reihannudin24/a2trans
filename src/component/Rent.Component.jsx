@@ -1,4 +1,4 @@
-import {InputCheckbox, InputSearch} from "./Input.Component";
+import {InputCheckbox, InputCheckboxRound, InputSearch} from "./Input.Component";
 import {CardComponent, CardProductComponent, ListCardComponent} from "./Card.Component";
 import { useState } from "react";
 
@@ -31,47 +31,69 @@ export const RentContentComponent = ({   setSearch,bus, categories, search }) =>
 
     return (
         <>
-            <div className={"bg-primary  relative pt-32 pb-20 lg:pb-20"}>
-                <div className={"w-11/12 mx-auto container"}>
+            <div className={"bg-primary  relative pt-32 pb-20 lg:pt-52 lg:pb-32"}>
+                <div className={"w-11/12 mx-auto container"} style={{maxWidth:"1500px"}}>
                     <div className={"text-left lg:text-center"}>
                         <h2 className={"text-white text-2xl lg:text-3xl font-semibold"}>Temukan Kendaraan yang Tepat untuk Setiap Perjalanan Anda!</h2>
                         <div className={"my-3 lg:my-2"}>
-                            <p className={"text-white hidden lg:block text-sm"}>Telusuri daftar mobil terbaik dari berbagia merek dan model yang tersedia di A2Trans, memastikan Anda menemukan <br /> kendaraan yang tepat untuk setiap perjalanan Anda!</p>
-                            <p className={"text-white block lg:hidden text-sm"}>Telusuri daftar mobil terbaik dari berbagia merek dan model yang tersedia di A2Trans, memastikan Anda menemukan</p>
+                            <p className={"text-white hidden lg:block lg:text-md text-sm"}>Telusuri daftar mobil terbaik dari berbagia merek dan model yang tersedia di A2Trans, memastikan Anda menemukan <br /> kendaraan yang tepat untuk setiap perjalanan Anda!</p>
+                            <p className={"text-white block lg:hidden lg:text-md text-sm"}>Telusuri daftar mobil terbaik dari berbagia merek dan model yang tersedia di A2Trans, memastikan Anda menemukan</p>
                         </div>
                     </div>
                 </div>
-                <div className={"w-10/12 left-0 right-0 absolute -bottom-6 mx-auto"}>
-                    <div className={"w-full lg:w-9/12 mx-auto container"}>
-
+                <div className={"w-10/12 right-0   left-0 absolute -bottom-6 mx-auto" } style={{maxWidth:"1500px"}}>
+                    <div className={"w-full lg:w-6/12 me-auto container"}>
                         <div className={"bg-white  py-2 px-4 rounded-lg shadow"}>
                             <div className={"flex justify-between"}>
                                 <div className={"my-auto w-full"}>
                                     <input
                                         value={searchQuery}
                                         onChange={handleSearchChange}
-                                        className={"py-2 text-sm w-full"} placeholder={"Cari kendaraan"}  />
+                                        className={"py-2 text-md lg:text-lg w-full"} placeholder={"Cari kendaraan"}  />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className={"w-full lg:w-11/12 mt-8 lg:mt-10 mx-auto container"}>
-                <div className={"w-full"}>
-                    <div className={"w-full block lg:flex gap-4"}>
+            <div className={"w-full lg:w-11/12 pb-16 mt-8 lg:mt-10 mx-auto container"} style={{maxWidth:"1500px"}}>
+                <div className={"w-full md:w-11/12 mx-auto lg:w-full"}>
+                    <div className={"w-full block md:flex justify-between "} style={{maxWidth:"1500px"}}>
 
-                        <div className={"lg:w-3/12 my-4"}>
-                            <div className={"border-b border-gray-300 lg:shadow w-11/12 mx-auto py-4 px-3 rounded-md shadow-md"}>
-                                <div className={"hidden lg:block w-11/12"}>
-                                    <div className={"w-10/12 mx-auto container"}>
+                        <div className={"w-11/12 sm:w-full md:w-4/12 lg:w-3/12  xl:w-3/12 2xl:w-3/12 mx-auto "}>
+                            <div className={"border-b  w-full mx-auto py-4 px-3 rounded-md "}>
+                                <div className={"block w-full"}>
+                                    <div className={"w-full mx-auto container"}>
                                         <div className={"mb-3 border-b border-gray-100 pb-3"}>
-                                            <h2 className={"text-md text-gray-700 font-semibold"}>Categories</h2>
+                                            <h2 className={"text-md lg:text-lg text-gray-700 font-medium"}>Kategori</h2>
                                         </div>
                                         <div className={"mt-4"}>
-                                            <ul className={"block"}>
+                                            <ul className={"flex w-full gap-3 flex-wrap"}>
                                                 {categories.map((item, index) => (
-                                                    <li key={index} className={"w-full my-2"}>
+                                                    <li key={index} className="">
+                                                        <InputCheckboxRound
+                                                            name={item.name}
+                                                            toggle={handleCategoryChange}
+                                                            selectedColors={selectedCategory}
+                                                            value={item.id}
+                                                        />
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={"border-b  w-full mx-auto py-4 px-3 rounded-md "}>
+                                <div className={"block w-full"}>
+                                    <div className={"w-full mx-auto container"}>
+                                        <div className={"mb-3 border-b border-gray-100 pb-3"}>
+                                            <h2 className={"text-md lg:text-lg text-gray-700 font-medium"}>Fasilitas</h2>
+                                        </div>
+                                        <div className={"mt-4"}>
+                                            <ul className={"block w-full gap-3 "}>
+                                                {categories.map((item, index) => (
+                                                    <li key={index} className="my-3">
                                                         <InputCheckbox
                                                             name={item.name}
                                                             toggle={handleCategoryChange}
@@ -84,31 +106,14 @@ export const RentContentComponent = ({   setSearch,bus, categories, search }) =>
                                         </div>
                                     </div>
                                 </div>
-                                {/* MOBILE */}
-                                <div className={"block lg:hidden w-11/12"}>
-                                    <ul className={"flex "}>
-                                        {categories.map((item, index) => (
-                                            <li key={index} className={"w-6/12 mx-auto container"}>
-                                                <InputCheckbox
-                                                    name={item.name}
-                                                    toggle={handleCategoryChange}
-                                                    selectedColors={selectedCategory}
-                                                    value={item.id}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
                             </div>
                         </div>
-
-                        <div className={"w-full my-4 lg:w-9/12 "}>
+                        <div className={"w-full md:w-7/12 lg:w-8/12 2xl:w-9/12 my-4  "}>
                             <div className={"w-full "}>
                                 <div className={"w-11/12 mx-auto container"}>
-
-                                    <ul className={"w-full block flex-wrap relative"}>
+                                    <ul className={"w-full flex flex-wrap relative"}>
                                         {filteredBus.map((res, index) => (
-                                            <li key={index} className={"w-full my-3"}>
+                                            <li key={index} className={"w-full sm:w-6/12 md:w-full lg:w-6/12 2xl:w-4/12 my-3"}>
                                                 <CardProductComponent item={res} />
                                             </li>
                                         ))}
@@ -124,3 +129,19 @@ export const RentContentComponent = ({   setSearch,bus, categories, search }) =>
         </>
     );
 }
+
+{/*/!* MOBILE *!/*/}
+{/*<div className={"block lg:hidden w-11/12"}>*/}
+{/*    <ul className={"flex "}>*/}
+{/*        {categories.map((item, index) => (*/}
+{/*            <li key={index} className={"w-6/12 mx-auto container"}>*/}
+{/*                <InputCheckbox*/}
+{/*                    name={item.name}*/}
+{/*                    toggle={handleCategoryChange}*/}
+{/*                    selectedColors={selectedCategory}*/}
+{/*                    value={item.id}*/}
+{/*                />*/}
+{/*            </li>*/}
+{/*        ))}*/}
+{/*    </ul>*/}
+{/*</div>*/}

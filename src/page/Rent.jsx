@@ -48,8 +48,8 @@ function Rent() {
 
     return (
         <>
-            <section className={"w-full"}>
-                <div className={"w-full"}>
+            <section className={"w-full overflow-x-hidden mx-auto "} >
+                <div className={"w-full "}>
                     <RentContentComponent
                         setSearch={setSearch}
                         bus={bus}
