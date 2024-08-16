@@ -5,11 +5,10 @@ import { useState } from "react";
 export const PromoComponent = () => {
     return (
         <>
-            <div className="mt-40 md:mt-60 xl:mt-10 mx-auto container pb-10">
+            <div className="mt-40 md:mt-40 lg:mt-10 mx-auto container pb-10">
                 <div className="mx-4">
                     <h1 className="font-bold xl:text-xl text-xl">Lebih Hemat dan Bebas Khawatir</h1>
-                    <div className="grid xl:grid-cols-2 grid-cols-1 mt-6 gap-6">
-
+                    <div className="grid lg:grid-cols-2 grid-cols-1 mt-6 gap-6">
                         <div className="flex flex-row gap-4 items-center">
                             <div>
                                 <Armchair size={32} />
@@ -19,8 +18,6 @@ export const PromoComponent = () => {
                                 <p className="font-sm md:font-xs ">Bisa langsung berangkat dengan nyaman, bebas khawatir.</p>
                             </div>
                         </div>
-
-
                         <div className="flex flex-row gap-4 items-center">
                             <div>
                                 <Tag size={32} />
@@ -44,18 +41,20 @@ export const Promo2Component = () => {
             <div className="xl:mt-10 mx-auto container pb-10">
                 <div className="mx-4">
                     <h1 className="font-bold text-xl ">Penting untuk Perjalananmu</h1>
-                    <div className="grid xl:grid-cols-3 grid-cols-1 mt-6 gap-6">
+                    <div className="grid lg:grid-cols-3 grid-cols-1 mt-6 gap-6">
 
-                        <div className="flex flex-row gap-4 items-center border-b xl:border border-gray-300 p-4 rounded-xl shadow-md">
+                        <div className="flex flex-row  gap-4 items-center border-b xl:border border-gray-300 p-4 rounded-xl shadow-md">
                             <div>
                                 <Lightbulb size={32} />
                             </div>
-                            <div className="flex flex-col">
-                                <h1 className="font-bold text-lg md:text-md">Cara Memesan Bus & Travel</h1>
-                                <p className="font-xs">Yuk, cari tau mudahnya cara memesan Bus & Travel di tiket.com.</p>
-                            </div>
-                            <div className="xl:hidden">
-                                <CaretRight size={32} />
+                            <div className={"flex w-full justify-between"}>
+                                <div className="flex flex-col">
+                                    <h1 className="font-bold text-lg md:text-md">Cara Memesan Bus & Travel</h1>
+                                    <p className="font-xs">Yuk, cari tau mudahnya cara memesan Bus & Travel di tiket.com.</p>
+                                </div>
+                                <div className="">
+                                    <CaretRight size={32} />
+                                </div>
                             </div>
                         </div>
 
@@ -64,25 +63,30 @@ export const Promo2Component = () => {
                             <div>
                                 <Question size={32} />
                             </div>
-                            <div className="flex flex-col">
-                                <h1 className="font-bold text-lg md:text-md">Pertanyaan Sering Diajukan</h1>
-                                <p className="font-xs">Temukan jawaban atas pertanyaan seputar Bus & Travel di tiket.com.</p>
+                            <div className={"flex w-full justify-between"}>
+                                <div className="flex flex-col">
+                                    <h1 className="font-bold text-lg md:text-md">Pertanyaan Sering Diajukan</h1>
+                                    <p className="font-xs">Temukan jawaban atas pertanyaan seputar Bus & Travel di tiket.com.</p>
+                                </div>
+                                <div className="">
+                                    <CaretRight size={32} />
+                                </div>
                             </div>
-                            <div className="xl:hidden">
-                                <CaretRight size={32} />
-                            </div>
+
                         </div>
 
                         <div className="flex flex-row gap-4 items-center border-b xl:border border-gray-300 p-4 rounded-xl shadow-md">
                             <div>
                                 <ExclamationMark size={32} />
                             </div>
-                            <div className="flex flex-col">
-                                <h1 className="font-bold text-lg md:text-md">Persyaratan Perjalanan</h1>
-                                <p className="font-xs">Cek protokol dan syarat perjalanan selama pandemi.</p>
-                            </div>
-                            <div className="xl:hidden">
-                                <CaretRight size={32} />
+                            <div className={"flex w-full justify-between"}>
+                                <div className="flex flex-col">
+                                    <h1 className="font-bold text-lg md:text-md">Persyaratan Perjalanan</h1>
+                                    <p className="font-xs">Cek protokol dan syarat perjalanan selama pandemi.</p>
+                                </div>
+                                <div className="">
+                                    <CaretRight size={32} />
+                                </div>
                             </div>
                         </div>
 
@@ -158,7 +162,7 @@ export const Promo3Component = () => {
                             <p className={"my-6 text-md text-gray-700"}>
                                 Jaminan keamanan dan kenyamanan kami berikan kepada para pelanggan yang menggunakan layanan kami. Demi memberikan layanan yang terbaik untuk Anda, kamu bekerja sama dengan PO Bus Pariwisata yang terkemuka di wilayah Jabodetabek, Bali, Sumatera, serta Sulawesi.
                             </p>
-                            <p className={"my-6 text-mdtext-gray-700"}>
+                            <p className={"my-6 text-md text-gray-700"}>
                                 Anda tidak perlu merisaukan tentang biaya yang harus dikeluarkan. Kami memberikan tarif yang sangat bersaing dan bisa disesuaikan dengan anggaran yang sudah Anda persiapkan. Setelah menyepakati harga, maka kami akan merekomendasikan armada yang sesuai dengan kebutuhan Anda
                             </p>
                         </div>
@@ -208,7 +212,7 @@ export const Promo3Component = () => {
                             <ul className={"w-full block md:flex flex-wrap "}>
                                 {contact.map((item, index) => {
                                     return(
-                                        <li className={"w-full my-10 lg:w-4/12"}>
+                                        <li className={"w-full my-10 md:my-6 md:w-6/12 lg:w-4/12"}>
                                             <ContactCardComponent  icon={item?.image} name={item?.label} value={item?.value}/>
                                         </li>
                                     )
@@ -231,7 +235,7 @@ export const ContactCardComponent = ({icon, name, value}) => {
                     {icon}
                 </div>
                 <div>
-                    <h4 className={"text-gray-600 text-lg md:text-md  font-medium"}>{name}</h4>
+                    <h4 className={"text-gray-600 text-md md:text-md  font-medium"}>{name}</h4>
                     <p className={"text-gray-800  text-lg md:text-md font-semibold"}>{value}</p>
                 </div>
             </div>
@@ -245,7 +249,7 @@ export const TestimonialComponent = () => {
             <div className="xl:mt-10 mx-auto container pb-10">
                 <div className="w-full mt-10">
                     <div className={"w-full mx-4"}>
-                        <div className={"flex gap-2 text-center"}>
+                        <div className={"flex gap-2 m-4 text-center"}>
                             <h1 className="font-bold text-primary text-2xl text-md">Testimoni</h1>
                             <h1 className="font-medium text-primary text-2xl text-md">Konsumen</h1>
                         </div>
@@ -305,13 +309,13 @@ export const FaqComponent = () => {
     return (
         <div className={"bg-gray-50 w-full py-4 mx-auto container"}>
             <div className={"w-11/12 mx-auto"}>
-                <div className={"block gap-4 mx-4 justify-between"}>
+                <div className={"block gap-4 mx-1 justify-between"}>
                     <div className={"w-full text-center py-6"}>
                         <div className={""}>
                             <div className={""}>
                                 <h1 className={"text-2xl text-primary font-semibold"}>Pertanyaan Umum</h1>
                                 <div className={"my-1"}>
-                                    <p className={"text-gray-600 text-sm font-light"}>5 pertanyaan yang sering ditanyakan kepada Andarabus seputar layanan Sewa Bus luxury</p>
+                                    <p className={"text-gray-600 text-md font-light"}>5 pertanyaan yang sering ditanyakan kepada Andarabus seputar layanan Sewa Bus luxury</p>
                                 </div>
                             </div>
                         </div>
@@ -353,7 +357,7 @@ const FaqCardComponent = ({ title, content, id }) => {
             >
                 <div className="flex w-full justify-between">
                     <div className={"text-left"}>
-                        <h2 className="text-md font-semibold text-gray-600">{title}</h2>
+                        <h2 className="text-lg font-semibold text-gray-600">{title}</h2>
                     </div>
                     <div className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
                         <CaretDown size={16} />
@@ -365,7 +369,7 @@ const FaqCardComponent = ({ title, content, id }) => {
                     }`}
             >
                 <div className="my-3">
-                    <p className="text-left text-sm text-gray-500">
+                    <p className="text-left text-md text-gray-500">
                         Andarabus memiliki sejumlah fasilitas yang dikhususkan untuk menunjang keamanan dan kenyamanan para pelanggan. Berikut adalah beberapa fasilitas yang bisa Anda dapatkan saat menggunakan layanan dari Andarabus
                     </p>
                 </div>
