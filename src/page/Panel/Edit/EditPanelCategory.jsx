@@ -22,28 +22,35 @@ function EditPanelCategory() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!name || !selectedFiles) {
+        console.log(name)
+        if (!name) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
 
         const dataForm = {
+            id: id,
             name: name,
         }
 
         try {
-            const responseData = await apiAuth.post('/categories/create/new', dataForm)
+            const responseData = await apiAuth.post('/categories/update', dataForm)
 
             // RESPONE
             if (responseData.status === 200) {
+                if (selectedFiles.length !== 0) {
 
-                const formDataFiles = new FormData();
-                formDataFiles.append('category_id', id);
-                formDataFiles.append('category', true);
-                formDataFiles.append('files', selectedFiles);
+                    const formDataFiles = new FormData();
+                    formDataFiles.append('category_id', id);
+                    formDataFiles.append('category', true);
+                    formDataFiles.append('files', selectedFiles);
 
-                const responseFiles = await apiImage.post('/categories/add/new/image', formDataFiles);
-                if (responseFiles.data.status === 200) {
+                    const responseFiles = await apiImage.post('/categories/add/new/image', formDataFiles);
+                    if (responseFiles.data.status === 200) {
+                        console.log('data category uploaded successfully');
+                        textPopUp("Success", "Berhasil menambah data kedatabase", "success")
+                    }
+                } else {
                     console.log('data category uploaded successfully');
                     textPopUp("Success", "Berhasil menambah data kedatabase", "success")
                 }
@@ -104,7 +111,7 @@ function EditPanelCategory() {
                                     <div>
                                         <button
                                             type="submit"
-                                            className="hover:shadow-form w-full rounded-md bg-blue-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                                            className="hover:shadow-form w-full rounded-md bg-red-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
                                             Submit
                                         </button>
                                     </div>

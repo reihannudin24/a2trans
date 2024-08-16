@@ -45,7 +45,7 @@ function EditPanelMerek() {
 
     const [loop, setLoop] = useState(true)
     const checkData = useCallback(async () => {
-        const responseData = await apiAuth.get(`/vendors/show?id=${id}`);
+        const responseData = await apiAuth.get(`/brand/show?id=${id}`);
         if (responseData.data.data.length === 0) return navigate("/panel/bus")
         setName(responseData.data.data[0].name);
 
@@ -84,7 +84,7 @@ function EditPanelMerek() {
                                     <div>
                                         <button
                                             type="submit"
-                                            className="hover:shadow-form w-full rounded-md bg-blue-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                                            className="hover:shadow-form w-full rounded-md bg-red-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
                                             Submit
                                         </button>
                                     </div>

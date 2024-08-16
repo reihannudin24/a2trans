@@ -130,7 +130,7 @@ export const InputSelectOption = ({ data, id, value, set, text }) => {
             onChange={(e) => set(e.target.value)}
             className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
         >
-            <option value={null} disabled>{text}</option>
+            <option value={0} disabled>{text}</option>
             {data.map((res, index) => {
                 return (
                     <option key={index} value={res.id}>{res.name}</option>

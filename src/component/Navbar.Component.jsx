@@ -73,24 +73,23 @@ export const NavbarComponent = () => {
 
 export const NavbarNewPanelComponent = () => {
     return (
-        <div className={"container flex gap-2 me-auto "}>
-            <nav className="sticky  top-4 px-5 z-40 shadow-gray-300 hover:text-white text-gray-700 dark:text-white flex flex-row items-center w-3/12 ms-auto justify-between rounded-xl bg-white/90 cursor-pointer hover:bg-red-500 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
+        <div className={"container flex gap-2 mx-auto"}>
+            <nav className="sticky  top-4 px-5 z-40 shadow-gray-300 hover:text-white text-white flex flex-row items-center w-3/12 ms-auto justify-between rounded-xl bg-red-500 cursor-pointer hover:bg-red-500 p-2 backdrop-blur-xl">
                 <div className={"flex gap-2"}>
                     <MdArrowBack className="text-2xl " />
                     <h2 className="ml-2  ">Kembali</h2>
                 </div>
             </nav>
-            <nav className="sticky top-4 px-5 z-40 shadow-gray-300 flex flex-row items-center w-9/12 ms-auto justify-between rounded-xl bg-white/90 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
+            <nav className="sticky top-4 px-5 z-40 shadow-gray-300 flex flex-row items-center w-9/12 ms-auto justify-between rounded-xl bg-red-500 p-2 backdrop-blur-xl">
                 <div className="flex items-center">
-                    <div className="text-gray-600 font-semibold  dark:text-white"> {/* Ubah ke warna yang jelas */}
+                    <div className="font-semibold  text-white"> 
                         <a href="/dashboard" className="hover:underline">
                             Pages
                         </a>
-                        <span className="text-black dark:text-gray-300"> / Add</span> {/* Ubah ke warna yang jelas */}
+                        <span className="text-white"> / Add</span> 
                     </div>
                 </div>
                 <div className="flex items-center">
-                    {/* Profile & Dropdown */}
                     <Dropdown
                         button={
                             <img
@@ -102,7 +101,7 @@ export const NavbarNewPanelComponent = () => {
                         children={
                             <div className="flex w-56 flex-col rounded-[20px] bg-white shadow-xl dark:bg-navy-700 dark:text-white">
                                 <div className="p-4">
-                                    <p className="text-sm font-bold text-black dark:text-white">
+                                    <p className="text-sm font-bold text-black">
                                         👋 Hey, Adela
                                     </p>
                                 </div>
@@ -110,13 +109,13 @@ export const NavbarNewPanelComponent = () => {
                                 <div className="flex flex-col p-4">
                                     <a
                                         href="#profile-settings"
-                                        className="text-sm text-black dark:text-white hover:underline"
+                                        className="text-sm text-black hover:underline"
                                     >
                                         Profile Settings
                                     </a>
                                     <a
                                         href="#newsletter-settings"
-                                        className="mt-3 text-sm text-black dark:text-white hover:underline"
+                                        className="mt-3 text-sm text-black hover:underline"
                                     >
                                         Newsletter Settings
                                     </a>

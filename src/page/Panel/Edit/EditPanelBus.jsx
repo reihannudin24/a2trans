@@ -31,10 +31,6 @@ function EditPanelBus() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // if (!selectedThumbFile || !busSeat || !busName || !description || !busCategory || !busType || !busMerek) {
-        //     textPopUp("Error", "Ada Value yang tidak terisi", "error")
-        //     return;
-        // }
 
         const dataForm = {
             id: id,
@@ -77,12 +73,13 @@ function EditPanelBus() {
         }
     };
 
-    const checkDataCategory = async () => {
+    const checkDataCategory = useCallback(async () => {
         const responseCategories = await apiAuth.get('/categories/show');
-        const responseMerek = await apiAuth.get('/vendors/show');
+        const responseMerek = await apiAuth.get('/brand/show');
+        if (responseCategories.data.data.length === 0 || responseMerek.data.data.length === 0) return navigate("/panel/bus")
         setCategories(responseCategories.data.data)
         setMerek(responseMerek.data.data)
-    }
+    }, [navigate])
 
     const [loop, setLoop] = useState(true)
     const checkData = useCallback(async () => {
@@ -104,7 +101,7 @@ function EditPanelBus() {
         if (loop === true) {
             checkData()
         }
-    }, [loop, checkData])
+    }, [loop, checkData, checkDataCategory])
 
     return (
         <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
