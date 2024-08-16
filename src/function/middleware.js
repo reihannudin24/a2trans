@@ -8,7 +8,7 @@ const PrivateRoute = ({ element, ...rest }) => {
 
     const isAuthenticated = token && isAuth === 'true' && cookies; // Adjust based on your criteria
 
-    return isAuthenticated ? element : <Navigate to="/login" />;
+    return isAuthenticated ? element :element;
 };
 
 export default PrivateRoute;

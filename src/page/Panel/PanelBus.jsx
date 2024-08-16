@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { textPopUp } from "../../function/swal";
 import { CardPanelBusComponent } from "../../component/PanelComponent";
 import { useNavigate } from "react-router-dom";
-import {WidgetComponent} from "../../component/Widget.Component";
+import { WidgetComponent } from "../../component/Widget.Component";
 import { MdBarChart, MdDashboard } from "react-icons/md";
-import {IoDocuments} from "react-icons/io5";
-import {NavbarNewPanelComponent} from "../../component/Navbar.Component";
+import { IoDocuments } from "react-icons/io5";
+import { NavbarNewPanelComponent } from "../../component/Navbar.Component";
 import apiAuth from "../../function/axiosAuth";
 
 function PanelBus() {
@@ -81,27 +81,26 @@ function PanelBus() {
                                 <div className="overflow-x-auto">
                                     <table className="w-full my-0">
                                         <thead className="align-bottom">
-                                        <tr className="font-semibold text-[0.95rem] text-secondary-dark">
-                                            <th className="pb-3 text-start min-w-[175px]">Bus</th>
-                                            <th className="pb-3 pr-12 text-end min-w-[175px]">Seat</th>
-                                            <th className="pb-3 text-end min-w-[175px]">Kategori</th>
-                                            <th className="pb-3 text-end min-w-[175px]">Tipe</th>
-                                            <th className="pb-3 pr-12 text-end min-w-[175px]">Merek</th>
-                                            <th className="pb-3 pr-12 text-end min-w-[175px]">Action</th>
-                                        </tr>
+                                            <tr className="font-semibold text-[0.95rem] text-secondary-dark">
+                                                <th className="pb-3 text-start min-w-[175px]">Bus</th>
+                                                <th className="pb-3 pr-12 text-end min-w-[175px]">Seat</th>
+                                                <th className="pb-3 text-end min-w-[175px]">Kategori</th>
+                                                <th className="pb-3 text-end min-w-[175px]">Tipe</th>
+                                                <th className="pb-3 pr-12 text-end min-w-[175px]">Merek</th>
+                                                <th className="pb-3 pr-12 text-end min-w-[175px]">Action</th>
+                                            </tr>
                                         </thead>
                                         <tbody className={"scroll-m-0"}>
-                                        {bus?.length === 0 ? (
-                                            <div>
-                                                <div className={"my-10"}>
-                                                    <h1>Data kosong</h1>
+                                            {bus?.length === 0 ? (
+                                                <div>
+                                                    <div className={"my-10 mx-4"}>
+                                                        <h1>Data kosong</h1>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ): (
-                                            <div>
-                                                {bus?.map((item, index) => {
-                                                    console.log("item : " ,item)
-                                                    return(
+                                            ) : (
+                                                bus?.map((item, index) => {
+                                                    console.log("item : ", item)
+                                                    return (
                                                         <CardPanelBusComponent
                                                             key={index}
                                                             id={item?.id}
@@ -109,9 +108,8 @@ function PanelBus() {
                                                             navigate={navigate}
                                                         />
                                                     )
-                                                })}
-                                            </div>
-                                        )}
+                                                })
+                                            )}
 
 
                                         </tbody>
