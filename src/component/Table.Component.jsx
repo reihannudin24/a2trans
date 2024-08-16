@@ -1,16 +1,16 @@
-import {confirmDelete, textPopUp} from "../function/swal";
-import {useEffect, useState} from "react";
+import { confirmDelete, textPopUp } from "../function/swal";
+import { useEffect, useState } from "react";
 import apiAuth from "../function/axios";
 
 export default function TableComponent({ data }) {
 
-    const [bus, setBus ] = useState([]);
+    const [bus, setBus] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
-            try{
+            try {
                 const response = await apiAuth.post('/bus/show');
                 setBus(response?.data);
-            }catch (error){
+            } catch (error) {
                 console.log(error)
                 textPopUp("Error", "Login failed. Please check your credentials.", "error");
             }
@@ -44,11 +44,11 @@ export default function TableComponent({ data }) {
                             </div>
                             <div className="flex-auto block py-8 pt-6 px-9">
                                 <div className="overflow-x-auto">
-                                    <table className="w-full my-0 ">
+                                    <table class="w-full my-0 align-middle text-dark border-neutral-200">
                                         <thead className="align-bottom">
                                             <tr className="font-semibold text-[0.95rem] text-secondary-dark">
                                                 <th className="pb-3 text-start min-w-[175px]">Bus</th>
-                                                <th className="pb-3 pr-12 text-end min-w-[175px]">Seat</th>
+                                                <th className="pb-3 text-end min-w-[175px]">Seat</th>
                                                 <th className="pb-3 text-end min-w-[175px]">Kategori</th>
                                                 <th className="pb-3 text-end min-w-[175px]">Tipe</th>
                                                 <th className="pb-3 pr-12 text-end min-w-[175px]">Merek</th>
@@ -58,7 +58,7 @@ export default function TableComponent({ data }) {
                                         <tbody>
                                             {bus.map((res, index) => {
                                                 return (
-                                                    <tr key={index} className="border-b">
+                                                    <tr key={index} className="border-b border-dashed last:border-b-0">
                                                         <td className="p-3 pl-0">
                                                             <div className="flex items-center">
                                                                 <div className="relative inline-block shrink-0 rounded-2xl me-3">
