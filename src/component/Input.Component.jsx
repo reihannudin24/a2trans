@@ -127,6 +127,7 @@ export const InputSelectOption = ({ data, id, value, set }) => {
 }
 
 export const InputImage = ({ id, change, multiple }) => {
+
     return (
         <div className="col-span-5 h-full w-full rounded-xl bg-lightPrimary dark:!bg-navy-700 2xl:col-span-6">
             <label htmlFor={id}>

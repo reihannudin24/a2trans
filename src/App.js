@@ -30,7 +30,7 @@ function App() {
             <section className={""}>
                 <Routes>
                     <Route path={"/"} element={<Home />} />
-                    <Route path={"/detail"} element={<Detail />} />
+                    <Route path={"/detail/:id"} element={<Detail />} />
                     <Route path={"/rent"} element={<Rent />} />
                     <Route path={"/about"} element={<About />} />
                     <Route path={"/contact"} element={<Contact />} />

@@ -1,8 +1,30 @@
 import { CardDetialComponent } from "../component/Card.Component"
 import { CarousselGalleryComponent } from "../component/Caroussel.Component"
-// import CalenderComponent from "../component/Calender.Component"
+import {useEffect, useState} from "react";
+import apiAuth from "../function/axiosAuth";
+import {textPopUp} from "../function/swal";
 
 function Detail() {
+
+    const [bus, setBus] = useState([]);
+    useEffect(() => {
+        const fetchDataBus = async () => {
+            try {
+                const response = await apiAuth.get('/bus/show', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                setBus(response?.data?.data || []);
+            } catch (error) {
+                console.error(error);
+                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
+            }
+        };
+
+        fetchDataBus();
+    }, []);
+
 
     // Note : Belum di kasih query jadi blm bisa detek bus by id / nama
 

@@ -1,97 +1,205 @@
-import { InputCheckbox } from "./Input.Component";
-import { CardComponent, ListCardComponent } from "./Card.Component";
+import {InputCheckbox, InputSearch} from "./Input.Component";
+import {CardComponent, CardProductComponent, ListCardComponent} from "./Card.Component";
 import { useState } from "react";
 
-export const RentContentComponent = ({ all_kendaraan, category_checkbox, Type_Bus, search }) => {
 
-    const [selectedColors, setSelectedColors] = useState([]);
+export const RentContentComponent = ({   setSearch,bus, categories, search }) => {
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
 
-    const handleChange = (event) => {
+    const handleCategoryChange = (event) => {
         const value = event.target.value;
-        setSelectedColors(selectedColors === value ? '' : value);
+        setSelectedCategory(selectedCategory === value ? '' : value);
     };
 
-    // Ini untuk deteksi category checkbox + search
-    console.log(search)
-    console.log(selectedColors)
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value.toLowerCase());
+    };
+
+    const filteredBus = bus.filter((item) => {
+        const matchesCategory = selectedCategory ? item.categories_id === parseInt(selectedCategory) : true;
+        const matchesSearch = searchQuery ? item.name.toLowerCase().includes(searchQuery) : true;
+        return matchesCategory && matchesSearch;
+    });
 
     return (
-        <div className={"w-full lg:w-11/12 mt-8 lg:mt-10 mx-auto container"}>
-            <div className={"w-full"}>
-                <div className={"w-full block lg:flex gap-4"}>
-
-                    <div className={"lg:w-3/12 my-4"}>
-
-                        <div className={"border-b border-gray-300 lg:shadow w-11/12 mx-auto py-4 px-3 rounded-md shadow-md"}>
-
-                            {/* DASKTOP */}
-                            <div className={"hidden lg:block w-11/12"}>
-                                <div className={"w-10/12 mx-auto container"}>
-                                    <div className={"mb-3 border-b border-gray-100 pb-3"}>
-                                        <h2 className={"text-md text-gray-700 font-semibold"}>Categories</h2>
-                                    </div>
-                                    <div className={"mt-4"}>
-                                        <ul className={"block"}>
-
-                                            {/* Category Map */}
-                                            {category_checkbox.map((item, index) => {
-                                                return (
-                                                    <li className={"w-full  my-2"}>
-                                                        <InputCheckbox name={item?.name} toggle={handleChange} selectedColors={selectedColors} value={item?.value} />
-                                                    </li>
-                                                )
-                                            })}
-
-                                        </ul>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            {/* MOBILE */}
-                            <div className={"block lg:hidden w-11/12"}>
-                                <ul className={"flex "}>
-                                    {category_checkbox.map((item, index) => {
-                                        return (
-                                            <li className={"w-6/12 mx-auto container"}>
-                                                <InputCheckbox name={item?.name} toggle={handleChange} selectedColors={selectedColors} value={item?.value} />
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </div>
-
+        <>
+            <div className={"bg-primary  relative pt-20 pb-14 lg:pb-20"}>
+                <div className={"w-11/12 mx-auto container"}>
+                    <div className={"text-left lg:text-center"}>
+                        <h2 className={"text-white text-2xl lg:text-3xl font-semibold"}>Temukan Kendaraan yang Tepat untuk Setiap Perjalanan Anda!</h2>
+                        <div className={"my-3 lg:my-2"}>
+                            <p className={"text-white hidden lg:block text-sm"}>Telusuri daftar mobil terbaik dari berbagia merek dan model yang tersedia di A2Trans, memastikan Anda menemukan <br /> kendaraan yang tepat untuk setiap perjalanan Anda!</p>
+                            <p className={"text-white block lg:hidden text-sm"}>Telusuri daftar mobil terbaik dari berbagia merek dan model yang tersedia di A2Trans, memastikan Anda menemukan</p>
                         </div>
-
                     </div>
+                </div>
+                <div className={"w-10/12 left-0 right-0 absolute -bottom-6 mx-auto"}>
+                    <div className={"w-full lg:w-9/12 mx-auto container"}>
 
-                    <div className={"w-full my-4 lg:w-9/12 "}>
-                        <div className={"w-full "}>
-
-                            {/* Type Bus */}
-                            <ListCardComponent title={"Jenis-Jenis Kendaraan "} data={Type_Bus} />
-
-                            <div className={"lg:w-11/12 mx-auto container"}>
-                                <div className={"my-5"}>
-                                    <h2 className={"font-bold xl:text-xl text-md text-gray-800 mx-4"}>Semua Kendaraan</h2>
+                        <div className={"bg-white  py-2 px-4 rounded-lg shadow"}>
+                            <div className={"flex justify-between"}>
+                                <div className={"my-auto w-full"}>
+                                    <input
+                                        value={searchQuery}
+                                        onChange={handleSearchChange}
+                                        className={"py-2 text-sm w-full"} placeholder={"Cari kendaraan"}  />
                                 </div>
-                                <ul className={"w-full block flex-wrap relative"}>
-
-                                    {/* Mapping Semua Kendaraan */}
-                                    {all_kendaraan.map(res => {
-                                        return (<li className={"w-full  my-3"}>
-                                            <CardComponent data={res} />
-                                        </li>)
-                                    })}
-
-                                </ul>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-        </div>
+            <div className={"w-full lg:w-11/12 mt-8 lg:mt-10 mx-auto container"}>
+                <div className={"w-full"}>
+                    <div className={"w-full block lg:flex gap-4"}>
 
-    )
+                        <div className={"lg:w-3/12 my-4"}>
+                            <div className={"border-b border-gray-300 lg:shadow w-11/12 mx-auto py-4 px-3 rounded-md shadow-md"}>
+                                <div className={"hidden lg:block w-11/12"}>
+                                    <div className={"w-10/12 mx-auto container"}>
+                                        <div className={"mb-3 border-b border-gray-100 pb-3"}>
+                                            <h2 className={"text-md text-gray-700 font-semibold"}>Categories</h2>
+                                        </div>
+                                        <div className={"mt-4"}>
+                                            <ul className={"block"}>
+                                                {categories.map((item, index) => (
+                                                    <li key={index} className={"w-full my-2"}>
+                                                        <InputCheckbox
+                                                            name={item.name}
+                                                            toggle={handleCategoryChange}
+                                                            selectedColors={selectedCategory}
+                                                            value={item.id}
+                                                        />
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* MOBILE */}
+                                <div className={"block lg:hidden w-11/12"}>
+                                    <ul className={"flex "}>
+                                        {categories.map((item, index) => (
+                                            <li key={index} className={"w-6/12 mx-auto container"}>
+                                                <InputCheckbox
+                                                    name={item.name}
+                                                    toggle={handleCategoryChange}
+                                                    selectedColors={selectedCategory}
+                                                    value={item.id}
+                                                />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className={"w-full my-4 lg:w-9/12 "}>
+                            <div className={"w-full "}>
+                                <div className={"lg:w-11/12 mx-auto container"}>
+
+                                    <ul className={"w-full block flex-wrap relative"}>
+                                        {filteredBus.map((res, index) => (
+                                            <li key={index} className={"w-full my-3"}>
+                                                <CardProductComponent item={res} />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </>
+    );
 }
+
+// export const RentContentComponent = ({ bus, categories,  search }) => {
+//
+//     const [selectedColors, setSelectedColors] = useState([]);
+//
+//     const handleChange = (event) => {
+//         const value = event.target.value;
+//         setSelectedColors(selectedColors === value ? '' : value);
+//     };
+//
+//
+//
+//
+//     return (
+//         <div className={"w-full lg:w-11/12 mt-8 lg:mt-10 mx-auto container"}>
+//             <div className={"w-full"}>
+//                 <div className={"w-full block lg:flex gap-4"}>
+//
+//                     <div className={"lg:w-3/12 my-4"}>
+//
+//                         <div className={"border-b border-gray-300 lg:shadow w-11/12 mx-auto py-4 px-3 rounded-md shadow-md"}>
+//                             <div className={"hidden lg:block w-11/12"}>
+//                                 <div className={"w-10/12 mx-auto container"}>
+//                                     <div className={"mb-3 border-b border-gray-100 pb-3"}>
+//                                         <h2 className={"text-md text-gray-700 font-semibold"}>Categories</h2>
+//                                     </div>
+//                                     <div className={"mt-4"}>
+//                                         <ul className={"block"}>
+//
+//                                             {categories.map((item, index) => {
+//                                                 return (
+//                                                     <li className={"w-full  my-2"}>
+//                                                         <InputCheckbox name={item?.name} toggle={handleChange} selectedColors={selectedColors} value={item?.value} />
+//                                                     </li>
+//                                                 )
+//                                             })}
+//
+//                                         </ul>
+//                                     </div>
+//                                 </div>
+//
+//                             </div>
+//
+//                             {/* MOBILE */}
+//                             <div className={"block lg:hidden w-11/12"}>
+//                                 <ul className={"flex "}>
+//                                     {categories.map((item, index) => {
+//                                         return (
+//                                             <li className={"w-6/12 mx-auto container"}>
+//                                                 <InputCheckbox name={item?.name} toggle={handleChange} selectedColors={selectedColors} value={item?.value} />
+//                                             </li>
+//                                         )
+//                                     })}
+//                                 </ul>
+//                             </div>
+//
+//                         </div>
+//
+//                     </div>
+//
+//                     <div className={"w-full my-4 lg:w-9/12 "}>
+//                         <div className={"w-full "}>
+//                             <div className={"lg:w-11/12 mx-auto container"}>
+//                                 <div className={"my-5"}>
+//                                     <h2 className={"font-bold xl:text-xl text-md text-gray-800 mx-4"}>Semua Kendaraan</h2>
+//                                 </div>
+//                                 <ul className={"w-full block flex-wrap relative"}>
+//
+//                                     {bus.map(res => {
+//                                         return (<li className={"w-full  my-3"}>
+//                                             <CardProductComponent item={res} />
+//                                             {/*<CardComponent data={res} />*/}
+//                                         </li>)
+//                                     })}
+//
+//                                 </ul>
+//                             </div>
+//                         </div>
+//                     </div>
+//
+//                 </div>
+//             </div>
+//         </div>
+//
+//     )
+// }

@@ -1,4 +1,130 @@
-import { Star, Fan, Monitor, User, PintGlass } from "@phosphor-icons/react";
+import {Star, Fan, Monitor, User, PintGlass,  ArrowRight} from "@phosphor-icons/react";
+import {useState} from "react";
+
+
+
+export const ListCardProductComponent = ({ bus, categories }) => {
+    const [selected, setSelected] = useState(1); // Initialize with the first category ID
+
+    const handleSelected = (e) => {
+        const target = parseInt(e.target.value); // Convert selected value to an integer
+        setSelected(target);
+    };
+
+    const filterByCategory = (data, categoryId) => {
+        return data.filter(item => item.categories_id === categoryId);
+    };
+
+    const filteredBus = filterByCategory(bus, selected);
+
+    return (
+        <div className="w-full my-4 mx-auto container">
+            <div className="w-full">
+                <div>
+                    <div className="my-5">
+                        <div className="mb-2">
+                            <h2 className="font-semibold text-3xl text-black-700 mx-4">Tipe Kendaraan A2Trans</h2>
+                            <p className="my-1 py-1 text-sm text-gray-600 mx-4">
+                                Dengan berbagai pilihan model yang ditawarkan, A2trans menghadirkan solusi mobilitas yang sesuai dengan kebutuhan beragam konsumen.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="mx-4 w-full my-4 border-b border-gray-200 pb-3">
+                        <ul className="flex gap-4 overflow-x-scroll scrollbar-hide text-center w-full">
+                            {categories.map((item, index) => (
+                                <li key={index} className="mx-auto flex-shrink-0">
+                                    <button
+                                        value={item.id}
+                                        onClick={handleSelected}
+                                        className={`cursor-pointer z-10 mx-auto bg-white px-4 py-2 ${selected === item.id ? 'bg-gray-200' : ''}`}
+                                    >
+                                        <p className="text-xl font-semibold text-gray-600">{item.name}</p>
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <ul className="w-full flex flex-wrap">
+                        {filteredBus.map((busItem, index) => (
+                            <li key={index} className="w-full mb-5 md:w-3/12">
+                                <CardProductComponent item={busItem} />
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export const CardProductComponent = ({ item }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleIsOpen = () => {
+        setIsOpen(!isOpen);
+    };
+
+    return (
+        <div className="w-full shadow pb-4">
+            <div className="w-11/12 mx-auto">
+                <div className="w-full h-full">
+                    <div className="h-img-product">
+                        <img className="h-full w-full rounded-xl object-cover" src={item.imageUrl || "/assets/img/bus/bus-1.jpg"} alt={item.name} />
+                    </div>
+                </div>
+                <div className="my-2">
+                    <div className="mb-5">
+                        <div className="bg-gray-500/50 w-1/2 py-1 my-3 px-3 rounded-md">
+                            <h2 className="text-white text-lg font-normal">{item.type}</h2>
+                        </div>
+                        <div className="my-3">
+                            <h1 className="text-2xl text-gray-700 font-semibold">{item.name}</h1>
+                        </div>
+                    </div>
+                    <div className="w-full flex justify-between">
+                        <div>
+                            <button className="bg-red-600 py-2.5 rounded-full px-4">
+                                <p className="text-white">Detail Kendaraan</p>
+                            </button>
+                        </div>
+                        <div>
+                            <button onClick={handleIsOpen} className="bg-gray-700/40 rounded-full p-3 my-auto">
+                                <ArrowRight className="text-2xl text-white" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="w-full mt-4">
+                {isOpen && (
+                    <div className="w-11/12 mx-auto border rounded-2xl border-gray-200">
+                        <div className="w-11/12 mx-auto">
+                            <div className="my-4 mx-2">
+                                <h2 className="text-lg font-normal text-gray-600">Fasilitas</h2>
+                            </div>
+                            <div className="w-10/12 my-3 mx-auto">
+                                <ul className="list-disc">
+                                    {item.facilities && item.facilities.map((facility, index) => (
+                                        <li key={index} className="my-4 text-gray-500">
+                                            <p className="text-lg text-gray-500">{facility}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                <div className="my-5 w-11/12 mx-auto">
+                    <button className="bg-primary py-3 w-full rounded-md">
+                        <p className="text-white">Pesan sekarang</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 
 export const ListCardComponent = ({ title, data }) => {

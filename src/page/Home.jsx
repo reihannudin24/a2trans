@@ -6,28 +6,50 @@ import Detail, {
     PromoComponent,
     TestimonialComponent
 } from "../component/Promo.Component"
-import {ListCardComponent} from "../component/Card.Component";
+import {ListCardProductComponent} from "../component/Card.Component";
+import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import apiAuth from "../function/axiosAuth";
+import {textPopUp} from "../function/swal";
 
 function Home() {
 
-    const ArrayTypeBus = [
-        {
-            nama_bus: "Luxury Bus",
-            category: "Travel Bus"
-        },
-        {
-            nama_bus: "Luxury Bus",
-            category: "Travel Bus"
-        },
-        {
-            nama_bus: "Luxury Bus",
-            category: "Travel Bus"
-        },
-        {
-            nama_bus: "Luxury Bus",
-            category: "Travel Bus"
-        }
-    ]
+    const navigate = useNavigate();
+    const [bus, setBus] = useState([]);
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchDataBus = async () => {
+            try {
+                const response = await apiAuth.get('/bus/show', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                setBus(response?.data?.data || []);
+            } catch (error) {
+                console.error(error);
+                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
+            }
+        };
+        const fetchDataCategory = async () => {
+            try {
+                const response = await apiAuth.get('/categories/show', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                setCategories(response?.data?.data || []);
+            } catch (error) {
+                console.error(error);
+                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
+            }
+        };
+
+        fetchDataBus();
+        fetchDataCategory()
+    }, []);
+
 
     return (
         <section className={"w-full"}>
@@ -35,7 +57,8 @@ function Home() {
                 <CarousselComponent />
                 <PromoComponent />
                 <Promo2Component />
-                <ListCardComponent title={"Jenis-Jenis Kendaraan "} data={ArrayTypeBus} />
+                <ListCardProductComponent bus={bus} categories={categories}/>
+                {/*<ListCardComponent title={"Jenis-Jenis Kendaraan "} data={ArrayTypeBus} />*/}
                 <TestimonialComponent />
                 <FaqComponent />
                 <Promo3Component />

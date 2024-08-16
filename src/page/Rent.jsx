@@ -1,68 +1,60 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { HeaderRent } from "../component/Banner.Component";
 import { RentContentComponent } from "../component/Rent.Component";
+import {useNavigate} from "react-router-dom";
+import apiAuth from "../function/axiosAuth";
+import {textPopUp} from "../function/swal";
 
 
 function Rent() {
 
+    const navigate = useNavigate();
+    const [bus, setBus] = useState([]);
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchDataBus = async () => {
+            try {
+                const response = await apiAuth.get('/bus/show', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                setBus(response?.data?.data || []);
+            } catch (error) {
+                console.error(error);
+                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
+            }
+        };
+        const fetchDataCategory = async () => {
+            try {
+                const response = await apiAuth.get('/categories/show', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                setCategories(response?.data?.data || []);
+            } catch (error) {
+                console.error(error);
+                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
+            }
+        };
+
+        fetchDataBus();
+        fetchDataCategory()
+    }, []);
+
     const [search, setSearch] = useState("");
-
-    const ArrayDummyBus = [
-        {
-            nama_bus: "Bus Gede",
-            thumb: "/assets/img/bus/bus-1.jpg",
-            harga: "100k"
-        }
-    ]
-
-
-    const ArrayDummyCategoryCheckbox = [
-        {
-            "id": 1,
-            "name": "Luxury",
-            "value": "luxury",
-        },
-        {
-            "id": 2,
-            "name": "Bus",
-            "value": "bus",
-        },
-        {
-            "id": 3,
-            "name": "Mini Bus",
-            "value": "mini_bus",
-        },
-    ]
-
-    const ArrayTypeBus = [
-        {
-            nama_bus: "Luxury Bus",
-            category: "Travel Bus"
-        },
-        {
-            nama_bus: "Luxury Bus",
-            category: "Travel Bus"
-        },
-        {
-            nama_bus: "Luxury Bus",
-            category: "Travel Bus"
-        },
-        {
-            nama_bus: "Luxury Bus",
-            category: "Travel Bus"
-        }
-    ]
 
     return (
         <>
             <section className={"w-full"}>
                 <div className={"w-full"}>
-                    <HeaderRent search={search} setSearch={setSearch} />
                     <RentContentComponent
-                        all_kendaraan={ArrayDummyBus}
-                        category_checkbox={ArrayDummyCategoryCheckbox}
-                        Type_Bus={ArrayTypeBus}
-                        search={search} 
+                        setSearch={setSearch}
+                        bus={bus}
+                        categories={categories}
+                        search={search}
                     />
                 </div>
             </section>
