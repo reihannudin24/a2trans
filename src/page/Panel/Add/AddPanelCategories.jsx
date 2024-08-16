@@ -1,15 +1,23 @@
 import { useState } from "react";
 import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
+import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
-import { InputText } from "../../../component/Input.Component";
+import { InputText, InputImage } from "../../../component/Input.Component";
+import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
 
 function AddPanelCategories() {
     const [name, setName] = useState("");
+    const [selectedFiles, setSelectedFiles] = useState([]);
+
+    const handleFileChangeThumb = (event) => {
+        const file = event.target.files[0];
+        setSelectedFiles(file);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!name) {
+        if (!name || !selectedFiles) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
@@ -19,15 +27,22 @@ function AddPanelCategories() {
         }
 
         try {
-            console.log(dataForm)
             const responseData = await apiAuth.post('/categories/create/new', dataForm)
 
             // RESPONE
             if (responseData.status === 200) {
 
-                console.log('data category uploaded successfully');
-                setName("");
-                textPopUp("Success", "Berhasil menambah data kedatabase", "success")
+                const formDataFiles = new FormData();
+                formDataFiles.append('category_id', responseData.data.data[0].insertId);
+                formDataFiles.append('category', true);
+                formDataFiles.append('files', selectedFiles);
+
+                const responseFiles = await apiImage.post('/categories/add/new/image', formDataFiles);
+                if (responseFiles.data.status === 200) {
+                    console.log('data category uploaded successfully');
+                    setName("");
+                    textPopUp("Success", "Berhasil menambah data kedatabase", "success")
+                }
 
                 return;
             } else {
@@ -41,6 +56,7 @@ function AddPanelCategories() {
 
     return (
         <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
+            <NavbarNewPanelComponent brandText="Dashboard" />
             <div className="flex flex-wrap -mx-3 mb-5">
                 <div className="w-full max-w-full  mb-6  mx-auto">
                     <div className="relative flex flex-col  min-w-0 shadow-md rounded-md bg-white m-5">
@@ -58,11 +74,15 @@ function AddPanelCategories() {
                                         <LabelText text={"Category Bus"} htmlFor={"category_bus"} />
                                         <InputText id={"category_bus"} value={name} set={setName} placeholder={"Enter Category Bus"} />
                                     </div>
+                                    <div className="mb-5">
+                                        <LabelText text={"Image Category"} htmlFor={"image_category"} />
+                                        <InputImage id={"image_category"} change={handleFileChangeThumb} multiple={false} />
+                                    </div>
 
                                     <div>
                                         <button
                                             type="submit"
-                                            className="hover:shadow-form w-full rounded-md bg-blue-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                                            className="hover:shadow-form w-full rounded-md bg-red-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
                                             Submit
                                         </button>
                                     </div>

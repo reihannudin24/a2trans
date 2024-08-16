@@ -93,6 +93,20 @@ export const InputText = ({ id, value, set, placeholder }) => {
     )
 }
 
+export const InputNumber = ({ id, value, set, placeholder }) => {
+    return (
+        <input
+            type="number"
+            name={id}
+            id={id}
+            placeholder={placeholder}
+            value={value}
+            onChange={(e) => set(e.target.value)}
+            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
+        />
+    )
+}
+
 export const InputTextArea = ({ id, value, set, placeholder, rows }) => {
     return (
         <textarea
@@ -107,7 +121,7 @@ export const InputTextArea = ({ id, value, set, placeholder, rows }) => {
     )
 }
 
-export const InputSelectOption = ({ data, id, value, set }) => {
+export const InputSelectOption = ({ data, id, value, set, text }) => {
     return (
         <select
             name={id}
@@ -116,7 +130,7 @@ export const InputSelectOption = ({ data, id, value, set }) => {
             onChange={(e) => set(e.target.value)}
             className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
         >
-            <option value="" disabled>Pilih Type</option>
+            <option value={null} disabled>{text}</option>
             {data.map((res, index) => {
                 return (
                     <option key={index} value={res.id}>{res.name}</option>
@@ -140,7 +154,7 @@ export const InputImage = ({ id, change, multiple }) => {
                     className="hidden"
                 />
                 <div className="flex h-full py-4 w-full flex-col items-center justify-center rounded-xl border-[2px] border-dashed border-gray-200  dark:!border-navy-700 lg:pb-5">
-                    <MdFileUpload className="text-[50px] text-red-500 dark:text-white" />
+                    <MdFileUpload className="text-[50px] text-red-500 " />
                     <h4 className="text-xl font-bold text-red-500 dark:text-white">
                         Upload Files
                     </h4>

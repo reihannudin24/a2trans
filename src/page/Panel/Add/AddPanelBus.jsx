@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
 import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
-import { InputImage, InputSelectOption, InputText, InputTextArea } from "../../../component/Input.Component";
-import {NavbarNewPanelComponent} from "../../../component/Navbar.Component";
-import {MdFileUpload} from "react-icons/md";
+import { InputImage, InputSelectOption, InputNumber, InputText, InputTextArea } from "../../../component/Input.Component";
+import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
+
+
 
 function AddPanelMerek() {
     const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
@@ -16,8 +17,10 @@ function AddPanelMerek() {
     const [busCategory, setBusCategory] = useState("");
     const [busMerek, setbusMerek] = useState("");
     const [busType, setBusType] = useState("");
+    const [busSeat, setBusSeat] = useState("");
 
     const [categories, setCategories] = useState([])
+    const [merek, setMerek] = useState([])
 
     const handleFileChangeGallery = (event) => {
         const files = Array.from(event.target.files);
@@ -31,7 +34,7 @@ function AddPanelMerek() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!selectedThumbFile || !selectedGalleryFiles.length || !busName || !description || !busCategory || !busType || !busMerek) {
+        if (!selectedThumbFile || !selectedGalleryFiles.length || !busSeat || !busName || !description || !busCategory || !busType || !busMerek) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
@@ -39,10 +42,10 @@ function AddPanelMerek() {
         const dataForm = {
             name: busName,
             description: description,
-            seat: 10,
+            seat: busSeat,
             categories_id: busCategory,
             type: busType,
-            merek_id: 2
+            merek_id: busType
         }
 
         try {
@@ -72,6 +75,7 @@ function AddPanelMerek() {
                     setDescription("");
                     setBusType("")
                     setbusMerek("")
+                    setBusSeat("")
                     setBusCategory("")
                     event.target.reset();
                     textPopUp("Success", "Berhasil menambah data kedatabase", "success")
@@ -89,14 +93,22 @@ function AddPanelMerek() {
         }
     };
 
-    const checkDataCategory = async () => {
-        const responseGallery = await apiAuth.get('/categories/show');
-        setCategories(responseGallery.data.data)
-    }
+    const [loop, setLoop] = useState(true)
+    const checkDataCategory = useCallback(async () => {
+        const responseCategories = await apiAuth.get('/categories/show');
+        const responseMerek = await apiAuth.get('/vendors/show');
+        setCategories(responseCategories.data.data)
+        setMerek(responseMerek.data.data)
+
+        
+        setLoop(false);
+    }, []);
 
     useEffect(() => {
-        checkDataCategory()
-    }, [])
+        if (loop === true) {
+            checkDataCategory()
+        }
+    }, [loop, checkDataCategory])
 
     return (
         <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
@@ -117,6 +129,7 @@ function AddPanelMerek() {
                                         <LabelText text={"Bus Name"} htmlFor={"bus_name"} />
                                         <InputText id={"bus_name"} value={busName} set={setBusName} placeholder={"Enter Bus Name"} />
                                     </div>
+
                                     <div className="mb-5">
                                         <LabelText text={"Description"} htmlFor={"description"} />
                                         <InputTextArea id={"description"} value={description} set={setDescription} placeholder={"Enter Description Bus"} rows={4} />
@@ -146,18 +159,23 @@ function AddPanelMerek() {
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
                                                 <LabelText text={"Category Kendaraan"} htmlFor={"category_bus"} />
-                                                <InputSelectOption data={categories} id={"category_bus"} value={busCategory} set={setBusCategory} />
+                                                <InputSelectOption data={categories} id={"category_bus"} value={busCategory} set={setBusCategory} text={"Pilih Category"} />
                                             </div>
                                         </div>
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">
-                                                <LabelText text={"Merk Kendaraan"} htmlFor={"merk_bus"} />
-                                                <InputSelectOption data={["Bus Gede", "Bus Kecil", "Bus Amatron"]} id={"merk_bus"} value={busMerek} set={setbusMerek} />
+                                                <LabelText text={"Merek Kendaraan"} htmlFor={"merk_bus"} />
+                                                <InputSelectOption data={merek} id={"merk_bus"} value={busMerek} set={setbusMerek} text={"Pilih Merek"} />
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className={"mt-10"}>
+                                    <div className="mb-5">
+                                        <LabelText text={"Seat"} htmlFor={"seat"} />
+                                        <InputNumber id={"seat"} value={busSeat} set={setBusSeat} placeholder={"Enter Bus Seat"} />
+                                    </div>
+
+                                    <div>
                                         <button
                                             type="submit"
                                             className="hover:shadow-form w-full rounded-md bg-red-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">

@@ -1,10 +1,11 @@
-import {useState} from "react";
-import {textPopUp} from "../../../function/swal";
+import { useState } from "react";
+import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
-import {LabelText} from "../../../component/Label.Component";
-import {InputImage, InputSelectOption, InputText, InputTextArea} from "../../../component/Input.Component";
+import { LabelText } from "../../../component/Label.Component";
+import { InputText, InputTextArea } from "../../../component/Input.Component";
+import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
 
-function AddPanelCategories () {
+function AddPanelCategories() {
 
     const [name, setName] = useState("");
     const [icon, setIcon] = useState("");
@@ -12,28 +13,29 @@ function AddPanelCategories () {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if ( !name || !icon ) {
+        if (!name || !icon) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
 
         const dataForm = {
-            name : name,
-            icon : icon,
+            name: name,
+            icon: icon,
         }
 
-        try{
+        try {
             const responseData = await apiAuth.post('/facilities/add/new', dataForm);
             console.log(responseData.data.data[0].insertId)
             textPopUp("Success", "Berhasil menambah data kedatabase", "success")
-        }catch (err){
+        } catch (err) {
             console.error('Error uploading files:', err);
         }
 
     }
 
-    return(
+    return (
         <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
+            <NavbarNewPanelComponent brandText="Dashboard" />
             <div className="flex flex-wrap -mx-3 mb-5">
                 <div className="w-full max-w-full  mb-6  mx-auto">
                     <div className="relative flex flex-col  min-w-0 shadow-md rounded-md bg-white m-5">
@@ -59,7 +61,7 @@ function AddPanelCategories () {
                                     <div>
                                         <button
                                             type="submit"
-                                            className="hover:shadow-form w-full rounded-md bg-blue-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                                            className="hover:shadow-form w-full rounded-md bg-red-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
                                             Submit
                                         </button>
                                     </div>

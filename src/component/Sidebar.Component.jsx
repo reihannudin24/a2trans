@@ -99,7 +99,7 @@ export default function SidebarComponent() {
                                         <a href="/panel/add/new/bus" className="block py-3  px-2 hover:bg-red-50 hover:text-red-700 rounded-lg text-gray-500">Tambahkan Bus</a>
                                     </li>
                                     <li>
-                                        <a href="/panel/add/new/category" className="block py-3  px-2 hover:bg-red-50 hover:text-red-700  rounded-lg text-gray-500">Tambahkan Kategori</a>
+                                        <a href="/panel/add/new/categories" className="block py-3  px-2 hover:bg-red-50 hover:text-red-700  rounded-lg text-gray-500">Tambahkan Kategori</a>
                                     </li>
                                     <li>
                                         <a href="/panel/add/new/facilities" className="block py-3  px-2 hover:bg-red-50 hover:text-red-700  rounded-lg text-gray-500">Tambahkan Fasilitas</a>
