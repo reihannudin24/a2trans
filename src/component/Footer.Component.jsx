@@ -117,7 +117,7 @@ export const FooterComponent = () => {
                                     {information.map((item) => {
                                         return(
                                             <div className={"my-2"}>
-                                                <p className={"text-sm md:text-sm text-gray-500"}>
+                                                <p className={"text-md md:text-sm text-gray-500"}>
                                                     {item.value}
                                                 </p>
                                             </div>
@@ -136,7 +136,7 @@ export const FooterComponent = () => {
                                                 <ul className={"my-3 block"}>
                                                     {item?.footer?.data.map((itemData , indexData) => {
                                                         return(
-                                                            <li key={indexData} className={"text-sm md:text-sm py-2 my-auto h-full cursor-pointer text-gray-500 hover:text-red-600"}>
+                                                            <li key={indexData} className={"text-md md:text-sm py-2 my-auto h-full cursor-pointer text-gray-500 hover:text-red-600"}>
                                                                 <Link to={`${itemData.url}`}>{itemData.value}</Link>
                                                             </li>
                                                         )
@@ -169,7 +169,7 @@ export const FooterComponent = () => {
                                 </div>
                                 <div className={"w-full md:w-6/12 order-1 md:order-2 my-auto h-full"}>
                                     <div className={"text-center md:text-right h-full my-auto"}>
-                                        <span className={"text-sm md:text-sm h-full my-auto text-gray-500"}>@copyright 2024 by reihannudin</span>
+                                        <span className={"text-md md:text-sm h-full my-auto text-gray-500"}>@copyright 2024 by reihannudin</span>
                                     </div>
                                 </div>
                             </div>

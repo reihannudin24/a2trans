@@ -1,61 +1,97 @@
 import { Bus, Van, CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { useState, useRef, useEffect } from "react"
 
-export const CarousselComponent = () => {
+import { useNavigate } from "react-router-dom";
 
+export const CarousselComponent = ({ categories }) => {
   return (
-    <>
-      <section className="relative h-full">
-        <div className={"h-full"}  style={{maxHeight:"400px"}}>
-          <img src="/assets/img/bus/banner-bus.jpg" alt="" className="absolute  inset-0 w-full h-full object-cover" />
-        </div>
-        <div className={"container relative h-60 mx-auto justify-center items-center "} style={{minHeight:"600px", maxHeight:"800px"}}>
-          <div className={"absolute w-11/12 mx-auto bottom-20 lg:bottom-10 left-0 right-0"}>
-            <div className={"lg:flex w-full  block justify-between"}>
-              <div className={"w-full lg:w-8/12"}>
-                <h1 className="text-white  mb-5 lg:mt-20 text-4xl font-extrabold tracking-tight leading-none  xl:text-4xl dark:text-white drop-shadow-xl">
-                  Yuk, cari tiket bus dan travel terbaik untuk kebutuhanmu.
-                </h1>
-              </div>
-              <div className={"w-full lg:w-4/12 ms-auto"}>
-                <div className={"absolute w-full  -bottom-50 z-20 lg:relative "}>
-                  <CardBannerDes />
+      <>
+        <section className="relative h-full">
+          <div className={"h-full"} style={{ maxHeight: "400px" }}>
+            <img
+                src="/assets/img/bus/banner-bus.jpg"
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
+          <div
+              className={
+                "relative h-60 mx-auto justify-center items-center"
+              }
+              style={{
+                minHeight: "600px",
+                maxHeight: "800px",
+                maxWidth: "1500px",
+              }}
+          >
+            <div
+                className={
+                  "absolute md:w-10/12 w-11/12 mx-auto bottom-20 lg:bottom-10 left-0 right-0"
+                }
+            >
+              <div className={"lg:flex lg:w-full block justify-between"}>
+                <div className={"w-full lg:w-8/12"}>
+                  <h1 className="text-white mb-5 lg:mt-20 text-3xl md:text-4xl font-extrabold tracking-tight leading-none xl:text-4xl dark:text-white drop-shadow-xl">
+                    Yuk, cari tiket bus dan travel terbaik untuk kebutuhanmu.
+                  </h1>
+                </div>
+                <div className={"w-full lg:w-4/12 ms-auto"}>
+                  <div className={"absolute w-full -bottom-50 z-20 lg:relative"}>
+                    <CardBannerDes categories={categories} />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        {/*<div className="flex container px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 relative z-1 justify-items-center">*/}
-        {/* */}
-        {/*</div>*/}
-        {/* MOBILE UI */}
-        {/*<CardBannerMobile />*/}
-      </section>
-    </>
+        </section>
+      </>
   );
-}
+};
 
+const PopupDes = ({ toggle, onSelect, categories }) => {
+  const navigate = useNavigate();
 
-const PopupDes = ({ toggle, onSelect }) => {
+  const handleSelect = (categoryId) => {
+    onSelect(categoryId);
+    navigate(`/rent?categories_id=${categoryId}`);
+  };
+
   return (
-    <div className="absolute top-0 left-0 w-full h-full bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-6 shadow-md rounded-md sm:w-1/3">
-        <h3 className="text-md sm:text-lg font-bold mb-2">Pilih tipe kendaraan</h3>
-        <ul>
-          {/* Nnti bikin jadi type bus */}
-          <li className="cursor-pointer hover:bg-gray-100 p-2" onClick={() => onSelect("Jakarta")}>Jakarta</li>
-          <li className="cursor-pointer hover:bg-gray-100 p-2" onClick={() => onSelect("Surabaya")}>Surabaya</li>
-          <li className="cursor-pointer hover:bg-gray-100 p-2" onClick={() => onSelect("Bandung")}>Bandung</li>
-        </ul>
-        <button className="mt-4 bg-red-500 text-white px-4 py-2 rounded" onClick={toggle}>Tutup</button>
-      </div>
-    </div>
-  )
-}
+      <>
+        <div
+            onClick={toggle}
+            className={"fixed bg-gray-700/50 top-0 bottom-0 left-0 right-0 z-50 h-screen w-full"}
+        />
+        <div className="fixed z-50 top-0 left-0 w-full h-full bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 shadow-md rounded-md w-2/3 lg:w-1/3">
+            <h3 className="text-md sm:text-lg font-bold mb-2">
+              Pilih tipe kendaraan
+            </h3>
+            <ul>
+              {categories?.map((item) => (
+                  <li
+                      key={item.id}
+                      className="cursor-pointer hover:bg-gray-100 py-3 px-2"
+                      onClick={() => handleSelect(item?.id)}
+                  >
+                    {item?.name}
+                  </li>
+              ))}
+              <div className={"w-full mt-5"}>
+                <button onClick={toggle} className={"bg-red-600 w-full text-sm text-white py-3 px-2 rounded-md"}>
+                  Tutup
+                </button>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </>
+  );
+};
 
 
 
-const CardBannerDes = () => {
+const CardBannerDes = ({categories}) => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("Pilih Tipe Kendaraan");
 
@@ -70,7 +106,7 @@ const CardBannerDes = () => {
 
   return (
     <div className=" ms-auto  block w-full mb-10">
-      <div className={"w-full lg:w-10/12 ms-auto "}>
+      <div className={"w-full lg:w-11/12 xl:w-10/12 ms-auto "}>
         <div className="rounded-xl bg-white px-4 pb-4 pt-2">
           <div className="bg-gray-300 p-2 rounded-xl my-2">
             <div className="flex items-center  hover:scale-105 transition-transform duration-200  gap-4 border-b border-gray-400 mx-4 py-3 cursor-pointer" onClick={togglePopup}>
@@ -88,7 +124,7 @@ const CardBannerDes = () => {
 
 
           {showPopup && (
-              <PopupDes toggle={togglePopup} onSelect={handleLocationSelect} />
+              <PopupDes toggle={togglePopup} categories={categories} onSelect={handleLocationSelect} />
           )}
         </div>
       </div>
@@ -97,41 +133,6 @@ const CardBannerDes = () => {
 }
 
 
-const CardBannerMobile = () => {
-  const [showPopup, setShowPopup] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState("Pilih lokasi keberangkatan");
-
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
-  };
-
-  const handleLocationSelect = (location) => {
-    setSelectedLocation(location);
-    togglePopup();
-  };
-
-  return (
-    <div className="rounded-xl absolute w-full top-52 bg-white p-6 rounded-t-2xl block xl:hidden place-self-end">
-      <div className="bg-gray-300 p-2 rounded-xl my-4">
-        <div className="flex items-center gap-4 border-b border-gray-400 mx-4 py-3" onClick={togglePopup}>
-          <span><Bus size={32} color="gray" /></span><span className="text-gray-500">{selectedLocation}</span>
-        </div>
-        <div className="flex items-center gap-4 mx-4 py-3">
-          <span><Van size={32} color="gray" /></span><span className="text-gray-500">Mau ke mana?</span>
-        </div>
-      </div>
-
-      <div className="flex justify-center">
-        <button className="p-3 xl:p-5 bg-primary text-white text-xl rounded-xl w-full">Cari Bus Dan Travel</button>
-      </div>
-
-      {showPopup && (
-        <PopupDes toggle={togglePopup} onSelect={handleLocationSelect} />
-      )}
-
-    </div>
-  )
-}
 
 export const CarousselGalleryComponent = ({ data }) => {
 

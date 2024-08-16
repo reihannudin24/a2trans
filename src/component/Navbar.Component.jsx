@@ -32,18 +32,18 @@ export const NavbarComponent = () => {
 
     return(
         <>
-            <nav className={"fixed overflow-x-hidden top-0 z-50 w-full mx-auto "} style={{minWidth:"300px"}}>
+            <nav className={"fixed overflow-x-hidden top-0 z-30 w-full mx-auto "} style={{minWidth:"300px"}}>
                 <div className={"bg-primary-new-nav py-1 w-full"}>
-                    <header className={"w-11/12 mx-auto container pt-2  lg:pt-4 pb-4"}>
+                    <header className={"w-11/12 mx-auto  pt-2  lg:pt-4 pb-4"} style={{maxWidth:"1500px"}}>
                         <div className={"w-full flex justify-between"}>
-                            <div className={"lg:w-6/12 mt-3 mb-auto lg:mb-0 lg:mt-0"}>
-                                <div className={"w-full lg:w-5/12 h-full my-auto "}>
+                            <div className={"lg:w-4/12 xl:w-6/12 mt-3 mb-auto lg:mb-0 lg:mt-0"}>
+                                <div className={"w-full lg:w-7/12 xl:w-5/12 h-full my-auto "}>
                                     <div className={"h-10 lg:h-10 "}>
                                         <img alt="Logo" className={"h-full object-cover"} src={"/assets/img/hor-icon.svg"}/>
                                     </div>
                                 </div>
                             </div>
-                            <div className={"lg:w-6/12 my-auto"}>
+                            <div className={"lg:w-8/12 xl:w-6/12 my-auto"}>
                                 <div className={"w-10/12 my-auto lg:block hidden mx-auto"}>
                                     <ul className={"flex my-auto gap-10"}>
                                         {navbar.map((item, index) => {
@@ -219,7 +219,7 @@ const ListNavbar = ({url, name}) => {
         <div className={"w-5/12 mx-auto lg:w-full"}>
             <div className={"cursor-pointer text-15  mx-auto text-white hover:text-white hover:scale-110 transition-transform duration-200 py-1 md:px-2 rounded-md hover:bg-white hover:bg-opacity-40"}>
                 <Link to={`${url}`}>
-                    <p className={"font-semibold lg:text-md text-xl text-white  "}>{name}</p>
+                    <p className={"font-medium xl:text-md text-xl text-white  "}>{name}</p>
                 </Link>
             </div>
         </div>

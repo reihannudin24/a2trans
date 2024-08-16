@@ -1,12 +1,14 @@
 import { InputComponent } from "../component/Input.Component";
 import { useState } from "react";
 import apiJson from "../function/axios";
-import { useNavigate } from "react-router-dom";
-import { textPopUp } from "../function/swal";
+import {useNavigate} from "react-router-dom";
+import {textPopUp} from "../function/swal";
+import React from "react";
 
 export default function Login() {
 
     const navigate = useNavigate();
+    const [error, setErro] = useState('');
     const [state, setState] = useState({
         email: '',
         password: ''
@@ -20,86 +22,114 @@ export default function Login() {
         });
     };
 
-    console.log("email : ", state.email)
-    console.log("password : ", state.password)
+    console.log("email : ", state.email === "")
+    console.log("password : ", state?.email === "")
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!state.email || !state.password) {
+            setErro('Please fill in all fields.');
+            textPopUp("Error", "Please complete all fields", "error");
+            navigate('/login');
+            return;
+        }
 
         try {
             const response = await apiJson.post('/auth/login', {
                 email: state.email,
                 password: state.password
-            })
+            });
 
-            const data = await response;
-            console.log(data);
             textPopUp("Success", "Login successful!", "success");
             navigate('/');
         } catch (err) {
             console.error(err);
             textPopUp("Error", "Login failed. Please check your credentials.", "error");
+            navigate('/login');
         }
     };
 
+
+    console.log(state.email)
+    console.log(state.password)
+
     return (
         <>
-            <div className={"fixed w-full h-screen"}>
-                <div className={"absolute z-10 w-full h-full shadow-banner"}>
+            <div className={"relative h-screen mx-auto w-full"} style={{minWidth:"420px"}}>
+                <div className={"fixed w-full h-screen "}>
+                    <div className={"absolute z-10 w-full h-full shadow-banner"}>
+                    </div>
+                    <img src="/assets/img/bus/banner-bus.jpg" alt="" className="absolute  inset-0 w-full h-full object-cover" />
                 </div>
-                <img src="/assets/img/bus/banner-bus.jpg" alt="" className="absolute  inset-0 w-full h-full object-cover" />
-            </div>
-            <div className=" z-20  absolute top-0 h-screen bottom-0 w-full md:my-40 xl:my-52 mx-auto">
-                <div className={"flex justify-center  relative h-full items-center"}>
-                    <div className={" h-screen sm:w-full  xl:w-5/12 mx-auto relative left-0 right-0 top-0 bottom-0 pb-2 "}>
-                        <div className="w-11/12  my-8 bg-white left-0 right-0 top-0 bottom-0 mx-auto container py-4 px-8 rounded-xl shadow-md">
-                            <div className={"h-28"}>
-                                <img alt="Logo" className={"h-full object-cover"} src={"/assets/img/logo.svg"} />
-                            </div>
-                            <div>
-                                <h1 className="text-3xl font-bold">Admin Login</h1>
-                                <p className="text-slate-500">Halo Admin, Selamat datang kembali 👋</p>
-                            </div>
-                            <form onSubmit={handleSubmit} className="mt-5 ">
-                                <div className="flex flex-col space-y-3 ">
-                                    <InputComponent
+                <div className=" z-20 left-0 right-0 absolute container  mx-auto h-screen bottom-0 w-full ">
+                    <div className="my-auto flex h-full w-full rounded-md items-center justify-center  md:mx-0 md:px-0 lg:mb-10 lg:items-center">
+                        <div className={"bg-white w-11/12  md:w-8/12 lg:w-7/12 xl:w-5/12 mx-auto rounded-lg pt-6 pb-8 px-4 md:px-8 "}>
+                            {/*xl:max-w-[420px]*/}
+                            <div className=" w-full  max-w-full flex-col items-center  lg:pl-0 ">
+                                <div className={"h-28"}>
+                                    <img alt="Logo" className={"h-full object-cover"} src={"/assets/img/logo.svg"}/>
+                                </div>
+                                <h4 className="mb-2.5 text-3xl sm:text-4xl font-bold text-navy-700 dark:text-white">
+                                    Sign In
+                                </h4>
+                                <p className="mb-4 sm:mb-9 ml-1 text-base text-gray-600">
+                                    Enter your email and password to sign in!
+                                </p>
+                                <div className="mb-6 flex items-center  gap-3">
+                                    <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
+                                </div>
+                                <form onSubmit={handleSubmit} className="mt-5 ">
+                                    <InputField
+                                        variant="auth"
+                                        extra="mb-3"
+                                        label="Email*"
                                         id="email"
                                         name="email"
-                                        label="Email Admin"
                                         value={state.email}
                                         type="email"
                                         placeholder="Masukkan email admin"
                                         onChange={handleInputChange}
                                     />
-                                    <div>
-                                        <InputComponent
-                                            id="password"
-                                            name="password"
-                                            label="Kata Sandi"
-                                            value={state.password}
-                                            type="password"
-                                            placeholder="Masukkan kata sandi"
-                                            onChange={handleInputChange}
-                                        />
-                                        <div className="flex flex-row my-2 justify-between">
-                                            <div>
-                                                <label htmlFor="remember" className="flex items-center">
-                                                    <input type="checkbox" id="remember" className="w-4 h-4 border-slate-200 focus:bg-indigo-600 mr-2" />
-                                                    Ingat saya
-                                                </label>
-                                            </div>
+                                    <InputField
+                                        variant="auth"
+                                        extra="mb-3"
+                                        label="Password*"
+                                        id="password"
+                                        name="password"
+                                        value={state.password}
+                                        type="password"
+                                        placeholder="Masukkan kata sandi"
+                                        onChange={handleInputChange}
+                                    />
+                                    <div className="mb-4 flex items-center justify-between px-2">
+                                        <div className="flex items-center">
                                         </div>
+                                        <a
+                                            className="text-sm font-medium text-brand-500 hover:text-brand-600 dark:text-white"
+                                            href=" "
+                                        >
+                                            Forgot Password?
+                                        </a>
                                     </div>
-                                </div>
-                                <div className={"mt-10 mb-4"}>
-                                    <button className="w-full py-3 font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
+                                    <button className="w-full mt-10 py-3 font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                                         </svg>
                                         <span>Login Admin</span>
                                     </button>
+                                </form>
+                                    <div className="mt-4">
+                                    <span className=" text-sm font-medium text-navy-700 dark:text-gray-600">
+                                      Pastikan anda merupakan seorang admin
+                                    </span>
+                                    <a
+                                        href=" "
+                                        className="ml-1 text-sm font-medium text-brand-500 hover:text-brand-600 dark:text-white"
+                                    >
+                                    </a>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,3 +137,39 @@ export default function Login() {
         </>
     )
 }
+
+
+function InputField({label, id, name, extra, type, placeholder, variant, state, disabled, onChange, value}) {
+    const inputState = value ? "success" : state === "error" ? "error" : "";
+
+    return (
+        <div className={`${extra}`}>
+            <label
+                htmlFor={id}
+                className={`text-sm text-navy-700 dark:text-white ${
+                    variant === "auth" ? "ml-1.5 font-medium" : "ml-3 font-bold"
+                }`}
+            >
+                {label}
+            </label>
+            <input
+                type={type}
+                name={name}
+                id={id}
+                value={value}
+                onChange={onChange}
+                placeholder={placeholder}
+                className={`mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none ${
+                    disabled === true
+                        ? "!border-none !bg-gray-100 dark:!bg-white/5 dark:placeholder:!text-[rgba(255,255,255,0.15)]"
+                        : inputState === "error"
+                            ? "border-red-500 text-red-500 placeholder:text-red-500 dark:!border-red-400 dark:!text-red-400 dark:placeholder:!text-red-400"
+                            : inputState === "success"
+                                ? "border-green-500 text-green-500 placeholder:text-green-500 dark:!border-green-400 dark:!text-green-400 dark:placeholder:!text-green-400"
+                                : "border-gray-200 dark:!border-white/10 dark:text-white"
+                }`}
+            />
+        </div>
+    );
+}
+

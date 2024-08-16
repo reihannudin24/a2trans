@@ -8,7 +8,6 @@ import Rent from './page/Rent';
 import Panel from './page/Panel';
 import PanelAdd from './page/PanelAdd';
 
-import Login from './page/Login';
 
 import { NavbarComponent } from "./component/Navbar.Component";
 import { FooterComponent } from "./component/Footer.Component";
@@ -17,6 +16,7 @@ import NotFound from "./page/NotFound";
 import Contact from "./page/Contact";
 import About from "./page/About";
 import PrivateRoute from "./function/middleware";
+import SignIn from "./page/Login";
 
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
         location.pathname.includes("/login") 
 
     return (
-        <main className={"w-full bg-white overflow-x-hidden"} style={{minWidth:"300px"}}>
+        <main className={"w-full bg-white overflow-x-hidden"} style={{minWidth:"420px"}}>
             {!isPanelRoute && <NavbarComponent />}
             <section className={"ma"}>
                 <Routes>
@@ -36,7 +36,7 @@ function App() {
                     <Route path={"/about"} element={<About />} />
                     <Route path={"/contact"} element={<Contact />} />
 
-                    <Route path={"/login"} element={<Login />} />
+                    <Route path={"/login"} element={<SignIn />} />
 
                     {/*Touter ini harus udah ada token is auth true dan ada cokkies*/}
                     {/* PANEL */}
