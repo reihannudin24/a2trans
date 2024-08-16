@@ -16,6 +16,7 @@ import PanelEdit from "./page/PanelEdit";
 import NotFound from "./page/NotFound";
 import Contact from "./page/Contact";
 import About from "./page/About";
+import PrivateRoute from "./function/middleware";
 
 
 function App() {
@@ -37,10 +38,14 @@ function App() {
 
                     <Route path={"/login"} element={<Login />} />
 
+                    {/*Touter ini harus udah ada token is auth true dan ada cokkies*/}
                     {/* PANEL */}
-                    <Route path={"/panel/*"} element={<Panel />} />
-                    <Route path={"/panel/add/*"} element={<PanelAdd />} />
-                    <Route path={"/panel/edit/*"} element={<PanelEdit />} />
+
+                    {/* Protected Routes */}
+                    <Route path={"/panel/*"} element={<PrivateRoute element={<Panel />} />} />
+                    <Route path={"/panel/add/*"} element={<PrivateRoute element={<PanelAdd />} />} />
+                    <Route path={"/panel/edit/*"} element={<PrivateRoute element={<PanelEdit />} />} />
+
                     <Route path="*" element={<NotFound />} /> {/* Handle other undefined paths */}
                 </Routes>
             </section>
