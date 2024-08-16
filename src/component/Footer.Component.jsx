@@ -98,7 +98,7 @@ export const FooterComponent = () => {
     return(
         <>
             <footer className={"w-full xl:pt-10 bg-gray-50 py-2"}>
-                <header className={"w-full 2xl:w-1/12  py-4  mx-auto container"} style={{minWidth:"300px" , maxWidth:"1500px"}}>
+                <header className={"w-full py-4  mx-auto container"} style={{minWidth:"300px" , maxWidth:"1500px"}}>
                     <div className={"w-full lg:w-11/12 mx-auto "}>
                         <div className={"md:flex block mx-4"}>
                             <div className={"md:w-5/12 w-full "}>

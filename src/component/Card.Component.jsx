@@ -74,10 +74,10 @@ export const CardProductComponent = ({ item }) => {
                         <img className="h-full w-full rounded-md object-cover" src={item.imageUrl || "/assets/img/bus/bus-1.jpg"} alt={item.name} />
                     </div>
                 </div>
-                <div className="my-2 px-3">
+                <div className="my-2 px-3 mx-4">
                     <div className="mb-3">
                         <div className="w-full flex justify-between">
-                            <div className="bg-gray-600/40 py-1 my-3 px-3 rounded-md">
+                            <div className="bg-red-500 py-1 my-3 px-3 rounded-lg">
                                 <h2 className="text-white text-sm font-normal">{item.type}</h2>
                             </div>
                         </div>
@@ -87,12 +87,12 @@ export const CardProductComponent = ({ item }) => {
                     </div>
                     <div className="w-full flex justify-between">
                         <Link to={`/detail/${item?.id}`}>
-                            <button className="bg-gray-600 py-3 rounded-full px-3">
+                            <button className="bg-red-500 py-3 rounded-full px-3">
                                 <p className="text-white text-xs">Detail Kendaraan</p>
                             </button>
                         </Link>
                         <div>
-                            <button onClick={handleIsOpen} className="bg-gray-700/40 rounded-full p-3 my-auto">
+                            <button onClick={handleIsOpen} className="bg-red-500 rounded-full p-3 my-auto">
                                 <ArrowRight className="text-lg text-white" />
                             </button>
                         </div>
@@ -106,7 +106,7 @@ export const CardProductComponent = ({ item }) => {
                             <div className="my-3 mx-2">
                                 <h2 className="text-sm font-normal text-gray-500">Fasilitas yang disediakan</h2>
                             </div>
-                            <div className="w-10/12 my-3 mx-auto">
+                            <div className="w-full my-3 mx-auto">
                                 <ul className="list-disc">
                                     {item.facilities && item.facilities.map((facility, index) => (
                                         <li key={index} className="my-4 text-gray-500">
@@ -118,9 +118,9 @@ export const CardProductComponent = ({ item }) => {
                         </div>
                     </div>
                 )}
-                <div className="my-5 w-11/12 mx-auto">
+                <div className="my-5 mx-4 rounded-md">
                     <a href="https://wa.me/6282111191279?text=Halo%20A2%20Trans%20saya%20ingin%20memesan%20kendaraan" target="_blank" rel="noopener noreferrer">
-                        <button className="bg-gray-600 border border-gray-700 py-2 shadow shadow-gray-700 w-full rounded-md">
+                        <button className="bg-red-500 border py-2 shadow w-full rounded-md">
                             <p className="text-white text-sm">Pesan sekarang</p>
                         </button>
                     </a>
