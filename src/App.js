@@ -25,9 +25,9 @@ function App() {
         location.pathname.includes("/login") 
 
     return (
-        <main className={"w-full bg-white"} style={{minWidth:"300px"}}>
+        <main className={"w-full bg-white overflow-x-hidden"} style={{minWidth:"300px"}}>
             {!isPanelRoute && <NavbarComponent />}
-            <section className={""}>
+            <section className={"ma"}>
                 <Routes>
                     <Route path={"/"} element={<Home />} />
                     <Route path={"/detail/:id"} element={<Detail />} />

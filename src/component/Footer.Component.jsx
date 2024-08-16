@@ -117,7 +117,7 @@ export const FooterComponent = () => {
                                     {information.map((item) => {
                                         return(
                                             <div className={"my-2"}>
-                                                <p className={"text-md md:text-sm text-gray-500"}>
+                                                <p className={"text-sm md:text-sm text-gray-500"}>
                                                     {item.value}
                                                 </p>
                                             </div>
@@ -136,7 +136,7 @@ export const FooterComponent = () => {
                                                 <ul className={"my-3 block"}>
                                                     {item?.footer?.data.map((itemData , indexData) => {
                                                         return(
-                                                            <li key={indexData} className={"text-md  md:text-sm py-2 my-auto h-full cursor-pointer text-gray-500 hover:text-red-600"}>
+                                                            <li key={indexData} className={"text-sm md:text-sm py-2 my-auto h-full cursor-pointer text-gray-500 hover:text-red-600"}>
                                                                 <Link to={`${itemData.url}`}>{itemData.value}</Link>
                                                             </li>
                                                         )

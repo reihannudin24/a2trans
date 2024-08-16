@@ -52,8 +52,8 @@ function Home() {
 
 
     return (
-        <section className={"w-full"}>
-            <div className={"w-full"}>
+        <section className={"w-full overflow-x-hidden"} style={{maxWidth:"1500px"}}>
+            <div className={"w-full"} >
                 <CarousselComponent />
                 <PromoComponent />
                 <Promo2Component />

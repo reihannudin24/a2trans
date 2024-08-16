@@ -141,42 +141,42 @@ export const Promo3Component = () => {
     return (
         <div className={"w-full bg-white"}>
             <div className={"w-full bg-gray-100 mx-auto container  py-10"}>
-                <div className={"pt-10"}>
+                <div className={"py-5"}>
                     <div className={"w-11/12 md:w-10/12 mx-auto container"}>
                         <div className={"text-center my-5"}>
-                            <h2 className={"text-3xl text-center text-primary"}>
+                            <h2 className={"text-2xl text-center text-primary"}>
                                 Profil <b>A2Trans.com</b> - Pusat Sewa Bus Pariwisata Jakarta
                             </h2>
-                            <div className={"my-3"}>
-                                <h3 className={"text-xl text-gray-600 "}>by AJB TOUR & TRANS</h3>
+                            <div className={"my-1"}>
+                                <h3 className={"text-md text-gray-600 "}>by AJB TOUR & TRANS</h3>
                             </div>
                         </div>
                         <div className={"my-6 text-center"}>
-                            <p className={"my-10 text-lg lg:text-md text-gray-700"}>
+                            <p className={"my-6 text-md text-gray-700"}>
                                 Andarabus adalah penyedia layanan sewa bus pariwisata terbaik di Jakarta. Kami menyediakan berbagai armada yang bisa disesuaikan dengan kebutuhan Anda. Mulai dari study tour, wisata religi, outbond, gathering, rombongan mudik, dan masih banyak lagi.
                             </p>
-                            <p className={"my-10 text-lg lg:text-md text-gray-700"}>
+                            <p className={"my-6 text-md text-gray-700"}>
                                 Jaminan keamanan dan kenyamanan kami berikan kepada para pelanggan yang menggunakan layanan kami. Demi memberikan layanan yang terbaik untuk Anda, kamu bekerja sama dengan PO Bus Pariwisata yang terkemuka di wilayah Jabodetabek, Bali, Sumatera, serta Sulawesi.
                             </p>
-                            <p className={"my-10 text-lg lg:text-mdtext-gray-700"}>
+                            <p className={"my-6 text-mdtext-gray-700"}>
                                 Anda tidak perlu merisaukan tentang biaya yang harus dikeluarkan. Kami memberikan tarif yang sangat bersaing dan bisa disesuaikan dengan anggaran yang sudah Anda persiapkan. Setelah menyepakati harga, maka kami akan merekomendasikan armada yang sesuai dengan kebutuhan Anda
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className={"w-full py-5 bg-primaryt"}>
+            <div className={"w-full py-5 bg-primary"}>
                 <div className={"mx-auto container"}>
                     <div className={"mx-4"}>
-                        <ul className={"w-full flex gap-4"}>
+                        <ul className={"w-full flex  flex-wrap"}>
                             {promoLayanan.map((item, index) => {
                                 return (
-                                    <li key={index} className={"w-3/12"}>
-                                        <div className={"my-2"}>
-                                            <h2 className={"text-3xl text-center font-semibold text-white "}>
+                                    <li key={index} className={"w-5/12  mx-auto text-center md:w-3/12"}>
+                                        <div className={"my-1"}>
+                                            <h2 className={"text-xl text-center font-semibold text-white "}>
                                                 {item?.name}
                                             </h2>
-                                            <p className={"text-center text-white font-normal tex-md my-2"}>
+                                            <p className={"text-center text-white font-normal text-sm my-2"}>
                                                 {item?.category}
                                             </p>
                                         </div>
@@ -191,13 +191,13 @@ export const Promo3Component = () => {
             <div className={"py-10 w-full"}>
                 <div className={"w-full md:w-10/12 py-5 mx-auto container"}>
                     <div className={"text-center "}>
-                        <h2 className={"font-semibold text-primary text-3xl"}><b>Hubungi</b> Kami</h2>
+                        <h2 className={"font-semibold text-primary text-2xl"}><b>Hubungi</b> Kami</h2>
                     </div>
                     <div className={"my-5 w-11/12 mx-auto"}>
                         <div className={"py-5 text-center"}>
-                            <p className={"text-lg md:text-md font-medium text-gray-600"}>Andarabus bukan hanya sekedar penyedia layanan sewa bus pariwisata, melainkan partner perjalanan yang siap mewujudkan perjalanan Anda menjadi pengalaman yang tak terlupakan. Dengan banyaknya armada yang beroperasi, fasilitas yang menarik, dan kemudahan pemesanan, Andarabus merupakan pilihan terbaik untuk setiap kebutuhan transportasi Anda.</p>
+                            <p className={"text-md font-medium text-gray-600"}>Andarabus bukan hanya sekedar penyedia layanan sewa bus pariwisata, melainkan partner perjalanan yang siap mewujudkan perjalanan Anda menjadi pengalaman yang tak terlupakan. Dengan banyaknya armada yang beroperasi, fasilitas yang menarik, dan kemudahan pemesanan, Andarabus merupakan pilihan terbaik untuk setiap kebutuhan transportasi Anda.</p>
                             <br />
-                            <p className={"text-lg md:text-md font-medium text-gray-600"}>
+                            <p className={"text-md font-medium text-gray-600"}>
                                 Andarabus memahami bahwa suatu perjalanan bukan hanya untuk mencapai tujuan atau destinasi saja, namun juga tentang menciptakan kenangan yang berharga. Bersama Andarabus, nikmati perjalanan yang nyaman, menyenangkan, dan tak terlupakan. Lakukan pemesanan dengan segera untuk mendapatkan penawaran menarik.
                             </p>
                         </div>
@@ -251,16 +251,16 @@ export const TestimonialComponent = () => {
                         </div>
                     </div>
                     <div className="grid xl:grid-cols-2 grid-cols-1 mt-3 md:mt-6 gap-6">
-                        <div className="block flex-row gap-4 items-center  p-4 rounded-xl ">
+                        <div className="block flex-row gap-4 items-center pt-2  px-4 rounded-xl ">
                             <ReviewCardComponent />
                         </div>
-                        <div className="block flex-row gap-4 items-center  p-4 rounded-xl ">
+                        <div className="block flex-row gap-4 items-center pt-2  px-4 rounded-xl ">
                             <ReviewCardComponent />
                         </div>
-                        <div className="block flex-row gap-4 items-center  p-4 rounded-xl ">
+                        <div className="block flex-row gap-4 items-center pt-2  px-4 rounded-xl ">
                             <ReviewCardComponent />
                         </div>
-                        <div className="block flex-row gap-4 items-center  p-4 rounded-xl ">
+                        <div className="block flex-row gap-4 items-center pt-2  px-4 rounded-xl ">
                             <ReviewCardComponent />
                         </div>
                     </div>
@@ -309,9 +309,9 @@ export const FaqComponent = () => {
                     <div className={"w-full text-center py-6"}>
                         <div className={""}>
                             <div className={""}>
-                                <h1 className={"text-3xl text-primary font-semibold"}>Pertanyaan Umum</h1>
-                                <div className={"my-2"}>
-                                    <p className={"text-gray-600 font-light"}>5 pertanyaan yang sering ditanyakan kepada Andarabus seputar layanan Sewa Bus luxury</p>
+                                <h1 className={"text-2xl text-primary font-semibold"}>Pertanyaan Umum</h1>
+                                <div className={"my-1"}>
+                                    <p className={"text-gray-600 text-sm font-light"}>5 pertanyaan yang sering ditanyakan kepada Andarabus seputar layanan Sewa Bus luxury</p>
                                 </div>
                             </div>
                         </div>
@@ -322,7 +322,7 @@ export const FaqComponent = () => {
                             {faq.map((item, index) => {
                                 return (
                                     <>
-                                        <li key={index} className={"my-3"}>
+                                        <li key={index} className={"my-3 text-center"}>
                                             <FaqCardComponent id={item?.id} title={item?.name} content={item?.content} />
                                         </li>
                                     </>
@@ -352,8 +352,8 @@ const FaqCardComponent = ({ title, content, id }) => {
                 className="cursor-pointer border-b-2 w-full py-4 border-gray-100"
             >
                 <div className="flex w-full justify-between">
-                    <div>
-                        <h2 className="text-xl font-semibold text-gray-600">{title}</h2>
+                    <div className={"text-left"}>
+                        <h2 className="text-md font-semibold text-gray-600">{title}</h2>
                     </div>
                     <div className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
                         <CaretDown size={16} />
@@ -365,7 +365,7 @@ const FaqCardComponent = ({ title, content, id }) => {
                     }`}
             >
                 <div className="my-3">
-                    <p className="text-left text-sm text-gray-600">
+                    <p className="text-left text-sm text-gray-500">
                         Andarabus memiliki sejumlah fasilitas yang dikhususkan untuk menunjang keamanan dan kenyamanan para pelanggan. Berikut adalah beberapa fasilitas yang bisa Anda dapatkan saat menggunakan layanan dari Andarabus
                     </p>
                 </div>

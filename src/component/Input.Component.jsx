@@ -10,7 +10,7 @@ export const InputCheckbox = ({ name, toggle, selectedColors, value }) => {
                     type="checkbox"
                     name="color"
                     value={value}
-                    checked={selectedColors === value}
+                    checked={selectedColors.includes(value)}
                     onChange={toggle}
                 />
             </div>

@@ -18,12 +18,8 @@ const navbar = [
         "url" : "/rent",
     },
     {
-        "name" : "Tentang Kami",
-        "url" : "/",
-    },
-    {
-        "name" : "Kontak",
-        "url" : "/Kontak",
+        "name" : "Kontak Kami",
+        "url" : "/contact",
     },
 ]
 
@@ -36,16 +32,15 @@ export const NavbarComponent = () => {
 
     return(
         <>
-            <nav className={"sticky top-0 z-50 w-full mx-auto "} style={{minWidth:"300px"}}>
+            <nav className={"fixed overflow-x-hidden top-0 z-50 w-full mx-auto "} style={{minWidth:"300px"}}>
                 <div className={"bg-primary-new-nav py-1 w-full"}>
                     <header className={"w-11/12 mx-auto container pt-2  lg:pt-4 pb-4"}>
                         <div className={"w-full flex justify-between"}>
                             <div className={"lg:w-6/12 mt-3 mb-auto lg:mb-0 lg:mt-0"}>
                                 <div className={"w-full lg:w-5/12 h-full my-auto "}>
-                                    <div className={"h-10 "}>
+                                    <div className={"h-10 lg:h-10 "}>
                                         <img alt="Logo" className={"h-full object-cover"} src={"/assets/img/hor-icon.svg"}/>
                                     </div>
-                                    {/*<Logo />*/}
                                 </div>
                             </div>
                             <div className={"lg:w-6/12 my-auto"}>
@@ -224,7 +219,7 @@ const ListNavbar = ({url, name}) => {
         <div className={"w-5/12 mx-auto lg:w-full"}>
             <div className={"cursor-pointer text-15  mx-auto text-white hover:text-white hover:scale-110 transition-transform duration-200 py-1 md:px-2 rounded-md hover:bg-white hover:bg-opacity-40"}>
                 <Link to={`${url}`}>
-                    <p className={"font-semibold text-white  "}>{name}</p>
+                    <p className={"font-semibold lg:text-md text-xl text-white  "}>{name}</p>
                 </Link>
             </div>
         </div>
