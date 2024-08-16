@@ -1,4 +1,3 @@
-import { InputComponent } from "../component/Input.Component";
 import { useState } from "react";
 import apiJson from "../function/axios";
 import {useNavigate} from "react-router-dom";
