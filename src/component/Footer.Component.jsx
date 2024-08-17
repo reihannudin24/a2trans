@@ -117,7 +117,7 @@ export const FooterComponent = () => {
                                     {information.map((item) => {
                                         return(
                                             <div className={"my-2"}>
-                                                <p className={"text-md md:text-sm text-gray-500"}>
+                                                <p className={"text-md selectableText-new md:text-sm text-gray-500"}>
                                                     {item.value}
                                                 </p>
                                             </div>
@@ -130,14 +130,14 @@ export const FooterComponent = () => {
                                     {footer.map((item , index) => {
                                         return(
                                             <div key={index} className={"py-4"}>
-                                                <p className={"text-lg md:text-md font-semibold text-gray-700"}>
+                                                <p className={"text-lg md:text-md selectableText-new font-semibold text-gray-700"}>
                                                     {item?.footer.title}
                                                 </p>
                                                 <ul className={"my-3 block"}>
                                                     {item?.footer?.data.map((itemData , indexData) => {
                                                         return(
-                                                            <li key={indexData} className={"text-md md:text-sm py-2 my-auto h-full cursor-pointer text-gray-500 hover:text-red-600"}>
-                                                                <Link to={`${itemData.url}`}>{itemData.value}</Link>
+                                                            <li key={indexData} className={"selectableText-new text-md md:text-sm py-2 my-auto h-full cursor-pointer text-gray-500 hover:text-red-600"}>
+                                                                <Link className={"selectableText-new"} to={`${itemData.url}`}>{itemData.value}</Link>
                                                             </li>
                                                         )
                                                     })}
@@ -156,9 +156,9 @@ export const FooterComponent = () => {
                                             return(
                                                 <li className={"mx-2"}>
                                                     <Link to={`${item.url}`}>
-                                                        <div className={"bg-gray-100 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10"} >
+                                                        <div className={"bg-gray-100 cursor-pointer selectableText-new hover:bg-gray-200 rounded-full w-10 h-10"} >
                                                             <div className={"py-3 px-3 w-full h-full"}>
-                                                                <img alt="img" className={" w-full h-full object-cover"} src={`/assets/img/icon/img-social${item?.image}.png`}/>
+                                                                <img alt="img" className={"selectableText-new w-full h-full object-cover"} src={`/assets/img/icon/img-social${item?.image}.png`}/>
                                                             </div>
                                                         </div>
                                                     </Link>
@@ -169,7 +169,7 @@ export const FooterComponent = () => {
                                 </div>
                                 <div className={"w-full md:w-6/12 order-1 md:order-2 my-auto h-full"}>
                                     <div className={"text-center md:text-right h-full my-auto"}>
-                                        <span className={"text-md md:text-sm h-full my-auto text-gray-500"}>@copyright 2024 by reihannudin</span>
+                                        <span className={"text-md md:text-sm h-full selectableText-new my-auto text-gray-500"}>@copyright 2024 by reihannudin</span>
                                     </div>
                                 </div>
                             </div>

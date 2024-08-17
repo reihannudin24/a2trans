@@ -48,8 +48,8 @@ export const NavbarComponent = () => {
                                 </div>
                             </div>
                             <div className={"lg:w-8/12 xl:w-6/12 my-auto"}>
-                                <div className={"w-10/12 my-auto lg:block hidden mx-auto"}>
-                                    <ul className={"flex my-auto gap-10"}>
+                                <div className={"w-10/12 xl:w-11/12 my-auto lg:block hidden mx-auto"}>
+                                    <ul className={"flex my-auto lg:gap-6 xl:gap-15"}>
                                         {navbar.map((item, index) => {
                                             return(
                                                 <li key={index} className={"ms-auto"}>
@@ -186,9 +186,9 @@ const Menu = ({toggleMenu , isOpen}) => {
 const ListNavbar = ({url, name}) => {
     return(
         <div className={"w-5/12 mx-auto py-4 lg:py-0 lg:w-full"}>
-            <div className={"cursor-pointer text-15 lg:text-15  mx-auto text-white hover:text-white hover:scale-105 lg:hover:scale-110 transition-transform duration-200 py-1 md:px-2 rounded-md hover:bg-white hover:bg-opacity-40"}>
+            <div className={"cursor-pointer text-15 lg:text-12 xl:text-15  mx-auto text-white hover:text-white hover:scale-105 xl:hover:scale-110 transition-transform duration-200 py-1 md:px-2 rounded-md hover:bg-white hover:bg-opacity-40"}>
                 <Link to={`${url}`}>
-                    <p className={"font-medium xl:text-md text-lg hover:text-md text-white "}>{name}</p>
+                    <p className={"font-medium xl:text-md text-lg lg:text-md hover:text-md text-white "}>{name}</p>
                 </Link>
             </div>
         </div>

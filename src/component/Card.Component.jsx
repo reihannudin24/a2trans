@@ -1,5 +1,6 @@
 import {Star, Fan, Monitor, User, PintGlass,  ArrowRight} from "@phosphor-icons/react";
 import {useState} from "react";
+import {Link} from "react-router-dom";
 
 
 
@@ -23,8 +24,8 @@ export const ListCardProductComponent = ({ bus, categories }) => {
                 <div>
                     <div className="my-5">
                         <div className="mb-2">
-                            <h2 className="font-bold text-2xl text-black-700 selectableText mx-4">Tipe Kendaraan A2Trans</h2>
-                            <p className="my-1 py-1 text-sm selectableText text-gray-600 mx-4">
+                            <h2 className="font-bold text-2xl text-black-700 selectableText-new mx-4">Tipe Kendaraan A2Trans</h2>
+                            <p className="my-1 py-1 text-sm selectableText-new text-gray-600 mx-4">
                                 Dengan berbagai pilihan model yang ditawarkan, A2trans menghadirkan solusi mobilitas yang sesuai dengan kebutuhan beragam konsumen.
                             </p>
                         </div>
@@ -36,7 +37,7 @@ export const ListCardProductComponent = ({ bus, categories }) => {
                                     <button
                                         value={item.id}
                                         onClick={handleSelected}
-                                        className={`cursor-pointer transition-transform duration-300 hover:transform hover:-translate-y-1 hover:text-red-600 hover:font-semibold text-md font-normal text-gray-500 w-full h-full z-10 mx-auto bg-white px-4 py-2 ${selected === item.id ? 'bg-gray-200' : ''}`}
+                                        className={`cursor-pointer transition-transform selectableText-new duration-300 hover:transform hover:-translate-y-1 hover:text-red-600 hover:font-semibold text-md font-normal text-gray-500 w-full h-full z-10 mx-auto bg-white px-4 py-2 ${selected === item.id ? 'bg-gray-200' : ''}`}
                                     >{item.name}
                                     </button>
                                 </li>
@@ -47,7 +48,7 @@ export const ListCardProductComponent = ({ bus, categories }) => {
                 <div>
                     <ul className="w-full flex flex-wrap ">
                         {filteredBus.map((busItem, index) => (
-                            <li key={index} className="w-11/12 mx-auto lg:mx-0 mb-10 md:w-6/12 lg:w-3/12">
+                            <li key={index} className="w-11/12 mx-auto md:mx-0 mb-10 md:w-6/12 lg:w-6/12 xl:w-4/12">
                                 <CardProductComponent item={busItem} />
                             </li>
                         ))}
@@ -61,139 +62,83 @@ export const ListCardProductComponent = ({ bus, categories }) => {
 
 
 export const CardProductComponent = ({ item }) => {
-    const [isOpen, setIsOpen] = useState(false);
 
-    const handleIsOpen = () => {
-        setIsOpen(!isOpen);
-    };
+    const phoneNumber = process.env.REACT_APP_PHONE_NUMBER;
+    const message = "Halo%20A2%20Trans%20saya%20ingin%20memesan%20kendaraan";
+    const waLink = `https://wa.me/${phoneNumber}?text=${message}`;
+
 
     return (
-        <div className="w-99 mx-auto transition-transform duration-300 cursor-pointer hover:transform hover:-translate-y-2 shadow rounded-md pb-1">
-
-            {/*NEW*/}
-            <div className={"relative "}>
-                <div className="w-full top-10 h-full">
-                    <div className="h-img-product">
-                        <img className="h-full w-full border-radius-card-img object-cover" src={item.imageUrl || "/assets/img/bus/bus-1.jpg"} alt={item.name} />
-                    </div>
-                </div>
-                <div className="w-full my- z-20 border shadow shadow-gray-400 rounded-2xl border-gray-50">
-                    <div className="w-11/12 mx-auto flex">
-                        <div className="bg-gray-600/40 py-1 my-3 px-3 rounded-md">
-                            <h2 className="text-white text-sm font-normal">{item?.category_name}</h2>
+        <div className="w-99 mx-auto selectableText-new transition-transform duration-300 cursor-pointer hover:transform hover:-translate-y-2 shadow rounded-md pb-1">
+            <Link to={`/detail/${item?.id}`}>
+                <div className={"relative "}>
+                    <div className="w-full top-10 h-full">
+                        <div className="h-img-product">
+                            <img className="h-full w-full selectableText-new border-radius-card-img object-cover" src={item.imageUrl || "/assets/img/bus/bus-1.jpg"} alt={item.name} />
                         </div>
                     </div>
-                    <div className={"mb-3 w-11/12 mx-auto"}>
-                        <div className="border-b pb-2 border-gray-200 w-full">
-                            <h1 className="text-xl text-gray-700 font-semibold">{item.name}</h1>
+                    <div className="w-full my- z-20 border shadow shadow-gray-400 rounded-2xl border-gray-50">
+                        <div className="w-11/12 mx-auto flex">
+                            <div className="bg-gray-600/40 py-1 my-3 px-3 rounded-md">
+                                <h2 className="text-white text-sm selectableText-new font-normal">{item?.category_name}</h2>
+                            </div>
                         </div>
-                        <div className={"my-2"}>
+                        <div className={"mb-3 w-11/12 mx-auto"}>
+                            <div className="border-b pb-2 border-gray-200 w-full">
+                                <h1 className="text-xl text-gray-700 selectableText-new font-semibold">{item.name}</h1>
+                            </div>
+                            <div className={"my-2"}>
 
-                        </div>
-                        <div className={"w-full mx-auto"}>
-                            <div className={""}>
-                                <div className={"flex justify-between"}>
-                                    <div className={""}>
-                                        <p className={"text-md text-gray-600 font-medium"}>
-                                            Seat : {item?.seat}
-                                        </p>
-                                    </div>
-                                    <div className={""}>
-                                        <p className={"text-md text-gray-600 font-medium"}>
-                                            Tipe : {item?.type}
-                                        </p>
+                            </div>
+                            <div className={"w-full mx-auto"}>
+                                <div className={""}>
+                                    <div className={"flex justify-between"}>
+                                        <div className={""}>
+                                            <p className={"text-md selectableText-new text-gray-600 font-medium"}>
+                                                Seat : {item?.seat}
+                                            </p>
+                                        </div>
+                                        <div className={""}>
+                                            <p className={"text-md selectableText-new text-gray-600 font-medium"}>
+                                                Tipe : {item?.type}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <ul className={" w-full mx-auto gap-3 flex-wrap flex"}>
-                                {item?.facilities?.map((res, index) => {
-                                    return(
-                                        <li key={index} className={"my-1"}>
-                                            <div>
+                                <ul className={" w-full mx-auto gap-3 flex-wrap flex"}>
+                                    {item?.facilities?.map((res, index) => {
+                                        return(
+                                            <li key={index} className={"my-1"}>
                                                 <div>
-                                                    <img />
+                                                    <div>
+                                                        <img />
+                                                    </div>
+                                                    <p className={"text-md selectableText-new text-gray-600 font-normal"}>
+                                                        {res?.facility_name}
+                                                    </p>
                                                 </div>
-                                                <p className={"text-md text-gray-600 font-normal"}>
-                                                    {res?.facility_name}
-                                                </p>
-                                            </div>
-                                        </li>
-                                    )
-                                })}
+                                            </li>
+                                        )
+                                    })}
 
-                            </ul>
-                        </div>
+                                </ul>
+                            </div>
 
-                        <div className="my-5 w-full mx-auto">
-                            <a className={"cursor-pointer"} href="https://wa.me/6282111191279?text=Halo%20A2%20Trans%20saya%20ingin%20memesan%20kendaraan" target="_blank" rel="noopener noreferrer">
-                                <button className="bg-red-600 border border-red-700 py-2 shadow shadow-red-700 w-full rounded-md">
-                                    <p className="text-white text-sm">Pesan sekarang</p>
-                                </button>
-                            </a>
+                            <div className="my-5 w-full mx-auto">
+                                <a className={"cursor-pointer"}
+                                   href={waLink}
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                >
+                                    <button className="bg-red-600 border border-red-700 py-2 shadow shadow-red-700 w-full rounded-md">
+                                        <p className="text-white text-sm">Pesan sekarang</p>
+                                    </button>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            {/*OLD*/}
-            {/*<div className="w-full  mx-auto">*/}
-            {/*    <div className="w-full h-full">*/}
-            {/*        <div className="h-img-product">*/}
-            {/*            <img className="h-full w-full rounded-md object-cover" src={item.imageUrl || "/assets/img/bus/bus-1.jpg"} alt={item.name} />*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*    <div className="my-2 px-3 mx-0">*/}
-            {/*        <div className="mb-3">*/}
-            {/*            <div className="w-full flex justify-between">*/}
-            {/*                <div className="bg-gray-500/50 py-1 my-3 px-3 rounded-sm">*/}
-            {/*                    <h2 className="text-white text-sm font-normal">{item.type}</h2>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*            <div className="">*/}
-            {/*                <h1 className="text-xl text-gray-700 font-semibold">{item.name}</h1>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*        <div className="w-full flex justify-between">*/}
-            {/*            <Link to={`/detail/${item?.id}`}>*/}
-            {/*                <button className="bg-red-500 py-3 rounded-full px-3">*/}
-            {/*                    <p className="text-white text-xs">Detail Kendaraan</p>*/}
-            {/*                </button>*/}
-            {/*            </Link>*/}
-            {/*            <div>*/}
-            {/*                <button onClick={handleIsOpen} className="bg-red-500 rounded-full p-3 my-auto">*/}
-            {/*                    <ArrowRight className="text-lg text-white" />*/}
-            {/*                </button>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            {/*<div className="w-full mt-1">*/}
-            {/*    {isOpen && (*/}
-            {/*        <div className="w-11/12 mx-auto border shadow rounded-2xl border-gray-50">*/}
-            {/*            <div className="w-11/12 mx-auto">*/}
-            {/*                <div className="my-3 mx-2">*/}
-            {/*                    <h2 className="text-sm font-normal text-gray-500">Fasilitas yang disediakan</h2>*/}
-            {/*                </div>*/}
-            {/*                <div className="w-full my-3 mx-auto">*/}
-            {/*                    <ul className="list-disc">*/}
-            {/*                        {item.facilities && item.facilities.map((facility, index) => (*/}
-            {/*                            <li key={index} className="my-4 text-gray-500">*/}
-            {/*                                <p className="text-sm text-gray-500">{facility}</p>*/}
-            {/*                            </li>*/}
-            {/*                        ))}*/}
-            {/*                    </ul>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    )}*/}
-            {/*    <div className="my-5 mx-4 rounded-md">*/}
-            {/*        <a href="https://wa.me/6282111191279?text=Halo%20A2%20Trans%20saya%20ingin%20memesan%20kendaraan" target="_blank" rel="noopener noreferrer">*/}
-            {/*            <button className="bg-red-500 border py-2 shadow w-full rounded-md">*/}
-            {/*                <p className="text-white text-sm">Pesan sekarang</p>*/}
-            {/*            </button>*/}
-            {/*        </a>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+            </Link>
         </div>
     )
 }
