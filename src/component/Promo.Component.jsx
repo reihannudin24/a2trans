@@ -7,15 +7,15 @@ export const PromoComponent = () => {
         <>
             <div className="mt-40 md:mt-40 lg:mt-10 mx-auto container pb-10">
                 <div className="mx-4">
-                    <h1 className="font-bold xl:text-xl text-xl">Lebih Hemat dan Bebas Khawatir</h1>
+                    <h1 className="font-bold xl:text-xl selectableText text-xl">Lebih Hemat dan Bebas Khawatir</h1>
                     <div className="grid lg:grid-cols-2 grid-cols-1 mt-6 gap-6">
                         <div className="flex flex-row gap-4 items-center">
                             <div>
                                 <Armchair size={32} />
                             </div>
                             <div className="flex flex-col">
-                                <h1 className="font-bold text-lg md:text-md">Pasti Dapet Kursi</h1>
-                                <p className="font-sm md:font-xs ">Bisa langsung berangkat dengan nyaman, bebas khawatir.</p>
+                                <h1 className="font-bold selectableText text-lg md:text-md">Pasti Dapet Kursi</h1>
+                                <p className="selectableText font-sm md:font-xs ">Bisa langsung berangkat dengan nyaman, bebas khawatir.</p>
                             </div>
                         </div>
                         <div className="flex flex-row gap-4 items-center">
@@ -23,8 +23,8 @@ export const PromoComponent = () => {
                                 <Tag size={32} />
                             </div>
                             <div className="flex flex-col">
-                                <h1 className="font-bold text-lg md:text-md">Diskon Setiap Hari</h1>
-                                <p className="font-sm md:font-xs">Nikmati harga spesial biar budget perjalanan makin aman.</p>
+                                <h1 className="font-bold selectableText text-lg md:text-md">Diskon Setiap Hari</h1>
+                                <p className="font-sm md:font-xs selectableText">Nikmati harga spesial biar budget perjalanan makin aman.</p>
                             </div>
                         </div>
 
@@ -40,17 +40,17 @@ export const Promo2Component = () => {
         <>
             <div className="xl:mt-10 mx-auto container pb-10">
                 <div className="mx-4">
-                    <h1 className="font-bold text-xl ">Penting untuk Perjalananmu</h1>
+                    <h1 className="font-bold text-xl selectableText">Penting untuk Perjalananmu</h1>
                     <div className="grid lg:grid-cols-3 grid-cols-1 mt-6 gap-6">
 
-                        <div className="flex flex-row  gap-4 items-center border-b xl:border border-gray-300 p-4 rounded-xl shadow-md">
+                        <div className="cursor-pointer flex flex-row gap-4 items-center border-b xl:border border-gray-300 p-4 rounded-xl shadow-md transition-transform duration-300 hover:transform hover:-translate-y-2">
                             <div>
                                 <Lightbulb size={32} />
                             </div>
                             <div className={"flex w-full justify-between"}>
                                 <div className="flex flex-col">
-                                    <h1 className="font-bold text-lg md:text-md">Cara Memesan Bus & Travel</h1>
-                                    <p className="font-xs">Yuk, cari tau mudahnya cara memesan Bus & Travel di tiket.com.</p>
+                                    <h1 className="font-bold text-lg selectableText md:text-md">Cara Memesan Bus & Travel</h1>
+                                    <p className="font-xs selectableText">Yuk, cari tau mudahnya cara memesan Bus & Travel di tiket.com.</p>
                                 </div>
                                 <div className="">
                                     <CaretRight size={32} />
@@ -58,31 +58,29 @@ export const Promo2Component = () => {
                             </div>
                         </div>
 
-
-                        <div className="flex flex-row gap-4 items-center border-b xl:border border-gray-300 p-4 rounded-xl shadow-md">
+                        <div className="cursor-pointer flex flex-row gap-4 items-center border-b xl:border border-gray-300 p-4 rounded-xl shadow-md transition-transform duration-300 hover:transform hover:-translate-y-2">
                             <div>
                                 <Question size={32} />
                             </div>
                             <div className={"flex w-full justify-between"}>
                                 <div className="flex flex-col">
-                                    <h1 className="font-bold text-lg md:text-md">Pertanyaan Sering Diajukan</h1>
-                                    <p className="font-xs">Temukan jawaban atas pertanyaan seputar Bus & Travel di tiket.com.</p>
+                                    <h1 className="font-bold selectableText text-lg md:text-md">Pertanyaan Sering Diajukan</h1>
+                                    <p className="font-xs selectableText">Temukan jawaban atas pertanyaan seputar Bus & Travel di tiket.com.</p>
                                 </div>
                                 <div className="">
                                     <CaretRight size={32} />
                                 </div>
                             </div>
-
                         </div>
 
-                        <div className="flex flex-row gap-4 items-center border-b xl:border border-gray-300 p-4 rounded-xl shadow-md">
+                        <div className="cursor-pointer flex flex-row gap-4 items-center border-b xl:border border-gray-300 p-4 rounded-xl shadow-md transition-transform duration-300 hover:transform hover:-translate-y-2">
                             <div>
                                 <ExclamationMark size={32} />
                             </div>
                             <div className={"flex w-full justify-between"}>
                                 <div className="flex flex-col">
-                                    <h1 className="font-bold text-lg md:text-md">Persyaratan Perjalanan</h1>
-                                    <p className="font-xs">Cek protokol dan syarat perjalanan selama pandemi.</p>
+                                    <h1 className="font-bold selectableText text-lg md:text-md">Persyaratan Perjalanan</h1>
+                                    <p className="font-xs selectableText">Cek protokol dan syarat perjalanan selama pandemi.</p>
                                 </div>
                                 <div className="">
                                     <CaretRight size={32} />
@@ -96,6 +94,7 @@ export const Promo2Component = () => {
         </>
     )
 }
+
 
 export const Promo3Component = () => {
 
@@ -250,8 +249,8 @@ export const TestimonialComponent = () => {
                 <div className="w-full mt-10">
                     <div className={"w-full mx-4"}>
                         <div className={"flex gap-2 m-4 text-center"}>
-                            <h1 className="font-bold text-primary text-2xl text-md">Testimoni</h1>
-                            <h1 className="font-medium text-primary text-2xl text-md">Konsumen</h1>
+                            <h1 className="font-bold selectableText text-primary text-2xl text-md">Testimoni</h1>
+                            <h1 className="font-medium selectableText text-primary text-2xl text-md">Konsumen</h1>
                         </div>
                     </div>
                     <div className="grid xl:grid-cols-2 grid-cols-1 mt-3 md:mt-6 gap-6">
@@ -313,9 +312,9 @@ export const FaqComponent = () => {
                     <div className={"w-full text-center py-6"}>
                         <div className={""}>
                             <div className={""}>
-                                <h1 className={"text-2xl text-primary font-semibold"}>Pertanyaan Umum</h1>
+                                <h1 className={"text-2xl text-primary selectableText-new font-semibold"}>Pertanyaan Umum</h1>
                                 <div className={"my-1"}>
-                                    <p className={"text-gray-600 text-md font-light"}>5 pertanyaan yang sering ditanyakan kepada Andarabus seputar layanan Sewa Bus luxury</p>
+                                    <p className={"text-gray-600 text-md selectableText-new font-light"}>5 pertanyaan yang sering ditanyakan kepada Andarabus seputar layanan Sewa Bus luxury</p>
                                 </div>
                             </div>
                         </div>
@@ -357,7 +356,7 @@ const FaqCardComponent = ({ title, content, id }) => {
             >
                 <div className="flex w-full justify-between">
                     <div className={"text-left"}>
-                        <h2 className="text-lg font-semibold text-gray-600">{title}</h2>
+                        <h2 className="text-lg selectableText-new font-semibold text-gray-600">{title}</h2>
                     </div>
                     <div className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
                         <CaretDown size={16} />
@@ -369,7 +368,7 @@ const FaqCardComponent = ({ title, content, id }) => {
                     }`}
             >
                 <div className="my-3">
-                    <p className="text-left text-md text-gray-500">
+                    <p className="text-left selectableText-new text-md text-gray-500">
                         Andarabus memiliki sejumlah fasilitas yang dikhususkan untuk menunjang keamanan dan kenyamanan para pelanggan. Berikut adalah beberapa fasilitas yang bisa Anda dapatkan saat menggunakan layanan dari Andarabus
                     </p>
                 </div>

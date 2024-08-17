@@ -23,8 +23,8 @@ export const ListCardProductComponent = ({ bus, categories }) => {
                 <div>
                     <div className="my-5">
                         <div className="mb-2">
-                            <h2 className="font-semibold text-2xl text-black-700 mx-4">Tipe Kendaraan A2Trans</h2>
-                            <p className="my-1 py-1 text-sm text-gray-600 mx-4">
+                            <h2 className="font-bold text-2xl text-black-700 selectableText mx-4">Tipe Kendaraan A2Trans</h2>
+                            <p className="my-1 py-1 text-sm selectableText text-gray-600 mx-4">
                                 Dengan berbagai pilihan model yang ditawarkan, A2trans menghadirkan solusi mobilitas yang sesuai dengan kebutuhan beragam konsumen.
                             </p>
                         </div>
@@ -36,7 +36,7 @@ export const ListCardProductComponent = ({ bus, categories }) => {
                                     <button
                                         value={item.id}
                                         onClick={handleSelected}
-                                        className={`cursor-pointer text-md font-normal text-gray-500 w-full h-full z-10 mx-auto bg-white px-4 py-2 ${selected === item.id ? 'bg-gray-200' : ''}`}
+                                        className={`cursor-pointer transition-transform duration-300 hover:transform hover:-translate-y-1 hover:text-red-600 hover:font-semibold text-md font-normal text-gray-500 w-full h-full z-10 mx-auto bg-white px-4 py-2 ${selected === item.id ? 'bg-gray-200' : ''}`}
                                     >{item.name}
                                     </button>
                                 </li>
@@ -47,7 +47,7 @@ export const ListCardProductComponent = ({ bus, categories }) => {
                 <div>
                     <ul className="w-full flex flex-wrap ">
                         {filteredBus.map((busItem, index) => (
-                            <li key={index} className="w-11/12 mb-10 md:w-6/12 lg:w-3/12">
+                            <li key={index} className="w-11/12 mx-auto lg:mx-0 mb-10 md:w-6/12 lg:w-3/12">
                                 <CardProductComponent item={busItem} />
                             </li>
                         ))}
@@ -68,13 +68,13 @@ export const CardProductComponent = ({ item }) => {
     };
 
     return (
-        <div className="w-99 mx-auto  shadow rounded-md pb-1">
+        <div className="w-99 mx-auto transition-transform duration-300 cursor-pointer hover:transform hover:-translate-y-2 shadow rounded-md pb-1">
 
             {/*NEW*/}
-            <div className={"relative"}>
+            <div className={"relative "}>
                 <div className="w-full top-10 h-full">
                     <div className="h-img-product">
-                        <img className="h-full w-full rounded-md object-cover" src={item.imageUrl || "/assets/img/bus/bus-1.jpg"} alt={item.name} />
+                        <img className="h-full w-full border-radius-card-img object-cover" src={item.imageUrl || "/assets/img/bus/bus-1.jpg"} alt={item.name} />
                     </div>
                 </div>
                 <div className="w-full my- z-20 border shadow shadow-gray-400 rounded-2xl border-gray-50">
@@ -125,7 +125,7 @@ export const CardProductComponent = ({ item }) => {
                         </div>
 
                         <div className="my-5 w-full mx-auto">
-                            <a href="https://wa.me/6282111191279?text=Halo%20A2%20Trans%20saya%20ingin%20memesan%20kendaraan" target="_blank" rel="noopener noreferrer">
+                            <a className={"cursor-pointer"} href="https://wa.me/6282111191279?text=Halo%20A2%20Trans%20saya%20ingin%20memesan%20kendaraan" target="_blank" rel="noopener noreferrer">
                                 <button className="bg-red-600 border border-red-700 py-2 shadow shadow-red-700 w-full rounded-md">
                                     <p className="text-white text-sm">Pesan sekarang</p>
                                 </button>
@@ -225,21 +225,21 @@ export const ListCardComponent = ({ title, data }) => {
 
 export const ReviewCardComponent = () => {
     return (
-        <div className={"w-full shadow rounded-lg pt-4 pb-3 "}>
+        <div className={"w-full shadow transition-transform duration-300 hover:transform hover:-translate-y-2 rounded-lg pt-4 pb-3 "}>
             <div className={"w-11/12 mx-auto"}>
                 <div className={"w-full"}>
                     <ul>
                         <StarComponent />
                     </ul>
                     <div className={"my-4"}>
-                        <p className={"text-sm text-gray-500"}>Pergi liburan keluarga pake Bus Luxury serasa kayak nginep di hotel berjalan. Bus luxury-nya cihuy banget, ada karaoke, kulkas, sofa empuk-empuk, sampe toilet dalem bus juga ada! Perjalanan jauh jadi berasa cepet gara-gara asyik nyanyi ama ngemil bareng. Top deh pokoknya!</p>
+                        <p className={"text-md text-gray-500 selectableText-new"}>Pergi liburan keluarga pake Bus Luxury serasa kayak nginep di hotel berjalan. Bus luxury-nya cihuy banget, ada karaoke, kulkas, sofa empuk-empuk, sampe toilet dalem bus juga ada! Perjalanan jauh jadi berasa cepet gara-gara asyik nyanyi ama ngemil bareng. Top deh pokoknya!</p>
                     </div>
                 </div>
                 <div className={"my-2"}>
-                    <p className={"text-primary  font-bold text-lg"}>
+                    <p className={"text-primary selectableText-new font-bold text-lg"}>
                         Reihannudin
                     </p>
-                    <p className={"text-gray-500 text-sm "}>Jakarta</p>
+                    <p className={"text-gray-500 text-md selectableText-new"}>Jakarta</p>
                 </div>
             </div>
         </div>

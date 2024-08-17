@@ -28,7 +28,7 @@ function App() {
     return (
         <main className={"w-full bg-white overflow-x-hidden"} style={{minWidth:"420px"}}>
             {!isPanelRoute && <NavbarComponent />}
-            <section className={"ma"}>
+            <section className={"ma "}>
                 <Routes>
                     <Route path={"/"} element={<Home />} />
                     <Route path={"/detail/:id"} element={<Detail />} />

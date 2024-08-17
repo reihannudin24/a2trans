@@ -21,6 +21,10 @@ const navbar = [
         "name" : "Kontak Kami",
         "url" : "/contact",
     },
+    {
+        "name" : "Tentang Kami",
+        "url" : "/about-us",
+    },
 ]
 
 export const NavbarComponent = () => {
@@ -38,7 +42,7 @@ export const NavbarComponent = () => {
                         <div className={"w-full flex justify-between"}>
                             <div className={"lg:w-4/12 xl:w-6/12 mt-3 mb-auto lg:mb-0 lg:mt-0"}>
                                 <div className={"w-full lg:w-7/12 xl:w-5/12 h-full my-auto "}>
-                                    <div className={"h-10 lg:h-10 "}>
+                                    <div className={"h-9 lg:h-10 "}>
                                         <img alt="Logo" className={"h-full object-cover"} src={"/assets/img/hor-icon.svg"}/>
                                     </div>
                                 </div>
@@ -157,40 +161,6 @@ export const NavbarPanelComponent = ({text, direct}) => {
 }
 
 
-
-export  const Logo = () => {
-    return(
-        <>
-            <div className={"my-auto"}>
-                <h1 className={"text-2xl text-white my-auto"}>A2Trans</h1>
-            </div>
-            {/*<div className={"hidden lg:block h-img my-auto"}>*/}
-            {/*    <img className={"w-full my-auto h-full object-fit"} src={"/assets/img/logo.svg"} alt={"logo"}/>*/}
-            {/*</div>*/}
-            {/*<div className={"block lg:hidden h-img-2 my-auto"}>*/}
-            {/*    <img className={"w-full my-auto h-full object-fit"} src={"/assets/img/logo.svg"} alt={"logo"}/>*/}
-            {/*</div>*/}
-        </>
-    )
-}
-
-
-export  const LogoPrimary = () => {
-    return(
-        <>
-            <div className={"my-auto"}>
-                <h1 className={"text-2xl text-primary my-auto"}>A2Trans</h1>
-            </div>
-            {/*<div className={"hidden lg:block h-img my-auto"}>*/}
-            {/*    <img className={"w-full my-auto h-full object-fit"} src={"/assets/img/logo.svg"} alt={"logo"}/>*/}
-            {/*</div>*/}
-            {/*<div className={"block lg:hidden h-img-2 my-auto"}>*/}
-            {/*    <img className={"w-full my-auto h-full object-fit"} src={"/assets/img/logo.svg"} alt={"logo"}/>*/}
-            {/*</div>*/}
-        </>
-    )
-}
-
 const Menu = ({toggleMenu , isOpen}) => {
     return(
         <button
@@ -215,10 +185,10 @@ const Menu = ({toggleMenu , isOpen}) => {
 
 const ListNavbar = ({url, name}) => {
     return(
-        <div className={"w-5/12 mx-auto lg:w-full"}>
-            <div className={"cursor-pointer text-15  mx-auto text-white hover:text-white hover:scale-110 transition-transform duration-200 py-1 md:px-2 rounded-md hover:bg-white hover:bg-opacity-40"}>
+        <div className={"w-5/12 mx-auto py-4 lg:py-0 lg:w-full"}>
+            <div className={"cursor-pointer text-15 lg:text-15  mx-auto text-white hover:text-white hover:scale-105 lg:hover:scale-110 transition-transform duration-200 py-1 md:px-2 rounded-md hover:bg-white hover:bg-opacity-40"}>
                 <Link to={`${url}`}>
-                    <p className={"font-medium xl:text-md text-xl text-white  "}>{name}</p>
+                    <p className={"font-medium xl:text-md text-lg hover:text-md text-white "}>{name}</p>
                 </Link>
             </div>
         </div>
@@ -228,8 +198,8 @@ const ListNavbar = ({url, name}) => {
 
 const MenuOpen = ({navbar}) => {
     return(
-        <div className={"bg-primary py-4 "}>
-            <div className={""}>
+        <div className={"bg-primary-menu-nav h-screen py-4 menu-container"}>
+            <div>
                 <ul className={"block gap-10 text-center"}>
                     {navbar.map((item, index) => {
                         return (
@@ -243,3 +213,21 @@ const MenuOpen = ({navbar}) => {
         </div>
     )
 }
+
+// const MenuOpen = ({navbar}) => {
+//     return(
+//         <div className={"bg-primary py-4 "}>
+//             <div className={""}>
+//                 <ul className={"block gap-10 text-center"}>
+//                     {navbar.map((item, index) => {
+//                         return (
+//                             <li key={index} className={"my-10"}>
+//                                 <ListNavbar name={item?.name} url={item?.url} id={index}/>
+//                             </li>
+//                         )
+//                     })}
+//                 </ul>
+//             </div>
+//         </div>
+//     )
+// }
