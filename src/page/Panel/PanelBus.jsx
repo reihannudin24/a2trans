@@ -3,10 +3,9 @@ import { textPopUp } from "../../function/swal";
 import { CardPanelBusComponent } from "../../component/PanelComponent";
 import { useNavigate } from "react-router-dom";
 import { WidgetComponent } from "../../component/Widget.Component";
-import { IoDocuments } from "react-icons/io5";
 import { NavbarNewPanelComponent } from "../../component/Navbar.Component";
 import apiAuth from "../../function/axiosAuth";
-import { Bus } from "@phosphor-icons/react";
+import { Bus, Seat } from "@phosphor-icons/react";
 import { BiCategory } from "react-icons/bi";
 import { BsTag } from "react-icons/bs";
 
@@ -89,9 +88,9 @@ function PanelBus() {
                     </li>
                     <li className={"w-3/12"}>
                         <WidgetComponent
-                            icon={<IoDocuments className="h-6 w-6" />}
-                            title={"Spend this month"}
-                            subtitle={"$642.39"}
+                            icon={<Seat className="h-6 w-6" />}
+                            title={"Total Seat"}
+                            subtitle={bus.reduce((acc, bus) => acc + bus.seat, 0) || 0}
                         />
                     </li>
                 </ul>

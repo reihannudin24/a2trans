@@ -21,7 +21,7 @@ function AddPanelMerek() {
         }
 
         try {
-            const responseData = await apiAuth.post('/vendors/create', dataForm)
+            const responseData = await apiAuth.post('/brand/create', dataForm)
 
             // RESPONE
             if (responseData.status === 200) {

@@ -4,11 +4,11 @@ import { textPopUp } from "../../function/swal";
 import { CardPanelImageGalleryComponent } from "../../component/PanelComponent";
 import { NavbarNewPanelComponent } from "../../component/Navbar.Component";
 import { WidgetComponent } from "../../component/Widget.Component";
-import { IoDocuments } from "react-icons/io5";
 import apiAuth from "../../function/axiosAuth";
-import { Bus } from "@phosphor-icons/react";
+import { Bus, ImageSquare } from "@phosphor-icons/react";
 import { BiCategory } from "react-icons/bi";
 import { BsTag } from "react-icons/bs";
+
 
 function PanelGallery() {
 
@@ -105,9 +105,9 @@ function PanelGallery() {
                     </li>
                     <li className={"w-3/12"}>
                         <WidgetComponent
-                            icon={<IoDocuments className="h-6 w-6" />}
-                            title={"Spend this month"}
-                            subtitle={"$642.39"}
+                            icon={<ImageSquare className="h-6 w-6" />}
+                            title={"Total Image"}
+                            subtitle={imageGallery.length}
                         />
                     </li>
                 </ul>
