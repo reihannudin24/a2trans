@@ -1,7 +1,7 @@
 import { useState } from "react";
 import apiJson from "../function/axios";
-import {useNavigate} from "react-router-dom";
-import {textPopUp} from "../function/swal";
+import { useNavigate } from "react-router-dom";
+import { textPopUp } from "../function/swal";
 import React from "react";
 
 export default function Login() {
@@ -55,11 +55,11 @@ export default function Login() {
 
     return (
         <>
-            <div className={"relative h-screen mx-auto w-full"} style={{minWidth:"420px"}}>
-                <div className={"fixed w-full h-screen "}>
+            <div className={"h-screen mx-auto w-full"} style={{ minWidth: "400px" }}>
+                <div className={"relative w-full h-screen "}>
                     <div className={"absolute z-10 w-full h-full shadow-banner"}>
+                        <img src="/assets/img/bus/banner-bus.jpg" alt="" className="absolute  inset-0 w-full h-full object-cover" />
                     </div>
-                    <img src="/assets/img/bus/banner-bus.jpg" alt="" className="absolute  inset-0 w-full h-full object-cover" />
                 </div>
                 <div className=" z-20 left-0 right-0 absolute container  mx-auto h-screen bottom-0 w-full ">
                     <div className="my-auto flex h-full w-full rounded-md items-center justify-center  md:mx-0 md:px-0 lg:mb-10 lg:items-center">
@@ -67,22 +67,22 @@ export default function Login() {
                             {/*xl:max-w-[420px]*/}
                             <div className=" w-full  max-w-full flex-col items-center  lg:pl-0 ">
                                 <div className={"h-28"}>
-                                    <img alt="Logo" className={"h-full object-cover"} src={"/assets/img/logo.svg"}/>
+                                    <img alt="Logo" className={"h-full object-cover"} src={"/assets/img/logo.svg"} />
                                 </div>
-                                <h4 className="mb-2.5 text-3xl sm:text-4xl font-bold text-navy-700 dark:text-white">
+                                <h4 className="mb-2.5 text-3xl sm:text-4xl font-bold text-navy-700">
                                     Sign In
                                 </h4>
                                 <p className="mb-4 sm:mb-9 ml-1 text-base text-gray-600">
                                     Enter your email and password to sign in!
                                 </p>
                                 <div className="mb-6 flex items-center  gap-3">
-                                    <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
+                                    <div className="h-px w-full bg-gray-200" />
                                 </div>
                                 <form onSubmit={handleSubmit} className="mt-5 ">
                                     <InputField
                                         variant="auth"
                                         extra="mb-3"
-                                        label="Email*"
+                                        label="Email"
                                         id="email"
                                         name="email"
                                         value={state.email}
@@ -93,7 +93,7 @@ export default function Login() {
                                     <InputField
                                         variant="auth"
                                         extra="mb-3"
-                                        label="Password*"
+                                        label="Password"
                                         id="password"
                                         name="password"
                                         value={state.password}
@@ -101,16 +101,6 @@ export default function Login() {
                                         placeholder="Masukkan kata sandi"
                                         onChange={handleInputChange}
                                     />
-                                    <div className="mb-4 flex items-center justify-between px-2">
-                                        <div className="flex items-center">
-                                        </div>
-                                        <a
-                                            className="text-sm font-medium text-brand-500 hover:text-brand-600 dark:text-white"
-                                            href=" "
-                                        >
-                                            Forgot Password?
-                                        </a>
-                                    </div>
                                     <button className="w-full mt-10 py-3 font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -118,9 +108,9 @@ export default function Login() {
                                         <span>Login Admin</span>
                                     </button>
                                 </form>
-                                    <div className="mt-4">
-                                    <span className=" text-sm font-medium text-navy-700 dark:text-gray-600">
-                                      Pastikan anda merupakan seorang admin
+                                <div className="mt-4">
+                                    <span className=" text-sm font-medium text-navy-700 ">
+                                        Pastikan anda merupakan seorang admin
                                     </span>
                                     <a
                                         href=" "
@@ -138,16 +128,15 @@ export default function Login() {
 }
 
 
-function InputField({label, id, name, extra, type, placeholder, variant, state, disabled, onChange, value}) {
+function InputField({ label, id, name, extra, type, placeholder, variant, state, disabled, onChange, value }) {
     const inputState = value ? "success" : state === "error" ? "error" : "";
 
     return (
         <div className={`${extra}`}>
             <label
                 htmlFor={id}
-                className={`text-sm text-navy-700 dark:text-white ${
-                    variant === "auth" ? "ml-1.5 font-medium" : "ml-3 font-bold"
-                }`}
+                className={`text-sm text-navy-700 ${variant === "auth" ? "ml-1.5 font-medium" : "ml-3 font-bold"
+                    }`}
             >
                 {label}
             </label>
@@ -158,15 +147,14 @@ function InputField({label, id, name, extra, type, placeholder, variant, state, 
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                className={`mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none ${
-                    disabled === true
-                        ? "!border-none !bg-gray-100 dark:!bg-white/5 dark:placeholder:!text-[rgba(255,255,255,0.15)]"
+                className={`mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none ${disabled === true
+                        ? "!border-none !bg-gray-100  "
                         : inputState === "error"
-                            ? "border-red-500 text-red-500 placeholder:text-red-500 dark:!border-red-400 dark:!text-red-400 dark:placeholder:!text-red-400"
+                            ? "border-red-500 text-red-500 placeholder:text-red-500 "
                             : inputState === "success"
-                                ? "border-green-500 text-green-500 placeholder:text-green-500 dark:!border-green-400 dark:!text-green-400 dark:placeholder:!text-green-400"
-                                : "border-gray-200 dark:!border-white/10 dark:text-white"
-                }`}
+                                ? "border-red-500 text-black placeholder:text-black"
+                                : "border-gray-200 "
+                    }`}
             />
         </div>
     );
