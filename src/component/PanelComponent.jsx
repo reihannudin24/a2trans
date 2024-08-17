@@ -74,7 +74,7 @@ export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => 
                         className="p-2 bg-red-500 rounded-md text-white">Delete
                     </button>
                     <a href={`/panel/edit/bus/${item?.id}`} className="cursor-pointer p-2 bg-blue-500 rounded-md text-white">Edit</a>
-                    <a href={`/panel/gallery/${item?.id}`} className="cursor-pointer p-2 bg-green-500 rounded-md text-white">Detial</a>
+                    <a href={`/panel/gallery/${item?.id}`} className="cursor-pointer p-2 bg-green-500 rounded-md text-white">Detail</a>
                 </div>
             </td>
         </tr>

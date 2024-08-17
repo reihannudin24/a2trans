@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import apiJson from "../../function/axios";
 import { textPopUp } from "../../function/swal";
-import {CardPanelCategoryComponent, CardPanelFacilitiesComponent} from "../../component/PanelComponent";
-import {NavbarNewPanelComponent} from "../../component/Navbar.Component";
-import {WidgetComponent} from "../../component/Widget.Component";
-import {MdBarChart} from "react-icons/md";
-import {IoDocuments} from "react-icons/io5";
+import { CardPanelCategoryComponent, CardPanelFacilitiesComponent } from "../../component/PanelComponent";
+import { NavbarNewPanelComponent } from "../../component/Navbar.Component";
+import { WidgetComponent } from "../../component/Widget.Component";
+import { MdBarChart } from "react-icons/md";
+import { IoDocuments } from "react-icons/io5";
 import apiAuth from "../../function/axiosAuth";
 
 function PanelFacilities() {
@@ -16,7 +16,7 @@ function PanelFacilities() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await apiAuth.get('/facilities/show' , {
+                const response = await apiAuth.get('/facilities/show', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -36,7 +36,7 @@ function PanelFacilities() {
             <NavbarNewPanelComponent brandText="Dashboard" />
             <div className="flex flex-wrap -mx-3 mb-5">
                 <div className="w-full flex max-w-full mb-6 mx-auto">
-                    <div className="relative w-3/12 flex flex-col min-w-0 shadow-md rounded-2xl bg-white my-5 mx-4">
+                    <div className="relative w-full flex flex-col min-w-0 shadow-md rounded-2xl bg-white my-5 mx-4">
                         <div className="relative flex flex-col bg-clip-border rounded-2xl">
                             <div className="px-5 pt-5 flex justify-between items-stretch flex-wrap pb-0 bg-transparent">
                                 <h3 className="flex flex-col items-start justify-center ml-0 font-medium">
@@ -49,20 +49,21 @@ function PanelFacilities() {
                             </div>
 
                         </div>
-                    </div>
-                    <div className="flex-auto w-10/12 block py-8 pt-6 px-0">
+                    <div className="flex-auto  block py-8 pt-6 px-0">
                         <div className={"mt-4"}>
                             <ul className={"flex gap-2"}>
                                 {facilities.length === 0 ? (
-                                    <div>
-                                        <div>
-                                            Tidak Ada data
-                                        </div>
-                                    </div>
-                                ): (
+                                    <tr>
+                                        <td colSpan="6">
+                                            <div className={"my-10 mx-4"}>
+                                                <h1>Data kosong</h1>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ) : (
                                     <>
                                         {facilities.map((item, index) => {
-                                            return(
+                                            return (
                                                 <li className={"w-3/12"}>
                                                     <WidgetComponent
                                                         icon={<MdBarChart className="h-7 w-7" />}
@@ -76,6 +77,7 @@ function PanelFacilities() {
                                 )}
                             </ul>
                         </div>
+                    </div>
                     </div>
                 </div>
 

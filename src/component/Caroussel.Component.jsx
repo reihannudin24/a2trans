@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export const CarousselComponent = ({ categories }) => {
   return (
-      <>
+      <d>
         <section className="relative h-full">
           <div className={"h-full"} style={{ maxHeight: "400px" }}>
             <img
@@ -44,7 +44,7 @@ export const CarousselComponent = ({ categories }) => {
             </div>
           </div>
         </section>
-      </>
+      </d>
   );
 };
 

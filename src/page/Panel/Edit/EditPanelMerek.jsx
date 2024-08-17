@@ -26,7 +26,7 @@ function EditPanelMerek() {
         }
 
         try {
-            const responseData = await apiAuth.post('/vendors/update', dataForm)
+            const responseData = await apiAuth.post('/brand/update', dataForm)
 
             // RESPONE
             if (responseData.status === 200) {
