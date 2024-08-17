@@ -8,9 +8,9 @@ import {textPopUp} from "../function/swal";
 
 function Rent() {
 
-    const navigate = useNavigate();
     const [bus, setBus] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [facilities, setFacilities] = useState([]);
 
     useEffect(() => {
         const fetchDataBus = async () => {
@@ -25,6 +25,19 @@ function Rent() {
                 console.error(error);
                 textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
+        };
+        const fetchFacilities = async () => {
+          try{
+              const response = await apiAuth.get('/facilities/show', {
+                 headers: {
+                     'Content-Type' : 'application/json',
+                 }
+              });
+              setFacilities(response?.data?.data || []);
+          } catch (error) {
+              console.error(error);
+              textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
+          }
         };
         const fetchDataCategory = async () => {
             try {
@@ -41,20 +54,18 @@ function Rent() {
         };
 
         fetchDataBus();
-        fetchDataCategory()
+        fetchFacilities();
+        fetchDataCategory();
     }, []);
-
-    const [search, setSearch] = useState("");
 
     return (
         <>
             <section className={"w-full overflow-x-hidden mx-auto "} >
                 <div className={"w-full "}>
                     <RentContentComponent
-                        setSearch={setSearch}
                         bus={bus}
+                        facilities={facilities}
                         categories={categories}
-                        search={search}
                     />
                 </div>
             </section>

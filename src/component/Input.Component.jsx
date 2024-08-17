@@ -25,16 +25,24 @@ export const InputCheckbox = ({ name, toggle, selectedColors, value }) => {
 
 export const InputCheckboxRound = ({ name, toggle, selectedColors, value }) => {
     return (
-        <div className="flex gap-3">
-            <div>
-                <button
-                    className={`bg-white border text-gray-500 text-sm border-gray-200 rounded-full py-2 px-5 ${
-                        selectedColors.includes(value) ? 'bg-blue-500 text-white' : ''
-                    }`}
-                    onClick={() => toggle(value)}
-                >
-                    {name}
-                </button>
+        <div className="flex items-center gap-3">
+            <div className={`relative bg-white border border-gray-200 rounded-full py-2 px-5 cursor-pointer`}>
+                <input
+                    className="absolute opacity-0 w-full h-full cursor-pointer rounded-full"
+                    type="checkbox"
+                    name="color"
+                    value={value}
+                    checked={selectedColors.includes(value)}
+                    onChange={toggle}
+                />
+                <div className="flex items-center justify-center">
+                    <p className="text-sm text-gray-600">{name}</p>
+                </div>
+                {selectedColors.includes(value) && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-4 h-4 bg-primary rounded-full"></div>
+                    </div>
+                )}
             </div>
         </div>
     );
