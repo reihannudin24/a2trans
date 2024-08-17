@@ -165,11 +165,11 @@ export const CarousselGalleryComponent = ({ data }) => {
   };
 
   return (
-    <div className="mx-4">
-      <h1 className="font-bold text-xl py-5 my-4">Gallery Kendaraan</h1>
+    <div className="mx-4 lg:mx-0">
+      <h1 className="font-bold text-xl py-5 lg:my-2 my-4">Gallery Kendaraan</h1>
       <div className="relative">
-        <div className="overflow-x-auto mx-4" ref={scrollRef}>
-          <div className="flex gap-4 pb-4">
+        <div className="overflow-x-auto " ref={scrollRef}>
+          <div className="flex gap-4 lg:gap-3 pb-4">
 
             {/* Mapping Gallery Image */}
             {data.map(res => {

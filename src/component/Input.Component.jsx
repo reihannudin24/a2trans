@@ -21,6 +21,27 @@ export const InputCheckbox = ({ name, toggle, selectedColors, value }) => {
     )
 }
 
+
+
+export const InputCheckboxRound = ({ name, toggle, selectedColors, value }) => {
+    return (
+        <div className="flex gap-3">
+            <div>
+                <button
+                    className={`bg-white border text-gray-500 text-sm border-gray-200 rounded-full py-2 px-5 ${
+                        selectedColors.includes(value) ? 'bg-blue-500 text-white' : ''
+                    }`}
+                    onClick={() => toggle(value)}
+                >
+                    {name}
+                </button>
+            </div>
+        </div>
+    );
+};
+
+
+
 export const InputSearch = ({ search, setSearch, redirect }) => {
     const navigate = useNavigate();
     const handleSearch = (e) => {
