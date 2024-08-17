@@ -211,9 +211,9 @@ export const Promo3Component = () => {
                         <div className={"w-full"}>
                             <ul className={"w-full block md:flex flex-wrap "}>
                                 {contact.map((item, index) => {
-                                    return(
-                                        <li className={"w-full my-10 md:my-6 md:w-6/12 lg:w-4/12"}>
-                                            <ContactCardComponent  icon={item?.image} name={item?.label} value={item?.value}/>
+                                    return (
+                                        <li key={index} className={"w-full my-10 md:my-6 md:w-6/12 lg:w-4/12"}>
+                                            <ContactCardComponent icon={item?.image} name={item?.label} value={item?.value} />
                                         </li>
                                     )
                                 })}
@@ -227,7 +227,7 @@ export const Promo3Component = () => {
 }
 
 
-export const ContactCardComponent = ({icon, name, value}) => {
+export const ContactCardComponent = ({ icon, name, value }) => {
     return (
         <div className={"w-11/12 mx-auto"}>
             <div className={"flex gap-3"}>
@@ -325,11 +325,9 @@ export const FaqComponent = () => {
                         <ul className={"mx-auto "}>
                             {faq.map((item, index) => {
                                 return (
-                                    <>
-                                        <li key={index} className={"my-3 text-center"}>
-                                            <FaqCardComponent id={item?.id} title={item?.name} content={item?.content} />
-                                        </li>
-                                    </>
+                                    <li key={index} className={"my-3 text-center"}>
+                                        <FaqCardComponent id={item?.id} title={item?.name} content={item?.content} />
+                                    </li>
                                 )
                             })}
                         </ul>

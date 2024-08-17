@@ -23,7 +23,7 @@ export const FooterComponent = () => {
                         "value" : "+62 821-1119-1279" , "url" : "/history"
                     },
                     {
-                        "value" : "a2trans@gmail.com" , "url" : "/history"
+                        "value" : "a2transbus@gmail.com" , "url" : "/history"
                     }
                 ]
             },
@@ -114,9 +114,9 @@ export const FooterComponent = () => {
                                     </div>
                                 </div>
                                 <div className={"block w-full md:w-10/12 mt-5 my-3"}>
-                                    {information.map((item) => {
+                                    {information.map((item, index) => {
                                         return(
-                                            <div className={"my-2"}>
+                                            <div key={index} className={"my-2"}>
                                                 <p className={"text-md md:text-sm text-gray-500"}>
                                                     {item.value}
                                                 </p>
@@ -152,9 +152,9 @@ export const FooterComponent = () => {
                             <div className={"md:flex block justify-between"}>
                                 <div className={"w-6/12  md:mx-0 mx-auto"}>
                                     <ul className={"flex order-2  pb-4  md:pb-0 md:order-1 md:justify-start md:items-start justify-center items-center "}>
-                                        {socialMedia.map((item) => {
+                                        {socialMedia.map((item, index) => {
                                             return(
-                                                <li className={"mx-2"}>
+                                                <li key={index} className={"mx-2"}>
                                                     <Link to={`${item.url}`}>
                                                         <div className={"bg-gray-100 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10"} >
                                                             <div className={"py-3 px-3 w-full h-full"}>
