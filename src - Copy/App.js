@@ -7,6 +7,7 @@ import Detail from "./page/Detail";
 
 import Panel from './page/Panel';
 import PanelAdd from './page/PanelAdd';
+import PanelEdit from '../src/page/PanelEdit';
 
 import { NavbarComponent } from "./component/Navbar.Component";
 import { FooterComponent } from "./component/Footer.Component";
@@ -29,6 +30,7 @@ function App() {
                     {/* PANEL */}
                     <Route path={"/panel"} element={<Panel />} />
                     <Route path={"/panel/add"} element={<PanelAdd />} />
+                    <Route path={"/panel/edit"} element={<PanelEdit />} />
                 </Routes>
             </section>
             {!isPanelRoute && <FooterComponent />}

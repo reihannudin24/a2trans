@@ -5,17 +5,19 @@ import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
 import { InputImage, InputSelectOption, InputNumber, InputText, InputTextArea } from "../../../component/Input.Component";
 import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
-
+import { useNavigate } from "react-router-dom";
 
 
 function AddPanelMerek() {
+    const navigate = useNavigate()
+
     const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
     const [selectedThumbFile, setSelectedThumbFile] = useState(null);
 
     const [busName, setBusName] = useState("");
     const [description, setDescription] = useState("");
-    const [busCategory, setBusCategory] = useState("");
-    const [busMerek, setbusMerek] = useState("");
+    const [busCategory, setBusCategory] = useState(0);
+    const [busMerek, setbusMerek] = useState(0);
     const [busType, setBusType] = useState("");
     const [busSeat, setBusSeat] = useState("");
 
@@ -45,7 +47,7 @@ function AddPanelMerek() {
             seat: busSeat,
             categories_id: busCategory,
             type: busType,
-            merek_id: busType
+            merek_id: busMerek
         }
 
         try {
@@ -96,13 +98,14 @@ function AddPanelMerek() {
     const [loop, setLoop] = useState(true)
     const checkDataCategory = useCallback(async () => {
         const responseCategories = await apiAuth.get('/categories/show');
-        const responseMerek = await apiAuth.get('/vendors/show');
+        const responseMerek = await apiAuth.get('/brand/show');
+        if (responseCategories.data.data.length === 0 || responseMerek.data.data.length === 0) return navigate("/panel/bus")
         setCategories(responseCategories.data.data)
         setMerek(responseMerek.data.data)
 
-        
+
         setLoop(false);
-    }, []);
+    }, [navigate]);
 
     useEffect(() => {
         if (loop === true) {

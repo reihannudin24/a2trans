@@ -1,5 +1,5 @@
 import {CarousselComponent} from "../component/Caroussel.Component"
-import Detail, {
+import {
     FaqComponent,
     Promo2Component,
     Promo3Component,
@@ -7,14 +7,12 @@ import Detail, {
     TestimonialComponent
 } from "../component/Promo.Component"
 import {ListCardProductComponent} from "../component/Card.Component";
-import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import apiAuth from "../function/axiosAuth";
 import {textPopUp} from "../function/swal";
 
 function Home() {
 
-    const navigate = useNavigate();
     const [bus, setBus] = useState([]);
     const [categories, setCategories] = useState([]);
 
