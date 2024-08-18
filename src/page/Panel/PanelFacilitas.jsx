@@ -91,34 +91,37 @@ function PanelFacilities() {
         }
     }, [loop]);
 
+    const currentPath = window.location.pathname;
 
     return (
-        <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
-            <NavbarNewPanelComponent brandText="Dashboard" />
+        <div className="lg:ml-80 ml-0 lg:mr-16 mr-0 mt-0 ">
+            <NavbarNewPanelComponent brandText="Dashboard" currentPath={currentPath} />
             <div className={"mt-4 "}>
                 <ul className={"gap-2 grid-cols-2 grid md:grid-cols-4"}>
-                    <li className={"w-3/12"}>
+                    <li className={"w-full lg:w-3/12"}>
                         <WidgetComponent
                             icon={<Bus size={24} className="h-7 w-7" />}
                             title={"Total Bus"}
                             subtitle={bus.length}
                         />
                     </li>
-                    <li className={"w-3/12"}>
+                    <li className={"w-full lg:w-3/12"}>
                         <WidgetComponent
                             icon={<BiCategory className="h-6 w-6" />}
                             title={"Total Category"}
                             subtitle={category.length}
                         />
                     </li>
-                    <li className={"w-3/12"}>
+                    <li className={"w-full lg:w-3/12"}>
+
                         <WidgetComponent
                             icon={<BsTag size={24} className="h-7 w-7" />}
                             title={"Total Merek"}
                             subtitle={merek.length}
                         />
                     </li>
-                    <li className={"w-3/12"}>
+                    <li className={"w-full lg:w-3/12"}>
+
                         <WidgetComponent
                             icon={<Seat className="h-6 w-6" />}
                             title={"Total Vendor"}
@@ -128,8 +131,8 @@ function PanelFacilities() {
                 </ul>
             </div>
             <div className="flex flex-wrap -mx-3 mb-5">
-                <div className="w-full flex max-w-full mb-6 mx-auto">
-                    <div className="relative w-full flex flex-col min-w-0 shadow-md rounded-2xl bg-white my-5 mx-4">
+                <div className="w-full max-w-full mb-6 mx-auto">
+                    <div className="relative flex flex-col min-w-0 shadow-md rounded-2xl bg-white my-5 md:mx-4">
                         <div className="relative flex flex-col bg-clip-border rounded-2xl">
                             <div className="px-5 pt-5 flex justify-between items-stretch flex-wrap pb-0 bg-transparent">
                                 <h3 className="flex flex-col items-start justify-center ml-0 font-medium">
@@ -148,7 +151,7 @@ function PanelFacilities() {
                                     <thead className="align-bottom">
                                         <tr className="font-semibold text-[0.95rem] text-secondary-dark">
                                             <th className="pb-3 ps-3 text-start min-w-[50px]">Id</th>
-                                            <th className="pb-3 pr-12 text-start min-w-[140px]">Image</th>
+                                            <th className="pb-3 pr-12 text-start min-w-[140px]">Fasilitas</th>
                                             <th className="pb-3 pr-12 text-end min-w-[175px]">Action</th>
                                         </tr>
                                     </thead>

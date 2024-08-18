@@ -82,10 +82,12 @@ function PanelMerek() {
         }
     }, [loop]);
 
+    const currentPath = window.location.pathname;
+
 
     return (
-        <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
-            <NavbarNewPanelComponent brandText="Dashboard" />
+        <div className="lg:ml-80 ml-0 lg:mr-16 mr-0 mt-0 ">
+            <NavbarNewPanelComponent brandText="Dashboard" currentPath={currentPath} />
             <div className={"mt-4"}>
                 <ul className={"gap-2 grid-cols-2 grid md:grid-cols-4"}>
                     <li className={"w-full lg:w-3/12"}>

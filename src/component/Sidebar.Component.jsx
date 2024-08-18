@@ -82,6 +82,9 @@ export default function SidebarComponent() {
                                     <li>
                                         <a href="/panel/brand" className="block py-3  px-2 hover:bg-red-50 hover:text-red-700  rounded-lg text-gray-500">Daftar Merek</a>
                                     </li>
+                                    <li>
+                                        <a href="/panel/vendor" className="block py-3  px-2 hover:bg-red-50 hover:text-red-700  rounded-lg text-gray-500">Daftar Vendor</a>
+                                    </li>
                                 </ul>
                             )}
                         </li>
@@ -107,7 +110,9 @@ export default function SidebarComponent() {
                                     <li>
                                         <a href="/panel/add/new/brand" className="block py-3  px-2 hover:bg-red-50 hover:text-red-700  rounded-lg text-gray-500">Tambahkan Merek</a>
                                     </li>
-
+                                    <li>
+                                        <a href="/panel/add/new/vendor" className="block py-3  px-2 hover:bg-red-50 hover:text-red-700  rounded-lg text-gray-500">Tambahkan Merek</a>
+                                    </li>
                                 </ul>
                             )}
                         </li>

@@ -78,8 +78,8 @@ export const NavbarComponent = () => {
 
 export const NavbarNewPanelComponent = ({currentPath}) => {
     return (
-        <div className={"container flex gap-2 mx-auto"}>
-            <nav className="sticky top-4 px-4 md:px-5 z-40 shadow-gray-300 hover:text-white text-white flex flex-row items-center w-2/12 md:w-3/12 me-auto md:me-0  ms-auto justify-between rounded-xl bg-red-500 cursor-pointer hover:bg-red-500 p-2 backdrop-blur-xl">
+        <div className={"w-full  flex gap-2 mx-auto"}>
+            <nav className="sticky lg:hidden top-4 px-4 md:px-5 z-40 shadow-gray-300 hover:text-white text-white flex flex-row items-center w-2/12 md:w-3/12 me-auto md:me-0  ms-auto justify-between rounded-xl bg-red-500 cursor-pointer hover:bg-red-500 p-2 backdrop-blur-xl">
                 <SidebarComponent />
             </nav>
             <nav className="sticky  top-4 px-4 md:px-5 z-40 shadow-gray-300 hover:text-white text-white flex flex-row items-center w-2/12 md:w-3/12 me-auto md:me-0  ms-auto justify-between rounded-xl bg-red-500 cursor-pointer hover:bg-red-500 p-2 backdrop-blur-xl">

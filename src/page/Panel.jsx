@@ -13,7 +13,7 @@ export default function Panel() {
             <div className={"my-10 hidden md:block"}>
                 <SidebarComponent />
             </div>
-            <div className={"w-11/12 mx-auto md:w-full"}>
+            <div className={"w-11/12 mx-auto lg:w-full"}>
                 <Routes>
                     <Route path={"/bus"} element={<PanelBus />} />
                     <Route path={"/category"} element={<PanelCategory />} />
