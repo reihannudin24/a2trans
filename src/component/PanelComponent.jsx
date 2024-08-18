@@ -47,29 +47,29 @@ export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => 
 
     return (
         <tr key={index} className="border-b scrollbar-hide">
-            <td className="p-3 pl-0">
+            <td className="pb-3 text-start min-w-[175px]">
                 <div className="flex items-center">
                     <div className="relative inline-block shrink-0 rounded-2xl me-3">
-                        <img src={`http://localhost:3000/api/bus/image/${id}`} className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl" alt="" />
+                        <img src={`http://127.0.0.1:8000${item?.thumb}`} className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl" alt="" />
                     </div>
                     <div className="flex flex-col justify-start">
                         <div className="mb-1 font-semibold transition-colors duration-200 ease-in-out"> {item?.name}</div>
                     </div>
                 </div>
             </td>
-            <td className="p-3 pr-12 text-end">
+            <td className="pb-3 pr-12 text-end min-w-[175px]">
                 <span className="font-semibold">{item?.seat}</span>
             </td>
-            <td className="p-3 pr-0 text-end">
+            <td className="pb-3 text-end min-w-[175px]">
                 <span className="font-semibold">{categoryName}</span>
             </td>
-            <td className="p-3 pr-0 text-end">
+            <td className="pb-3 text-end min-w-[175px]">
                 <span className="font-semibold">{item?.type}</span>
             </td>
-            <td className="p-3 pr-12 text-end">
+            <td className="pb-3 pr-12 text-end min-w-[175px]">
                 <span className="font-semibold">{brandName}</span>
             </td>
-            <td className="p-3 pr-12 text-end">
+            <td className="pb-3 pr-12 text-end min-w-[175px]">
                 <div className="flex gap-4 justify-end">
                     <button onClick={(e) => handleDelete(id, e)}
                         className="p-2 bg-red-500 rounded-md text-white">Delete
