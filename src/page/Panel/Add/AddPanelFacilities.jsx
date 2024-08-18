@@ -25,7 +25,6 @@ function AddPanelCategories() {
 
         try {
             const responseData = await apiAuth.post('/facilities/add/new', dataForm);
-            console.log(responseData.data.data[0].insertId)
             textPopUp("Success", "Berhasil menambah data kedatabase", "success")
         } catch (err) {
             console.error('Error uploading files:', err);
@@ -54,8 +53,8 @@ function AddPanelCategories() {
                                         <InputText id={"name"} value={name} set={setName} placeholder={"Enter Name"} />
                                     </div>
                                     <div className="mb-5">
-                                        <LabelText text={"Des"} htmlFor={"icon"} />
-                                        <InputTextArea id={"description"} value={icon} set={setIcon} placeholder={"Enter Icon"} rows={4} />
+                                        <LabelText text={"Icon"} htmlFor={"icon"} />
+                                        <InputText id={"icon"} value={icon} set={setIcon} placeholder={"Enter Icon"} />
                                     </div>
 
                                     <div>

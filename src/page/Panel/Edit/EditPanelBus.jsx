@@ -34,6 +34,17 @@ function EditPanelBus() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const formData = new FormData();
+        formData.append('id', id);
+        formData.append('name', busName);
+        formData.append('description', description);
+        formData.append('seat', busSeat);
+        formData.append('categories_id', busCategory);
+        formData.append('type', busType);
+        formData.append('brand_id', busMerek);
+        formData.append('vandor_id', busMerek);
+        formData.append('thumbnail', selectedThumbFile);
+
         const dataForm = {
             id: id,
             name: busName,
@@ -50,7 +61,7 @@ function EditPanelBus() {
 
         try {
             // FETCHING
-            const responseData = await apiImage.post('/bus/update', dataForm)
+            const responseData = await apiImage.post('/bus/update', formData)
             console.log(responseData)
 
             // // RESPONE
