@@ -149,9 +149,9 @@ function PanelGallery() {
                                                 <>
                                                     {imageGallery.map((item, index) => (
                                                         <CardPanelImageGalleryComponent
-                                                            key={item.id} // Added key prop
+                                                            key={item.image_id} // Added key prop
                                                             index={index}
-                                                            id={item?.id}
+                                                            id={item?.image_id}
                                                             item={item}
                                                             id_bus={id}
                                                             navigate={navigate}

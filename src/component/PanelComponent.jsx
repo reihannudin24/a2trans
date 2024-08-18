@@ -222,10 +222,8 @@ export const CardPanelImageGalleryComponent = ({ index, id, id_bus, item, naviga
         try {
             const result = await confirmDelete('Are you sure?', 'Apa kamu yakin untuk menghapus data ini', id);
             if (result.confirmed) {
-                const response = await apiAuth.delete('/image/bus/delete', {
-                    data: { id: id, file: item?.image.split("/")[3], id_bus: id_bus },
-                });
-                setImageGallery(prevBus => prevBus.filter(item => item.id !== id));
+                const response = await apiAuth.delete(`/image_bus/delete?id=${id}`);
+                setImageGallery(prevBus => prevBus.filter(item => item.image_id !== id));
                 textPopUp("Success", `${response?.data?.message}`, "success");
                 navigate(`/panel/gallery/${id_bus}`);
             }
@@ -238,13 +236,13 @@ export const CardPanelImageGalleryComponent = ({ index, id, id_bus, item, naviga
     return (
         <tr key={index} className="border-b">
             <td className="p-3 pr-0 text-start">
-                <span className="font-semibold">{item?.id}</span>
+                <span className="font-semibold">{item?.image_id}</span>
             </td>
             <td className="p-3 pl-0">
                 <div className="flex items-center justify-start">
                     <div className="relative inline-block shrink-0 rounded-2xl me-3">
-                        <img src={`http://localhost:3000/api/bus/imagegallery/${id_bus}/${item?.image.split("/")[3]}`} className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl"
-                            alt="" />
+                        {/* <img src={`http://localhost:3000/api/bus/imagegallery/${id_bus}/${item?.image.split("/")[3]}`} className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl"
+                            alt="" /> */}
                     </div>
                 </div>
             </td>
