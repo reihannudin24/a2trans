@@ -106,6 +106,7 @@ function PanelGallery() {
                                 <h3 className="flex flex-col items-start justify-center ml-0 font-medium">
                                     <span className="mr-3 text-lg font-semibold">List Image Gallery Bus {id}</span>
                                 </h3>
+                                <a href={`/panel/add/new/gallery/6/${id}`} className="p-2 px-3 bg-green-500 rounded-lg text-sm text-white">Tambahkan Image Gallery</a>
                             </div>
                             <div className="px-9">
                                 <span className="font-medium mt-1">Semua data image gallery dari bus {id}</span>

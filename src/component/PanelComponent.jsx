@@ -242,8 +242,8 @@ export const CardPanelImageGalleryComponent = ({ index, id, id_bus, item, naviga
             <td className="p-3 pl-0">
                 <div className="flex items-center justify-start">
                     <div className="relative inline-block shrink-0 rounded-2xl me-3">
-                        {/* <img src={`http://localhost:3000/api/bus/imagegallery/${id_bus}/${item?.image.split("/")[3]}`} className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl"
-                            alt="" /> */}
+                        <img src={`http://127.0.0.1:8000${item?.image_path}`} className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl"
+                            alt="" />
                     </div>
                 </div>
             </td>

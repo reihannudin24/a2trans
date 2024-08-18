@@ -74,7 +74,7 @@ export const CardProductComponent = ({ item }) => {
                 <div className={"relative "}>
                     <div className="w-full top-10 h-full">
                         <div className="h-img-product">
-                            <img className="h-full w-full selectableText-new border-radius-card-img object-cover" src={item.imageUrl || "/assets/img/bus/bus-1.jpg"} alt={item.name} />
+                            <img className="h-full w-full selectableText-new border-radius-card-img object-cover" src={`http://127.0.0.1:8000${item?.thumb}`} alt={item.name} />
                         </div>
                     </div>
                     <div className="w-full my- z-20 border shadow shadow-gray-400 rounded-2xl border-gray-50">
