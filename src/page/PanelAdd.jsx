@@ -12,7 +12,7 @@ import AddPanelGallery from "./Panel/Add/AddPanelGallery";
 export default function PanelAdd() {
     return (
         <section className={"bg-gray-50 min-h-screen py-10"}>
-            <div className={"md:my-10 hidden md:block"}>
+            <div className={"md:my-10 hidden lg:block"}>
                 <SidebarComponent />
             </div>
             <div className={"w-11/12 mx-auto lg:w-full"}>

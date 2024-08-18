@@ -9,10 +9,11 @@ import { NavbarPanelComponent } from "../component/Navbar.Component";
 
 function PanelEdit() {
     return (
-        <section>
-            <SidebarComponent />
-            <NavbarPanelComponent text={"Edit Data"} direct={"Edit"} />
-            <div>
+        <section className={"bg-gray-50 min-h-screen py-10"}>
+            <div className={"md:my-10 hidden lg:block"}>
+                <SidebarComponent />
+            </div>
+            <div className={"w-11/12 mx-auto lg:w-full"}>
                 <Routes>
                     <Route path={"bus/:id"} element={<EditPanelBus />} />
                     <Route path={"facilities/:id"} element={<EditPanelFacilities />} />
