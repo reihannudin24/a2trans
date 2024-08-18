@@ -21,7 +21,7 @@ function AddPanelVendor() {
         }
 
         try {
-            const responseData = await apiAuth.post('/vendor/create/new', dataForm)
+            const responseData = await apiAuth.post('/vendor/add/new', dataForm)
 
             // RESPONE
             if (responseData.status === 201) {

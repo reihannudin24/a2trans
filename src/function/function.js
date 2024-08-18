@@ -19,3 +19,13 @@ export const checkCategoryById = async (id) => {
         return "None"
     }
 }
+
+export const checkVendorById = async (id) => {
+    const responseVendor = await apiAuth.get('/vendor/show');
+    const findIndex = responseVendor.data.data?.vendors.findIndex(i => i.id === id)
+    if (findIndex !== -1) {
+        return responseVendor.data.data.vendors[findIndex]?.name
+    } else {
+        return "None"
+    }
+}

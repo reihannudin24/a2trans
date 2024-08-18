@@ -1,6 +1,7 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { RentContentComponent } from "../component/Rent.Component";
 import apiJson from "../function/axios";
+import { textPopUp } from "../function/swal";
 
 
 function Rent() {
@@ -8,6 +9,7 @@ function Rent() {
     const [bus, setBus] = useState([]);
     const [categories, setCategories] = useState([]);
     const [facilities, setFacilities] = useState([]);
+    const [loop, setLoop] = useState(true);
 
     useEffect(() => {
         const fetchDataBus = async () => {
@@ -17,26 +19,12 @@ function Rent() {
                         'Content-Type': 'application/json',
                     }
                 });
-                setBus(response?.data?.data || []);
+                setBus(response?.data?.data?.buses || []);
             } catch (error) {
                 console.error(error);
-                // textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
+                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
-        };
-        const fetchFacilities = async () => {
-          try{
-              const response = await apiJson.get('/facilities/show', {
-                 headers: {
-                     'Content-Type' : 'application/json',
-                 }
-              });
-              setFacilities(response?.data?.data || []);
-          } catch (error) {
-              console.error(error);
-            //   textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-          }
-        };
-        const fetchDataCategory = async () => {
+
             try {
                 const response = await apiJson.get('/categories/show', {
                     headers: {
@@ -46,14 +34,28 @@ function Rent() {
                 setCategories(response?.data?.data?.categories || []);
             } catch (error) {
                 console.error(error);
-                // textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
+                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
+
+            try {
+                const response = await apiJson.get('/facilities/show', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                setFacilities(response?.data?.data?.facilities || []);
+            } catch (error) {
+                console.error(error);
+                  textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
+            }
+
+            setLoop(false)
         };
 
-        fetchDataBus();
-        fetchFacilities();
-        fetchDataCategory();
-    }, []);
+        if (loop === true) {
+            fetchDataBus();
+        }
+    }, [loop]);
 
     return (
         <>

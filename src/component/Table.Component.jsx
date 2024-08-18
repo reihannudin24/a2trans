@@ -5,6 +5,7 @@ import apiAuth from "../function/axios";
 export default function TableComponent({ data }) {
 
     const [bus, setBus] = useState([]);
+    const [loop, setLoop] = useState(true)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -14,8 +15,11 @@ export default function TableComponent({ data }) {
                 console.log(error)
                 textPopUp("Error", "Login failed. Please check your credentials.", "error");
             }
+            setLoop(false)
         }
-        fetchData()
+        if(loop === true) {
+            fetchData()
+        }
     }, []);
 
 

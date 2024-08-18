@@ -1,4 +1,4 @@
-import {CarousselComponent} from "../component/Caroussel.Component"
+import { CarousselComponent } from "../component/Caroussel.Component"
 import {
     FaqComponent,
     Promo2Component,
@@ -6,15 +6,16 @@ import {
     PromoComponent,
     TestimonialComponent
 } from "../component/Promo.Component"
-import {ListCardProductComponent} from "../component/Card.Component";
-import {useEffect, useState} from "react";
-import {textPopUp} from "../function/swal";
+import { ListCardProductComponent } from "../component/Card.Component";
+import { useEffect, useState } from "react";
+import { textPopUp } from "../function/swal";
 import apiJson from "../function/axios";
 
 function Home() {
 
     const [bus, setBus] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [loop, setLoop] = useState(true);
 
     useEffect(() => {
         const fetchDataBus = async () => {
@@ -24,13 +25,13 @@ function Home() {
                         'Content-Type': 'application/json',
                     }
                 });
-                setBus(response?.data?.data || []);
+                console.log(response?.data?.data?.buses)
+                setBus(response?.data?.data?.buses || []);
             } catch (error) {
                 console.error(error);
                 textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
-        };
-        const fetchDataCategory = async () => {
+
             try {
                 const response = await apiJson.get('/categories/show', {
                     headers: {
@@ -42,20 +43,23 @@ function Home() {
                 console.error(error);
                 textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
+
+            setLoop(false)
         };
 
-        // fetchDataBus();
-        fetchDataCategory()
-    }, []);
+        if (loop === true) {
+            fetchDataBus();
+        }
+    }, [loop]);
 
 
     return (
-        <section className={"w-full overflow-x-hidden mx-auto container"} style={{maxWidth:"1500px"}}>
+        <section className={"w-full overflow-x-hidden mx-auto container"} style={{ maxWidth: "1500px" }}>
             <div className={"w-full"} >
                 <CarousselComponent categories={categories} />
                 <PromoComponent />
                 <Promo2Component />
-                <ListCardProductComponent bus={bus} categories={categories}/>
+                <ListCardProductComponent bus={bus} categories={categories} />
                 {/*<ListCardComponent title={"Jenis-Jenis Kendaraan "} data={ArrayTypeBus} />*/}
                 <TestimonialComponent />
                 <FaqComponent />

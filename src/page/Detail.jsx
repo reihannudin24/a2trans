@@ -2,48 +2,53 @@ import { CarousselGalleryComponent } from "../component/Caroussel.Component"
 import { useEffect, useState } from "react";
 import apiAuth from "../function/axiosAuth";
 import { textPopUp } from "../function/swal";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { checkCategoryById, checkMerekById } from "../function/function";
 
 function Detail() {
+    const navigate = useNavigate()
+
     const [brandName, setBrandName] = useState('');
     const [categoryName, setCategoryName] = useState('');
+    const [vendorName, setVendorName] = useState('');
     const [imageGallery, setImageGallery] = useState([]);
 
     const { id } = useParams();
     const [bus, setBus] = useState([]);
+    const [loop, setLoop] = useState(true);
 
 
     useEffect(() => {
         const fetchDataBus = async () => {
             try {
 
-                const response = await apiAuth.get('/bus/show', {
+                const response = await apiAuth.get(`/bus/show?id=${id}`, {
                     params: { id } // Mengirim id sebagai query parameter
                 });
+                if(response?.data?.data?.buses.length === 0 ) return navigate("/")
 
-                const responseImageGallery = await apiAuth.get(`/image/bus/show?id=${id}`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
+                setImageGallery(response?.data?.data?.buses[0]?.images || []);
 
-                setImageGallery(responseImageGallery?.data?.data || []);
+                const merek = await checkMerekById(response?.data?.data?.buses[0]?.brand_id);
+                const category = await checkCategoryById(response?.data?.data?.buses[0]?.categories_id);
+                const vendor = await checkCategoryById(response?.data?.data?.buses[0]?.vendor_id);
 
-                const merek = await checkMerekById(response?.data?.data[0]?.merek_id);
-                const category = await checkCategoryById(response?.data?.data[0]?.categories_id);
-
+                setVendorName(vendor);
                 setBrandName(merek);
                 setCategoryName(category);
-                setBus(response?.data?.data || []);
+                setBus(response?.data?.data?.buses[0] || []);
             } catch (error) {
                 console.error(error);
                 textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
+
+            setLoop(false)
         };
 
-        fetchDataBus();
-    }, [bus, id]);
+        if(loop === true) {
+            fetchDataBus();
+        }
+    }, [bus, id, loop, navigate]);
 
     return (
         <section className={"w-full pt-20 mx-auto container"}>
@@ -54,7 +59,7 @@ function Detail() {
                     <div className={"block md:flex gap-3 justify-between"}>
                         <div className="block gap-4 justify-center sm:justify-normal">
                             <div className={"h-img-card flex gap-4"}>
-                                <img alt="Img" className={"w-full h-full object-cover radius-card-img"} src={`http://localhost:3000/api/bus/image/${id}`} />
+                                <img alt="Img" className={"w-full h-full object-cover radius-card-img"} src={`http://localhost:8000/${bus?.thumb}`} />
                             </div>
                             <CarousselGalleryComponent data={imageGallery} id={id} />
                             <div className={"w-11/12 lg:w-full mx-auto py-5 "}>
@@ -95,16 +100,16 @@ function Detail() {
                             <div className="w-full my-5 mx-2 border shadow shadow-gray-400 rounded-2xl border-gray-50">
                                 <div className="w-11/12 mx-auto flex">
                                     <div className="bg-gray-600/40 py-1 my-3 px-3 rounded-md">
-                                        <h2 className="text-white text-sm font-normal">BUs Besar</h2>
+                                        <h2 className="text-white text-sm font-normal">{bus?.type}</h2>
                                     </div>
                                 </div>
                                 <div className={"mb-3 w-11/12 mx-auto"}>
                                     <div className="border-b pb-2 border-gray-200 w-full">
-                                        <h1 className="text-xl text-gray-700 font-semibold">HINO</h1>
+                                        <h1 className="text-xl text-gray-700 font-semibold">{vendorName}</h1>
                                     </div>
                                     <div className={"my-2"}>
                                         <p className={"text-sm text-gray-500"}>
-                                            Deskripsi HINO {brandName} ({categoryName})
+                                            Deskripsi {vendorName} {brandName} ({categoryName})
                                         </p>
                                     </div>
                                     <div className="my-5 w-full mx-auto">

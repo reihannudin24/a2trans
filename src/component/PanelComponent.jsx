@@ -2,7 +2,7 @@ import { confirmDelete, textPopUp } from "../function/swal";
 import apiAuth from "../function/axiosAuth";
 import { useState, useEffect } from "react";
 import { checkCategoryById, checkMerekById } from "../function/function";
-import apiImage from "../function/axiosImage";
+// import apiImage from "../function/axiosImage";
 
 
 export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => {
@@ -25,7 +25,7 @@ export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => 
         if (loop === true) {
             fetchData();
         }
-    }, [item]);
+    }, [item, loop]);
 
     const handleDelete = async (id, e) => {
         if (e) e.preventDefault();

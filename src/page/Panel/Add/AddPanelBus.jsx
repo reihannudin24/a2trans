@@ -8,7 +8,7 @@ import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
 
 
 function AddPanelBus() {
-    const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
+    // const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
     const [selectedThumbFile, setSelectedThumbFile] = useState(null);
 
     const [busName, setBusName] = useState("");
@@ -23,10 +23,10 @@ function AddPanelBus() {
     const [merek, setMerek] = useState([])
     const [vendor, setVendor] = useState([])
 
-    const handleFileChangeGallery = (event) => {
-        const files = Array.from(event.target.files);
-        setSelectedGalleryFiles(files);
-    };
+    // const handleFileChangeGallery = (event) => {
+    //     const files = Array.from(event.target.files);
+    //     setSelectedGalleryFiles(files);
+    // };
 
     const handleFileChangeThumb = (event) => {
         const file = event.target.files[0];
@@ -49,6 +49,8 @@ function AddPanelBus() {
             vendor_id: busVendor,
             thumbnail: selectedThumbFile
         }
+
+        console.log(dataForm)
 
         try {
             // FETCHING

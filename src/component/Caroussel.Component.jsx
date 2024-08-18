@@ -171,7 +171,7 @@ export const CarousselGalleryComponent = ({ data, id }) => {
 
             {/* Mapping Gallery Image */}
             {data.map((res, index) => {
-              return (<img key={index} alt="Img" className="w-56 h-40 flex-shrink-0 object-cover radius-card-img hover:scale-105" src={`http://localhost:3000/api/bus/imagegallery/${id}/${res?.image.split("/")[3]}`} />)
+              return (<img key={index} alt="Img" className="w-56 h-40 flex-shrink-0 object-cover radius-card-img hover:scale-105" src={`http://localhost:8000/${res?.image_path}`} />)
             })}
 
           </div>

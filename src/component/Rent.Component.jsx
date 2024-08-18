@@ -1,5 +1,5 @@
-import {InputCheckbox, InputCheckboxRound} from "./Input.Component";
-import {CardProductComponent} from "./Card.Component";
+import { InputCheckbox, InputCheckboxRound } from "./Input.Component";
+import { CardProductComponent } from "./Card.Component";
 import { useState } from "react";
 
 
@@ -143,9 +143,9 @@ import { useState } from "react";
 
 
 export const RentContentComponent = ({ bus, facilities, categories }) => {
-    const [selectedCategory, setSelectedCategory] = useState([]);
     const [selectedFacilities, setSelectedFacilities] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState([]);
 
     const handleCategoryChange = (event) => {
         const value = parseInt(event.target.value);
@@ -161,6 +161,15 @@ export const RentContentComponent = ({ bus, facilities, categories }) => {
         setSelectedFacilities((prevSelected) =>
             prevSelected.includes(value)
                 ? prevSelected.filter((facility) => facility !== value)
+                : [...prevSelected, value]
+        );
+    };
+
+    const handleCategory1Change = (event) => {
+        const value = parseInt(event.target.value);
+        setSelectedCategory((prevSelected) =>
+            prevSelected.includes(value)
+                ? prevSelected.filter((category) => category !== value)
                 : [...prevSelected, value]
         );
     };
@@ -222,12 +231,13 @@ export const RentContentComponent = ({ bus, facilities, categories }) => {
                                             <ul className={"flex w-full gap-3 flex-wrap"}>
                                                 {categories.map((item, index) => (
                                                     <li key={index} className="">
-                                                        <InputCheckboxRound
+                                                        <InputCheckbox
                                                             name={item.name}
-                                                            toggle={handleCategoryChange}
+                                                            toggle={handleCategory1Change}
                                                             selectedColors={selectedCategory}
                                                             value={item.id}
                                                         />
+     
                                                     </li>
                                                 ))}
                                             </ul>
