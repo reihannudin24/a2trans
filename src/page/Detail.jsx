@@ -1,21 +1,40 @@
-import { CardDetialComponent } from "../component/Card.Component"
 import { CarousselGalleryComponent } from "../component/Caroussel.Component"
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import apiAuth from "../function/axiosAuth";
-import {textPopUp} from "../function/swal";
-import {useParams} from "react-router-dom";
+import { textPopUp } from "../function/swal";
+import { useParams } from "react-router-dom";
+import { checkCategoryById, checkMerekById } from "../function/function";
 
 function Detail() {
+    const [brandName, setBrandName] = useState('');
+    const [categoryName, setCategoryName] = useState('');
+    const [imageGallery, setImageGallery] = useState([]);
 
     const { id } = useParams();
     const [bus, setBus] = useState([]);
-    console.log(id)
+
+
     useEffect(() => {
         const fetchDataBus = async () => {
             try {
+
                 const response = await apiAuth.get('/bus/show', {
                     params: { id } // Mengirim id sebagai query parameter
                 });
+
+                const responseImageGallery = await apiAuth.get(`/image/bus/show?id=${id}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                setImageGallery(responseImageGallery?.data?.data || []);
+
+                const merek = await checkMerekById(response?.data?.data[0]?.merek_id);
+                const category = await checkCategoryById(response?.data?.data[0]?.categories_id);
+
+                setBrandName(merek);
+                setCategoryName(category);
                 setBus(response?.data?.data || []);
             } catch (error) {
                 console.error(error);
@@ -24,28 +43,7 @@ function Detail() {
         };
 
         fetchDataBus();
-    }, []);
-
-    console.log(bus)
-
-
-
-    // Note : Belum di kasih query jadi blm bisa detek bus by id / nama
-
-    // Data Gallery Bus
-    const arrayDummy = [
-        "/assets/img/bus/bus-1.jpg",
-        "/assets/img/bus/bus-1.jpg",
-        "/assets/img/bus/bus-1.jpg",
-        "/assets/img/bus/bus-1.jpg"
-    ]
-
-    // Note : ini gw nama asal dlu nnti ubah aja
-    const arrayDummyBus = {
-        status: true,
-        nama_bus: "Bus Gede",
-        thumbAsli: "/assets/img/bus/bus-1.jpg"
-    }
+    }, [bus, id]);
 
     return (
         <section className={"w-full pt-20 mx-auto container"}>
@@ -56,9 +54,9 @@ function Detail() {
                     <div className={"block md:flex gap-3 justify-between"}>
                         <div className="block gap-4 justify-center sm:justify-normal">
                             <div className={"h-img-card flex gap-4"}>
-                                <img alt="Img" className={"w-full h-full object-cover radius-card-img"} src={arrayDummyBus.thumbAsli} />
+                                <img alt="Img" className={"w-full h-full object-cover radius-card-img"} src={`http://localhost:3000/api/bus/image/${id}`} />
                             </div>
-                            <CarousselGalleryComponent data={arrayDummy} />
+                            <CarousselGalleryComponent data={imageGallery} id={id} />
                             <div className={"w-11/12 lg:w-full mx-auto py-5 "}>
                                 <div>
                                     <div>
@@ -106,7 +104,7 @@ function Detail() {
                                     </div>
                                     <div className={"my-2"}>
                                         <p className={"text-sm text-gray-500"}>
-                                            Deskripsi HINO RK8JSKA (BIGBUS)
+                                            Deskripsi HINO {brandName} ({categoryName})
                                         </p>
                                     </div>
                                     <div className="my-5 w-full mx-auto">
@@ -121,9 +119,9 @@ function Detail() {
                             <div className={"w-full"}>
                                 <ul className={"w-full flex "}>
                                     <li className={"w-4/12 "}>
-                                        <div className={"w-11/12 text-center  py-3 mx-auto cursor-pointer bg-gray-500/80 rounded-lg"}>
-                                            <div className={"my-2"}>
-                                                <h2 className={"text-xl text-white"}>48</h2>
+                                        <div className={"w-11/12 text-center py-3 mx-auto cursor-pointer bg-red-500 rounded-lg flex flex-wrap justify-between h-full"}>
+                                            <div className={"my-2 w-11/12"}>
+                                                <p className={"text-xl text-white"}>{bus[0]?.seat}</p>
                                             </div>
                                             <div className={"w-11/12 mx-auto"}>
                                                 <p className={"text-white text-sm font-light "}>Kapasitas Penumpang</p>
@@ -131,22 +129,22 @@ function Detail() {
                                         </div>
                                     </li>
                                     <li className={"w-4/12 "}>
-                                        <div className={"w-11/12 text-center  py-3 mx-auto cursor-pointer bg-gray-500/80 rounded-lg"}>
-                                            <div className={"my-2"}>
-                                                <h2 className={"text-xl text-white"}>48</h2>
+                                        <div className={"w-11/12 text-center py-3 mx-auto cursor-pointer bg-red-500 rounded-lg flex flex-wrap justify-between h-full"}>
+                                            <div className={"my-2 w-11/12"}>
+                                                <p className={"text-xl text-white"}>{categoryName}</p>
                                             </div>
                                             <div className={"w-11/12 mx-auto"}>
-                                                <p className={"text-white text-sm font-light "}>Kapasitas Penumpang</p>
+                                                <p className={"text-white text-sm font-light"}>Category</p>
                                             </div>
                                         </div>
                                     </li>
                                     <li className={"w-4/12 "}>
-                                        <div className={"w-11/12 text-center  py-3 mx-auto cursor-pointer bg-gray-500/80 rounded-lg"}>
-                                            <div className={"my-2"}>
-                                                <h2 className={"text-xl text-white"}>48</h2>
+                                        <div className={"w-11/12 text-center py-3 mx-auto cursor-pointer bg-red-500 rounded-lg flex flex-wrap justify-between h-full"}>
+                                            <div className={"my-2 w-11/12"}>
+                                                <p className={"text-white text-xl font-light "}>48</p>
                                             </div>
                                             <div className={"w-11/12 mx-auto"}>
-                                                <p className={"text-white text-sm font-light "}>Kapasitas Penumpang</p>
+                                                <p className={"text-white text-sm font-light "}>Vendor</p>
                                             </div>
                                         </div>
                                     </li>
@@ -159,16 +157,16 @@ function Detail() {
                                     </div>
                                     <div className="w-10/12 my-3 mx-auto">
                                         <ul className="list-disc">
-                                            <li  className="my-4 text-gray-500">
+                                            <li className="my-4 text-gray-500">
                                                 <p className="text-sm text-gray-500">facility</p>
                                             </li>
-                                            <li  className="my-4 text-gray-500">
+                                            <li className="my-4 text-gray-500">
                                                 <p className="text-sm text-gray-500">facility</p>
                                             </li>
-                                            <li  className="my-4 text-gray-500">
+                                            <li className="my-4 text-gray-500">
                                                 <p className="text-sm text-gray-500">facility</p>
                                             </li>
-                                            <li  className="my-4 text-gray-500">
+                                            <li className="my-4 text-gray-500">
                                                 <p className="text-sm text-gray-500">facility</p>
                                             </li>
                                             {/*{item.facilities && item.facilities.map((facility, index) => (*/}

@@ -18,11 +18,13 @@ function EditPanelBus() {
     const [description, setDescription] = useState("");
     const [busCategory, setBusCategory] = useState("");
     const [busMerek, setbusMerek] = useState("");
+    const [busVendor, setbusVendor] = useState("");
     const [busType, setBusType] = useState("");
     const [busSeat, setBusSeat] = useState("");
 
     const [categories, setCategories] = useState([])
     const [merek, setMerek] = useState([])
+    const [vendor, setVendor] = useState([])
 
     const handleFileChangeThumb = (event) => {
         const file = event.target.files[0];
@@ -39,28 +41,33 @@ function EditPanelBus() {
             seat: busSeat,
             categories_id: busCategory,
             type: busType,
-            merek_id: busType
+            brand_id: busMerek,
+            vandor_id: "2",
+            thumbnail: selectedThumbFile
         }
+
+        console.log(dataForm)
 
         try {
             // FETCHING
-            const responseData = await apiAuth.post('/bus/update', dataForm)
+            const responseData = await apiImage.post('/bus/update', dataForm)
+            console.log(responseData)
 
             // // RESPONE
             if (responseData.status === 200) {
 
-                const formDataThumb = new FormData();
-                formDataThumb.append('bus_id', id);
-                formDataThumb.append('thumb', true);
-                formDataThumb.append('files', selectedThumbFile);
+                // const formDataThumb = new FormData();
+                // formDataThumb.append('bus_id', id);
+                // formDataThumb.append('thumb', true);
+                // formDataThumb.append('files', selectedThumbFile);
 
-                const responseThumb = await apiImage.post('/bus/add/new/image/bus', formDataThumb);
+                // const responseThumb = await apiImage.post('/bus/add/new/image/bus', formDataThumb);
 
-                if (responseThumb.data.status === 200) {
-                    console.log('data bus uploaded successfully');
-                    event.target.reset();
-                    textPopUp("Success", "Berhasil menambah data kedatabase", "success")
-                }
+                // if (responseThumb.data.status === 200) {
+                console.log('data bus uploaded successfully');
+                event.target.reset();
+                textPopUp("Success", "Berhasil menambah data kedatabase", "success")
+                // }
 
 
                 return;
@@ -76,29 +83,32 @@ function EditPanelBus() {
     const checkDataCategory = useCallback(async () => {
         const responseCategories = await apiAuth.get('/categories/show');
         const responseMerek = await apiAuth.get('/brand/show');
-        if (responseCategories.data.data.length === 0 || responseMerek.data.data.length === 0) return navigate("/panel/bus")
-        setCategories(responseCategories.data.data)
-        setMerek(responseMerek.data.data)
-    }, [navigate])
+        const responseVendor = await apiAuth.get('/vendor/show');
+        if (responseVendor.data.data?.vendors.length !== 0 || responseCategories.data.data?.categories.length !== 0 || responseMerek.data.data?.brand.length !== 0) {
+            setCategories(responseCategories.data.data?.categories)
+            setMerek(responseMerek.data.data?.brand)
+            setVendor(responseVendor.data.data?.vendors)
+        }
+    }, [])
 
     const [loop, setLoop] = useState(true)
     const checkData = useCallback(async () => {
         const responseData = await apiAuth.get(`/bus/show?id=${id}`);
-        if (responseData.data.data.length === 0) return navigate("/panel/bus")
-        setBusName(responseData.data.data[0].name);
-        setDescription(responseData.data.data[0].description);
-        setBusCategory(responseData.data.data[0].categories_id);
-        setbusMerek(responseData.data.data[0].merek_id);
-        setBusType(responseData.data.data[0].type);
-        setBusSeat(responseData.data.data[0].seat);
+        if (responseData.data.data?.buses.length === 0) return navigate("/panel/bus")
+        setBusName(responseData.data.data?.buses[0].name);
+        setDescription(responseData.data.data?.buses[0].description);
+        setBusCategory(responseData.data.data?.buses[0].categories_id);
+        setbusMerek(responseData.data.data?.buses[0].brand_id);
+        setBusType(responseData.data.data?.buses[0].type);
+        setBusSeat(responseData.data.data?.buses[0].seat);
 
         setLoop(false);
     }, [id, navigate]);
 
 
     useEffect(() => {
-        checkDataCategory()
         if (loop === true) {
+            checkDataCategory()
             checkData()
         }
     }, [loop, checkData, checkDataCategory])
@@ -154,15 +164,25 @@ function EditPanelBus() {
                                         </div>
                                     </div>
 
-                                    <div className="mb-5">
-                                        <LabelText text={"Seat"} htmlFor={"seat"} />
-                                        <InputNumber id={"seat"} value={busSeat} set={setBusSeat} placeholder={"Enter Bus Seat"} />
+                                    <div className="-mx-3 flex flex-wrap">
+                                        <div className="w-full px-3 sm:w-1/2">
+                                            <div className="mb-5">
+                                                <LabelText text={"Seat"} htmlFor={"seat"} />
+                                                <InputNumber id={"seat"} value={busSeat} set={setBusSeat} placeholder={"Enter Bus Seat"} />
+                                            </div>
+                                        </div>
+                                        <div className="w-full px-3 sm:w-1/2">
+                                            <div className="mb-5">
+                                                <LabelText text={"Vendor"} htmlFor={"vendor"} />
+                                                <InputSelectOption data={vendor} id={"vendor"} value={busVendor} set={setbusVendor} text={"Pilih Vendor"} />
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div>
                                         <button
                                             type="submit"
-                                            className="hover:shadow-form w-full rounded-md bg-blue-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                                            className="hover:shadow-form w-full rounded-md bg-red-500 py-3 px-8 text-center text-base font-semibold text-white outline-none">
                                             Submit
                                         </button>
                                     </div>

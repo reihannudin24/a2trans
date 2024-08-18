@@ -1,28 +1,21 @@
 import { useCallback, useEffect, useState } from "react";
 import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
-// import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
-import { InputImage, InputText } from "../../../component/Input.Component";
+import { InputText } from "../../../component/Input.Component";
 import { useNavigate, useParams } from "react-router-dom";
 import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
+import apiJson from "../../../function/axios";
 
-function EditPanelCategory() {
+function EditPanelVendor() {
     const { id } = useParams();
 
     const navigate = useNavigate()
 
     const [name, setName] = useState("");
-    // const [selectedFiles, setSelectedFiles] = useState([]);
-
-    // const handleFileChangeThumb = (event) => {
-    //     const file = event.target.files[0];
-    //     setSelectedFiles(file);
-    // };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         if (!name) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
@@ -34,26 +27,12 @@ function EditPanelCategory() {
         }
 
         try {
-            const responseData = await apiAuth.put('/categories/update', dataForm)
+            const responseData = await apiAuth.put('/vendor/update', dataForm)
 
             // RESPONE
             if (responseData.status === 200) {
-                // if (selectedFiles.length !== 0) {
-
-                //     const formDataFiles = new FormData();
-                //     formDataFiles.append('category_id', id);
-                //     formDataFiles.append('category', true);
-                //     formDataFiles.append('files', selectedFiles);
-
-                //     const responseFiles = await apiImage.post('/categories/add/new/image', formDataFiles);
-                //     if (responseFiles.data.status === 200) {
-                //         console.log('data category uploaded successfully');
-                //         textPopUp("Success", "Berhasil menambah data kedatabase", "success")
-                //     }
-                // } else {
                 console.log('data category uploaded successfully');
                 textPopUp("Success", "Berhasil menambah data kedatabase", "success")
-                // }
 
                 return;
             } else {
@@ -67,9 +46,9 @@ function EditPanelCategory() {
 
     const [loop, setLoop] = useState(true)
     const checkData = useCallback(async () => {
-        const responseData = await apiAuth.get(`/categories/show?id=${id}`);
-        if (responseData.data.data.categories.length === 0) return navigate("/panel/bus")
-        setName(responseData.data.data.categories[0].name);
+        const responseData = await apiJson.get(`/vendor/show?id=${id}`);
+        if (responseData.data.data.vendors.length === 0) return navigate("/panel/bus")
+        setName(responseData.data.data.vendors[0].name);
 
 
         setLoop(false);
@@ -99,14 +78,9 @@ function EditPanelCategory() {
                             <div className="py-8 pt-6 px-9">
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-5">
-                                        <LabelText text={"Category Bus"} htmlFor={"category_bus"} />
-                                        <InputText id={"category_bus"} value={name} set={setName} placeholder={"Enter Category Bus"} />
+                                        <LabelText text={"Merek Bus"} htmlFor={"merek_bus"} />
+                                        <InputText id={"merek_bus"} value={name} set={setName} placeholder={"Enter Merek Bus"} />
                                     </div>
-
-                                    {/* <div className="mb-5">
-                                        <LabelText text={"Image Category"} htmlFor={"image_category"} />
-                                        <InputImage id={"image_category"} change={handleFileChangeThumb} multiple={false} />
-                                    </div> */}
 
                                     <div>
                                         <button
@@ -126,4 +100,4 @@ function EditPanelCategory() {
     )
 }
 
-export default EditPanelCategory;
+export default EditPanelVendor;

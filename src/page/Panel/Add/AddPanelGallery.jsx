@@ -7,7 +7,7 @@ import { InputImage, InputSelectOption, InputNumber, InputText, InputTextArea } 
 import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
 
 
-function AddPanelBus() {
+function AddPanelGallery() {
     const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
     const [selectedThumbFile, setSelectedThumbFile] = useState(null);
 
@@ -207,4 +207,4 @@ function AddPanelBus() {
     )
 }
 
-export default AddPanelBus;
+export default AddPanelGallery;

@@ -22,7 +22,7 @@ export default function Login() {
     };
 
     console.log("email : ", state.email === "")
-    console.log("password : ", state?.email === "")
+    console.log("password : ", state?.email === "", state?.email)
 
 
     const handleSubmit = async (e) => {
@@ -44,14 +44,10 @@ export default function Login() {
             navigate('/');
         } catch (err) {
             console.error(err);
-            textPopUp("Error", "Login failed. Please check your credentials.", "error");
+            textPopUp("Error", `Login failed. Please check your credentials.`, "error");
             navigate('/login');
         }
     };
-
-
-    console.log(state.email)
-    console.log(state.password)
 
     return (
         <>
@@ -148,12 +144,12 @@ function InputField({ label, id, name, extra, type, placeholder, variant, state,
                 onChange={onChange}
                 placeholder={placeholder}
                 className={`mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none ${disabled === true
-                        ? "!border-none !bg-gray-100  "
-                        : inputState === "error"
-                            ? "border-red-500 text-red-500 placeholder:text-red-500 "
-                            : inputState === "success"
-                                ? "border-red-500 text-black placeholder:text-black"
-                                : "border-gray-200 "
+                    ? "!border-none !bg-gray-100  "
+                    : inputState === "error"
+                        ? "border-red-500 text-red-500 placeholder:text-red-500 "
+                        : inputState === "success"
+                            ? "border-red-500 text-black placeholder:text-black"
+                            : "border-gray-200 "
                     }`}
             />
         </div>

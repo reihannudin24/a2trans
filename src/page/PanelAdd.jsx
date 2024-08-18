@@ -5,7 +5,9 @@ import { NavbarPanelComponent } from "../component/Navbar.Component";
 import AddPanelMerek from "./Panel/Add/AddPanelMerek";
 import AddPanelCategories from "./Panel/Add/AddPanelCategories";
 import AddPanelFacilities from "./Panel/Add/AddPanelFacilities";
+import AddPanelVendor from "./Panel/Add/AddPanelVendor";
 import NotFound from "./NotFound";
+import AddPanelGallery from "./Panel/Add/AddPanelGallery";
 
 export default function PanelAdd() {
     return (
@@ -15,8 +17,10 @@ export default function PanelAdd() {
             <div>
                 <Routes>
                     <Route path={"new/bus"} element={<AddPanelBus />} />
+                    <Route path={"new/gallery/:id"} element={<AddPanelGallery />} />
                     <Route path={"new/facilities"} element={<AddPanelFacilities />} />
                     <Route path={"new/categories"} element={<AddPanelCategories />} />
+                    <Route path={"new/vendor"} element={<AddPanelVendor />} />
                     <Route path={"new/brand"} element={<AddPanelMerek />} />
                     <Route path="*" element={<NotFound />} /> {/* Handle other undefined paths */}
                 </Routes>

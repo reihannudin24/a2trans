@@ -4,8 +4,8 @@ import { textPopUp } from "../../function/swal";
 import { CardPanelMerekComponent } from "../../component/PanelComponent";
 import { NavbarNewPanelComponent } from "../../component/Navbar.Component";
 import { WidgetComponent } from "../../component/Widget.Component";
-import apiAuth from "../../function/axiosAuth";
 import { Bus, Seat } from "@phosphor-icons/react";
+import apiJson from "../../function/axios";
 import { BiCategory } from "react-icons/bi";
 import { BsTag } from "react-icons/bs";
 
@@ -16,49 +16,71 @@ function PanelMerek() {
     const [bus, setBus] = useState([]);
     const [category, setCategory] = useState([]);
     const [merek, setMerek] = useState([]);
+    const [vendor, setVendor] = useState([]);
+    const [loop, setLoop] = useState(true);
+
+
 
     useEffect(() => {
         const fetchData = async () => {
+
             try {
-                const response = await apiAuth.get('/bus/show', {
+                const response = await apiJson.get('/bus/show', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
-                setBus(response?.data?.data || []);
+
+                setBus(response?.data?.data?.buses || []);
             } catch (error) {
                 console.error(error);
                 textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
 
             try {
-                const response = await apiAuth.get('/categories/show', {
+                const response = await apiJson.get('/categories/show', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
-                setCategory(response?.data?.data || []);
+                setCategory(response?.data?.data?.categories || []);
             } catch (error) {
                 console.error(error);
                 textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
 
             try {
-                const response = await apiAuth.get('/brand/show', {
+                const response = await apiJson.get('/brand/show', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
-                setMerek(response?.data?.data || []);
+                setMerek(response?.data?.data?.brand || []);
             } catch (error) {
                 console.error(error);
                 textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
+
+            try {
+                const response = await apiJson.get('/vendor/show', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                setVendor(response?.data?.data?.vendors || []);
+            } catch (error) {
+                console.error(error);
+                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
+            }
+
+            setLoop(false)
 
         };
 
-        fetchData();
-    }, []);
+        if (loop === true) {
+            fetchData();
+        }
+    }, [loop]);
 
 
     return (
@@ -90,8 +112,8 @@ function PanelMerek() {
                     <li className={"w-3/12"}>
                         <WidgetComponent
                             icon={<Seat className="h-6 w-6" />}
-                            title={"Total Seat"}
-                            subtitle={bus.reduce((acc, bus) => acc + bus.seat, 0) || 0}
+                            title={"Total Vendor"}
+                            subtitle={vendor.length}
                         />
                     </li>
                 </ul>

@@ -1,9 +1,6 @@
 import {useEffect, useState} from "react";
-import { HeaderRent } from "../component/Banner.Component";
 import { RentContentComponent } from "../component/Rent.Component";
-import {useNavigate} from "react-router-dom";
-import apiAuth from "../function/axiosAuth";
-import {textPopUp} from "../function/swal";
+import apiJson from "../function/axios";
 
 
 function Rent() {
@@ -15,7 +12,7 @@ function Rent() {
     useEffect(() => {
         const fetchDataBus = async () => {
             try {
-                const response = await apiAuth.get('/bus/show', {
+                const response = await apiJson.get('/bus/show', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -23,12 +20,12 @@ function Rent() {
                 setBus(response?.data?.data || []);
             } catch (error) {
                 console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
+                // textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
         };
         const fetchFacilities = async () => {
           try{
-              const response = await apiAuth.get('/facilities/show', {
+              const response = await apiJson.get('/facilities/show', {
                  headers: {
                      'Content-Type' : 'application/json',
                  }
@@ -36,20 +33,20 @@ function Rent() {
               setFacilities(response?.data?.data || []);
           } catch (error) {
               console.error(error);
-              textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
+            //   textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
           }
         };
         const fetchDataCategory = async () => {
             try {
-                const response = await apiAuth.get('/categories/show', {
+                const response = await apiJson.get('/categories/show', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
-                setCategories(response?.data?.data || []);
+                setCategories(response?.data?.data?.categories || []);
             } catch (error) {
                 console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
+                // textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
         };
 

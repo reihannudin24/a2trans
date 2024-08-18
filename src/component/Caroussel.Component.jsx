@@ -1,50 +1,48 @@
-import { Bus, Van, CaretLeft, CaretRight } from "@phosphor-icons/react";
+import { Bus, CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { useState, useRef, useEffect } from "react"
 
 import { useNavigate } from "react-router-dom";
 
 export const CarousselComponent = ({ categories }) => {
   return (
-      <d>
-        <section className="relative h-full">
-          <div className={"h-full"} style={{ maxHeight: "400px" }}>
-            <img
-                src="/assets/img/bus/banner-bus.jpg"
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
-          <div
-              className={
-                "relative h-60 mx-auto justify-center items-center"
-              }
-              style={{
-                minHeight: "600px",
-                maxHeight: "800px",
-                maxWidth: "1500px",
-              }}
-          >
-            <div
-                className={
-                  "absolute md:w-10/12 w-11/12 mx-auto bottom-20 lg:bottom-10 left-0 right-0"
-                }
-            >
-              <div className={"lg:flex lg:w-full block justify-between"}>
-                <div className={"w-full lg:w-8/12"}>
-                  <h1 className="text-white mb-5 lg:mt-20 text-3xl md:text-4xl font-extrabold tracking-tight leading-none xl:text-4xl dark:text-white drop-shadow-xl">
-                    Yuk, cari tiket bus dan travel terbaik untuk kebutuhanmu.
-                  </h1>
-                </div>
-                <div className={"w-full lg:w-4/12 ms-auto"}>
-                  <div className={"absolute w-full -bottom-50 z-20 lg:relative"}>
-                    <CardBannerDes categories={categories} />
-                  </div>
-                </div>
+    <section className="relative h-full">
+      <div className={"h-full"} style={{ maxHeight: "400px" }}>
+        <img
+          src="/assets/img/bus/banner-bus.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </div>
+      <div
+        className={
+          "relative h-60 mx-auto justify-center items-center"
+        }
+        style={{
+          minHeight: "600px",
+          maxHeight: "800px",
+          maxWidth: "1500px",
+        }}
+      >
+        <div
+          className={
+            "absolute md:w-10/12 w-11/12 mx-auto bottom-20 lg:bottom-10 left-0 right-0"
+          }
+        >
+          <div className={"lg:flex lg:w-full block justify-between"}>
+            <div className={"w-full lg:w-8/12"}>
+              <h1 className="text-white mb-5 lg:mt-20 text-3xl md:text-4xl font-extrabold tracking-tight leading-none xl:text-4xl dark:text-white drop-shadow-xl">
+                Yuk, cari tiket bus dan travel terbaik untuk kebutuhanmu.
+              </h1>
+            </div>
+            <div className={"w-full lg:w-4/12 ms-auto"}>
+              <div className={"absolute w-full -bottom-50 z-20 lg:relative"}>
+                <CardBannerDes categories={categories} />
               </div>
             </div>
           </div>
-        </section>
-      </d>
+        </div>
+      </div>
+    </section>
   );
 };
 
@@ -57,41 +55,41 @@ const PopupDes = ({ toggle, onSelect, categories }) => {
   };
 
   return (
-      <>
-        <div
-            onClick={toggle}
-            className={"fixed bg-gray-700/50 top-0 bottom-0 left-0 right-0 z-50 h-screen w-full"}
-        />
-        <div className="fixed z-50 top-0 left-0 w-full h-full bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 shadow-md rounded-md w-2/3 lg:w-1/3">
-            <h3 className="text-md sm:text-lg font-bold mb-2">
-              Pilih tipe kendaraan
-            </h3>
-            <ul>
-              {categories?.map((item) => (
-                  <li
-                      key={item.id}
-                      className="cursor-pointer hover:bg-gray-100 py-3 px-2"
-                      onClick={() => handleSelect(item?.id)}
-                  >
-                    {item?.name}
-                  </li>
-              ))}
-              <div className={"w-full mt-5"}>
-                <button onClick={toggle} className={"bg-red-600 w-full text-sm text-white py-3 px-2 rounded-md"}>
-                  Tutup
-                </button>
-              </div>
-            </ul>
-          </div>
+    <>
+      <div
+        onClick={toggle}
+        className={"fixed bg-gray-700/50 top-0 bottom-0 left-0 right-0 z-50 h-screen w-full"}
+      />
+      <div className="fixed z-50 top-0 left-0 w-full h-full bg-opacity-50 flex justify-center items-center">
+        <div className="bg-white p-6 shadow-md rounded-md w-2/3 lg:w-1/3">
+          <h3 className="text-md sm:text-lg font-bold mb-2">
+            Pilih tipe kendaraan
+          </h3>
+          <ul>
+            {categories?.map((item, index) => (
+              <li
+                key={index}
+                className="cursor-pointer hover:bg-gray-100 py-3 px-2"
+                onClick={() => handleSelect(item?.id)}
+              >
+                {item?.name}
+              </li>
+            ))}
+            <div className={"w-full mt-5"}>
+              <button onClick={toggle} className={"bg-red-600 w-full text-sm text-white py-3 px-2 rounded-md"}>
+                Tutup
+              </button>
+            </div>
+          </ul>
         </div>
-      </>
+      </div>
+    </>
   );
 };
 
 
 
-const CardBannerDes = ({categories}) => {
+const CardBannerDes = ({ categories }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("Pilih Tipe Kendaraan");
 
@@ -124,7 +122,7 @@ const CardBannerDes = ({categories}) => {
 
 
           {showPopup && (
-              <PopupDes toggle={togglePopup} categories={categories} onSelect={handleLocationSelect} />
+            <PopupDes toggle={togglePopup} categories={categories} onSelect={handleLocationSelect} />
           )}
         </div>
       </div>
@@ -134,7 +132,7 @@ const CardBannerDes = ({categories}) => {
 
 
 
-export const CarousselGalleryComponent = ({ data }) => {
+export const CarousselGalleryComponent = ({ data, id }) => {
 
   const scrollRef = useRef(null);
   const [showLeftButton, setShowLeftButton] = useState(false);
@@ -172,8 +170,8 @@ export const CarousselGalleryComponent = ({ data }) => {
           <div className="flex gap-4 lg:gap-3 pb-4">
 
             {/* Mapping Gallery Image */}
-            {data.map(res => {
-              return (<img alt="Img" className="w-56 h-40 flex-shrink-0 object-cover radius-card-img hover:scale-105" src={res} />)
+            {data.map((res, index) => {
+              return (<img key={index} alt="Img" className="w-56 h-40 flex-shrink-0 object-cover radius-card-img hover:scale-105" src={`http://localhost:3000/api/bus/imagegallery/${id}/${res?.image.split("/")[3]}`} />)
             })}
 
           </div>

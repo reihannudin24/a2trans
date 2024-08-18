@@ -1,5 +1,5 @@
-import {InputCheckbox, InputCheckboxRound, InputSearch} from "./Input.Component";
-import {CardComponent, CardProductComponent, ListCardComponent} from "./Card.Component";
+import {InputCheckbox, InputCheckboxRound} from "./Input.Component";
+import {CardProductComponent} from "./Card.Component";
 import { useState } from "react";
 
 
@@ -280,18 +280,18 @@ export const RentContentComponent = ({ bus, facilities, categories }) => {
 }
 
 
-{/*/!* MOBILE *!/*/}
-{/*<div className={"block lg:hidden w-11/12"}>*/}
-{/*    <ul className={"flex "}>*/}
-{/*        {categories.map((item, index) => (*/}
-{/*            <li key={index} className={"w-6/12 mx-auto container"}>*/}
-{/*                <InputCheckbox*/}
-{/*                    name={item.name}*/}
-{/*                    toggle={handleCategoryChange}*/}
-{/*                    selectedColors={selectedCategory}*/}
-{/*                    value={item.id}*/}
-{/*                />*/}
-{/*            </li>*/}
-{/*        ))}*/}
-{/*    </ul>*/}
-{/*</div>*/}
+// {/*/!* MOBILE *!/*/}
+// {/*<div className={"block lg:hidden w-11/12"}>*/}
+// {/*    <ul className={"flex "}>*/}
+// {/*        {categories.map((item, index) => (*/}
+// {/*            <li key={index} className={"w-6/12 mx-auto container"}>*/}
+// {/*                <InputCheckbox*/}
+// {/*                    name={item.name}*/}
+// {/*                    toggle={handleCategoryChange}*/}
+// {/*                    selectedColors={selectedCategory}*/}
+// {/*                    value={item.id}*/}
+// {/*                />*/}
+// {/*            </li>*/}
+// {/*        ))}*/}
+// {/*    </ul>*/}
+// {/*</div>*/}

@@ -5,13 +5,8 @@ import {
     Lightbulb,
     CaretRight,
     ExclamationMark,
-    Star,
     CaretDown,
-    ChevronDown,
     EnvelopeSimple,
-    Phone,
-    MapPin,
-    Buildings,
     WhatsappLogo, InstagramLogo
 } from "@phosphor-icons/react"
 import { ReviewCardComponent } from "./Card.Component";
@@ -226,7 +221,7 @@ export const Promo3Component = () => {
                             <ul className={"w-full block md:flex flex-wrap "}>
                                 {contact.map((item, index) => {
                                     return(
-                                        <li className={"w-full my-4 md:my-6 md:w-6/12 lg:w-4/12"}>
+                                        <li key={index} className={"w-full my-4 md:my-6 md:w-6/12 lg:w-4/12"}>
                                             <ContactCardComponent  icon={item?.icon} name={item?.label} value={item?.value}/>
                                         </li>
                                     )

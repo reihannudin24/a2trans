@@ -10,10 +10,10 @@ function AddPanelCategories() {
     const [name, setName] = useState("");
     const [selectedFiles, setSelectedFiles] = useState([]);
 
-    const handleFileChangeThumb = (event) => {
-        const file = event.target.files[0];
-        setSelectedFiles(file);
-    };
+    // const handleFileChangeThumb = (event) => {
+    //     const file = event.target.files[0];
+    //     setSelectedFiles(file);
+    // };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -27,22 +27,22 @@ function AddPanelCategories() {
         }
 
         try {
-            const responseData = await apiAuth.post('/categories/create/new', dataForm)
+            const responseData = await apiAuth.post('/categories/add/new', dataForm)
 
             // RESPONE
-            if (responseData.status === 200) {
+            if (responseData.status === 201) {
 
-                const formDataFiles = new FormData();
-                formDataFiles.append('category_id', responseData.data.data[0].insertId);
-                formDataFiles.append('category', true);
-                formDataFiles.append('files', selectedFiles);
+                // const formDataFiles = new FormData();
+                // formDataFiles.append('category_id', responseData.data.data[0].insertId);
+                // formDataFiles.append('category', true);
+                // formDataFiles.append('files', selectedFiles);
 
-                const responseFiles = await apiImage.post('/categories/add/new/image', formDataFiles);
-                if (responseFiles.data.status === 200) {
-                    console.log('data category uploaded successfully');
-                    setName("");
-                    textPopUp("Success", "Berhasil menambah data kedatabase", "success")
-                }
+                // const responseFiles = await apiImage.post('/categories/add/new/image', formDataFiles);
+                // if (responseFiles.data.status === 200) {
+                console.log('data category uploaded successfully');
+                setName("");
+                textPopUp("Success", "Berhasil menambah data kedatabase", "success")
+                // }
 
                 return;
             } else {
@@ -74,10 +74,10 @@ function AddPanelCategories() {
                                         <LabelText text={"Category Bus"} htmlFor={"category_bus"} />
                                         <InputText id={"category_bus"} value={name} set={setName} placeholder={"Enter Category Bus"} />
                                     </div>
-                                    <div className="mb-5">
+                                    {/* <div className="mb-5">
                                         <LabelText text={"Image Category"} htmlFor={"image_category"} />
                                         <InputImage id={"image_category"} change={handleFileChangeThumb} multiple={false} />
-                                    </div>
+                                    </div> */}
 
                                     <div>
                                         <button

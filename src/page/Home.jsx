@@ -8,8 +8,8 @@ import {
 } from "../component/Promo.Component"
 import {ListCardProductComponent} from "../component/Card.Component";
 import {useEffect, useState} from "react";
-import apiAuth from "../function/axiosAuth";
 import {textPopUp} from "../function/swal";
+import apiJson from "../function/axios";
 
 function Home() {
 
@@ -19,7 +19,7 @@ function Home() {
     useEffect(() => {
         const fetchDataBus = async () => {
             try {
-                const response = await apiAuth.get('/bus/show', {
+                const response = await apiJson.get('/bus/show', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -32,19 +32,19 @@ function Home() {
         };
         const fetchDataCategory = async () => {
             try {
-                const response = await apiAuth.get('/categories/show', {
+                const response = await apiJson.get('/categories/show', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
-                setCategories(response?.data?.data || []);
+                setCategories(response?.data?.data?.categories || []);
             } catch (error) {
                 console.error(error);
                 textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
         };
 
-        fetchDataBus();
+        // fetchDataBus();
         fetchDataCategory()
     }, []);
 

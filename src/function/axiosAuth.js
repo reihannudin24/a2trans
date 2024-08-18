@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-// const token = localStorage.getItem('token');
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjM2MjM2NTR9.bzIcUIp1XvDnwJKYdvVYYMHPtJfg3uvjNG8mlEsaq44";
+const token = localStorage.getItem('token');
+// const token = "1|36oD7nrM9AWP1IFrj9vQ280uJTLiB3qmNC5rNd43d7373da0";
 const apiAuth = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: 'http://127.0.0.1:8000/api',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',

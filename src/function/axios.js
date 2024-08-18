@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Membuat instance axios baru dengan konfigurasi khusus untuk API JSON
 const apiJson = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: 'http://127.0.0.1:8000/api',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',

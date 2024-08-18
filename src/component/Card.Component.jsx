@@ -1,4 +1,4 @@
-import {Star, Fan, Monitor, User, PintGlass,  ArrowRight} from "@phosphor-icons/react";
+import {Star, Fan, Monitor, User, PintGlass} from "@phosphor-icons/react";
 import {useState} from "react";
 import {Link} from "react-router-dom";
 
@@ -110,9 +110,9 @@ export const CardProductComponent = ({ item }) => {
                                         return(
                                             <li key={index} className={"my-1"}>
                                                 <div>
-                                                    <div>
+                                                    {/* <div>
                                                         <img />
-                                                    </div>
+                                                    </div> */}
                                                     <p className={"text-md selectableText-new text-gray-600 font-normal"}>
                                                         {res?.facility_name}
                                                     </p>
@@ -264,8 +264,8 @@ export const CardComponent = ({ data }) => {
 
                                 {/* FACILITY ICON */}
                                 {/* Note : Data array dummy ada di bawah */}
-                                {FacilityArray.map(res => {
-                                    return <FacilityCardComponent Icon={res.icon} text={res.text} />
+                                {FacilityArray.map((res, index) => {
+                                    return <FacilityCardComponent key={index} Icon={res.icon} text={res.text} />
                                 })}
 
                             </div>
@@ -334,10 +334,10 @@ const FacilityCardComponent = ({ text, Icon }) => {
     )
 }
 
-const StatusCardComponent = ({ status }) => {
-    return (
-        <div className={`${status ? "bg-green-500" : "bg-red-500"} p-2 rounded-md text-white w-16 text-center mb-2`}>
-            {status ? "Ready" : "Not Ready"}
-        </div>
-    )
-}
+// const StatusCardComponent = ({ status }) => {
+//     return (
+//         <div className={`${status ? "bg-green-500" : "bg-red-500"} p-2 rounded-md text-white w-16 text-center mb-2`}>
+//             {status ? "Ready" : "Not Ready"}
+//         </div>
+//     )
+// }

@@ -4,10 +4,11 @@ import { textPopUp } from "../../function/swal";
 import { CardPanelImageGalleryComponent } from "../../component/PanelComponent";
 import { NavbarNewPanelComponent } from "../../component/Navbar.Component";
 import { WidgetComponent } from "../../component/Widget.Component";
-import apiAuth from "../../function/axiosAuth";
 import { Bus, ImageSquare } from "@phosphor-icons/react";
 import { BiCategory } from "react-icons/bi";
 import { BsTag } from "react-icons/bs";
+import apiJson from "../../function/axios";
+import apiAuth from "../../function/axiosAuth";
 
 
 function PanelGallery() {
@@ -19,62 +20,63 @@ function PanelGallery() {
     const [category, setCategory] = useState([]);
     const [merek, setMerek] = useState([]);
     const [imageGallery, setImageGallery] = useState([]);
+    const [loop, setLoop] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
+
             try {
-                const response = await apiAuth.get('/bus/show', {
+                const response = await apiJson.get('/bus/show', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
-                setBus(response?.data?.data || []);
+
+                const responseGallery = await apiAuth.get(`/bus/show?id=${id}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                setBus(response?.data?.data?.buses || []);
+                setImageGallery(responseGallery?.data?.data?.buses[0]?.images || []);
             } catch (error) {
                 console.error(error);
                 textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
 
             try {
-                const response = await apiAuth.get('/categories/show', {
+                const response = await apiJson.get('/categories/show', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
-                setCategory(response?.data?.data || []);
+                setCategory(response?.data?.data?.categories || []);
             } catch (error) {
                 console.error(error);
                 textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
 
             try {
-                const response = await apiAuth.get('/brand/show', {
+                const response = await apiJson.get('/brand/show', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
-                setMerek(response?.data?.data || []);
+                setMerek(response?.data?.data?.brand || []);
             } catch (error) {
                 console.error(error);
                 textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
 
-            try {
-                const response = await apiAuth.get(`/image/bus/show?id=${id}`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-
-                setImageGallery(response?.data?.data || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
+            setLoop(false)
 
         };
 
-        fetchData();
-    }, [id]);
+        if (loop === true) {
+            fetchData();
+        }
+    }, [loop, id]);
 
 
     return (

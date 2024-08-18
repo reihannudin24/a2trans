@@ -21,10 +21,10 @@ function AddPanelMerek() {
         }
 
         try {
-            const responseData = await apiAuth.post('/brand/create', dataForm)
+            const responseData = await apiAuth.post('/brand/add/new', dataForm)
 
             // RESPONE
-            if (responseData.status === 200) {
+            if (responseData.status === 201) {
 
                 console.log('data category uploaded successfully');
                 setName("");
