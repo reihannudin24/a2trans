@@ -9,17 +9,22 @@ export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => 
     const [brandName, setBrandName] = useState('');
     const [categoryName, setCategoryName] = useState('');
 
+    const [loop, setLoop] = useState(true)
+
     useEffect(() => {
         const fetchData = async () => {
 
-            const merek = await checkMerekById(item?.merek_id);
+            const merek = await checkMerekById(item?.brand_id);
             const category = await checkCategoryById(item?.categories_id);
             setBrandName(merek);
             setCategoryName(category);
 
+            setLoop(false);
         };
 
-        fetchData();
+        if (loop === true) {
+            fetchData();
+        }
     }, [item]);
 
     const handleDelete = async (id, e) => {
@@ -93,7 +98,7 @@ export const CardPanelFacilitiesComponent = ({ index, id, item, navigate }) => {
                     data: { id: id },
                 });
                 textPopUp("Success", `${response?.data?.message}`, "success");
-                navigate('/dashboard'); // Redirect after successful deletion
+                navigate('/panel/facilities'); // Redirect after successful deletion
             }
         } catch (err) {
             console.error(err);
@@ -104,7 +109,7 @@ export const CardPanelFacilitiesComponent = ({ index, id, item, navigate }) => {
 
     return (
         <tr key={index} className="border-b">
-            <td className="p-3 pr-0 text-end">
+            <td className="p-3 pr-0 text-start">
                 <span className="font-semibold">{item?.id}</span>
             </td>
             <td className="p-3 pl-0">
@@ -122,7 +127,7 @@ export const CardPanelFacilitiesComponent = ({ index, id, item, navigate }) => {
                     <button onClick={(e) => handleDelete(id, e)}
                         className="p-2 bg-red-500 rounded-md text-white">Delete
                     </button>
-                    <a href="/panel/facilities/edit" className="cursor-pointer p-2 bg-blue-500 rounded-md text-white">Edit</a>
+                    <a href={`/panel/edit/facilities/${id}`} className="cursor-pointer p-2 bg-blue-500 rounded-md text-white">Edit</a>
                 </div>
             </td>
         </tr>
