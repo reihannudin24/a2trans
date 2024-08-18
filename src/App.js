@@ -38,10 +38,6 @@ function App() {
 
                     <Route path={"/login"} element={<SignIn />} />
 
-                    {/*Touter ini harus udah ada token is auth true dan ada cokkies*/}
-                    {/* PANEL */}
-
-                    {/* Protected Routes */}
                     <Route path={"/panel/*"} element={<PrivateRoute element={<Panel />} />} />
                     <Route path={"/panel/add/*"} element={<PrivateRoute element={<PanelAdd />} />} />
                     <Route path={"/panel/edit/*"} element={<PrivateRoute element={<PanelEdit />} />} />

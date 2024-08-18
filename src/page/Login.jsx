@@ -7,7 +7,7 @@ import React from "react";
 export default function Login() {
 
     const navigate = useNavigate();
-    const [error, setErro] = useState('');
+    const [error, setError] = useState('');
     const [state, setState] = useState({
         email: '',
         password: ''
@@ -21,14 +21,10 @@ export default function Login() {
         });
     };
 
-    console.log("email : ", state.email === "")
-    console.log("password : ", state?.email === "", state?.email)
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!state.email || !state.password) {
-            setErro('Please fill in all fields.');
+            setError('Please fill in all fields.');
             textPopUp("Error", "Please complete all fields", "error");
             navigate('/login');
             return;
@@ -40,10 +36,13 @@ export default function Login() {
                 password: state.password
             });
 
+            const token = response?.data?.data?.user?.token
+            localStorage.setItem('token', token)
+            localStorage.setItem('isAuth', true);
+
             textPopUp("Success", "Login successful!", "success");
-            navigate('/');
+            navigate('/panel/bus');
         } catch (err) {
-            console.error(err);
             textPopUp("Error", `Login failed. Please check your credentials.`, "error");
             navigate('/login');
         }
@@ -51,7 +50,7 @@ export default function Login() {
 
     return (
         <>
-            <div className={"h-screen mx-auto w-full"} style={{ minWidth: "400px" }}>
+            <div className={"h-screen mx-auto relative w-full"} style={{ minWidth: "400px" }}>
                 <div className={"relative w-full h-screen "}>
                     <div className={"absolute z-10 w-full h-full shadow-banner"}>
                         <img src="/assets/img/bus/banner-bus.jpg" alt="" className="absolute  inset-0 w-full h-full object-cover" />
