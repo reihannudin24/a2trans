@@ -47,7 +47,7 @@ export default function SidebarComponent() {
             </nav>
             <aside
                 ref={sidebarRef}
-                className={`fixed bg-white top-0 left-0 z-50 w-64 h-screen ${sidebar ? "" : "hidden"} lg:block bg-gray-50 shadow-xl transition-all scrollbar-hide ease-in duration-300`}
+                className={`fixed bg-white top-0 left-0 rounded-xl md:rounded-none z-50 w-64 h-screen ${sidebar ? "" : "hidden"} lg:block bg-gray-50 shadow-xl transition-all scrollbar-hide ease-in duration-300`}
             >
                 <div className="h-full px-6 pb-4 scrollbar-hide overflow-y-auto bg-color-abu2 ">
                     <ul className="space-y-2 font-medium pt-10 scrollbar-hide text-color-background text-sm">
@@ -82,6 +82,9 @@ export default function SidebarComponent() {
                                     <li>
                                         <a href="/panel/brand" className="block py-3  px-2 hover:bg-red-50 hover:text-red-700  rounded-lg text-gray-500">Daftar Merek</a>
                                     </li>
+                                    <li>
+                                        <a href="/panel/vendor" className="block py-3  px-2 hover:bg-red-50 hover:text-red-700  rounded-lg text-gray-500">Daftar Vendor</a>
+                                    </li>
                                 </ul>
                             )}
                         </li>
@@ -107,7 +110,9 @@ export default function SidebarComponent() {
                                     <li>
                                         <a href="/panel/add/new/brand" className="block py-3  px-2 hover:bg-red-50 hover:text-red-700  rounded-lg text-gray-500">Tambahkan Merek</a>
                                     </li>
-
+                                    <li>
+                                        <a href="/panel/add/new/vendor" className="block py-3  px-2 hover:bg-red-50 hover:text-red-700  rounded-lg text-gray-500">Tambahkan Vendor</a>
+                                    </li>
                                 </ul>
                             )}
                         </li>

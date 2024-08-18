@@ -1,3 +1,43 @@
+import {Bus, Seat} from "@phosphor-icons/react";
+import {BiCategory} from "react-icons/bi";
+import {BsTag} from "react-icons/bs";
+
+
+export const WidgetContainerComponent = ({bus, category, merek, vendor}) => {
+    return(
+        <ul className={"gap-2 grid-cols-2 grid md:grid-cols-4"}>
+            <li className={"w-full "}>
+                <WidgetComponent
+                    icon={<Bus size={24} className="h-7 w-7" />}
+                    title={"Total Bus"}
+                    subtitle={bus.length}
+                />
+            </li>
+            <li className={"w-full "}>
+                <WidgetComponent
+                    icon={<BiCategory size={24}  className="h-6 w-6" />}
+                    title={"Total Category"}
+                    subtitle={category.length}
+                />
+            </li>
+            <li className={"w-full "}>
+                <WidgetComponent
+                    icon={<BsTag size={24} className="h-7 w-7" />}
+                    title={"Total Merek"}
+                    subtitle={merek.length}
+                />
+            </li>
+            <li className={"w-full "}>
+                <WidgetComponent
+                    icon={<Seat size={24} className="h-6 w-6" />}
+                    title={"Total Vendor"}
+                    subtitle={vendor.length}
+                />
+            </li>
+        </ul>
+    )
+}
+
 
 export const WidgetComponent = ({ icon, title, subtitle }) => {
     return (
