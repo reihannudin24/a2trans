@@ -4,10 +4,11 @@ import apiAuth from "../../../function/axiosAuth";
 import { LabelText } from "../../../component/Label.Component";
 import { InputText } from "../../../component/Input.Component";
 import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
+import {useNavigate} from "react-router-dom";
 
 function AddPanelVendor() {
     const [name, setName] = useState("");
-
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -23,14 +24,13 @@ function AddPanelVendor() {
         try {
             const responseData = await apiAuth.post('/vendor/add/new', dataForm)
 
-            // RESPONE
             if (responseData.status === 201) {
 
-                console.log('data category uploaded successfully');
+                console.log('data vendor uploaded successfully');
                 setName("");
                 textPopUp("Success", "Berhasil menambah data kedatabase", "success")
 
-                return;
+                navigate('/panel/vendor');
             } else {
                 console.error('File upload failed');
             }
@@ -41,16 +41,16 @@ function AddPanelVendor() {
     };
 
     return (
-        <div className="lg:ml-80 ml-0 lg:mr-16 mr-0 mt-0 ">
+        <div className="xl:ml-80 xl:mr-16 lg:ml-72 ml-0 lg:mr-10 mr-0 mt-0 ">
             <NavbarNewPanelComponent brandText="Dashboard" />
-            <div className="flex flex-wrap -mx-3 mb-5">
+            <div className="flex flex-wrap md:-mx-3 mb-5">
                 <div className="w-full max-w-full mb-6 mx-auto">
                     <div className="relative flex flex-col min-w-0 shadow-md rounded-2xl bg-white my-5 md:mx-4">
                         <div className="relative flex flex-col bg-clip-border rounded-2xl">
                             <div className="px-9 pt-5 flex justify-between items-stretch flex-wrap pb-0 bg-transparent">
                                 <h3 className="flex flex-col items-start justify-center ml-0 font-medium">
-                                    <span className="mr-3 font-semibold">Add Data</span>
-                                    <span className="font-medium mt-1">Menambah data ke dalam database</span>
+                                    <span className="mr-3 font-semibold">Add Data PO / perusahaan otobus</span>
+                                    <span className="font-medium mt-1">Menambah data PO / perusahaan otobus ke dalam database</span>
                                 </h3>
                             </div>
 

@@ -5,23 +5,18 @@ import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
 import { InputText, InputImage } from "../../../component/Input.Component";
 import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
+import {useNavigate} from "react-router-dom";
 
 function AddPanelCategories() {
+    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [selectedFiles, setSelectedFiles] = useState([]);
-
-    // const handleFileChangeThumb = (event) => {
-    //     const file = event.target.files[0];
-    //     setSelectedFiles(file);
-    // };
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!name || !selectedFiles) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
-
         const dataForm = {
             name: name,
         }
@@ -31,24 +26,15 @@ function AddPanelCategories() {
 
             // RESPONE
             if (responseData.status === 201) {
-
-                // const formDataFiles = new FormData();
-                // formDataFiles.append('category_id', responseData.data.data[0].insertId);
-                // formDataFiles.append('category', true);
-                // formDataFiles.append('files', selectedFiles);
-
-                // const responseFiles = await apiImage.post('/categories/add/new/image', formDataFiles);
-                // if (responseFiles.data.status === 200) {
                 console.log('data category uploaded successfully');
                 setName("");
                 textPopUp("Success", "Berhasil menambah data kedatabase", "success")
-                // }
 
-                return;
+                navigate('/panel/category');
+
             } else {
                 console.error('File upload failed');
             }
-
         } catch (error) {
             console.error('Error uploading files:', error);
         }
@@ -57,9 +43,9 @@ function AddPanelCategories() {
     const currentPath = window.location.pathname;
 
     return (
-        <div className="lg:ml-80 ml-0 lg:mr-16 mr-0 mt-0 ">
+        <div className="xl:ml-80 xl:mr-16 lg:ml-72 ml-0 lg:mr-10 mr-0 mt-0 ">
             <NavbarNewPanelComponent brandText="Dashboard" />
-            <div className="flex flex-wrap -mx-3 mb-5">
+            <div className="flex flex-wrap md:-mx-3 mb-5">
                 <div className="w-full max-w-full mb-6 mx-auto">
                     <div className="relative flex flex-col min-w-0 shadow-md rounded-2xl bg-white my-5 md:mx-4">
                         <div className="relative flex flex-col bg-clip-border rounded-2xl">

@@ -2,11 +2,8 @@ import { useEffect, useState } from "react";
 import { textPopUp } from "../../function/swal";
 import { CardPanelBusComponent } from "../../component/PanelComponent";
 import { useNavigate } from "react-router-dom";
-import {WidgetComponent, WidgetContainerComponent} from "../../component/Widget.Component";
+import {WidgetContainerComponent} from "../../component/Widget.Component";
 import { NavbarNewPanelComponent } from "../../component/Navbar.Component";
-import { Bus, Seat } from "@phosphor-icons/react";
-import { BiCategory } from "react-icons/bi";
-import { BsTag } from "react-icons/bs";
 import apiJson from "../../function/axios";
 
 function PanelBus() {
@@ -17,74 +14,42 @@ function PanelBus() {
     const [vendor, setVendor] = useState([]);
     const [loop, setLoop] = useState(true);
 
-    // You can use window.location.pathname to get the current path
-    const currentPath = window.location.pathname;
+    const fetchData = async (endpoint, setData) => {
+        try {
+            const response = await apiJson.get(endpoint, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                timeout: 20000, // Set timeout to 20 seconds
+            });
+            setData(response?.data?.data || []);
+        } catch (error) {
+            console.error(error);
+            textPopUp("Error", `Terjadi kesalahan saat mengambil data: ${error?.message}`, "error");
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
+        if (loop) {
+            fetchData('/bus/show', setBus);
+            fetchData('/categories/show', setCategory);
+            fetchData('/brand/show', setMerek);
+            fetchData('/vendor/show', setVendor);
 
-            try {
-                const response = await apiJson.get('/bus/show', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-
-                setBus(response?.data?.data?.buses || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
-
-            try {
-                const response = await apiJson.get('/categories/show', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                setCategory(response?.data?.data?.categories || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
-
-            try {
-                const response = await apiJson.get('/brand/show', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                setMerek(response?.data?.data?.brand || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
-
-            try {
-                const response = await apiJson.get('/vendor/show', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                setVendor(response?.data?.data?.vendors || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
-
-            setLoop(false)
-        };
-
-        if (loop === true) {
-            fetchData();
+            setLoop(false);
         }
     }, [loop]);
 
+
     return (
-        <div className="lg:ml-80 ml-0 lg:mr-16 mr-0 mt-0 ">
-            <NavbarNewPanelComponent brandText="Dashboard" currentPath={currentPath} />
+        <div className="xl:ml-80 xl:mr-16 lg:ml-72 ml-0 lg:mr-10 mr-0 mt-0 ">
+            <NavbarNewPanelComponent brandText="Dashboard" currentPath={""} />
             <div className={"mt-4"}>
-                <WidgetContainerComponent bus={bus} category={category} merek={merek} vendor={vendor} />
+                <WidgetContainerComponent
+                    bus={bus.length === 0 ? [] : bus?.buses}
+                    category={category.length === 0 ? [] : category?.categories}
+                    merek={merek.length === 0 ? [] : merek?.brand }
+                    vendor={vendor.length === 0 ? [] : vendor?.vendors } />
             </div>
             <div className="flex flex-wrap -mx-3 mb-5">
                 <div className="w-full max-w-full mb-6 mx-auto">
@@ -100,7 +65,7 @@ function PanelBus() {
                                 <span className="font-medium mt-1">Semua data bus dari database</span>
                             </div>
                             <div className="flex-auto block py-8 pt-6 px-9">
-                                <div className="overflow-x-auto">
+                                <div className="overflow-x-auto scrollbar-hide">
                                     <table className="w-full my-0">
                                         <thead className="align-bottom">
                                             <tr className="font-semibold text-[0.95rem] text-secondary-dark">
@@ -112,8 +77,8 @@ function PanelBus() {
                                                 <th className="pb-3 pr-12 text-end min-w-[175px]">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody className={"scroll-m-0"}>
-                                            {bus?.length === 0 ? (
+                                        <tbody className={"scroll-m-0 scrollbar-hide"}>
+                                            {bus?.buses?.length === 0 ? (
                                                 <tr>
                                                     <td colSpan="6">
                                                         <div className={"my-10 mx-4"}>
@@ -122,7 +87,7 @@ function PanelBus() {
                                                     </td>
                                                 </tr>
                                             ) : (
-                                                bus?.map((item, index) => {
+                                                bus?.buses?.map((item, index) => {
                                                     return (
                                                         <CardPanelBusComponent
                                                             key={index}

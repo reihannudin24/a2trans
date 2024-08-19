@@ -9,8 +9,8 @@ import PanelVendor from "./Panel/PanelVendor";
 
 export default function Panel() {
     return (
-        <section className={"bg-gray-50  min-h-screen py-10"}>
-            <div className={"my-10 hidden lg:block"}>
+        <section className={"bg-gray-50  min-h-screen pt-5 md:py-10"}>
+            <div className={"mt-10  lg:my-0 hidden lg:block"}>
                 <SidebarComponent />
             </div>
             <div className={"w-11/12 mx-auto lg:w-full"}>

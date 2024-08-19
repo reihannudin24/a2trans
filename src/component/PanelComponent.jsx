@@ -13,7 +13,6 @@ export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => 
 
     useEffect(() => {
         const fetchData = async () => {
-
             const merek = await checkMerekById(item?.brand_id);
             const category = await checkCategoryById(item?.categories_id);
             setBrandName(merek);
@@ -35,13 +34,9 @@ export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => 
                 const response = await apiAuth.post('/bus/delete', {
                     id: id,
                 });
-
-                // await apiAuth.delete('/image/bus/deleteall', {
-                //     data: { id_bus: id },
-                // });
                 setBus(prevBus => prevBus.filter(item => item.id !== id));
                 textPopUp("Success", `${response?.data?.message}`, "success");
-                navigate('/panel/bus');
+                window.location.reload();
             }
         } catch (err) {
             console.error(err);
@@ -55,7 +50,7 @@ export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => 
             <td className="pb-3 text-start min-w-[175px]">
                 <div className="flex items-center">
                     <div className="relative inline-block shrink-0 rounded-2xl me-3">
-                        <img src={`http://127.0.0.1:8000${item?.thumb}`} className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl" alt="" />
+                        <img src={`https://panel.a2trans.com/${item?.thumb}`} className="w-[140px] h-[100px] inline-block object-cover shrink-0 rounded-2xl" alt="" />
                     </div>
                     <div className="flex flex-col justify-start">
                         <div className="mb-1 font-semibold transition-colors duration-200 ease-in-out"> {item?.name}</div>
@@ -98,7 +93,7 @@ export const CardPanelFacilitiesComponent = ({ index, id, item, navigate }) => {
                     data: { id: id },
                 });
                 textPopUp("Success", `${response?.data?.message}`, "success");
-                navigate('/panel/facilities'); // Redirect after successful deletion
+                window.location.reload();
             }
         } catch (err) {
             console.error(err);
@@ -109,7 +104,7 @@ export const CardPanelFacilitiesComponent = ({ index, id, item, navigate }) => {
 
     return (
         <tr key={index} className="border-b">
-            <td className="p-3 pr-0 min-w-[50px] text-start">
+            <td className="p-3 ps-10 pr-0 min-w-[50px] text-start">
                 <span className="font-semibold">{item?.id}</span>
             </td>
             <td className="p-3 pl-0">
@@ -142,7 +137,7 @@ export const CardPanelVendorComponent = ({ index, id, item, navigate, setMerek }
                 });
                 setMerek(prevBus => prevBus.filter(item => item.id !== id));
                 textPopUp("Success", `${response?.data?.message}`, "success");
-                navigate('/panel/vendor');
+                window.location.reload();
             }
         } catch (err) {
             console.error(err);
@@ -185,7 +180,7 @@ export const CardPanelMerekComponent = ({ index, id, item, navigate, setMerek })
                 });
                 setMerek(prevBus => prevBus.filter(item => item.id !== id));
                 textPopUp("Success", `${response?.data?.message}`, "success");
-                navigate('/panel/brand');
+                window.location.reload();
             }
         } catch (err) {
             console.error(err);
@@ -199,7 +194,7 @@ export const CardPanelMerekComponent = ({ index, id, item, navigate, setMerek })
             <td className="p-3 pr-0 text-start">
                 <span className="font-semibold">{item?.id}</span>
             </td>
-            <td className="p-3 pl-0 text-end">
+            <td className="p-3 pl-0 text-start min-w-[140px]">
                 <div
                     className="mb-1 font-semibold transition-colors duration-200 ease-in-out"> {item?.name}</div>
             </td>
@@ -270,7 +265,7 @@ export const CardPanelCategoryComponent = ({ index, id, item, navigate, setCateg
                 });
                 setCategory(prevBus => prevBus.filter(item => item.id !== id));
                 textPopUp("Success", `${response?.data?.message}`, "success");
-                navigate('/panel/category'); // Redirect after successful deletion
+                window.location.reload();
             }
         } catch (err) {
             console.error(err);
@@ -282,7 +277,7 @@ export const CardPanelCategoryComponent = ({ index, id, item, navigate, setCateg
 
     return (
         <tr key={index} className="border-b">
-            <td className="p-3 pr-3 min-w-[50px] text-center">
+            <td className="p-3 pr-3 min-w-[50px] text-start">
                 <span className="font-semibold">{item?.id}</span>
             </td>
             <td className="p-3 pl-0">

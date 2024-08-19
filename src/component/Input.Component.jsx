@@ -131,7 +131,7 @@ export const InputNumber = ({ id, value, set, placeholder }) => {
             placeholder={placeholder}
             value={value}
             onChange={(e) => set(e.target.value)}
-            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
+            className="w-full rounded-md border  border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
         />
     )
 }
@@ -157,7 +157,7 @@ export const InputSelectOption = ({ data, id, value, set, text }) => {
             id={id}
             value={value}
             onChange={(e) => set(e.target.value)}
-            className="w-full rounded-md border border-white bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
+            className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-500 outline-none focus:border-blue-500 focus:shadow-md"
         >
             <option value={0} disabled>{text}</option>
             {data.map((res, index) => {
