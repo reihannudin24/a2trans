@@ -42,6 +42,7 @@ function AddPanelCategories() {
 
     const currentPath = window.location.pathname;
 
+
     return (
         <div className="xl:ml-80 xl:mr-16 lg:ml-72 ml-0 lg:mr-10 mr-0 mt-0 ">
             <NavbarNewPanelComponent brandText="Dashboard" />

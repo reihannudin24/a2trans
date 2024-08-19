@@ -8,6 +8,8 @@ import AddPanelFacilities from "./Panel/Add/AddPanelFacilities";
 import AddPanelVendor from "./Panel/Add/AddPanelVendor";
 import NotFound from "./NotFound";
 import AddPanelGallery from "./Panel/Add/AddPanelGallery";
+import AddPanelFacilitiesToBus from "./Panel/Add/AddPanelFacilitiesToBus";
+import PanelGallery from "./Panel/PanelGallery";
 
 export default function PanelAdd() {
     return (
@@ -18,6 +20,7 @@ export default function PanelAdd() {
             <div className={"w-11/12 mx-auto lg:w-full"}>
                 <Routes>
                     <Route path={"new/bus"} element={<AddPanelBus />} />
+                    <Route path={"new/relation/facilities/:id"} element={<AddPanelFacilitiesToBus  />} />
                     <Route path={"new/gallery/:id"} element={<AddPanelGallery />} />
                     <Route path={"new/facilities"} element={<AddPanelFacilities />} />
                     <Route path={"new/categories"} element={<AddPanelCategories />} />

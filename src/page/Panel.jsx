@@ -6,6 +6,9 @@ import PanelMerek from "./Panel/PanelMerek";
 import PanelFacilities from "./Panel/PanelFacilitas";
 import PanelGallery from "./Panel/PanelGallery";
 import PanelVendor from "./Panel/PanelVendor";
+import PanelDetail from "./Panel/PanelDetail";
+import AddPanelFacilitiesToBus from "./Panel/Add/AddPanelFacilitiesToBus";
+import PanelFacilitiesToBus from "./Panel/PanelFacilitiesToBus";
 
 export default function Panel() {
     return (
@@ -20,7 +23,10 @@ export default function Panel() {
                     <Route path={"/brand"} element={<PanelMerek />} />
                     <Route path={"/facilities"} element={<PanelFacilities />} />
                     <Route path={"/vendor"} element={<PanelVendor />} />
-                    <Route path={"/gallery/:id"} element={<PanelGallery />} />
+                    <Route path={"/detail/:id"} element={<PanelDetail />} />
+                    <Route path={"manage/detail/:id/facilities"} element={<PanelFacilitiesToBus />} />
+                    <Route path={"manage/detail/:id/gallery"} element={<PanelGallery />} />
+
                 </Routes>
             </div>
         </section>

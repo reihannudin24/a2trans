@@ -75,7 +75,7 @@ export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => 
                         className="p-2 bg-red-500 rounded-md text-white">Delete
                     </button>
                     <a href={`/panel/edit/bus/${item?.id}`} className="cursor-pointer p-2 bg-blue-500 rounded-md text-white">Edit</a>
-                    <a href={`/panel/gallery/${item?.id}`} className="cursor-pointer p-2 bg-green-500 rounded-md text-white">Detail</a>
+                    <a href={`/panel/detail/${item?.id}`} className="cursor-pointer p-2 bg-green-500 rounded-md text-white">Detail</a>
                 </div>
             </td>
         </tr>
@@ -124,6 +124,50 @@ export const CardPanelFacilitiesComponent = ({ index, id, item, navigate }) => {
         </tr>
     )
 }
+
+export const CardPanelFacilitiesToBusComponent = ({ index, id, item, navigate }) => {
+
+    const handleDelete = async (id, e) => {
+        if (e) e.preventDefault();
+        try {
+            const result = await confirmDelete('Are you sure?', 'Apa kamu yakin untuk menghapus data ini', id);
+            if (result.confirmed) {
+                const response = await apiAuth.delete('/facilities/delete/relation', {
+                    data: { id: id },
+                });
+                textPopUp("Success", `${response?.data?.message}`, "success");
+                window.location.reload();
+            }
+        } catch (err) {
+            console.error(err);
+            textPopUp("Error", `${err?.response?.data?.message || err.message}`, "error");
+        }
+    }
+
+
+    return (
+        <tr key={index} className="border-b">
+            <td className="p-3 ps-10 pr-0 min-w-[50px] text-start">
+                <span className="font-semibold">{item?.id}</span>
+            </td>
+            <td className="p-3 pl-0">
+                <div className="flex flex-col text-start">
+                    <div
+                        className="mb-1 font-semibold transition-colors duration-200 ease-in-out"> {item?.name}</div>
+                </div>
+            </td>
+            <td className="p-3 pr-12 text-end">
+                <div className="flex gap-4 justify-end">
+                    <button onClick={(e) => handleDelete(id, e)}
+                            className="p-2 bg-red-500 rounded-md text-white">Delete
+                    </button>
+                    <a href={`/panel/edit/facilities/${id}`} className="cursor-pointer p-2 bg-blue-500 rounded-md text-white">Edit</a>
+                </div>
+            </td>
+        </tr>
+    )
+}
+
 
 export const CardPanelVendorComponent = ({ index, id, item, navigate, setMerek }) => {
 

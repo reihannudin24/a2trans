@@ -9,6 +9,7 @@ import { BiCategory } from "react-icons/bi";
 import { BsTag } from "react-icons/bs";
 import apiJson from "../../function/axios";
 import apiAuth from "../../function/axiosAuth";
+import {CarousselGalleryComponent} from "../../component/Caroussel.Component";
 
 
 function PanelGallery() {
@@ -17,87 +18,36 @@ function PanelGallery() {
 
     const navigate = useNavigate();
     const [bus, setBus] = useState([]);
-    const [category, setCategory] = useState([]);
-    const [merek, setMerek] = useState([]);
-    const [vendor, setVendor] = useState([]);
     const [imageGallery, setImageGallery] = useState([]);
     const [loop, setLoop] = useState(true);
 
-    useEffect(() => {
-        const fetchData = async () => {
-
-            try {
-                const response = await apiJson.get('/bus/show', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-
-                const responseGallery = await apiAuth.get(`/bus/show?id=${id}`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-
-                setBus(response?.data?.data?.buses || []);
-                setImageGallery(responseGallery?.data?.data?.buses[0]?.images || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
-
-            try {
-                const response = await apiJson.get('/categories/show', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                setCategory(response?.data?.data?.categories || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
-
-            try {
-                const response = await apiJson.get('/brand/show', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                setMerek(response?.data?.data?.brand || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
-
-            try {
-                const response = await apiJson.get('/vendor/show', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                setVendor(response?.data?.data?.vendors || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
-
-            setLoop(false)
-
-        };
-
-        if (loop === true) {
-            fetchData();
+    const fetchData = async (endpoint, setData) => {
+        try {
+            const response = await apiJson.get(endpoint, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                timeout: 20000,
+            });
+            setData(response?.data?.data || []);
+        } catch (error) {
+            console.error(error);
+            textPopUp("Error", `Terjadi kesalahan saat mengambil data: ${error?.message}`, "error");
         }
-    }, [loop, id]);
+    };
+
+    useEffect(() => {
+        if (loop) {
+            fetchData(`/bus/show?id=${id}`, setBus);
+            fetchData(`/image_bus/show?bus_id=${id}`, setImageGallery);
+            setLoop(false);
+        }
+    }, [loop]);
 
 
     return (
-        <div className="lg:ml-80 ml-0 lg:mr-16 mr-0 mt-0 ">
-            <NavbarNewPanelComponent brandText="Dashboard" />
-            <div className={"mt-4"}>
-                <WidgetContainerComponent bus={bus} category={category} merek={merek} vendor={vendor} />
-            </div>
+        <div className="xl:ml-80 xl:mr-16 lg:ml-72 ml-0 lg:mr-10 mr-0 mt-0 ">
+            <NavbarNewPanelComponent brandText="Dashboard" currentPath={""} />
             <div className="flex flex-wrap -mx-3 mb-5">
                 <div className="w-full max-w-full mb-6 mx-auto">
                     <div className="relative flex flex-col min-w-0 shadow-md rounded-2xl bg-white my-5 md:mx-4">
@@ -132,11 +82,10 @@ function PanelGallery() {
                                                 </tr>
                                             ) : (
                                                 <>
-                                                    {imageGallery.map((item, index) => (
+                                                    {imageGallery?.image_bus.map((item, index) => (
                                                         <CardPanelImageGalleryComponent
-                                                            key={item.image_id} // Added key prop
                                                             index={index}
-                                                            id={item?.image_id}
+                                                            id={item?.id}
                                                             item={item}
                                                             id_bus={id}
                                                             navigate={navigate}
