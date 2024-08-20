@@ -5,8 +5,6 @@ import {BsTag} from "react-icons/bs";
 
 export const WidgetContainerComponent = ({bus, category, merek, vendor}) => {
 
-    console.log(bus)
-
     return(
         <ul className={"gap-2 grid-cols-2 grid md:grid-cols-4"}>
             <li className={"w-full "}>

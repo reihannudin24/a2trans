@@ -13,7 +13,6 @@ export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => 
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log(item)
             const merek = await checkMerekById(item?.brand_id);
             const category = await checkCategoryById(item?.categories_id);
             setBrandName(merek);
@@ -170,7 +169,7 @@ export const CardPanelFacilitiesToBusComponent = ({ index, id, item, navigate })
 }
 
 
-export const CardPanelVendorComponent = ({ index, id, item, navigate, setMerek }) => {
+export const CardPanelVendorComponent = ({ index, id, item, navigate, setVendor }) => {
 
     const handleDelete = async (id, e) => {
         if (e) e.preventDefault();
@@ -180,9 +179,11 @@ export const CardPanelVendorComponent = ({ index, id, item, navigate, setMerek }
                 const response = await apiAuth.delete('/vendor/delete', {
                     data: { id: id },
                 });
-                setMerek(prevBus => prevBus.filter(item => item.id !== id));
+                setVendor(prevBus => ({
+                    ...prevBus,
+                    vendors: prevBus.vendors.filter(item => item.id !== id)
+                }));
                 textPopUp("Success", `${response?.data?.message}`, "success");
-                window.location.reload();
             }
         } catch (err) {
             console.error(err);
@@ -223,9 +224,11 @@ export const CardPanelMerekComponent = ({ index, id, item, navigate, setMerek })
                 const response = await apiAuth.delete('/brand/delete', {
                     data: { id: id },
                 });
-                setMerek(prevBus => prevBus.filter(item => item.id !== id));
+                setMerek(prevBus => ({
+                    ...prevBus,
+                    brand: prevBus.brand.filter(item => item.id !== id)
+                }));
                 textPopUp("Success", `${response?.data?.message}`, "success");
-                window.location.reload();
             }
         } catch (err) {
             console.error(err);
@@ -266,7 +269,7 @@ export const CardPanelImageGalleryComponent = ({ index, id, id_bus, item, naviga
                 const response = await apiAuth.delete(`/image_bus/delete?id=${id}`);
                 setImageGallery(prevBus => prevBus.filter(item => item.image_id !== id));
                 textPopUp("Success", `${response?.data?.message}`, "success");
-                navigate(`/panel/gallery/${id_bus}`);
+                navigate(`/panel/manage/detail/${id_bus}/gallery`);
             }
         } catch (err) {
             console.error(err);
@@ -299,7 +302,7 @@ export const CardPanelImageGalleryComponent = ({ index, id, id_bus, item, naviga
 }
 
 export const CardPanelCategoryComponent = ({ index, id, item, navigate, setCategory }) => {
-
+    
     const handleDelete = async (id, e) => {
         if (e) e.preventDefault();
         try {
@@ -308,16 +311,18 @@ export const CardPanelCategoryComponent = ({ index, id, item, navigate, setCateg
                 const response = await apiAuth.delete('/categories/delete', {
                     data: { id: id },
                 });
-                setCategory(prevBus => prevBus.filter(item => item.id !== id));
+                setCategory(prevBus => ({
+                    ...prevBus,
+                    categories: prevBus.categories.filter(item => item.id !== id)
+                }));
+                
                 textPopUp("Success", `${response?.data?.message}`, "success");
-                window.location.reload();
             }
         } catch (err) {
             console.error(err);
             textPopUp("Error", `${err?.response?.data?.message || err.message}`, "error");
         }
     };
-
 
 
     return (

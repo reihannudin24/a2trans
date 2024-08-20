@@ -93,7 +93,7 @@ function PanelVendor() {
                                                             id={item?.id}
                                                             item={item}
                                                             navigate={navigate}
-                                                            setMerek={setMerek}
+                                                            setVendor={setVendor}
                                                         />
                                                     ))}
                                                 </>

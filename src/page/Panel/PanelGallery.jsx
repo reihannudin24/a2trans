@@ -11,7 +11,6 @@ function PanelGallery() {
     const { id } = useParams();
 
     const navigate = useNavigate();
-    const [bus, setBus] = useState([]);
     const [imageGallery, setImageGallery] = useState([]);
     const [loop, setLoop] = useState(true);
 
@@ -23,7 +22,8 @@ function PanelGallery() {
                 },
                 timeout: 20000,
             });
-            setData(response?.data?.data || []);
+            if (response?.data?.data?.buses.length === 0) return navigate("/panel/bus")
+            setData(response?.data?.data.buses[0]?.images || []);
         } catch (error) {
             console.error(error);
             textPopUp("Error", `Terjadi kesalahan saat mengambil data: ${error?.message}`, "error");
@@ -32,10 +32,12 @@ function PanelGallery() {
 
     useEffect(() => {
         if (loop) {
-            fetchData(`/bus/show?id=${id}`, setBus);
+            fetchData(`/bus/show?id=${id}`, setImageGallery);
             setLoop(false);
         }
     }, [loop, id]);
+
+
 
 
     return (
@@ -75,10 +77,11 @@ function PanelGallery() {
                                                 </tr>
                                             ) : (
                                                 <>
-                                                    {bus?.images?.image_bus.map((item, index) => (
+                                                    {imageGallery.map((item, index) => (
                                                         <CardPanelImageGalleryComponent
+                                                            key={index}
                                                             index={index}
-                                                            id={item?.id}
+                                                            id={item?.image_id}
                                                             item={item}
                                                             id_bus={id}
                                                             navigate={navigate}

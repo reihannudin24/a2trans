@@ -11,13 +11,14 @@ import apiJson from "../../function/axios";
 
 function PanelCategory() {
     const navigate = useNavigate();
+    
     const [bus, setBus] = useState([]);
     const [category, setCategory] = useState([]);
     const [merek, setMerek] = useState([]);
     const [vendor, setVendor] = useState([]);
     const [loop, setLoop] = useState(true);
 
-    const fetchData = async (endpoint, setData) => {
+    const fetchData = async (endpoint, setData, status) => {
         try {
             const response = await apiJson.get(endpoint, {
                 headers: {
@@ -35,7 +36,7 @@ function PanelCategory() {
     useEffect(() => {
         if (loop) {
             fetchData('/bus/show', setBus);
-            fetchData('/categories/show', setCategory);
+            fetchData('/categories/show', setCategory, true);
             fetchData('/brand/show', setMerek);
             fetchData('/vendor/show', setVendor);
 
