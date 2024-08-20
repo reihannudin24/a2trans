@@ -5,7 +5,6 @@ import EditPanelFacilities from "./Panel/Edit/EditPanelFacilities";
 import EditPanelCategory from "./Panel/Edit/EditPanelCategory";
 import EditPanelMerek from "./Panel/Edit/EditPanelMerek";
 import EditPanelVendor from "./Panel/Edit/EditPanelVendor";
-import { NavbarPanelComponent } from "../component/Navbar.Component";
 
 function PanelEdit() {
     return (

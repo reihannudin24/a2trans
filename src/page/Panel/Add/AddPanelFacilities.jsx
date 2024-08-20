@@ -2,7 +2,7 @@ import { useState } from "react";
 import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
 import { LabelText } from "../../../component/Label.Component";
-import { InputText, InputTextArea } from "../../../component/Input.Component";
+import { InputText } from "../../../component/Input.Component";
 import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
 import {useNavigate} from "react-router-dom";
 
@@ -31,6 +31,7 @@ function AddPanelCategories() {
             if (responseData.status === 201) {
                 console.log('data facilities uploaded successfully');
                 setName("");
+                setIcon("");
                 textPopUp("Success", "Berhasil menambah data kedatabase", "success")
 
                 navigate('/panel/facilities');

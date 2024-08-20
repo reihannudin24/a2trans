@@ -7,7 +7,6 @@ import PanelFacilities from "./Panel/PanelFacilitas";
 import PanelGallery from "./Panel/PanelGallery";
 import PanelVendor from "./Panel/PanelVendor";
 import PanelDetail from "./Panel/PanelDetail";
-import AddPanelFacilitiesToBus from "./Panel/Add/AddPanelFacilitiesToBus";
 import PanelFacilitiesToBus from "./Panel/PanelFacilitiesToBus";
 
 export default function Panel() {

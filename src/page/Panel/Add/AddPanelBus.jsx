@@ -49,8 +49,6 @@ function AddPanelBus() {
             thumbnail: selectedThumbFile
         }
 
-        console.log(dataForm)
-
         try {
             const responseData = await apiImage.post('/bus/add/new', dataForm)
 
@@ -99,7 +97,6 @@ function AddPanelBus() {
         }
     }, [loop, checkDataCategory])
 
-    const currentPath = window.location.pathname;
 
     return (
         <div className="xl:ml-80 xl:mr-16 lg:ml-72 ml-0 lg:mr-10 mr-0 mt-0 ">
@@ -130,7 +127,7 @@ function AddPanelBus() {
                                     </div>
                                     <div className="mb-5">
                                         <LabelText text={"Link Youtube"} htmlFor={"link_youtube"} />
-                                        <InputText id={"link_youtube"} value={busName} set={setBusName} placeholder={"Enter Link Youtube"} />
+                                        <InputText id={"link_youtube"} value={linkYoutube} set={setLinkYoutube} placeholder={"Enter Link Youtube"} />
                                     </div>
                                     <div className="-mx-3 flex flex-wrap">
                                         <div className="w-full px-3 sm:w-1/2">

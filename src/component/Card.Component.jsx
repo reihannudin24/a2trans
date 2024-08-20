@@ -1,11 +1,11 @@
-import {Star, Fan, Monitor, User, PintGlass} from "@phosphor-icons/react";
-import {useState} from "react";
-import {Link} from "react-router-dom";
+import { Star, Fan, Monitor, User, PintGlass } from "@phosphor-icons/react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 
 
 export const ListCardProductComponent = ({ bus, categories }) => {
-    const [selected, setSelected] = useState(1); // Initialize with the first category ID
+    const [selected, setSelected] = useState(categories[0]?.id ? categories[0]?.id : 12); // Initialize with the first category ID
 
     const handleSelected = (e) => {
         const target = parseInt(e.target.value); // Convert selected value to an integer
@@ -16,6 +16,7 @@ export const ListCardProductComponent = ({ bus, categories }) => {
         return data.filter(item => item.categories_id === categoryId);
     };
 
+    console.log(selected)
     const filteredBus = filterByCategory(bus, selected);
 
     return (
@@ -83,10 +84,13 @@ export const CardProductComponent = ({ item }) => {
                                 <h2 className="text-white text-sm selectableText-new font-normal">{item?.category_name}</h2>
                             </div>
                         </div>
-                        <div className={"mb-3 w-11/12 mx-auto"}>
-                            <div className="border-b pb-2 border-gray-200 w-full">
-                                <h1 className="text-xl text-gray-700 selectableText-new font-semibold">{item.name}</h1>
+                        <div className={"mb-3 w-11/12 mx-auto flex-col flex justify-between"}>
+                            <div className="border-b pb-2 border-gray-200 w-full h-20">
+                                <h1 className="text-lg text-gray-700 selectableText-new font-semibold overflow-hidden text-ellipsis">
+                                    {item.name}
+                                </h1>
                             </div>
+
                             <div className={"my-2"}>
 
                             </div>
@@ -107,7 +111,7 @@ export const CardProductComponent = ({ item }) => {
                                 </div>
                                 <ul className={" w-full mx-auto gap-3 flex-wrap flex"}>
                                     {item?.facilities?.map((res, index) => {
-                                        return(
+                                        return (
                                             <li key={index} className={"my-1"}>
                                                 <div>
                                                     {/* <div>
@@ -125,15 +129,15 @@ export const CardProductComponent = ({ item }) => {
                             </div>
 
                             <div className="my-5 w-full mx-auto">
-                                <a className={"cursor-pointer"}
-                                   href={waLink}
-                                   target="_blank"
-                                   rel="noopener noreferrer"
+                                <div className={"cursor-pointer"}
+                                    href={waLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
-                                    <button className="bg-red-600 border border-red-700 py-2 shadow shadow-red-700 w-full rounded-md">
+                                    <button className="bg-green-600 border border-green-700 py-2 shadow shadow-green-700 w-full rounded-md">
                                         <p className="text-white text-sm">Pesan sekarang</p>
                                     </button>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -155,7 +159,7 @@ export const ListCardComponent = ({ title, data }) => {
                     <div className={"w-full relative"}>
                         <ul className={"w-full   flex flex-wrap relative"}>
                             {data?.map((item, index) => {
-                                return(
+                                return (
                                     <CardCategoriesComponent index={index} name={item.nama_bus} category={data.category} />
                                 )
                             })}
@@ -301,7 +305,7 @@ export const CardComponent = ({ data }) => {
 
 export const CardDetialComponent = ({ data }) => {
     return (
-       <></>
+        <></>
     )
 }
 

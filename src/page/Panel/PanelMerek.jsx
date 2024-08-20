@@ -3,18 +3,14 @@ import { useEffect, useState } from "react";
 import { textPopUp } from "../../function/swal";
 import { CardPanelMerekComponent } from "../../component/PanelComponent";
 import { NavbarNewPanelComponent } from "../../component/Navbar.Component";
-import {WidgetComponent, WidgetContainerComponent} from "../../component/Widget.Component";
-import { Bus, Seat } from "@phosphor-icons/react";
+import { WidgetContainerComponent} from "../../component/Widget.Component";
 import apiJson from "../../function/axios";
-import { BiCategory } from "react-icons/bi";
-import { BsTag } from "react-icons/bs";
 
 function PanelMerek() {
     const navigate = useNavigate();
     const [bus, setBus] = useState([]);
     const [category, setCategory] = useState([]);
     const [merek, setMerek] = useState([]);
-    const [facilities, setFacilities] = useState([]);
     const [vendor, setVendor] = useState([]);
     const [loop, setLoop] = useState(true);
 
@@ -39,13 +35,10 @@ function PanelMerek() {
             fetchData('/categories/show', setCategory);
             fetchData('/brand/show', setMerek);
             fetchData('/vendor/show', setVendor);
-            fetchData('/facilities/show', setFacilities);
 
             setLoop(false);
         }
     }, [loop]);
-
-    const currentPath = window.location.pathname;
 
     return (
         <div className="xl:ml-80 xl:mr-16 lg:ml-72 ml-0 lg:mr-10 mr-0 mt-0 ">

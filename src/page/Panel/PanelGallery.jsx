@@ -3,13 +3,7 @@ import { useEffect, useState } from "react";
 import { textPopUp } from "../../function/swal";
 import { CardPanelImageGalleryComponent } from "../../component/PanelComponent";
 import { NavbarNewPanelComponent } from "../../component/Navbar.Component";
-import {WidgetComponent, WidgetContainerComponent} from "../../component/Widget.Component";
-import { Bus, ImageSquare } from "@phosphor-icons/react";
-import { BiCategory } from "react-icons/bi";
-import { BsTag } from "react-icons/bs";
 import apiJson from "../../function/axios";
-import apiAuth from "../../function/axiosAuth";
-import {CarousselGalleryComponent} from "../../component/Caroussel.Component";
 
 
 function PanelGallery() {
@@ -39,10 +33,9 @@ function PanelGallery() {
     useEffect(() => {
         if (loop) {
             fetchData(`/bus/show?id=${id}`, setBus);
-            fetchData(`/image_bus/show?bus_id=${id}`, setImageGallery);
             setLoop(false);
         }
-    }, [loop]);
+    }, [loop, id]);
 
 
     return (
@@ -82,7 +75,7 @@ function PanelGallery() {
                                                 </tr>
                                             ) : (
                                                 <>
-                                                    {imageGallery?.image_bus.map((item, index) => (
+                                                    {bus?.images?.image_bus.map((item, index) => (
                                                         <CardPanelImageGalleryComponent
                                                             index={index}
                                                             id={item?.id}

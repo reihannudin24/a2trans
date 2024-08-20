@@ -20,30 +20,25 @@ function Home() {
     useEffect(() => {
         const fetchDataBus = async () => {
             try {
-                const response = await apiJson.get('/bus/show', {
+                const responseBus = await apiJson.get('/bus/show', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
-                console.log(response?.data?.data?.buses)
-                setBus(response?.data?.data?.buses || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
+                setBus(responseBus?.data?.data?.buses || []);
 
-            try {
-                const response = await apiJson.get('/categories/show', {
+                const responseCategories = await apiJson.get('/categories/show', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
-                setCategories(response?.data?.data?.categories || []);
+                console.log(responseCategories?.data?.data)
+                setCategories(responseCategories?.data?.data?.categories || []);
             } catch (error) {
                 console.error(error);
                 textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
             }
-
+            
             setLoop(false)
         };
 
@@ -51,6 +46,9 @@ function Home() {
             fetchDataBus();
         }
     }, [loop]);
+
+    console.log(process.env.REACT_APP_PANEL_WEBSITE)
+
 
 
     return (

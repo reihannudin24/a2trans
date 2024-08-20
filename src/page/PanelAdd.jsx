@@ -1,7 +1,6 @@
 import SidebarComponent from "../component/Sidebar.Component"
 import { Route, Routes } from "react-router-dom";
 import AddPanelBus from "./Panel/Add/AddPanelBus";
-import { NavbarPanelComponent } from "../component/Navbar.Component";
 import AddPanelMerek from "./Panel/Add/AddPanelMerek";
 import AddPanelCategories from "./Panel/Add/AddPanelCategories";
 import AddPanelFacilities from "./Panel/Add/AddPanelFacilities";
@@ -9,7 +8,6 @@ import AddPanelVendor from "./Panel/Add/AddPanelVendor";
 import NotFound from "./NotFound";
 import AddPanelGallery from "./Panel/Add/AddPanelGallery";
 import AddPanelFacilitiesToBus from "./Panel/Add/AddPanelFacilitiesToBus";
-import PanelGallery from "./Panel/PanelGallery";
 
 export default function PanelAdd() {
     return (

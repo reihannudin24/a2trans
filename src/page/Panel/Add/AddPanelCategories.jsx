@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
-import apiImage from "../../../function/axiosImage";
+// import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
-import { InputText, InputImage } from "../../../component/Input.Component";
+import { InputText } from "../../../component/Input.Component";
 import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
 import {useNavigate} from "react-router-dom";
 
 function AddPanelCategories() {
     const navigate = useNavigate();
     const [name, setName] = useState("");
-    const [selectedFiles, setSelectedFiles] = useState([]);
+    // const [selectedFiles, setSelectedFiles] = useState([]);
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!name || !selectedFiles) {
+        if (!name) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
@@ -39,9 +39,6 @@ function AddPanelCategories() {
             console.error('Error uploading files:', error);
         }
     };
-
-    const currentPath = window.location.pathname;
-
 
     return (
         <div className="xl:ml-80 xl:mr-16 lg:ml-72 ml-0 lg:mr-10 mr-0 mt-0 ">

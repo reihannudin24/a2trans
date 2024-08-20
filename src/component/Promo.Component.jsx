@@ -131,21 +131,21 @@ export const Promo3Component = () => {
 
     const contact = [
         {
-            icon: <EnvelopeSimple size={32}  color="#ffffff" />, // Phosphor icon for email
+            icon: <EnvelopeSimple size={32} color="#ffffff" />, // Phosphor icon for email
             label: "Email",
-            value: "user@example.com",
+            value: process.env.REACT_APP_EMAIL,
             id: "1"
         },
         {
             icon: <WhatsappLogo size={32} color="#ffffff" />, // Phosphor icon for WhatsApp
             label: "WhatsApp",
-            value: "+1234567890",
+            value: "+" + process.env.REACT_APP_PHONE_NUMBER,
             id: "2"
         },
         {
             icon: <InstagramLogo size={32} color="#ffffff" />, // Phosphor icon for Instagram
             label: "Instagram",
-            value: "@username",
+            value: process.env.REACT_APP_INSTAGRAM,
             id: "3"
         }
     ];
@@ -160,16 +160,13 @@ export const Promo3Component = () => {
                             <h2 className={"text-2xl selectableText-new text-center text-primary"}>
                                 Profil <b>A2Trans.com</b> - Pusat Sewa Bus Pariwisata Jakarta
                             </h2>
-                            <div className={"my-1"}>
-                                <h3 className={"text-md selectableText-new text-gray-600 "}>by AJB TOUR & TRANS</h3>
-                            </div>
                         </div>
                         <div className={"my-6 text-center"}>
                             <p className={"my-6 selectableText-new text-md text-gray-700"}>
-                                Andarabus adalah penyedia layanan sewa bus pariwisata terbaik di Jakarta. Kami menyediakan berbagai armada yang bisa disesuaikan dengan kebutuhan Anda. Mulai dari study tour, wisata religi, outbond, gathering, rombongan mudik, dan masih banyak lagi.
+                                A2Trans adalah penyedia layanan sewa bus pariwisata terbaik di Jakarta. Kami menyediakan berbagai armada yang bisa disesuaikan dengan kebutuhan Anda. Mulai dari study tour, wisata religi, outbond, gathering, rombongan mudik, dan masih banyak lagi.
                             </p>
                             <p className={"my-6 selectableText-new text-md text-gray-700"}>
-                                Jaminan keamanan dan kenyamanan kami berikan kepada para pelanggan yang menggunakan layanan kami. Demi memberikan layanan yang terbaik untuk Anda, kamu bekerja sama dengan PO Bus Pariwisata yang terkemuka di wilayah Jabodetabek, Bali, Sumatera, serta Sulawesi.
+                                Jaminan keamanan dan kenyamanan kami berikan kepada para pelanggan yang menggunakan layanan kami. Demi memberikan layanan yang terbaik untuk Anda, kamu bekerja sama dengan PO Bus Pariwisata yang terkemuka
                             </p>
                             <p className={"my-6 selectableText-new text-md text-gray-700"}>
                                 Anda tidak perlu merisaukan tentang biaya yang harus dikeluarkan. Kami memberikan tarif yang sangat bersaing dan bisa disesuaikan dengan anggaran yang sudah Anda persiapkan. Setelah menyepakati harga, maka kami akan merekomendasikan armada yang sesuai dengan kebutuhan Anda
@@ -208,10 +205,10 @@ export const Promo3Component = () => {
                     </div>
                     <div className={"my-5 w-11/12 mx-auto"}>
                         <div className={"py-5 text-center"}>
-                            <p className={"text-md font-medium selectableText-new text-gray-600"}>Andarabus bukan hanya sekedar penyedia layanan sewa bus pariwisata, melainkan partner perjalanan yang siap mewujudkan perjalanan Anda menjadi pengalaman yang tak terlupakan. Dengan banyaknya armada yang beroperasi, fasilitas yang menarik, dan kemudahan pemesanan, Andarabus merupakan pilihan terbaik untuk setiap kebutuhan transportasi Anda.</p>
+                            <p className={"text-md font-medium selectableText-new text-gray-600"}>A2Trans bukan hanya sekedar penyedia layanan sewa bus pariwisata, melainkan partner perjalanan yang siap mewujudkan perjalanan Anda menjadi pengalaman yang tak terlupakan. Dengan banyaknya armada yang beroperasi, fasilitas yang menarik, dan kemudahan pemesanan, A2Trans merupakan pilihan terbaik untuk setiap kebutuhan transportasi Anda.</p>
                             <br />
                             <p className={"text-md font-medium selectableText-new text-gray-600"}>
-                                Andarabus memahami bahwa suatu perjalanan bukan hanya untuk mencapai tujuan atau destinasi saja, namun juga tentang menciptakan kenangan yang berharga. Bersama Andarabus, nikmati perjalanan yang nyaman, menyenangkan, dan tak terlupakan. Lakukan pemesanan dengan segera untuk mendapatkan penawaran menarik.
+                                A2Trans memahami bahwa suatu perjalanan bukan hanya untuk mencapai tujuan atau destinasi saja, namun juga tentang menciptakan kenangan yang berharga. Bersama A2Trans, nikmati perjalanan yang nyaman, menyenangkan, dan tak terlupakan. Lakukan pemesanan dengan segera untuk mendapatkan penawaran menarik.
                             </p>
                         </div>
 
@@ -220,9 +217,9 @@ export const Promo3Component = () => {
                         <div className={"w-full"}>
                             <ul className={"w-full block md:flex flex-wrap "}>
                                 {contact.map((item, index) => {
-                                    return(
+                                    return (
                                         <li key={index} className={"w-full my-4 md:my-6 md:w-6/12 lg:w-4/12"}>
-                                            <ContactCardComponent  icon={item?.icon} name={item?.label} value={item?.value}/>
+                                            <ContactCardComponent icon={item?.icon} name={item?.label} value={item?.value} />
                                         </li>
                                     )
                                 })}
@@ -236,7 +233,7 @@ export const Promo3Component = () => {
 }
 
 
-export const ContactCardComponent = ({icon, name, value}) => {
+export const ContactCardComponent = ({ icon, name, value }) => {
     return (
         <div className={"w-11/12 px-5 py-3 hover:bg-gray-50 rounded-md cursor-pointer mx-auto"}>
             <div className={"flex gap-3"}>

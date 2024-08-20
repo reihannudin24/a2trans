@@ -24,10 +24,6 @@ const navbar = [
         "name" : "Kontak Kami",
         "url" : "/contact",
     },
-    {
-        "name" : "Tentang Kami",
-        "url" : "/about-us",
-    },
 ]
 
 export const NavbarComponent = () => {
@@ -86,17 +82,15 @@ export const NavbarNewPanelComponent = ({currentPath}) => {
         navigate(-1);
     }
 
-    const token = localStorage.getItem('token');
-
-    const handleLogout = async (token, e) => {
+    
+    const handleLogout = async (e) => {
         if (e) e.preventDefault();
         try{
-            const result = await confirmDelete('Are you sure?', 'Apakah kamu ingin login', token);
+            const result = await confirmDelete('Are you sure?', 'Apakah kamu ingin login');
             if (result.confirmed){
-                const response = await apiAuth.post('/auth/login', {
-                    token :token
-                })
-                textPopUp("Success", `${response?.data?.message}`, "success");
+                localStorage.removeItem('token');
+                localStorage.removeItem('isAuth');
+                textPopUp("Success", `Berhasil Logout`, "success");
                 navigate('/login');
             }
         }catch (err){
@@ -143,20 +137,8 @@ export const NavbarNewPanelComponent = ({currentPath}) => {
                                     </p>
                                 </div>
                                 <div className="h-px w-full bg-gray-200 dark:bg-white/20" />
-                                <div className="flex flex-col p-4">
-                                    <a
-                                        href="#profile-settings"
-                                        className="text-sm py-2 text-black hover:underline"
-                                    >
-                                        Profile Settings
-                                    </a>
-                                    <a
-                                        href="#newsletter-settings"
-                                        className="mt-3 py-2  text-sm text-black hover:underline"
-                                    >
-                                        Newsletter Settings
-                                    </a>
-                                    <button onClick={(e) => handleLogout(token, e)}
+                                <div className="flex flex-col px-4 pb-4">
+                                    <button onClick={(e) => handleLogout(e)}
                                         className="mt-3 text-left text-sm py-2 font-medium text-red-500 hover:text-red-500 transition duration-150 ease-out"
                                     >
                                         Log Out

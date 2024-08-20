@@ -1,43 +1,42 @@
 import { NavbarNewPanelComponent } from "../../component/Navbar.Component";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import apiJson from "../../function/axios";
 import { textPopUp } from "../../function/swal";
-import {CarousselGalleryComponent} from "../../component/Caroussel.Component";
 
 function PanelDetail() {
-    const { id } = useParams(); // Get the 'id' parameter from the URL
+    const { id } = useParams(); 
     const navigate = useNavigate();
-    const [bus, setBus] = useState(null); // Initialize as null to check if data is loaded
+    const [bus, setBus] = useState(null); 
     const [loop, setLoop] = useState(true);
 
-    console.log(id);
-
-    const fetchData = async (endpoint, setData) => {
+    const fetchData = useCallback(async (endpoint, setData) => {
         try {
             const response = await apiJson.get(endpoint, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                timeout: 20000, // Set timeout to 20 seconds
+                timeout: 20000, 
             });
+
+            if(response?.data?.data?.buses.length === 0) return navigate("/panel/bus")
             setData(response?.data?.data || null);
         } catch (error) {
             console.error(error);
             textPopUp("Error", `Terjadi kesalahan saat mengambil data: ${error?.message}`, "error");
         }
-    };
+    }, [navigate]);
 
     useEffect(() => {
         if (loop && id) {
-            const endpoint = `/bus/show?id=${id}`; // Add the query parameter to the endpoint
+            const endpoint = `/bus/show?id=${id}`;
             fetchData(endpoint, setBus);
             setLoop(false);
         }
-    }, [loop, id]);
+    }, [loop, id, fetchData]);
 
     if (!bus) {
-        return <div>Loading...</div>; // Show a loading state until data is fetched
+        return <div>Loading...</div>; 
     }
 
     console.log(bus);
@@ -59,7 +58,7 @@ function PanelDetail() {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full my-5 mx-2 border shadow shadow-gray-400 rounded-2xl border-gray-50">
+                        <div className="w-full my-5 mx-2">
                             <div className="w-11/12 mx-auto flex">
                                 <div className="bg-gray-600/40 py-1 my-3 px-3 rounded-md">
                                     <h2 className="text-white text-sm font-normal">{bus?.buses[0]?.type}</h2>
@@ -90,14 +89,14 @@ function PanelDetail() {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full my-2 mx-2 border shadow shadow-gray-400 rounded-2xl border-gray-50">
-                            <div className={"w-11/12 lg:w-full mx-auto py-5 "}>
+                        <div className="w-full my-2 mx-2">
+                            <div className={"w-11/12 lg:w-full mx-auto py-5"}>
                                 <div className={"flex justify-between"}>
-                                    <div>
+                                    <div className="mx-4">
                                         <h3 className={"text-lg font-semibold text-gray-700"}>Filter : </h3>
                                     </div>
                                     <div>
-                                        <a href="/panel/manage/detail/:id/facilities" className="p-2 px-3 bg-green-500 rounded-lg text-sm text-white">Keleolah Fasilitas</a>
+                                        <a href="/panel/manage/detail/:id/facilities" className="mx-4 p-2 px-3 bg-green-500 rounded-lg text-sm text-white">Keleolah Fasilitas</a>
                                     </div>
                                 </div>
                                 <div className={"w-11/12 mx-auto "}>
@@ -122,14 +121,14 @@ function PanelDetail() {
 
                             </div>
                         </div>
-                        <div className="w-full my-5 mx-2 border shadow shadow-gray-400 rounded-2xl border-gray-50">
+                        <div className="w-full my-5 mx-2 ">
                             <div className={"w-11/12 lg:w-full mx-auto py-5 "}>
                                 <div className={"flex justify-between"}>
-                                    <div>
+                                    <div className="mx-4">
                                         <h3 className={"text-lg font-semibold text-gray-700"}>Gallery Kendaraan : </h3>
                                     </div>
                                     <div>
-                                        <a href="/panel/manage/detail/:id/gallery" className="p-2 px-3 bg-green-500 rounded-lg text-sm text-white">Keleolah Galeri</a>
+                                        <a href={`/panel/manage/detail/${id}/gallery`} className="mx-4 p-2 px-3 bg-green-500 rounded-lg text-sm text-white">Keleolah Galeri</a>
                                     </div>
                                 </div>
                             </div>

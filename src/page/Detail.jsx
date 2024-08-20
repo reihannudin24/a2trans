@@ -115,7 +115,7 @@ function Detail() {
                                     </div>
                                     <div className="my-5 w-full mx-auto">
                                         <a href="https://wa.me/6282111191279?text=Halo%20A2%20Trans%20saya%20ingin%20memesan%20kendaraan" target="_blank" rel="noopener noreferrer">
-                                            <button className="bg-green-600 border border-gray-700 py-2 shadow shadow-gray-700 w-full rounded-md">
+                                            <button className="bg-green-600 border border-green-700 py-2 shadow shadow-green-700 w-full rounded-md">
                                                 <p className="text-white text-sm">Pesan sekarang</p>
                                             </button>
                                         </a>

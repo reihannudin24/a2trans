@@ -13,6 +13,7 @@ export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => 
 
     useEffect(() => {
         const fetchData = async () => {
+            console.log(item)
             const merek = await checkMerekById(item?.brand_id);
             const category = await checkCategoryById(item?.categories_id);
             setBrandName(merek);

@@ -282,6 +282,8 @@ export const RentContentComponent = ({ bus, facilities, categories }) => {
                                 </div>
                             </div>
                         </div>
+
+                        
                     </div>
                 </div>
             </div>

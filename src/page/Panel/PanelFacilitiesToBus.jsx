@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import apiAuth from "../../function/axiosAuth";
 import {textPopUp} from "../../function/swal";
 import {NavbarNewPanelComponent} from "../../component/Navbar.Component";
-import {CardPanelFacilitiesComponent, CardPanelFacilitiesToBusComponent} from "../../component/PanelComponent";
+import {CardPanelFacilitiesToBusComponent} from "../../component/PanelComponent";
 
 function PanelFacilitiesToBus(){
 

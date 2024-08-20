@@ -44,7 +44,7 @@ function EditPanelBus() {
         formData.append('categories_id', busCategory);
         formData.append('type', busType);
         formData.append('brand_id', busMerek);
-        formData.append('vendor_id', busMerek);
+        formData.append('vendor_id', busVendor);
         formData.append('thumbnail', selectedThumbFile);
 
 
@@ -129,7 +129,7 @@ function EditPanelBus() {
                                     </div>
                                     <div className="mb-5">
                                         <LabelText text={"Link Youtube"} htmlFor={"link_youtube"} />
-                                        <InputText id={"link_youtube"} value={busName} set={setBusName} placeholder={"Enter Link Youtube"} />
+                                        <InputText id={"link_youtube"} value={linkYoutube} set={setLinkYoutube} placeholder={"Enter Link Youtube"} />
                                     </div>
 
                                     <div className="mb-5">
