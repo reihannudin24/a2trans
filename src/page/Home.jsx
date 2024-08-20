@@ -1,6 +1,6 @@
 import { CarousselComponent } from "../component/Caroussel.Component"
 import {
-    FaqComponent,
+    // FaqComponent,
     Promo2Component,
     Promo3Component,
     PromoComponent,
@@ -62,7 +62,7 @@ function Home() {
                 <ListCardProductComponent bus={bus} categories={categories} />
                 {/*<ListCardComponent title={"Jenis-Jenis Kendaraan "} data={ArrayTypeBus} />*/}
                 <TestimonialComponent />
-                <FaqComponent />
+                {/* <FaqComponent /> */}
                 <Promo3Component />
             </div>
         </section>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import apiAuth from "../function/axiosAuth";
 import { textPopUp } from "../function/swal";
 import { useParams, useNavigate } from "react-router-dom";
-import { checkCategoryById, checkMerekById } from "../function/function";
+import { checkCategoryById, checkMerekById, checkVendorById } from "../function/function";
 
 function Detail() {
     const navigate = useNavigate()
@@ -31,7 +31,8 @@ function Detail() {
 
                 const merek = await checkMerekById(response?.data?.data?.buses[0]?.brand_id);
                 const category = await checkCategoryById(response?.data?.data?.buses[0]?.categories_id);
-                const vendor = await checkCategoryById(response?.data?.data?.buses[0]?.vendor_id);
+                console.log(response?.data?.data?.buses[0])
+                const vendor = await checkVendorById(response?.data?.data?.buses[0]?.vendors_id);
 
                 setVendorName(vendor);
                 setBrandName(merek);
@@ -89,7 +90,7 @@ function Detail() {
                                 </div>
                                 <div className={"py-10"}>
                                     <div className={"lg:hidden "}>
-                                        <button className={"bg-red-700  cursor-pointer text-xs text-white hover:bg-red-800 py-3 px-4 rounded-full "}>
+                                        <button className={"bg-green-700  cursor-pointer text-xs text-white hover:bg-red-800 py-3 px-4 rounded-full "}>
                                             Pesan Sekarang
                                         </button>
                                     </div>
@@ -114,7 +115,7 @@ function Detail() {
                                     </div>
                                     <div className="my-5 w-full mx-auto">
                                         <a href="https://wa.me/6282111191279?text=Halo%20A2%20Trans%20saya%20ingin%20memesan%20kendaraan" target="_blank" rel="noopener noreferrer">
-                                            <button className="bg-red-600 border border-gray-700 py-2 shadow shadow-gray-700 w-full rounded-md">
+                                            <button className="bg-green-600 border border-gray-700 py-2 shadow shadow-gray-700 w-full rounded-md">
                                                 <p className="text-white text-sm">Pesan sekarang</p>
                                             </button>
                                         </a>

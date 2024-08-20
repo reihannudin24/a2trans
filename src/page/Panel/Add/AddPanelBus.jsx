@@ -5,13 +5,16 @@ import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
 import { InputImage, InputSelectOption, InputNumber, InputText, InputTextArea } from "../../../component/Input.Component";
 import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
+import {useNavigate} from "react-router-dom";
 
 
 function AddPanelBus() {
-    // const [selectedGalleryFiles, setSelectedGalleryFiles] = useState([]);
+
+    const navigate = useNavigate();
     const [selectedThumbFile, setSelectedThumbFile] = useState(null);
 
     const [busName, setBusName] = useState("");
+    const [linkYoutube, setLinkYoutube] = useState("");
     const [description, setDescription] = useState("");
     const [busCategory, setBusCategory] = useState(0);
     const [busMerek, setbusMerek] = useState(0);
@@ -22,11 +25,6 @@ function AddPanelBus() {
     const [categories, setCategories] = useState([])
     const [merek, setMerek] = useState([])
     const [vendor, setVendor] = useState([])
-
-    // const handleFileChangeGallery = (event) => {
-    //     const files = Array.from(event.target.files);
-    //     setSelectedGalleryFiles(files);
-    // };
 
     const handleFileChangeThumb = (event) => {
         const file = event.target.files[0];
@@ -41,6 +39,7 @@ function AddPanelBus() {
         }
         const dataForm = {
             name: busName,
+            link: linkYoutube,
             description: description,
             seat: busSeat,
             categories_id: busCategory,
@@ -53,27 +52,12 @@ function AddPanelBus() {
         console.log(dataForm)
 
         try {
-            // FETCHING
             const responseData = await apiImage.post('/bus/add/new', dataForm)
 
-            // // RESPONE
             if (responseData.status === 201) {
-                // const formDataGallery = new FormData();
-                // formDataGallery.append('bus_id', responseData.data.data[0].insertId);
-                // selectedGalleryFiles.forEach((file, index) => {
-                //     formDataGallery.append('files', file);
-                // });
-
-                // const formDataThumb = new FormData();
-                // formDataThumb.append('thumbnail', selectedThumbFile);
-
-
-                // const responseGallery = await apiImage.post('/bus/add/new/image/bus', formDataGallery);
-                // const responseThumb = await apiImage.post('/bus/add/new/image/bus', formDataThumb);
-
-                // if (responseGallery.data.status === 200 && responseThumb.data.status === 200) {
                 console.log('data bus uploaded successfully');
                 setBusName("");
+                setLinkYoutube("");
                 setDescription("");
                 setBusType("")
                 setbusMerek(0)
@@ -81,9 +65,8 @@ function AddPanelBus() {
                 setBusCategory(0)
                 event.target.reset();
                 textPopUp("Success", "Berhasil menambah data kedatabase", "success")
-                // }
 
-                return;
+                navigate('/panel/bus');
             } else {
                 console.error('File upload failed');
                 textPopUp("Error", "Failed to fetch bus data. Please try again later.", "error");
@@ -118,47 +101,37 @@ function AddPanelBus() {
 
     const currentPath = window.location.pathname;
 
-
     return (
-        <div className="lg:ml-80 ml-0 lg:mr-16 mr-0 mt-0 ">
+        <div className="xl:ml-80 xl:mr-16 lg:ml-72 ml-0 lg:mr-10 mr-0 mt-0 ">
             <NavbarNewPanelComponent brandText="Dashboard" />
             <div className="flex flex-wrap -mx-3 mb-5">
                 <div className="w-full max-w-full mb-6 mx-auto">
                     <div className="relative flex flex-col min-w-0 shadow-md rounded-2xl bg-white my-5 md:mx-4">
                         <div className="relative flex flex-col bg-clip-border rounded-2xl">
-                            <div className="px-9 pt-5 flex justify-between items-stretch flex-wrap pb-0 bg-transparent">
+                            <div className="px-5 lg:px-9 pt-5 flex justify-between items-stretch flex-wrap pb-0 bg-transparent">
                                 <h3 className="flex flex-col items-start justify-center ml-0 font-medium">
                                     <span className="mr-3 text-lg font-semibold">Menambahkan data bus</span>
                                     <span className="font-medium mt-1">Menambah data kedalam database</span>
                                 </h3>
                             </div>
-                            <div className="py-8 pt-6 px-9">
+                            <div className="py-8 pt-6 px-5 lg:px-9">
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-5">
                                         <LabelText text={"Bus Name"} htmlFor={"bus_name"} />
                                         <InputText id={"bus_name"} value={busName} set={setBusName} placeholder={"Enter Bus Name"} />
                                     </div>
-
                                     <div className="mb-5">
                                         <LabelText text={"Description"} htmlFor={"description"} />
                                         <InputTextArea id={"description"} value={description} set={setDescription} placeholder={"Enter Description Bus"} rows={4} />
                                     </div>
-
-                                    {/* <div className="-mx-3 flex flex-wrap">
-                                        <div className="w-full px-3 sm:w-1/2">
-                                            <div className="mb-5">
-                                                <LabelText text={"Image Gallery"} htmlFor={"image_gallery"} />
-                                                <InputImage id={"image_gallery"} change={handleFileChangeGallery} multiple={true} />
-                                            </div>
-                                        </div> */}
-                                    {/* <div className="w-full px-3 sm:w-1/2"> */}
                                     <div className="mb-5">
                                         <LabelText text={"Image Thumb"} htmlFor={"image_thumb"} />
                                         <InputImage id={"image_thumb"} change={handleFileChangeThumb} multiple={false} />
                                     </div>
-                                    {/* </div> */}
-                                    {/* </div> */}
-
+                                    <div className="mb-5">
+                                        <LabelText text={"Link Youtube"} htmlFor={"link_youtube"} />
+                                        <InputText id={"link_youtube"} value={busName} set={setBusName} placeholder={"Enter Link Youtube"} />
+                                    </div>
                                     <div className="-mx-3 flex flex-wrap">
                                         <div className="w-full px-3 sm:w-1/2">
                                             <div className="mb-5">

@@ -11,93 +11,53 @@ import { BsTag } from "react-icons/bs";
 
 function PanelFacilities() {
     const navigate = useNavigate();
-    const [facilities, setFacilities] = useState([]);
     const [bus, setBus] = useState([]);
     const [category, setCategory] = useState([]);
     const [merek, setMerek] = useState([]);
+    const [facilities, setFacilities] = useState([]);
     const [vendor, setVendor] = useState([]);
     const [loop, setLoop] = useState(true);
 
+    const fetchData = async (endpoint, setData) => {
+        try {
+            const response = await apiJson.get(endpoint, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                timeout: 20000, // Set timeout to 20 seconds
+            });
+            setData(response?.data?.data || []);
+        } catch (error) {
+            console.error(error);
+            textPopUp("Error", `Terjadi kesalahan saat mengambil data: ${error?.message}`, "error");
+        }
+    };
+
     useEffect(() => {
-        const fetchData = async () => {
+        if (loop) {
+            fetchData('/bus/show', setBus);
+            fetchData('/categories/show', setCategory);
+            fetchData('/brand/show', setMerek);
+            fetchData('/vendor/show', setVendor);
+            fetchData('/facilities/show', setFacilities);
 
-            try {
-                const response = await apiJson.get('/bus/show', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-
-                setBus(response?.data?.data?.buses || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
-
-            try {
-                const response = await apiJson.get('/categories/show', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                setCategory(response?.data?.data?.categories || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
-
-            try {
-                const response = await apiJson.get('/brand/show', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                setMerek(response?.data?.data?.brand || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
-
-            try {
-                const response = await apiJson.get('/vendor/show', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                setVendor(response?.data?.data?.vendors || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
-
-            try {
-                const response = await apiJson.get('/facilities/show', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                setFacilities(response?.data?.data?.facilities || []);
-            } catch (error) {
-                console.error(error);
-                textPopUp("Error", `Terjadi kesalahan saat mengambil data ${error?.message}`, "error");
-            }
-
-            setLoop(false)
-
-        };
-
-        if (loop === true) {
-            fetchData();
+            setLoop(false);
         }
     }, [loop]);
 
     const currentPath = window.location.pathname;
 
+    console.log(facilities)
+
     return (
-        <div className="lg:ml-80 ml-0 lg:mr-16 mr-0 mt-0 ">
-            <NavbarNewPanelComponent brandText="Dashboard" currentPath={currentPath} />
-            <div className={"mt-4 "}>
-                <WidgetContainerComponent bus={bus} category={category} merek={merek} vendor={vendor} />
+        <div className="xl:ml-80 xl:mr-16 lg:ml-72 ml-0 lg:mr-10 mr-0 mt-0 ">
+            <NavbarNewPanelComponent brandText="Dashboard" currentPath={""} />
+            <div className={"mt-4"}>
+                <WidgetContainerComponent
+                    bus={bus.length === 0 ? [] : bus?.buses}
+                    category={category.length === 0 ? [] : category?.categories}
+                    merek={merek.length === 0 ? [] : merek?.brand }
+                    vendor={vendor.length === 0 ? [] : vendor?.vendors } />
             </div>
             <div className="flex flex-wrap -mx-3 mb-5">
                 <div className="w-full max-w-full mb-6 mx-auto">
@@ -119,7 +79,7 @@ function PanelFacilities() {
                                 <table className="w-full my-0">
                                     <thead className="align-bottom">
                                         <tr className="font-semibold text-[0.95rem] text-secondary-dark">
-                                            <th className="pb-3 ps-3 text-start min-w-[50px]">Id</th>
+                                            <th className="pb-3 ps-10 text-start min-w-[50px]">Id</th>
                                             <th className="pb-3 pr-12 text-start min-w-[140px]">Fasilitas</th>
                                             <th className="pb-3 pr-12 text-end min-w-[175px]">Action</th>
                                         </tr>
@@ -135,7 +95,7 @@ function PanelFacilities() {
                                             </tr>
                                         ) : (
                                             <>
-                                                {facilities.map((item, index) => (
+                                                {facilities?.facilities?.map((item, index) => (
                                                     <CardPanelFacilitiesComponent
                                                         key={item.id} // Added key prop
                                                         index={index}

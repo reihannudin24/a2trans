@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {CaretDown} from "@phosphor-icons/react";
 import React from "react";
@@ -8,6 +8,8 @@ import React from "react";
 import Dropdown from "./Dropdown.Component";
 import {MdArrowBack} from "react-icons/md";
 import SidebarComponent from "./Sidebar.Component";
+import {confirmDelete, textPopUp} from "../function/swal";
+import apiAuth from "../function/axiosAuth";
 
 const navbar = [
     {
@@ -77,18 +79,46 @@ export const NavbarComponent = () => {
 }
 
 export const NavbarNewPanelComponent = ({currentPath}) => {
+
+    const navigate = useNavigate()
+
+    const onBack = () => {
+        navigate(-1);
+    }
+
+    const token = localStorage.getItem('token');
+
+    const handleLogout = async (token, e) => {
+        if (e) e.preventDefault();
+        try{
+            const result = await confirmDelete('Are you sure?', 'Apakah kamu ingin login', token);
+            if (result.confirmed){
+                const response = await apiAuth.post('/auth/login', {
+                    token :token
+                })
+                textPopUp("Success", `${response?.data?.message}`, "success");
+                navigate('/login');
+            }
+        }catch (err){
+            console.error(err);
+            textPopUp("Error", `${err?.response?.data?.message || err.message}`, "error");
+        }
+    }
+
     return (
         <div className={"w-full  flex gap-2 mx-auto"}>
-            <nav className="sticky lg:hidden top-4 px-4 md:px-5 z-40 shadow-gray-300 hover:text-white text-white flex flex-row items-center w-2/12 md:w-3/12 me-auto md:me-0  ms-auto justify-between rounded-xl bg-red-500 cursor-pointer hover:bg-red-500 p-2 backdrop-blur-xl">
+            <nav className="sticky lg:hidden mx-auto top-4 px-4 md:px-5 z-40 shadow-gray-300 hover:text-white text-white flex flex-row items-center w-2/12 md:w-1/12 me-auto md:me-0  ms-auto justify-between rounded-xl bg-red-500 cursor-pointer hover:bg-red-500 p-2 backdrop-blur-xl">
                 <SidebarComponent />
             </nav>
-            <nav className="sticky  top-4 px-4 md:px-5 z-30 shadow-gray-300 hover:text-white text-white flex flex-row items-center w-2/12 md:w-3/12 me-auto md:me-0  ms-auto justify-between rounded-xl bg-red-500 cursor-pointer hover:bg-red-500 p-2 backdrop-blur-xl">
-                <div className={"flex gap-2"}>
-                    <MdArrowBack className="text-2xl mx-auto " />
-                    <h2 className="ml-2 hidden md:block">Kembali</h2>
-                </div>
+            <nav className="sticky  top-4  z-30 shadow-gray-300 hover:text-white text-white flex flex-row items-center w-2/12 md:w-3/12 xl:w-2/12 me-auto md:me-0   ms-auto justify-between">
+                <button onClick={onBack} className={"w-full px-4 md:px-5 rounded-xl h-full bg-red-500 cursor-pointer hover:bg-red-600 p-2 backdrop-blur-xl"}>
+                    <div className={"flex gap-2 lg:gap-0"}>
+                        <MdArrowBack  size={30}  className="text-2xl mx-auto lg:mx-2  font-semibold " />
+                        <h2 className="ml-2 lg:ml-0  my-auto hidden font-semibold md:block">Kembali</h2>
+                    </div>
+                </button>
             </nav>
-            <nav className="sticky top-4 px-5 z-30  shadow-gray-300 flex flex-row items-center w-9/12 me-auto md:me-0 ms-auto justify-between rounded-xl bg-red-500 p-2 backdrop-blur-xl">
+            <nav className="sticky top-4 px-5 z-30  shadow-gray-300 flex flex-row items-center w-9/12 md:w-10/12 lg:w-10/12 me-auto md:me-0 ms-auto justify-between rounded-xl bg-red-500 p-2 backdrop-blur-xl">
                 <div className="flex items-center">
                     <div className="font-semibold  text-white"> 
                         <a href={`${currentPath}`} className="hover:underline">
@@ -109,29 +139,28 @@ export const NavbarNewPanelComponent = ({currentPath}) => {
                             <div className="flex w-56 flex-col rounded-[20px] bg-white shadow-xl dark:bg-navy-700 dark:text-white">
                                 <div className="p-4">
                                     <p className="text-sm font-bold text-black">
-                                        👋 Hey, Adela
+                                        👋 Hey, A2Trans
                                     </p>
                                 </div>
                                 <div className="h-px w-full bg-gray-200 dark:bg-white/20" />
                                 <div className="flex flex-col p-4">
                                     <a
                                         href="#profile-settings"
-                                        className="text-sm text-black hover:underline"
+                                        className="text-sm py-2 text-black hover:underline"
                                     >
                                         Profile Settings
                                     </a>
                                     <a
                                         href="#newsletter-settings"
-                                        className="mt-3 text-sm text-black hover:underline"
+                                        className="mt-3 py-2  text-sm text-black hover:underline"
                                     >
                                         Newsletter Settings
                                     </a>
-                                    <a
-                                        href="#logout"
-                                        className="mt-3 text-sm font-medium text-red-500 hover:text-red-500 transition duration-150 ease-out"
+                                    <button onClick={(e) => handleLogout(token, e)}
+                                        className="mt-3 text-left text-sm py-2 font-medium text-red-500 hover:text-red-500 transition duration-150 ease-out"
                                     >
                                         Log Out
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         }

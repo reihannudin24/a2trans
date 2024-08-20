@@ -15,6 +15,7 @@ function EditPanelBus() {
     const [selectedThumbFile, setSelectedThumbFile] = useState(null);
 
     const [busName, setBusName] = useState("");
+    const [linkYoutube, setLinkYoutube] = useState("");
     const [description, setDescription] = useState("");
     const [busCategory, setBusCategory] = useState("");
     const [busMerek, setbusMerek] = useState("");
@@ -37,6 +38,7 @@ function EditPanelBus() {
         const formData = new FormData();
         formData.append('id', id);
         formData.append('name', busName);
+        formData.append('link', linkYoutube);
         formData.append('description', description);
         formData.append('seat', busSeat);
         formData.append('categories_id', busCategory);
@@ -47,26 +49,14 @@ function EditPanelBus() {
 
 
         try {
-            // FETCHING
             const responseData = await apiImage.post('/bus/update', formData)
             console.log(responseData)
 
-            // // RESPONE
             if (responseData.status === 200) {
 
-                // const formDataThumb = new FormData();
-                // formDataThumb.append('bus_id', id);
-                // formDataThumb.append('thumb', true);
-                // formDataThumb.append('files', selectedThumbFile);
-
-                // const responseThumb = await apiImage.post('/bus/add/new/image/bus', formDataThumb);
-
-                // if (responseThumb.data.status === 200) {
                 console.log('data bus uploaded successfully');
                 event.target.reset();
                 textPopUp("Success", "Berhasil menambah data kedatabase", "success")
-                // }
-
 
                 return;
             } else {
@@ -94,6 +84,7 @@ function EditPanelBus() {
         const responseData = await apiAuth.get(`/bus/show?id=${id}`);
         if (responseData.data.data?.buses.length === 0) return navigate("/panel/bus")
         setBusName(responseData.data.data?.buses[0].name);
+        setLinkYoutube(responseData.data.data?.buses[0].link);
         setDescription(responseData.data.data?.buses[0].description);
         setBusCategory(responseData.data.data?.buses[0].categories_id);
         setbusMerek(responseData.data.data?.buses[0].brand_id);
@@ -112,20 +103,20 @@ function EditPanelBus() {
     }, [loop, checkData, checkDataCategory])
 
     return (
-        <div className="lg:ml-80 ml-4 lg:mr-16 mr-4">
+        <div className="xl:ml-80 xl:mr-16 lg:ml-72 ml-0 lg:mr-10 mr-0 mt-0 ">
             <NavbarNewPanelComponent brandText="Dashboard" />
             <div className="flex flex-wrap -mx-3 mb-5">
-                <div className="w-full max-w-full  mb-6  mx-auto">
-                    <div className="relative flex flex-col  min-w-0 shadow-md rounded-md bg-white m-5">
-                        <div className="relative flex flex-col  border border-dashed bg-clip-border rounded-2xl">
-                            <div className="px-9 pt-5 flex justify-between items-stretch flex-wrap pb-0 bg-transparent">
+                <div className="w-full max-w-full mb-6 mx-auto">
+                    <div className="relative flex flex-col min-w-0 shadow-md rounded-2xl bg-white my-5 md:mx-4">
+                        <div className="relative flex flex-col bg-clip-border rounded-2xl">
+                            <div className="px-5 lg:px-9 pt-5 flex justify-between items-stretch flex-wrap pb-0 bg-transparent">
                                 <h3 className="flex flex-col items-start justify-center ml-0 font-medium">
                                     <span className="mr-3 font-semibold">Edit Data</span>
                                     <span className="font-medium mt-1">Mengedit data bus</span>
                                 </h3>
                             </div>
 
-                            <div className="py-8 pt-6 px-9">
+                            <div className="py-8 pt-6 px-5 lg:px-9">
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-5">
                                         <LabelText text={"Bus Name"} htmlFor={"bus_name"} />
@@ -135,6 +126,10 @@ function EditPanelBus() {
                                     <div className="mb-5">
                                         <LabelText text={"Description"} htmlFor={"description"} />
                                         <InputTextArea id={"description"} value={description} set={setDescription} placeholder={"Enter Description Bus"} rows={4} />
+                                    </div>
+                                    <div className="mb-5">
+                                        <LabelText text={"Link Youtube"} htmlFor={"link_youtube"} />
+                                        <InputText id={"link_youtube"} value={busName} set={setBusName} placeholder={"Enter Link Youtube"} />
                                     </div>
 
                                     <div className="mb-5">

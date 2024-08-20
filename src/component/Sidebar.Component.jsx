@@ -40,9 +40,9 @@ export default function SidebarComponent() {
 
     return (
         <>
-            <nav className="top-0 md:top-0 left-0 md:left-0 z-50 w-full ease-out duration-300 absolute lg:hidden">
-                <div className="right-0 relative">
-                    {showSidebar && <button onClick={handleClickSidebar}><List size={44} className="text-color-putih right-0 m-2  p-1 md:p-2 bg-red-500 hover:bg-red-600 cursor-pointer rounded-md text-white" /></button>}
+            <nav className="top-0 md:top-0 left-0 md:left-0 z-50 w-full mx-auto ease-out duration-300 absolute lg:hidden">
+                <div className=" relative w-10/12 me-auto">
+                    {showSidebar && <button className={"mx-auto"} onClick={handleClickSidebar}><List size={38} className="text-color-putih right-0 w-full left-0 m-2  p-1 md:p-2 bg-red-500 hover:bg-red-600 cursor-pointer rounded-md text-white" /></button>}
                 </div>
             </nav>
             <aside
