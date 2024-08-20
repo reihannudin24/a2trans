@@ -55,7 +55,7 @@ export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => 
             <td className="pb-3 text-start min-w-[175px]">
                 <div className="flex items-center">
                     <div className="relative inline-block shrink-0 rounded-2xl me-3">
-                        <img src={`http://127.0.0.1:8000${item?.thumb}`} className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl" alt="" />
+                        <img src={`${process.env.REACT_APP_PANEL_WEBSITE}/${item?.thumb}`} className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl" alt="" />
                     </div>
                     <div className="flex flex-col justify-start">
                         <div className="mb-1 font-semibold transition-colors duration-200 ease-in-out"> {item?.name}</div>
@@ -242,7 +242,7 @@ export const CardPanelImageGalleryComponent = ({ index, id, id_bus, item, naviga
             <td className="p-3 pl-0">
                 <div className="flex items-center justify-start">
                     <div className="relative inline-block shrink-0 rounded-2xl me-3">
-                        <img src={`http://127.0.0.1:8000${item?.image_path}`} className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl"
+                        <img src={`${process.env.REACT_APP_PANEL_WEBSITE}/${item?.image_path}`} className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl"
                             alt="" />
                     </div>
                 </div>

@@ -59,7 +59,7 @@ function Detail() {
                     <div className={"block md:flex gap-3 justify-between"}>
                         <div className="block gap-4 justify-center sm:justify-normal">
                             <div className={"h-img-card flex gap-4"}>
-                                <img alt="Img" className={"w-full h-full object-cover radius-card-img"} src={`http://127.0.0.1:8000${bus?.thumb}`} />
+                                <img alt="Img" className={"w-full h-full object-cover radius-card-img"} src={`${process.env.REACT_APP_PANEL_WEBSITE}/${bus?.thumb}`} />
                             </div>
                             <CarousselGalleryComponent data={imageGallery} id={id} />
                             <div className={"w-11/12 lg:w-full mx-auto py-5 "}>

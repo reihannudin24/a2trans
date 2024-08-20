@@ -6,6 +6,7 @@ export default function TableComponent({ data }) {
 
     const [bus, setBus] = useState([]);
     const [loop, setLoop] = useState(true)
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -15,12 +16,13 @@ export default function TableComponent({ data }) {
                 console.log(error)
                 textPopUp("Error", "Login failed. Please check your credentials.", "error");
             }
+
             setLoop(false)
         }
         if(loop === true) {
             fetchData()
         }
-    }, []);
+    }, [loop]);
 
 
     const handleDelete = async (id) => {
