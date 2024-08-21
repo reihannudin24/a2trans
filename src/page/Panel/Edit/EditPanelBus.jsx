@@ -38,19 +38,18 @@ function EditPanelBus() {
         const formData = new FormData();
         formData.append('id', id);
         formData.append('name', busName);
-        formData.append('link', linkYoutube);
+        // formData.append('link', linkYoutube);
         formData.append('description', description);
         formData.append('seat', busSeat);
         formData.append('categories_id', busCategory);
         formData.append('type', busType);
         formData.append('brand_id', busMerek);
         formData.append('vendor_id', busVendor);
-        formData.append('thumbnail', selectedThumbFile);
+        formData.append('thumbnail', selectedThumbFile === null ? [] : selectedThumbFile);
 
 
         try {
             const responseData = await apiImage.post('/bus/update', formData)
-            console.log(responseData)
 
             if (responseData.status === 200) {
 

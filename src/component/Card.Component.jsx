@@ -1,5 +1,5 @@
 import { Star, Fan, Monitor, User, PintGlass } from "@phosphor-icons/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 
@@ -16,7 +16,6 @@ export const ListCardProductComponent = ({ bus, categories }) => {
         return data.filter(item => item.categories_id === categoryId);
     };
 
-    console.log(selected)
     const filteredBus = filterByCategory(bus, selected);
 
     return (

@@ -3,7 +3,7 @@ import { textPopUp } from "../../../function/swal";
 import apiAuth from "../../../function/axiosAuth";
 import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
-import { InputImage, InputSelectOption, InputNumber, InputText, InputTextArea } from "../../../component/Input.Component";
+import { InputImage } from "../../../component/Input.Component";
 import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -31,12 +31,10 @@ function AddPanelGallery() {
             bus_id: id,
             images: selectedGalleryFiles
         }
-        console.log(selectedGalleryFiles)
 
         try {
             // FETCHING
             const responseData = await apiImage.post('/image_bus/add/new', dataForm)
-            console.log(responseData)
 
             // // RESPONE
             if (responseData.status === 201) {

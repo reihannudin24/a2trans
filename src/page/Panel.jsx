@@ -1,5 +1,5 @@
 import SidebarComponent from "../component/Sidebar.Component"
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import PanelBus from "./Panel/PanelBus";
 import PanelCategory from "./Panel/PanelCategory";
 import PanelMerek from "./Panel/PanelMerek";

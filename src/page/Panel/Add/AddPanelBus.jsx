@@ -5,7 +5,7 @@ import apiImage from "../../../function/axiosImage";
 import { LabelText } from "../../../component/Label.Component";
 import { InputImage, InputSelectOption, InputNumber, InputText, InputTextArea } from "../../../component/Input.Component";
 import { NavbarNewPanelComponent } from "../../../component/Navbar.Component";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function AddPanelBus() {
@@ -33,7 +33,7 @@ function AddPanelBus() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!selectedThumbFile || !busSeat || !busName || !description || !busCategory || !busType || !busMerek) {
+        if (!selectedThumbFile || !busSeat || !busName || !description || !busCategory || !busType || !busMerek || !busVendor) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }

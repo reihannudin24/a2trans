@@ -10,18 +10,17 @@ function AddPanelCategories() {
 
     const navigate = useNavigate();
     const [name, setName] = useState("");
-    const [icon, setIcon] = useState("");
+    // const [icon, setIcon] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (!name || !icon) {
+        if (!name) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
         const dataForm = {
             name: name,
-            icon: icon,
         }
 
         try {
@@ -31,7 +30,7 @@ function AddPanelCategories() {
             if (responseData.status === 201) {
                 console.log('data facilities uploaded successfully');
                 setName("");
-                setIcon("");
+                // setIcon("");
                 textPopUp("Success", "Berhasil menambah data kedatabase", "success")
 
                 navigate('/panel/facilities');
@@ -66,10 +65,10 @@ function AddPanelCategories() {
                                         <LabelText text={"Name"} htmlFor={"name"} />
                                         <InputText id={"name"} value={name} set={setName} placeholder={"Enter Name"} />
                                     </div>
-                                    <div className="mb-5">
+                                    {/* <div className="mb-5">
                                         <LabelText text={"Icon"} htmlFor={"icon"} />
                                         <InputText id={"icon"} value={icon} set={setIcon} placeholder={"Enter Icon"} />
-                                    </div>
+                                    </div> */}
 
                                     <div>
                                         <button

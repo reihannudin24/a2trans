@@ -13,11 +13,11 @@ function EditPanelFacilities() {
     const navigate = useNavigate()
 
     const [name, setName] = useState("");
-    const [icon, setIcon] = useState("");
+    // const [icon, setIcon] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!name || !icon) {
+        if (!name ) {
             textPopUp("Error", "Ada Value yang tidak terisi", "error")
             return;
         }
@@ -25,7 +25,7 @@ function EditPanelFacilities() {
         const dataForm = {
             id: id,
             name: name,
-            icon: icon
+            // icon: icon
         }
 
         try {
@@ -51,7 +51,7 @@ function EditPanelFacilities() {
         const responseData = await apiJson.get(`/facilities/show?id=${id}`);
         if (responseData.data.data.facilities.length === 0) return navigate("/panel/facilities")
         setName(responseData.data.data.facilities[0]?.name);
-        setIcon(responseData.data.data.facilities[0]?.icon);
+        // setIcon(responseData.data.data.facilities[0]?.icon);
 
 
         setLoop(false);
@@ -84,10 +84,10 @@ function EditPanelFacilities() {
                                         <InputText id={"name"} value={name} set={setName} placeholder={"Enter Name"} />
                                     </div>
 
-                                    <div className="mb-5">
+                                    {/* <div className="mb-5">
                                         <LabelText text={"Icon"} htmlFor={"icon"} />
                                         <InputText id={"icon"} value={icon} set={setIcon} placeholder={"Enter Icon"} />
-                                    </div>
+                                    </div> */}
 
                                     <div>
                                         <button

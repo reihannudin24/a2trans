@@ -1,13 +1,14 @@
-import { Promo3Component } from "../component/Promo.Component";
+// import { Promo3Component } from "../component/Promo.Component";
 
 
 function Contact() {
     return (
         <>
             <section>
-                <div className="relative w-full h-96"><img className="absolute h-full w-full object-cover object-center"
-                    src={"/assets/img/bus/banner-bus.jpg"}
-                    alt="nature image" />
+                <div className="relative w-full h-96">
+                    <img className="absolute h-full w-full object-cover object-center"
+                        src={"/assets/img/bus/banner-bus.jpg"}
+                        alt="Banner of a bus" />
                     <div className="absolute inset-0 h-full w-full bg-black/50"></div>
                     <div className="relative flex flex-col pt-28 text-center justify-center items-center">
                         <h2 className="block antialiased tracking-normal font-sans font-semibold leading-[1.3] text-white mb-4 text-3xl lg:text-4xl">
@@ -51,16 +52,6 @@ function Contact() {
                                             d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"></path>
                                     </svg>
                                     <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-bold">{process.env.REACT_APP_EMAIL}</p>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        aria-hidden="true" className="h-6 w-6">
-                                        <path fill-rule="evenodd"
-                                            d="M1.5 6.375c0-1.036.84-1.875 1.875-1.875h17.25c1.035 0 1.875.84 1.875 1.875v3.026a.75.75 0 01-.375.65 2.249 2.249 0 000 3.898.75.75 0 01.375.65v3.026c0 1.035-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 17.625v-3.026a.75.75 0 01.374-.65 2.249 2.249 0 000-3.898.75.75 0 01-.374-.65V6.375zm15-1.125a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0V6a.75.75 0 01.75-.75zm.75 4.5a.75.75 0 00-1.5 0v.75a.75.75 0 001.5 0v-.75zm-.75 3a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0v-.75a.75.75 0 01.75-.75zm.75 4.5a.75.75 0 00-1.5 0V18a.75.75 0 001.5 0v-.75zM6 12a.75.75 0 01.75-.75H12a.75.75 0 010 1.5H6.75A.75.75 0 016 12zm.75 2.25a.75.75 0 000 1.5h3a.75.75 0 000-1.5h-3z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                    <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-bold">Open
-                                        Support Ticket </p>
                                 </div>
                             </div>
 

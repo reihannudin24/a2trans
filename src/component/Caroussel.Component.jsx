@@ -164,7 +164,7 @@ export const CarousselGalleryComponent = ({ data, id }) => {
 
   return (
     <div className="mx-4 lg:mx-0">
-      <h1 className="font-bold text-xl py-5 lg:my-2 my-4">Gallery Kendaraan</h1>
+      {id && <h1 className="font-bold text-xl py-5 lg:my-2 my-4">Gallery Kendaraan</h1>}
       <div className="relative">
         <div className="overflow-x-auto " ref={scrollRef}>
           <div className="flex gap-4 lg:gap-3 pb-4">

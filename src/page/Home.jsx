@@ -32,7 +32,6 @@ function Home() {
                         'Content-Type': 'application/json',
                     }
                 });
-                console.log(responseCategories?.data?.data)
                 setCategories(responseCategories?.data?.data?.categories || []);
             } catch (error) {
                 console.error(error);
@@ -47,7 +46,6 @@ function Home() {
         }
     }, [loop]);
 
-    console.log(process.env.REACT_APP_PANEL_WEBSITE)
 
 
 

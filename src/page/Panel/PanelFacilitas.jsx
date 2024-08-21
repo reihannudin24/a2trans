@@ -4,10 +4,7 @@ import apiJson from "../../function/axios";
 import { textPopUp } from "../../function/swal";
 import { CardPanelFacilitiesComponent } from "../../component/PanelComponent";
 import { NavbarNewPanelComponent } from "../../component/Navbar.Component";
-import {WidgetComponent, WidgetContainerComponent} from "../../component/Widget.Component";
-import { Bus, Seat } from "@phosphor-icons/react";
-import { BiCategory } from "react-icons/bi";
-import { BsTag } from "react-icons/bs";
+import {WidgetContainerComponent} from "../../component/Widget.Component";
 
 function PanelFacilities() {
     const navigate = useNavigate();
@@ -45,10 +42,6 @@ function PanelFacilities() {
         }
     }, [loop]);
 
-    const currentPath = window.location.pathname;
-
-    console.log(facilities)
-
     return (
         <div className="xl:ml-80 xl:mr-16 lg:ml-72 ml-0 lg:mr-10 mr-0 mt-0 ">
             <NavbarNewPanelComponent brandText="Dashboard" currentPath={""} />
@@ -85,7 +78,7 @@ function PanelFacilities() {
                                         </tr>
                                     </thead>
                                     <tbody className={"scrollbar-hide"}>
-                                        {facilities.length === 0 ? (
+                                        {facilities?.facilities?.length === 0 ? (
                                             <tr>
                                                 <td colSpan="6">
                                                     <div className={"my-10 mx-4"}>

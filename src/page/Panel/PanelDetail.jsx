@@ -1,13 +1,14 @@
 import { NavbarNewPanelComponent } from "../../component/Navbar.Component";
+import { CarousselGalleryComponent } from "../../component/Caroussel.Component"
 import { useNavigate, useParams } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import apiJson from "../../function/axios";
 import { textPopUp } from "../../function/swal";
 
 function PanelDetail() {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const navigate = useNavigate();
-    const [bus, setBus] = useState(null); 
+    const [bus, setBus] = useState(null);
     const [loop, setLoop] = useState(true);
 
     const fetchData = useCallback(async (endpoint, setData) => {
@@ -16,10 +17,10 @@ function PanelDetail() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                timeout: 20000, 
+                timeout: 20000,
             });
 
-            if(response?.data?.data?.buses.length === 0) return navigate("/panel/bus")
+            if (response?.data?.data?.buses.length === 0) return navigate("/panel/bus")
             setData(response?.data?.data || null);
         } catch (error) {
             console.error(error);
@@ -36,10 +37,8 @@ function PanelDetail() {
     }, [loop, id, fetchData]);
 
     if (!bus) {
-        return <div>Loading...</div>; 
+        return <div>Loading...</div>;
     }
-
-    console.log(bus);
 
     return (
         <div className="xl:ml-80 xl:mr-16 lg:ml-72 ml-0 lg:mr-10 mr-0 mt-0 ">
@@ -83,7 +82,7 @@ function PanelDetail() {
                                             <PanelCategories name={"Kategori"} value={bus?.buses[0]?.category_name} />
                                         </li>
                                         <li className={"w-4/12"}>
-                                            <PanelCategories name={"Brand"} value={bus?.buses[0]?.merek_name} />
+                                            <PanelCategories name={"Brand"} value={bus?.buses[0]?.brand_name} />
                                         </li>
                                     </ul>
                                 </div>
@@ -96,7 +95,7 @@ function PanelDetail() {
                                         <h3 className={"text-lg font-semibold text-gray-700"}>Filter : </h3>
                                     </div>
                                     <div>
-                                        <a href="/panel/manage/detail/:id/facilities" className="mx-4 p-2 px-3 bg-green-500 rounded-lg text-sm text-white">Keleolah Fasilitas</a>
+                                        <a href={`/panel/manage/detail/${id}/facilities`} className="mx-4 p-2 px-3 bg-green-500 rounded-lg text-sm text-white">Kelola Fasilitas</a>
                                     </div>
                                 </div>
                                 <div className={"w-11/12 mx-auto "}>
@@ -128,11 +127,13 @@ function PanelDetail() {
                                         <h3 className={"text-lg font-semibold text-gray-700"}>Gallery Kendaraan : </h3>
                                     </div>
                                     <div>
-                                        <a href={`/panel/manage/detail/${id}/gallery`} className="mx-4 p-2 px-3 bg-green-500 rounded-lg text-sm text-white">Keleolah Galeri</a>
+                                        <a href={`/panel/manage/detail/${id}/gallery`} className="mx-4 p-2 px-3 bg-green-500 rounded-lg text-sm text-white">Kelola Galeri</a>
                                     </div>
                                 </div>
+                                <div className="mx-4 mt-4">
+                                    <CarousselGalleryComponent data={bus?.buses[0]?.images} />
+                                </div>
                             </div>
-                            {/*<CarousselGalleryComponent data={bus?.buses[0]?.images} />*/}
                         </div>
                     </div>
                 </div>

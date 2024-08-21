@@ -31,8 +31,7 @@ function Detail() {
 
                 const merek = await checkMerekById(response?.data?.data?.buses[0]?.brand_id);
                 const category = await checkCategoryById(response?.data?.data?.buses[0]?.categories_id);
-                console.log(response?.data?.data?.buses[0])
-                const vendor = await checkVendorById(response?.data?.data?.buses[0]?.vendors_id);
+                const vendor = await checkVendorById(response?.data?.data?.buses[0]?.vendor_id);
 
                 setVendorName(vendor);
                 setBrandName(merek);
@@ -127,7 +126,7 @@ function Detail() {
                                     <li className={"w-4/12 "}>
                                         <div className={"w-11/12 text-center py-3 mx-auto cursor-pointer bg-red-500 rounded-lg flex flex-wrap justify-between h-full"}>
                                             <div className={"my-2 w-11/12"}>
-                                                <p className={"text-xl text-white"}>{bus[0]?.seat}</p>
+                                                <p className={"text-xl text-white"}>{bus?.seat}</p>
                                             </div>
                                             <div className={"w-11/12 mx-auto"}>
                                                 <p className={"text-white text-sm font-light "}>Kapasitas Penumpang</p>
@@ -147,7 +146,7 @@ function Detail() {
                                     <li className={"w-4/12 "}>
                                         <div className={"w-11/12 text-center py-3 mx-auto cursor-pointer bg-red-500 rounded-lg flex flex-wrap justify-between h-full"}>
                                             <div className={"my-2 w-11/12"}>
-                                                <p className={"text-white text-xl font-light "}>48</p>
+                                                <p className={"text-white text-xl font-light "}>{vendorName}</p>
                                             </div>
                                             <div className={"w-11/12 mx-auto"}>
                                                 <p className={"text-white text-sm font-light "}>Vendor</p>

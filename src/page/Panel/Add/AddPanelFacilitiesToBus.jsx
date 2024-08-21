@@ -12,7 +12,7 @@ function AddPanelFacilitiesToBus(){
     const {id} = useParams();
 
     const navigate = useNavigate();
-    const [facility_id, setFacility_id] = useState("");
+    const [facility_id, setFacility_id] = useState(0);
     const [facilities, setFacilities] = useState([]);
     const [loop, setLoop] = useState(true);
 
@@ -25,7 +25,7 @@ function AddPanelFacilitiesToBus(){
                 },
                 timeout: 20000,
             });
-            setData(response?.data?.data || []);
+            setData(response?.data?.data?.facilities || []);
         } catch (error) {
             console.error(error);
             textPopUp("Error", `Terjadi kesalahan saat mengambil data: ${error?.message}`, "error");
@@ -49,8 +49,8 @@ function AddPanelFacilitiesToBus(){
             return;
         }
         const dataForm = {
-            facility_id: facility_id,
-            id: id,
+            facilities_id: facility_id,
+            bus_id: id,
         }
 
         try {
@@ -60,7 +60,7 @@ function AddPanelFacilitiesToBus(){
                 setFacility_id("");
                 textPopUp("Success", "Berhasil menambah data kedatabase", "success")
 
-                navigate('/panel/facilities');
+                navigate(`/panel/manage/detail/${id}/facilities`);
 
             } else {
                 console.error('File upload failed');
@@ -91,12 +91,8 @@ function AddPanelFacilitiesToBus(){
                                     <form onSubmit={handleSubmit}>
                                         <div className="mb-5">
                                             <LabelText text={"Fasilitas Id"} htmlFor={"facility_id"} />
-                                            <InputSelectOption data={facility_id} id={"facility_id"} value={facility_id} set={setFacility_id} text={"Pilih Facility id"} />
+                                            <InputSelectOption data={facilities} id={"facility_id"} value={facility_id} set={setFacility_id} text={"Pilih Facility id"} />
                                         </div>
-                                        {/*<div className="mb-5">*/}
-                                        {/*    <LabelText text={"Icon"} htmlFor={"icon"} />*/}
-                                        {/*    <InputText id={"icon"} value={icon} set={setIcon} placeholder={"Enter Icon"} />*/}
-                                        {/*</div>*/}
 
                                         <div>
                                             <button

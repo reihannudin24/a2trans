@@ -34,9 +34,11 @@ export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => 
                 const response = await apiAuth.post('/bus/delete', {
                     id: id,
                 });
-                setBus(prevBus => prevBus.filter(item => item.id !== id));
+                setBus(prevBus => ({
+                    ...prevBus,
+                    buses: prevBus.buses.filter(item => item.id !== id)
+                }));
                 textPopUp("Success", `${response?.data?.message}`, "success");
-                window.location.reload();
             }
         } catch (err) {
             console.error(err);
@@ -82,7 +84,7 @@ export const CardPanelBusComponent = ({ index, id, item, navigate, setBus }) => 
     )
 }
 
-export const CardPanelFacilitiesComponent = ({ index, id, item, navigate }) => {
+export const CardPanelFacilitiesComponent = ({ index, id, item, navigate, setFacilities }) => {
 
     const handleDelete = async (id, e) => {
         if (e) e.preventDefault();
@@ -92,8 +94,11 @@ export const CardPanelFacilitiesComponent = ({ index, id, item, navigate }) => {
                 const response = await apiAuth.delete('/facilities/delete', {
                     data: { id: id },
                 });
+                setFacilities(prevBus => ({
+                    ...prevBus,
+                    facilities: prevBus.facilities.filter(item => item.id !== id)
+                }));
                 textPopUp("Success", `${response?.data?.message}`, "success");
-                window.location.reload();
             }
         } catch (err) {
             console.error(err);
@@ -116,7 +121,7 @@ export const CardPanelFacilitiesComponent = ({ index, id, item, navigate }) => {
             <td className="p-3 pr-12 text-end">
                 <div className="flex gap-4 justify-end">
                     <button onClick={(e) => handleDelete(id, e)}
-                            className="p-2 bg-red-500 rounded-md text-white">Delete
+                        className="p-2 bg-red-500 rounded-md text-white">Delete
                     </button>
                     <a href={`/panel/edit/facilities/${id}`} className="cursor-pointer p-2 bg-blue-500 rounded-md text-white">Edit</a>
                 </div>
@@ -125,7 +130,7 @@ export const CardPanelFacilitiesComponent = ({ index, id, item, navigate }) => {
     )
 }
 
-export const CardPanelFacilitiesToBusComponent = ({ index, id, item, navigate }) => {
+export const CardPanelFacilitiesToBusComponent = ({ index, id, item, navigate, setFacilities }) => {
 
     const handleDelete = async (id, e) => {
         if (e) e.preventDefault();
@@ -133,10 +138,13 @@ export const CardPanelFacilitiesToBusComponent = ({ index, id, item, navigate })
             const result = await confirmDelete('Are you sure?', 'Apa kamu yakin untuk menghapus data ini', id);
             if (result.confirmed) {
                 const response = await apiAuth.delete('/facilities/delete/relation', {
-                    data: { id: id },
+                    data: { id: item?.facility_pivot_ids[0] },
                 });
+                setFacilities(prevBus => ({
+                    ...prevBus,
+                    facilities: prevBus.facilities.filter(item => item.facility_pivot_ids[0] !== id)
+                }));
                 textPopUp("Success", `${response?.data?.message}`, "success");
-                window.location.reload();
             }
         } catch (err) {
             console.error(err);
@@ -147,21 +155,20 @@ export const CardPanelFacilitiesToBusComponent = ({ index, id, item, navigate })
 
     return (
         <tr key={index} className="border-b">
-            <td className="p-3 ps-10 pr-0 min-w-[50px] text-start">
-                <span className="font-semibold">{item?.id}</span>
+            <td className="p-3  text-start">
+                <span className="font-semibold">{item?.facility_id}</span>
             </td>
             <td className="p-3 pl-0">
                 <div className="flex flex-col text-start">
                     <div
-                        className="mb-1 font-semibold transition-colors duration-200 ease-in-out"> {item?.name}</div>
+                        className="mb-1 font-semibold transition-colors duration-200 ease-in-out"> {item?.facility_name}</div>
                 </div>
             </td>
             <td className="p-3 pr-12 text-end">
                 <div className="flex gap-4 justify-end">
                     <button onClick={(e) => handleDelete(id, e)}
-                            className="p-2 bg-red-500 rounded-md text-white">Delete
+                        className="p-2 bg-red-500 rounded-md text-white">Delete
                     </button>
-                    <a href={`/panel/edit/facilities/${id}`} className="cursor-pointer p-2 bg-blue-500 rounded-md text-white">Edit</a>
                 </div>
             </td>
         </tr>
@@ -302,7 +309,7 @@ export const CardPanelImageGalleryComponent = ({ index, id, id_bus, item, naviga
 }
 
 export const CardPanelCategoryComponent = ({ index, id, item, navigate, setCategory }) => {
-    
+
     const handleDelete = async (id, e) => {
         if (e) e.preventDefault();
         try {
@@ -315,7 +322,7 @@ export const CardPanelCategoryComponent = ({ index, id, item, navigate, setCateg
                     ...prevBus,
                     categories: prevBus.categories.filter(item => item.id !== id)
                 }));
-                
+
                 textPopUp("Success", `${response?.data?.message}`, "success");
             }
         } catch (err) {
